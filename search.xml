@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>君Hexo本上手①：开始</title>
+    <url>/2023/04/14/hexo_1/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2023/04/14/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="quick-start"><a class="markdownIt-Anchor" href="#quick-start"></a> Quick Start</h2>
+<h3 id="create-a-new-post"><a class="markdownIt-Anchor" href="#create-a-new-post"></a> Create a new post</h3>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ hexo new &quot;My New Post&quot;</code></pre>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="run-server"><a class="markdownIt-Anchor" href="#run-server"></a> Run server</h3>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ hexo server</code></pre>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="generate-static-files"><a class="markdownIt-Anchor" href="#generate-static-files"></a> Generate static files</h3>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ hexo generate</code></pre>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="deploy-to-remote-sites"><a class="markdownIt-Anchor" href="#deploy-to-remote-sites"></a> Deploy to remote sites</h3>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ hexo deploy</code></pre>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<pre class="language-python" data-language="python"><code class="language-python">import json
+print(&quot;hello world)</code></pre>]]></content>
+  </entry>
+  <entry>
+    <title>SakuraFRP搭建过程踩坑</title>
+    <url>/2023/04/14/sakura_frp/</url>
+    <content><![CDATA[<p>几个人合资租了个服务器，忘了几C几G了，总体表现还行，打算整个FRP自己用用。找了一圈在线管理的面板，貌似只有<a href="https://github.com/ZeroDream-CN/SakuraPanel">SakuraFRP</a>的还不错。使用配套的前端+特制的FRPs即可，FRPc可以任选。</p>
+<p>操作系统是<s>答辩11</s>Debian11<br />
+<s>主人之前因为环境配烂了重装了三四次</s></p>
+<h2 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h2>
+<p>先把该装的都装上，iptables、lsof、<strong>nginx、mysql</strong>啥的<br />
+<strong>后续安装时发现还需要其他依赖库，比如php–fpm、</strong></p>
+<p><strong>SSL证书</strong>也申请好（非必须，但是建议这么做）<br />
+把库git clone一份到本地</p>
+<h2 id="开始部署前端-̄-̄-go"><a class="markdownIt-Anchor" href="#开始部署前端-̄-̄-go"></a> 开始部署前端！ &lt;(￣︶￣)↗ GO!</h2>
+<p>按着<a href="https://github.com/ZeroDream-CN/SakuraPanel">SakuraFRP</a>的README放置网页文件<br />
+这里因为没学过PHP犯了个错：把主页直接设为pages/home.php。应该设置为<strong>index.php（路由）</strong></p>
+<p><s>因为网站没备案所以</s>NGINX监听非80端口，为了确保安全配置SSL证书。但是这样子每次登录主页都要<a href="https://xxxxxxxxx">https://xxxxxxxxx</a>:xxxx/，<s>非常难受</s></p>
+<p>觉得带端口访问太丑？满足你！<s>慈善家</s>Cloudflare的Origin Rules可以用非公端口接入Cloudflare网络，懂了吧</p>
+<h2 id="开始部署后端-ヾ-ゝ"><a class="markdownIt-Anchor" href="#开始部署后端-ヾ-ゝ"></a> 开始部署后端！ ヾ(≧ ▽ ≦)ゝ</h2>
+<p>然后一路按着Wiki的教程部署。在configuration.php填写所需要的密钥、数据库地址啥的。</p>
+<p><strong>这里建议数据库用户不要设为root，换一个，不然可能遇到各种各样奇怪的问题</strong></p>
+<p><strong>貌似数据库初始端口无法连接，只能自己再开一个了 <s>不知道为啥</s></strong></p>
+<p>下载配套的Frps服务端，按照Wiki填写配置文件，记录密钥。</p>
+<p>我真傻，真的，我单知道frps内api密钥形式为xxxxxxxxx|n(n为节点编号，面板内新增)<br />
+却不知道api/configuration内不需要加节点编号，只要前面key就行了</p>
+<p>邮箱问题自行解决，不会，有个懂哥整的</p>
+<p>没啥好说的，注册账户，数据库里user的group字段改成admin，开造</p>
+<h2 id="the-end-~"><a class="markdownIt-Anchor" href="#the-end-~"></a> The END ~</h2>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>SakuraFRP</tag>
+      </tags>
+  </entry>
+</search>
