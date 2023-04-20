@@ -31,6 +31,35 @@
       </tags>
   </entry>
   <entry>
+    <title>在非Honor/Samsung手机上使用微软的“连接至Windows”功能</title>
+    <url>/2023/04/20/link-to-windows/</url>
+    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>尝试了各种手机+电脑的协同办公方案——小米系的MIUI+、Linux系的KDE Connect等。因为我的小米设备较多，所以MIUI+体验还不错。诸如屏幕镜像（扩展显示器）/剪贴板共享等功能都正常工作。唯一的小问题是只支持米系笔记本电脑<s>那都不是事</s>。<br />
+最近想起来，微软自家有个“连接手机”的应用，打算尝试一下。不过貌似国区只支持部分荣耀手机、部分三星手机<s>还有不存在的Microsoft Duo</s>。不信邪，试试看！</p>
+<p>在网上搜索了一番，最终在 <a href="https://www.hestudio.org/posts/how-to-link-to-windows.html">非特定手机如何连接到Windows | heStudio</a> 这里找到了答案。</p>
+<h2 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h2>
+<ul>
+<li>
+<p>一台安卓(?)手机，要求系统大于7.0 <s>可能苹果也行，没试过</s></p>
+</li>
+<li>
+<p>一台Windows10/11电脑 <s>废话</s></p>
+</li>
+<li>
+<p>能正确上网的工具，节点任意</p>
+</li>
+<li>
+<p>耐心的态度 <s>别急</s></p>
+</li>
+</ul>
+<h2 id="开始"><a class="markdownIt-Anchor" href="#开始"></a> 开始！</h2>
+<h3 id="下载-国区特供版-连接电脑"><a class="markdownIt-Anchor" href="#下载-国区特供版-连接电脑"></a> 下载 <em><strong>国区特供版</strong></em> 连接电脑</h3>
+]]></content>
+      <tags>
+        <tag>技术分享</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SakuraFRP搭建过程踩坑</title>
     <url>/2023/04/14/sakura_frp/</url>
     <content><![CDATA[<p>几个人合资租了个服务器，忘了几C几G了，总体表现还行，打算整个FRP自己用用。找了一圈在线管理的面板，貌似只有<a href="https://github.com/ZeroDream-CN/SakuraPanel">SakuraFRP</a>的还不错。使用配套的前端+特制的FRPs即可，FRPc可以任选。</p>
