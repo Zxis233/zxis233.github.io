@@ -20,17 +20,6 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 代码样式测试</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello world&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
-    <title>君Hexo本上手①：开始</title>
-    <url>/2023/04/14/hexo_1/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>在非Honor/Samsung手机上使用微软的“连接至Windows”功能</title>
     <url>/2023/04/20/link-to-windows/</url>
     <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
@@ -57,6 +46,17 @@
 ]]></content>
       <tags>
         <tag>技术分享</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>君Hexo本上手①：开始</title>
+    <url>/2023/04/14/hexo_1/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
