@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2023/04/14/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="quick-start"><a class="markdownIt-Anchor" href="#quick-start"></a> Quick Start</h2>
-<h3 id="create-a-new-post"><a class="markdownIt-Anchor" href="#create-a-new-post"></a> Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="run-server"><a class="markdownIt-Anchor" href="#run-server"></a> Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="generate-static-files"><a class="markdownIt-Anchor" href="#generate-static-files"></a> Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="deploy-to-remote-sites"><a class="markdownIt-Anchor" href="#deploy-to-remote-sites"></a> Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 代码样式测试</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello world&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
+    <title>君Hexo本上手①：开始</title>
+    <url>/2023/04/14/hexo_1/</url>
+    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>如你所见，本博客是使用Hexo框架搭建的，而博主没有任何前端相关知识。换言之，一切的美化/配置，都交由Hexo框架完成。</p>
+<p>本着“记录一切”的想法，把Hexo配置的全过程记下来<s>配到哪记到哪</s></p>
+<h2 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h2>
+<p><a href="https://hexo.io/zh-cn/">Hexo官网</a>在这里可以找到官方的配置说明——多平台安装、配置等。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>教程</tag>
+      </tags>
   </entry>
   <entry>
     <title>在非Honor/Samsung手机上使用微软的“连接至Windows”功能</title>
@@ -42,22 +40,39 @@
 </li>
 </ul>
 <h2 id="开始"><a class="markdownIt-Anchor" href="#开始"></a> 开始！</h2>
-<h3 id="下载-国区特供版-连接电脑"><a class="markdownIt-Anchor" href="#下载-国区特供版-连接电脑"></a> 下载 <em><strong>国区特供版</strong></em> 连接电脑</h3>
+<h3 id="手机-下载-国区特供版-连接电脑"><a class="markdownIt-Anchor" href="#手机-下载-国区特供版-连接电脑"></a> 手机 下载 <em><strong>国区特供版</strong></em> 连接电脑</h3>
+<p>笔者测试过了，Google Play商店下载的版本，电脑端会卡在“无法连接”的地方。老老实实用国区。</p>
+<p>下载地址：<a href="https://cloud.zxis.tk/s/YnC5">Link To Windows</a></p>
+<p>然后就是给一堆权限啥的 如果不想用电脑打电话看短信的话可以不给电话和短信权限</p>
+<p><strong>记得要给“管理所有通知”的权限</strong></p>
+<h3 id="电脑-下载-连接手机"><a class="markdownIt-Anchor" href="#电脑-下载-连接手机"></a> 电脑 下载 连接手机</h3>
+<p>MS官方应用商店：<a href="https://apps.microsoft.com/store/detail/%E6%89%8B%E6%9C%BA%E8%BF%9E%E6%8E%A5/9NMPJ99VJBWV">手机连接 - Microsoft Store 应用程序</a></p>
 ]]></content>
+      <categories>
+        <category>技术分享</category>
+      </categories>
       <tags>
         <tag>技术分享</tag>
       </tags>
   </entry>
   <entry>
-    <title>君Hexo本上手①：开始</title>
-    <url>/2023/04/14/hexo_1/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
+    <title>Hello World</title>
+    <url>/2023/04/14/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="quick-start"><a class="markdownIt-Anchor" href="#quick-start"></a> Quick Start</h2>
+<h3 id="create-a-new-post"><a class="markdownIt-Anchor" href="#create-a-new-post"></a> Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="run-server"><a class="markdownIt-Anchor" href="#run-server"></a> Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="generate-static-files"><a class="markdownIt-Anchor" href="#generate-static-files"></a> Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="deploy-to-remote-sites"><a class="markdownIt-Anchor" href="#deploy-to-remote-sites"></a> Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 代码样式测试</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello world&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>SakuraFRP搭建过程踩坑</title>
