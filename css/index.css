@@ -211,12 +211,12 @@ template {
 }
 .fontawesomeIcon,
 hr:before,
-#article-container.post-content h1:before,
-#article-container.post-content h2:before,
-#article-container.post-content h3:before,
-#article-container.post-content h4:before,
-#article-container.post-content h5:before,
-#article-container.post-content h6:before,
+#article-container h1:before,
+#article-container h2:before,
+#article-container h3:before,
+#article-container h4:before,
+#article-container h5:before,
+#article-container h6:before,
 #post .post-copyright:before,
 #post .post-outdate-notice:before,
 .note:not(.no-icon)::before {
@@ -3917,24 +3917,24 @@ h1.page-title + .tag-cloud-list {
 #article-container hr {
   margin: 20px 0;
 }
-#article-container.post-content h1,
-#article-container.post-content h2,
-#article-container.post-content h3,
-#article-container.post-content h4,
-#article-container.post-content h5,
-#article-container.post-content h6 {
+#article-container h1,
+#article-container h2,
+#article-container h3,
+#article-container h4,
+#article-container h5,
+#article-container h6 {
   -webkit-transition: all 0.2s ease-out;
   -moz-transition: all 0.2s ease-out;
   -o-transition: all 0.2s ease-out;
   -ms-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
-#article-container.post-content h1:before,
-#article-container.post-content h2:before,
-#article-container.post-content h3:before,
-#article-container.post-content h4:before,
-#article-container.post-content h5:before,
-#article-container.post-content h6:before {
+#article-container h1:before,
+#article-container h2:before,
+#article-container h3:before,
+#article-container h4:before,
+#article-container h5:before,
+#article-container h6:before {
   position: absolute;
   top: calc(50% - 7px);
   color: #f47466;
@@ -3946,87 +3946,87 @@ h1.page-title + .tag-cloud-list {
   -ms-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
-#article-container.post-content h1:hover:before,
-#article-container.post-content h2:hover:before,
-#article-container.post-content h3:hover:before,
-#article-container.post-content h4:hover:before,
-#article-container.post-content h5:hover:before,
-#article-container.post-content h6:hover:before {
+#article-container h1:hover:before,
+#article-container h2:hover:before,
+#article-container h3:hover:before,
+#article-container h4:hover:before,
+#article-container h5:hover:before,
+#article-container h6:hover:before {
   color: #28c28c;
 }
-#article-container.post-content h1 {
+#article-container h1 {
   padding-left: 32px;
 }
-#article-container.post-content h1:before {
+#article-container h1:before {
   margin-left: -26px;
   font-size: 20px;
 }
-#article-container.post-content h1:hover {
+#article-container h1:hover {
   padding-left: 38px;
 }
-#article-container.post-content h2 {
+#article-container h2 {
   padding-left: 30px;
 }
-#article-container.post-content h2:before {
+#article-container h2:before {
   margin-left: -24px;
   font-size: 18px;
 }
-#article-container.post-content h2:hover {
+#article-container h2:hover {
   padding-left: 36px;
 }
-#article-container.post-content h3 {
+#article-container h3 {
   padding-left: 28px;
 }
-#article-container.post-content h3:before {
+#article-container h3:before {
   margin-left: -22px;
   font-size: 16px;
 }
-#article-container.post-content h3:hover {
+#article-container h3:hover {
   padding-left: 34px;
 }
-#article-container.post-content h4 {
+#article-container h4 {
   padding-left: 26px;
 }
-#article-container.post-content h4:before {
+#article-container h4:before {
   margin-left: -20px;
   font-size: 14px;
 }
-#article-container.post-content h4:hover {
+#article-container h4:hover {
   padding-left: 32px;
 }
-#article-container.post-content h5 {
+#article-container h5 {
   padding-left: 24px;
 }
-#article-container.post-content h5:before {
+#article-container h5:before {
   margin-left: -18px;
   font-size: 12px;
 }
-#article-container.post-content h5:hover {
+#article-container h5:hover {
   padding-left: 30px;
 }
-#article-container.post-content h6 {
+#article-container h6 {
   padding-left: 24px;
 }
-#article-container.post-content h6:before {
+#article-container h6:before {
   margin-left: -18px;
   font-size: 12px;
 }
-#article-container.post-content h6:hover {
+#article-container h6:hover {
   padding-left: 30px;
 }
-#article-container.post-content ol p,
-#article-container.post-content ul p {
+#article-container ol p,
+#article-container ul p {
   margin: 0 0 8px;
 }
-#article-container.post-content li::marker {
+#article-container li::marker {
   color: #28c28c;
   font-weight: 600;
   font-size: 1.05em;
 }
-#article-container.post-content li:hover::marker {
+#article-container li:hover::marker {
   color: var(--pseudo-hover);
 }
-#article-container.post-content ul > li {
+#article-container ul > li {
   list-style-type: circle;
 }
 #post .tag_share:after {
@@ -4932,7 +4932,7 @@ blockquote.pullquote.right {
   position: relative;
   margin: 0 0 20px;
   padding: 15px;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 .note.icon-padding {
   padding-left: 3em;
@@ -5074,11 +5074,11 @@ blockquote.pullquote.right {
   font-size: larger;
 }
 .note.default.flat {
-  background: #f7f7f7;
+  background: #f3f3f3;
 }
 .note.default.modern {
   border-color: #e1e1e1;
-  background: #f3f3f3;
+  background: #efefef;
   color: #666;
 }
 .note.default.modern a:not(.btn) {
@@ -5104,11 +5104,11 @@ blockquote.pullquote.right {
   color: #777;
 }
 .note.primary.flat {
-  background: #f5f0fa;
+  background: #f1eaf8;
 }
 .note.primary.modern {
   border-color: #e1c2ff;
-  background: #f3daff;
+  background: #f1d3ff;
   color: #6f42c1;
 }
 .note.primary.modern a:not(.btn) {
@@ -5134,11 +5134,11 @@ blockquote.pullquote.right {
   color: #6f42c1;
 }
 .note.info.flat {
-  background: #eef7fa;
+  background: #e8f4f9;
 }
 .note.info.modern {
   border-color: #b3e5ef;
-  background: #d9edf7;
+  background: #d0e9f5;
   color: #31708f;
 }
 .note.info.modern a:not(.btn) {
@@ -5164,11 +5164,11 @@ blockquote.pullquote.right {
   color: #428bca;
 }
 .note.success.flat {
-  background: #eff8f0;
+  background: #eaf6ec;
 }
 .note.success.modern {
   border-color: #d0e6be;
-  background: #dff0d8;
+  background: #d8edd0;
   color: #3c763d;
 }
 .note.success.modern a:not(.btn) {
@@ -5194,11 +5194,11 @@ blockquote.pullquote.right {
   color: #5cb85c;
 }
 .note.warning.flat {
-  background: #fdf8ea;
+  background: #fdf7e4;
 }
 .note.warning.modern {
   border-color: #fae4cd;
-  background: #fcf4e3;
+  background: #fcf1dc;
   color: #8a6d3b;
 }
 .note.warning.modern a:not(.btn) {
@@ -5224,11 +5224,11 @@ blockquote.pullquote.right {
   color: #f0ad4e;
 }
 .note.danger.flat {
-  background: #fcf1f2;
+  background: #fbecee;
 }
 .note.danger.modern {
   border-color: #ebcdd2;
-  background: #f2dfdf;
+  background: #f0d9d9;
   color: #a94442;
 }
 .note.danger.modern a:not(.btn) {
