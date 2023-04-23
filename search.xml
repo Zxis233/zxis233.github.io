@@ -6,7 +6,52 @@
     <content><![CDATA[<p><a href="https://yisous.xyz/posts/11eb4aac/">butterfly 博客自定义右键菜单升级版 | Ariasaka の小窝 (yisous.xyz)</a></p>
 <p><a href="https://tzy1997.com/articles/hexo1608#%E6%89%A9%E5%B1%95">Hexo + Butterfly 自定义右键菜单 | 唐志远の博客 (tzy1997.com)</a></p>
 <p><a href="https://zsyyblog.com/df7b617.html">Hexo+Butterfly 实现文章随机跳转（无缝版） | 竹山一叶 (zsyyblog.com)</a></p>
+<p>效果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/right-menu_2023-4-24_0026_iv0l9riaj7.png" alt="right-menu" /></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>竹林鸟·霜华 开箱&amp;上手体验</title>
+    <url>/2023/04/23/Frosta-earpods/</url>
+    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>室友最近跟疯了一样买买买耳机相关：镀银大Pin线、耳塞套……</p>
+<p>我向来是只用最普通的有线耳机的——便宜耐用。不过想想，也该换了——体验一下好的。</p>
+<p>随手刷了刷酷安，看到有人推竹林鸟家的百元新品——霜华Z2。Type-C带DAC解码芯片、动圈、超多配件、<s>亚克力牌</s>……</p>
+<p>99元也算<em><strong>百元以内</strong></em>吧。买了。</p>
+<p>顺丰是真的很快，前一天中午买，下午发出，第二天上午就到了。<s>离散没听课玩耳机去了</s></p>
+<div class="note flat info flat"><p>以下内容可能包含较多主观感受</p>
+</div>
+<div class="note flat warning flat"><p>博主并不具有专业乐理知识，也非耳机发烧友，文章难免存在纰漏。欢迎各位大神指教</p>
+</div>
+<h2 id="开箱"><a class="markdownIt-Anchor" href="#开箱"></a> 开箱！</h2>
+<p><s>上课不好拍照，不拍了算了</s></p>
+<p>放一张网图，来自<a href="http://k.sina.com.cn/article_1823348853_6cae18750200197v1.html">百元又立新标杆？竹林鸟霜华有线耳机测评 | 耳机_新浪新闻 (sina.com.cn)</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/8e9e-e3c4ffa93196965baa8482888a184916_2023-4-24_0023_e3tr96xizd.jpg" alt="配件一览" /></p>
+<p>后来才知道在下单时备注暗号才会送亚克力牌 <s>啥比二刺螈</s> <s>亚克力牌才是灵魂啊！</s></p>
+<p>拿到手，第一个感觉：配件是真的多。不同型号的耳塞（算上自带的）一共八对。值得一提的是出场自带的是竹林鸟家价值29￥的“竹韵”耳塞。可以说很良心了。还贴心的送了耳机夹，不用担心耳机线迎风飘扬的问题了，绝赞！套子有点小，我倒是不大爱用。</p>
+<p>整体主色调是银白色，给人一种很清爽的感觉。配上包装盒的水墨画，确实有种淡雅的风韵。</p>
+<div class="gallery">
+    <div class="fj-gallery  data" data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/frosta-my-shot_2023-4-24_0005_y8vs4vx0mm.jpg","alt":"瞎拍的~~顺便看看我的键盘~~"}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<h2 id="使用体验"><a class="markdownIt-Anchor" href="#使用体验"></a> 使用体验</h2>
+<h2 id="调教"><a class="markdownIt-Anchor" href="#调教"></a> 调教</h2>
+<p>我也不知道这耳机要不要煲；手上有的只有软件——Viper4Android<s>从小用到大了属于是</s>。不过只支持Root设备/刷入Magisk的设备。我使用的是整合包<a href="https://github.com/programminghoch10/ViPER4AndroidRepackaged">ViPER4AndroidRepackaged</a>。</p>
+<h3 id="自己做ddc文件"><a class="markdownIt-Anchor" href="#自己做ddc文件"></a> 自己做DDC文件！</h3>
+<p>百度搜了几个教程，照着试了下。首先找到官方的频响曲线。听过后明显感觉低频不够，那就拉高一点！</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>耳机</tag>
+        <tag>霜华</tag>
+        <tag>竹林鸟</tag>
+        <tag>Viper4Android</tag>
+        <tag>DDC</tag>
+      </tags>
   </entry>
   <entry>
     <title>Hello World</title>
@@ -26,23 +71,6 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 代码样式测试</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello world&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>君Hexo本上手①：开始</title>
-    <url>/2023/04/14/hexo_1/</url>
-    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
-<p>如你所见，本博客是使用Hexo框架搭建的，而博主没有任何前端相关知识。换言之，一切的美化/配置，都交由Hexo框架完成。</p>
-<p>本着“记录一切”的想法，把Hexo配置的全过程记下来<s>配到哪记到哪</s></p>
-<h2 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h2>
-<p><a href="https://hexo.io/zh-cn/">Hexo官网</a>在这里可以找到官方的配置说明——多平台安装、配置等。</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>教程</tag>
-      </tags>
   </entry>
   <entry>
     <title>在非Honor/Samsung手机上使用微软的“连接至Windows”功能</title>
@@ -98,6 +126,46 @@
       </tags>
   </entry>
   <entry>
+    <title>君Hexo本上手①：开始</title>
+    <url>/2023/04/14/hexo_1/</url>
+    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>如你所见，本博客是使用Hexo框架搭建的，而博主没有任何前端相关知识。换言之，一切的美化/配置，都交由Hexo框架完成。</p>
+<p>本着“记录一切”的想法，把Hexo配置的全过程记下来<s>配到哪记到哪</s></p>
+<h2 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h2>
+<p><a href="https://hexo.io/zh-cn/">Hexo官网</a>在这里可以找到官方的配置说明——多平台安装、配置等。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决启动Vidado时的临时目录“读写无权限”问题</title>
+    <url>/2023/04/22/vivado-problem/</url>
+    <content><![CDATA[<p>数字电路实验需要用到AMD家的<strong>Vivado</strong>，安装可是费了一般功夫。去官网上下载的包全都是在线安装版，离线安装板又是镜像合集（塞了各种系统的安装包）<s>差评</s><br />
+而且安装后一直出现<strong>临时路径</strong>“无权限访问”的问题~~（合理猜测，可能和我用RAMDisk将临时文件的系统变量重定向有关）~~。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/1682170577605_2023-4-22_2136_fetbxgpc34.png" alt="Error" /></p>
+<p>看了一下快捷方式，是<code>F:\Xilinx\Vivado\2018.3\bin\unwrapped\win64.o\vvgl.exe F:\Xilinx\Vivado\2018.3\bin\vivado.bat</code>。估计这个<code>vivado.bat</code>和启动有关。毕竟直接启动安装路径下的<code>vivado.exe</code>会报错，应该是需要用批处理文件来初始化。在初始化环境之前，自己定义一下临时目录的环境变量就行了。</p>
+<p>一开始的<strong>vivado.bat</strong>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line">setlocal</span><br><span class="line">rem <span class="comment">#</span></span><br><span class="line">rem <span class="comment"># COPYRIGHT NOTICE</span></span><br><span class="line">rem <span class="comment"># Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.</span></span><br><span class="line">rem <span class="comment"># </span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> _RDI_CWD=%<span class="built_in">cd</span>%</span><br><span class="line"><span class="built_in">pushd</span> <span class="string">&quot;%~dp0&quot;</span></span><br><span class="line"><span class="built_in">set</span> _RDI_BINROOT=%<span class="built_in">cd</span>%</span><br><span class="line"><span class="built_in">cd</span> /d <span class="string">&quot;%_RDI_CWD%&quot;</span></span><br><span class="line"></span><br><span class="line">···</span><br></pre></td></tr></table></figure>
+<p>在<strong>vivado.bat</strong>里加上两行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line">setlocal</span><br><span class="line">rem <span class="comment">#</span></span><br><span class="line">rem <span class="comment"># COPYRIGHT NOTICE</span></span><br><span class="line">rem <span class="comment"># Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.</span></span><br><span class="line">rem <span class="comment"># </span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> TEMP=R:\Temp</span><br><span class="line"><span class="built_in">set</span> TMP=R:\Temp</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> _RDI_CWD=%<span class="built_in">cd</span>%</span><br><span class="line"><span class="built_in">pushd</span> <span class="string">&quot;%~dp0&quot;</span></span><br><span class="line"><span class="built_in">set</span> _RDI_BINROOT=%<span class="built_in">cd</span>%</span><br><span class="line"><span class="built_in">cd</span> /d <span class="string">&quot;%_RDI_CWD%&quot;</span></span><br><span class="line"></span><br><span class="line">···</span><br></pre></td></tr></table></figure>
+<p>就可以正常运行辣 😋</p>
+<p><s>啥比软件</s> <s>我也有锅</s><br />
+<s>没事别玩RAMDisk</s> <s>装内存装的😅</s></p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>技术分享</tag>
+        <tag>踩坑</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SakuraFRP搭建过程踩坑</title>
     <url>/2023/04/14/sakura_frp/</url>
     <content><![CDATA[<p>几个人合资租了个服务器，忘了几C几G了，总体表现还行，打算整个FRP自己用用。找了一圈在线管理的面板，貌似只有<a href="https://github.com/ZeroDream-CN/SakuraPanel">SakuraFRP</a>的还不错。使用配套的前端+特制的FRPs即可，FRPc可以任选。</p>
@@ -129,29 +197,6 @@
       </categories>
       <tags>
         <tag>SakuraFRP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vivado-problem</title>
-    <url>/2023/04/22/vivado-problem/</url>
-    <content><![CDATA[<p>数字电路实验需要用到AMD家的<strong>Vivado</strong>，安装可是费了一般功夫。去官网上下载的包全都是在线安装版，离线安装板又是镜像合集（塞了各种系统的安装包）<s>差评</s><br />
-而且安装后一直出现<strong>临时路径</strong>“无权限访问”的问题~~（合理猜测，可能和我用RAMDisk将临时文件的系统变量重定向有关）~~。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/1682170577605_2023-4-22_2136_fetbxgpc34.png" alt="Error" /></p>
-<p>看了一下快捷方式，是<code>F:\Xilinx\Vivado\2018.3\bin\unwrapped\win64.o\vvgl.exe F:\Xilinx\Vivado\2018.3\bin\vivado.bat</code>。估计这个<code>vivado.bat</code>和启动有关。毕竟直接启动安装路径下的<code>vivado.exe</code>会报错，应该是需要用批处理文件来初始化。在初始化环境之前，自己定义一下临时目录的环境变量就行了。</p>
-<p>一开始的<strong>vivado.bat</strong>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line">setlocal</span><br><span class="line">rem <span class="comment">#</span></span><br><span class="line">rem <span class="comment"># COPYRIGHT NOTICE</span></span><br><span class="line">rem <span class="comment"># Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.</span></span><br><span class="line">rem <span class="comment"># </span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> _RDI_CWD=%<span class="built_in">cd</span>%</span><br><span class="line"><span class="built_in">pushd</span> <span class="string">&quot;%~dp0&quot;</span></span><br><span class="line"><span class="built_in">set</span> _RDI_BINROOT=%<span class="built_in">cd</span>%</span><br><span class="line"><span class="built_in">cd</span> /d <span class="string">&quot;%_RDI_CWD%&quot;</span></span><br><span class="line"></span><br><span class="line">···</span><br></pre></td></tr></table></figure>
-<p>在<strong>vivado.bat</strong>里加上两行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line">setlocal</span><br><span class="line">rem <span class="comment">#</span></span><br><span class="line">rem <span class="comment"># COPYRIGHT NOTICE</span></span><br><span class="line">rem <span class="comment"># Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.</span></span><br><span class="line">rem <span class="comment"># </span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> TEMP=R:\Temp</span><br><span class="line"><span class="built_in">set</span> TMP=R:\Temp</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> _RDI_CWD=%<span class="built_in">cd</span>%</span><br><span class="line"><span class="built_in">pushd</span> <span class="string">&quot;%~dp0&quot;</span></span><br><span class="line"><span class="built_in">set</span> _RDI_BINROOT=%<span class="built_in">cd</span>%</span><br><span class="line"><span class="built_in">cd</span> /d <span class="string">&quot;%_RDI_CWD%&quot;</span></span><br><span class="line"></span><br><span class="line">···</span><br></pre></td></tr></table></figure>
-<p>就可以正常运行辣 😋</p>
-<p><s>啥比软件</s> <s>我也有锅</s><br />
-<s>没事别玩RAMDisk</s> <s>装内存装的😅</s></p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>技术分享</tag>
-        <tag>踩坑</tag>
       </tags>
   </entry>
 </search>
