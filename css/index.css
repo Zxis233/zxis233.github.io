@@ -1355,6 +1355,7 @@ canvas:not(#ribbon-canvas),
   --card-bg: #fff;
   --sidebar-bg: #f6f8fa;
   --btn-hover-color: #ff80ac;
+  --right-menu-select-color: rgba(255,128,172,0.5);
   --btn-color: #fff;
   --btn-bg: #28c28c;
   --text-bg-hover: rgba(40,194,140,0.7);
