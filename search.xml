@@ -44,24 +44,6 @@
       </tags>
   </entry>
   <entry>
-    <title>来点BA笑话①</title>
-    <url>/2023/04/24/ba-talk1/</url>
-    <content><![CDATA[<h2 id="1"><a class="markdownIt-Anchor" href="#1"></a> 1</h2>
-<p>你说的对，但是**《碧蓝档案》<strong>是由<em>Nexon</em>研发的一款全新</strong>二次元养成游戏**。游戏发生在一个被称作***「基沃托斯」<em><em><em>的幻想世界，在这里，被神选中的人将被授予「光环」，引导</em>神名之力</em>。你将扮演一位名为</em>**「老师」<em><em><em>的神秘角色，在这里邂逅性格各异、能力独特的学生们，和她们一起击败强敌，寻找不存在的</em>「崇高」</em>——同时，逐步发掘</em>**「希迪姆之匣」***的真相。</p>
-<p>你的素养很差，我现在每天玩碧蓝档案都能赚100青辉石，每个月差不多3000青辉石的收入， 也就是现实生活中每个月2000美元的收入水平，换算过来最少也12000人民币，虽然我 只有14岁，但是已经超越了中国绝大多数人 (包括你) 的水平，这便是碧蓝档案给我的骄傲的资本。</p>
-<h2 id="2"><a class="markdownIt-Anchor" href="#2"></a> 2</h2>
-<p>你说的对，但是我已经于 <em>2022年3月14日下午4:52分</em> 达成 <em>《碧蓝档案》北美服 竞技场 <strong>Top30</strong></em> 的好成绩</p>
-]]></content>
-      <categories>
-        <category>Emo</category>
-      </categories>
-      <tags>
-        <tag>碧蓝档案</tag>
-        <tag>Blue Archive</tag>
-        <tag>游戏</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo的Butterfly主题自定义右键菜单</title>
     <url>/2023/04/23/blog-right-menu/</url>
     <content><![CDATA[<p><a href="https://yisous.xyz/posts/11eb4aac/">butterfly 博客自定义右键菜单升级版 | Ariasaka の小窝 (yisous.xyz)</a></p>
@@ -81,23 +63,22 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2023/04/14/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="quick-start"><a class="markdownIt-Anchor" href="#quick-start"></a> Quick Start</h2>
-<h3 id="create-a-new-post"><a class="markdownIt-Anchor" href="#create-a-new-post"></a> Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="run-server"><a class="markdownIt-Anchor" href="#run-server"></a> Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="generate-static-files"><a class="markdownIt-Anchor" href="#generate-static-files"></a> Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="deploy-to-remote-sites"><a class="markdownIt-Anchor" href="#deploy-to-remote-sites"></a> Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 代码样式测试</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello world&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
+    <title>来点BA笑话①</title>
+    <url>/2023/04/24/ba-talk1/</url>
+    <content><![CDATA[<h2 id="1"><a class="markdownIt-Anchor" href="#1"></a> 1</h2>
+<p>你说的对，但是**《碧蓝档案》<strong>是由<em>Nexon</em>研发的一款全新</strong>二次元养成游戏**。游戏发生在一个被称作***「基沃托斯」<em><em><em>的幻想世界，在这里，被神选中的人将被授予「光环」，引导</em>神名之力</em>。你将扮演一位名为</em>**「老师」<em><em><em>的神秘角色，在这里邂逅性格各异、能力独特的学生们，和她们一起击败强敌，寻找不存在的</em>「崇高」</em>——同时，逐步发掘</em>**「希迪姆之匣」***的真相。</p>
+<p>你的素养很差，我现在每天玩碧蓝档案都能赚100青辉石，每个月差不多3000青辉石的收入， 也就是现实生活中每个月2000美元的收入水平，换算过来最少也12000人民币，虽然我 只有14岁，但是已经超越了中国绝大多数人 (包括你) 的水平，这便是碧蓝档案给我的骄傲的资本。</p>
+<h2 id="2"><a class="markdownIt-Anchor" href="#2"></a> 2</h2>
+<p>你说的对，但是我已经于 <em>2022年3月14日下午4:52分</em> 达成 <em>《碧蓝档案》北美服 竞技场 <strong>Top30</strong></em> 的好成绩</p>
+]]></content>
+      <categories>
+        <category>Emo</category>
+      </categories>
+      <tags>
+        <tag>碧蓝档案</tag>
+        <tag>Blue Archive</tag>
+        <tag>游戏</tag>
+      </tags>
   </entry>
   <entry>
     <title>君Hexo本上手①：开始</title>
@@ -117,35 +98,24 @@
       </tags>
   </entry>
   <entry>
-    <title>当我们在谈论Root时，我们究竟在讨论什么①</title>
-    <url>/2023/04/24/magisk-1/</url>
-    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
-<p>因报名了学校社团的科普演讲，故打算先写个稿子出来。后来想想，干脆放博客上了，还能存个档。</p>
-<p>为啥要讲Root？我也不知道。可能因为我对**“刷机”**有着独特的感情吧。</p>
-<p>四年级的时候，我成功Root了我的Samsung-i9300，并为其刷入了Cyanogenmod的类原生ROM。可能自那之后我就对刷机感兴趣了吧。</p>
-<p>十年过去了，Root也逐渐淡出的大家的视野——现在，可能只有酷安、百度贴吧，还有对其乐此不疲的人吧。</p>
-<p>所以，我想通过科普，让更多的人了解，什么是<strong>Root</strong>。</p>
-<p>按照惯例，依旧是两个Note：</p>
-<div class="note flat info flat"><p>以下内容可能已过时</p>
-</div>
-<div class="note flat warning flat"><p>博主并不具有专业Android系统/Linux内核相关的专业知识。</p>
-<p>文章难免存在纰漏。欢迎各位大神指教</p>
-</div>
-<p><em><strong>始める</strong></em>。</p>
-<h2 id="安卓发展史"><a class="markdownIt-Anchor" href="#安卓发展史"></a> 安卓发展史</h2>
-<p>安卓这玩意，历史还蛮悠久的。安卓系统的雏形可以追溯到</p>
+    <title>Hello World</title>
+    <url>/2023/04/14/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="quick-start"><a class="markdownIt-Anchor" href="#quick-start"></a> Quick Start</h2>
+<h3 id="create-a-new-post"><a class="markdownIt-Anchor" href="#create-a-new-post"></a> Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="run-server"><a class="markdownIt-Anchor" href="#run-server"></a> Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="generate-static-files"><a class="markdownIt-Anchor" href="#generate-static-files"></a> Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="deploy-to-remote-sites"><a class="markdownIt-Anchor" href="#deploy-to-remote-sites"></a> Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 代码样式测试</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello world&quot;</span>)</span><br></pre></td></tr></table></figure>
 ]]></content>
-      <categories>
-        <category>随笔</category>
-        <category>科普</category>
-      </categories>
-      <tags>
-        <tag>Magisk</tag>
-        <tag>安卓</tag>
-        <tag>Root</tag>
-        <tag>科普</tag>
-        <tag>刷机</tag>
-      </tags>
   </entry>
   <entry>
     <title>在非Honor/Samsung手机上使用微软的“连接至Windows”功能</title>
@@ -235,6 +205,37 @@
       </tags>
   </entry>
   <entry>
+    <title>当我们在谈论Root时，我们究竟在讨论什么①</title>
+    <url>/2023/04/24/magisk-1/</url>
+    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>因报名了学校社团的科普演讲，故打算先写个稿子出来。后来想想，干脆放博客上了，还能存个档。</p>
+<p>为啥要讲Root？我也不知道。可能因为我对**“刷机”**有着独特的感情吧。</p>
+<p>四年级的时候，我成功Root了我的Samsung-i9300，并为其刷入了Cyanogenmod的类原生ROM。可能自那之后我就对刷机感兴趣了吧。</p>
+<p>十年过去了，Root也逐渐淡出的大家的视野——现在，可能只有酷安、百度贴吧，还有对其乐此不疲的人吧。</p>
+<p>所以，我想通过科普，让更多的人了解，什么是<strong>Root</strong>。</p>
+<p>按照惯例，依旧是两个Note：</p>
+<div class="note flat info flat"><p>以下内容可能已过时</p>
+</div>
+<div class="note flat warning flat"><p>博主并不具有专业Android系统/Linux内核相关的专业知识。</p>
+<p>文章难免存在纰漏。欢迎各位大神指教</p>
+</div>
+<p><em><strong>始める</strong></em>。</p>
+<h2 id="安卓发展史"><a class="markdownIt-Anchor" href="#安卓发展史"></a> 安卓发展史</h2>
+<p>安卓这玩意，历史还蛮悠久的。安卓系统的雏形可以追溯到</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+        <category>科普</category>
+      </categories>
+      <tags>
+        <tag>Magisk</tag>
+        <tag>安卓</tag>
+        <tag>Root</tag>
+        <tag>科普</tag>
+        <tag>刷机</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>解决启动Vidado时的临时目录“读写无权限”问题</title>
     <url>/2023/04/22/vivado-problem/</url>
     <content><![CDATA[<p>数字电路实验需要用到AMD家的<strong>Vivado</strong>，安装可是费了一般功夫。去官网上下载的包全都是在线安装版，离线安装板又是镜像合集（塞了各种系统的安装包）<s>差评</s><br />
@@ -255,6 +256,32 @@
       <tags>
         <tag>技术分享</tag>
         <tag>踩坑</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我在干嘛？</title>
+    <url>/2023/04/24/wtf/</url>
+    <content><![CDATA[<div class="note warning flat"><p>以下内容可能会引起不适，包括但不限于：</p>
+<ul>
+<li>粗口/俚语</li>
+<li>意义不明的文字/语言表述</li>
+<li>偶尔/轻微的性暗示</li>
+</ul>
+<p>请慎重观看。</p>
+</div>
+<div class="note danger icon-padding flat"><i class="note-icon fas fa-triangle-exclamation"></i><p>极小部分人可能会在看到特定视觉图像（包括可能出现在博客文章图片中的闪烁效果或图案）时出现癫痫症状。</p>
+<p>甚至没有癫痫史的人也<strong>可能</strong>具有一些可能会在阅读博客文章时导致 “光敏性癫痫发作” 的未确诊症状。</p>
+<p><strong>如果你出现任何症状，请立即停止阅读本文并咨询医生。</strong></p>
+</div>
+<h2 id="1"><a class="markdownIt-Anchor" href="#1"></a> 1</h2>
+<p>人活着哪有不疯的？硬撑罢了！人活着哪有不疯的？硬撑罢了！人活着哪有不疯的？硬撑罢了！人活着哪有不疯的？硬撑罢了！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，</p>
+]]></content>
+      <categories>
+        <category>Emo</category>
+      </categories>
+      <tags>
+        <tag>彻底疯狂</tag>
+        <tag>大学生</tag>
       </tags>
   </entry>
 </search>
