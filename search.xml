@@ -44,6 +44,24 @@
       </tags>
   </entry>
   <entry>
+    <title>来点BA笑话①</title>
+    <url>/2023/04/24/ba-talk1/</url>
+    <content><![CDATA[<h2 id="1"><a class="markdownIt-Anchor" href="#1"></a> 1</h2>
+<p>你说的对，但是**《碧蓝档案》<strong>是由<em>Nexon</em>研发的一款全新</strong>二次元养成游戏**。游戏发生在一个被称作***「基沃托斯」<em><em><em>的幻想世界，在这里，被神选中的人将被授予「光环」，引导</em>神名之力</em>。你将扮演一位名为</em>**「老师」<em><em><em>的神秘角色，在这里邂逅性格各异、能力独特的学生们，和她们一起击败强敌，寻找不存在的</em>「崇高」</em>——同时，逐步发掘</em>**「希迪姆之匣」***的真相。</p>
+<p>你的素养很差，我现在每天玩碧蓝档案都能赚100青辉石，每个月差不多3000青辉石的收入， 也就是现实生活中每个月2000美元的收入水平，换算过来最少也12000人民币，虽然我 只有14岁，但是已经超越了中国绝大多数人 (包括你) 的水平，这便是碧蓝档案给我的骄傲的资本。</p>
+<h2 id="2"><a class="markdownIt-Anchor" href="#2"></a> 2</h2>
+<p>你说的对，但是我已经于 <em>2022年3月14日下午4:52分</em> 达成 <em>《碧蓝档案》北美服 竞技场 <strong>Top30</strong></em> 的好成绩</p>
+]]></content>
+      <categories>
+        <category>Emo</category>
+      </categories>
+      <tags>
+        <tag>碧蓝档案</tag>
+        <tag>Blue Archive</tag>
+        <tag>游戏</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo的Butterfly主题自定义右键菜单</title>
     <url>/2023/04/23/blog-right-menu/</url>
     <content><![CDATA[<p><a href="https://yisous.xyz/posts/11eb4aac/">butterfly 博客自定义右键菜单升级版 | Ariasaka の小窝 (yisous.xyz)</a></p>
@@ -52,6 +70,15 @@
 <p>效果：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/right-menu_2023-4-24_0026_iv0l9riaj7.png" alt="right-menu" /></p>
 ]]></content>
+      <categories>
+        <category>技术分享</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>博客</tag>
+        <tag>美化</tag>
+        <tag>Butterfly</tag>
+      </tags>
   </entry>
   <entry>
     <title>Hello World</title>
@@ -87,6 +114,37 @@
       <tags>
         <tag>hexo</tag>
         <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>当我们在谈论Root时，我们究竟在讨论什么①</title>
+    <url>/2023/04/24/magisk-1/</url>
+    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>因报名了学校社团的科普演讲，故打算先写个稿子出来。后来想想，干脆放博客上了，还能存个档。</p>
+<p>为啥要讲Root？我也不知道。可能因为我对**“刷机”**有着独特的感情吧。</p>
+<p>四年级的时候，我成功Root了我的Samsung-i9300，并为其刷入了Cyanogenmod的类原生ROM。可能自那之后我就对刷机感兴趣了吧。</p>
+<p>十年过去了，Root也逐渐淡出的大家的视野——现在，可能只有酷安、百度贴吧，还有对其乐此不疲的人吧。</p>
+<p>所以，我想通过科普，让更多的人了解，什么是<strong>Root</strong>。</p>
+<p>按照惯例，依旧是两个Note：</p>
+<div class="note flat info flat"><p>以下内容可能已过时</p>
+</div>
+<div class="note flat warning flat"><p>博主并不具有专业Android系统/Linux内核相关的专业知识。</p>
+<p>文章难免存在纰漏。欢迎各位大神指教</p>
+</div>
+<p><em><strong>始める</strong></em>。</p>
+<h2 id="安卓发展史"><a class="markdownIt-Anchor" href="#安卓发展史"></a> 安卓发展史</h2>
+<p>安卓这玩意，历史还蛮悠久的。安卓系统的雏形可以追溯到</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+        <category>科普</category>
+      </categories>
+      <tags>
+        <tag>Magisk</tag>
+        <tag>安卓</tag>
+        <tag>Root</tag>
+        <tag>科普</tag>
+        <tag>刷机</tag>
       </tags>
   </entry>
   <entry>
@@ -140,36 +198,6 @@
       </categories>
       <tags>
         <tag>技术分享</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>当我们在谈论Root时，我们究竟在讨论什么①</title>
-    <url>/2023/04/24/magisk-1/</url>
-    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
-<p>因报名了学校社团的科普演讲，故打算先写个稿子出来。后来想想，干脆放博客上了，还能存个档。</p>
-<p>为啥要讲Root？我也不知道。可能因为我对**“刷机”**有着独特的感情吧。</p>
-<p>四年级的时候，我成功Root了我的Samsung-i9300，并为其刷入了Cyanogenmod的类原生ROM。可能自那之后我就对刷机感兴趣了吧。</p>
-<p>十年过去了，Root也逐渐淡出的大家的视野——现在，可能只有酷安、百度贴吧，还有对其乐此不疲的人吧。</p>
-<p>所以，我想通过科普，让更多的人了解，什么是<strong>Root</strong>。</p>
-<p>按照惯例，依旧是两个Note：</p>
-<div class="note flat info flat"><p>以下内容可能已过时</p>
-</div>
-<div class="note flat warning flat"><p>博主并不具有专业Android系统/Linux内核相关的专业知识。</p>
-<p>文章难免存在纰漏。欢迎各位大神指教</p>
-</div>
-<p><em><strong>始める</strong></em>。</p>
-<h2 id="安卓发展史"><a class="markdownIt-Anchor" href="#安卓发展史"></a> 安卓发展史</h2>
-<p>安卓这玩意，历史还蛮悠久的。安卓系统的雏形可以追溯到</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>Magisk</tag>
-        <tag>安卓</tag>
-        <tag>Root</tag>
-        <tag>科普</tag>
-        <tag>刷机</tag>
       </tags>
   </entry>
   <entry>
