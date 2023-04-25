@@ -4886,12 +4886,13 @@ blockquote.pullquote.right {
 }
 .toggle {
   margin-bottom: 20px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid rgba(40,194,140,0.12);
+  background: rgba(40,194,140,0.04);
 }
 .toggle > .toggle-button {
   padding: 6px 15px;
-  background: #f0f0f0;
-  color: #1f2d3d;
+  background: rgba(40,194,140,0.12);
+  color: #28c28c;
   cursor: pointer;
 }
 .toggle > .toggle-content {

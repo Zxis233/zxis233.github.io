@@ -44,25 +44,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo的Butterfly主题自定义右键菜单</title>
-    <url>/2023/04/23/blog-right-menu/</url>
-    <content><![CDATA[<p><a href="https://yisous.xyz/posts/11eb4aac/">butterfly 博客自定义右键菜单升级版 | Ariasaka の小窝 (yisous.xyz)</a></p>
-<p><a href="https://tzy1997.com/articles/hexo1608#%E6%89%A9%E5%B1%95">Hexo + Butterfly 自定义右键菜单 | 唐志远の博客 (tzy1997.com)</a></p>
-<p><a href="https://zsyyblog.com/df7b617.html">Hexo+Butterfly 实现文章随机跳转（无缝版） | 竹山一叶 (zsyyblog.com)</a></p>
-<p>效果：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/right-menu_2023-4-24_0026_iv0l9riaj7.png" alt="right-menu" /></p>
-]]></content>
-      <categories>
-        <category>技术分享</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>博客</tag>
-        <tag>美化</tag>
-        <tag>Butterfly</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>来点BA笑话①</title>
     <url>/2023/04/24/ba-talk1/</url>
     <content><![CDATA[<h2 id="1"><a class="markdownIt-Anchor" href="#1"></a> 1</h2>
@@ -81,20 +62,22 @@
       </tags>
   </entry>
   <entry>
-    <title>君Hexo本上手①：开始</title>
-    <url>/2023/04/14/hexo_1/</url>
-    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
-<p>如你所见，本博客是使用Hexo框架搭建的，而博主没有任何前端相关知识。换言之，一切的美化/配置，都交由Hexo框架完成。</p>
-<p>本着“记录一切”的想法，把Hexo配置的全过程记下来<s>配到哪记到哪</s></p>
-<h2 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h2>
-<p><a href="https://hexo.io/zh-cn/">Hexo官网</a>在这里可以找到官方的配置说明——多平台安装、配置等。</p>
+    <title>Hexo的Butterfly主题自定义右键菜单</title>
+    <url>/2023/04/23/blog-right-menu/</url>
+    <content><![CDATA[<p><a href="https://yisous.xyz/posts/11eb4aac/">butterfly 博客自定义右键菜单升级版 | Ariasaka の小窝 (yisous.xyz)</a></p>
+<p><a href="https://tzy1997.com/articles/hexo1608#%E6%89%A9%E5%B1%95">Hexo + Butterfly 自定义右键菜单 | 唐志远の博客 (tzy1997.com)</a></p>
+<p><a href="https://zsyyblog.com/df7b617.html">Hexo+Butterfly 实现文章随机跳转（无缝版） | 竹山一叶 (zsyyblog.com)</a></p>
+<p>效果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/right-menu_2023-4-24_0026_iv0l9riaj7.png" alt="right-menu" /></p>
 ]]></content>
       <categories>
-        <category>随笔</category>
+        <category>技术分享</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
-        <tag>教程</tag>
+        <tag>Hexo</tag>
+        <tag>博客</tag>
+        <tag>美化</tag>
+        <tag>Butterfly</tag>
       </tags>
   </entry>
   <entry>
@@ -116,6 +99,23 @@
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 代码样式测试</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello world&quot;</span>)</span><br></pre></td></tr></table></figure>
 ]]></content>
+  </entry>
+  <entry>
+    <title>君Hexo本上手①：开始</title>
+    <url>/2023/04/14/hexo_1/</url>
+    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>如你所见，本博客是使用Hexo框架搭建的，而博主没有任何前端相关知识。换言之，一切的美化/配置，都交由Hexo框架完成。</p>
+<p>本着“记录一切”的想法，把Hexo配置的全过程记下来<s>配到哪记到哪</s></p>
+<h2 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h2>
+<p><a href="https://hexo.io/zh-cn/">Hexo官网</a>在这里可以找到官方的配置说明——多平台安装、配置等。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>教程</tag>
+      </tags>
   </entry>
   <entry>
     <title>在非Honor/Samsung手机上使用微软的“连接至Windows”功能</title>
@@ -171,6 +171,53 @@
       </tags>
   </entry>
   <entry>
+    <title>当我们在谈论Root时，我们究竟在讨论什么①</title>
+    <url>/2023/04/24/magisk-1/</url>
+    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>因报名了学校社团的科普演讲，故打算先写个稿子出来。后来想想，干脆放博客上了，还能存个档。</p>
+<p>为啥要讲Root？我也不知道。可能因为我对**“刷机”**有着独特的感情吧。</p>
+<p>四年级的时候，我成功Root了我的Samsung-i9300，并为其刷入了Cyanogenmod的类原生ROM。可能自那之后我就对刷机感兴趣了吧。</p>
+<p>十年过去了，Root也逐渐淡出的大家的视野——现在，可能只有酷安、百度贴吧，还有对其乐此不疲的人吧。</p>
+<p>所以，我想通过科普，让更多的人了解，什么是<strong>Root</strong>。</p>
+<p>按照惯例，依旧是两个Note：</p>
+<div class="note flat info flat"><p>以下内容可能已过时</p>
+</div>
+<div class="note flat warning flat"><p>博主并不具有专业Android系统/Linux内核相关的专业知识。</p>
+<p>文章难免存在纰漏。欢迎各位大神指教</p>
+</div>
+<p><em><strong>始める</strong></em>。</p>
+<h2 id="安卓发展史"><a class="markdownIt-Anchor" href="#安卓发展史"></a> 安卓发展史</h2>
+<p>安卓这玩意，历史还蛮悠久的。安卓系统的雏形可以追溯到2008年9月。在那之前，苹果公司已经于2007年1月，发布了第一款iPhone手机。或许是感受到了潜在的危机，也可能只是单纯地不想把手机市场“拱手让人”，谷歌开始着手研发自己的系统。这并非一件简单的事情；与机遇相比，更多的，或许是风险。</p>
+<p><strong>毕竟，2007年是个分水岭。微软自己的Windows Mobile系统和诺基亚的塞班(Symbian)系统逐渐开始丧失话语权。</strong></p>
+<p>或许，这是入局的好机会？当然，像诺基亚那样<em>中道崩殂</em>也是有可能的——这是后话。不管怎么样，谷歌还是做了。</p>
+<p>2008年9月，第一代安卓系统，Android 1.0发布。然而，新的系统并没有被外界看好：当时，诺基亚还是牢牢占据了市场。甚至有言论称最多一年谷歌就会放弃Android系统。</p>
+<details class="toggle" ><summary class="toggle-button" style="">题外话</summary><div class="toggle-content"><p>博主的第一台“智能手机”其实是<em>Nokia XpressMusic 5800</em>：搭载了<s>极为先进的</s>塞班系统，且可以运行Java编写的小程序。记得当时还是360手机助手的天下，居然还有一个“塞班专区”。下好心仪的游戏后，通过数据线可以将.jre安装包传到手机上。记得五年级的时候在被窝里拿着随机附赠的（没错，当时就有随机附赠的触摸笔，可以用来记录笔记啥的<s>三星学着点</s>）触摸笔打 8-ball-pool。</p>
+<p>在上面玩过的游戏有：</p>
+<ul>
+<li>SIM4</li>
+<li>狂野西部（塔防？小人还能到处走动<s>明日方舟早期作品</s>）</li>
+<li>8-ball-pool（台球）</li>
+<li>Bounce Ball的冒险（3D)</li>
+<li>RealFootball 2011 <s>實 況 足 球</s></li>
+<li>UNO！</li>
+<li>*<em>剩下的忘了</em></li>
+</ul>
+</div></details>
+<p>半年后，新的Android 1.5来到了大众的面前。从此，安卓系统开始有了自己的名字——或者说，<strong>代号</strong>(Codename)。Android 1.5的代号是<em>Cupcake</em>，即纸杯蛋糕。也是从此开始，每一代安卓系统的代号首字母，按字母表排列。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+        <category>科普</category>
+      </categories>
+      <tags>
+        <tag>Magisk</tag>
+        <tag>安卓</tag>
+        <tag>Root</tag>
+        <tag>科普</tag>
+        <tag>刷机</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SakuraFRP搭建过程踩坑</title>
     <url>/2023/04/14/sakura_frp/</url>
     <content><![CDATA[<p>几个人合资租了个服务器，忘了几C几G了，总体表现还行，打算整个FRP自己用用。找了一圈在线管理的面板，貌似只有<a href="https://github.com/ZeroDream-CN/SakuraPanel">SakuraFRP</a>的还不错。使用配套的前端+特制的FRPs即可，FRPc可以任选。</p>
@@ -202,37 +249,6 @@
       </categories>
       <tags>
         <tag>SakuraFRP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>当我们在谈论Root时，我们究竟在讨论什么①</title>
-    <url>/2023/04/24/magisk-1/</url>
-    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
-<p>因报名了学校社团的科普演讲，故打算先写个稿子出来。后来想想，干脆放博客上了，还能存个档。</p>
-<p>为啥要讲Root？我也不知道。可能因为我对**“刷机”**有着独特的感情吧。</p>
-<p>四年级的时候，我成功Root了我的Samsung-i9300，并为其刷入了Cyanogenmod的类原生ROM。可能自那之后我就对刷机感兴趣了吧。</p>
-<p>十年过去了，Root也逐渐淡出的大家的视野——现在，可能只有酷安、百度贴吧，还有对其乐此不疲的人吧。</p>
-<p>所以，我想通过科普，让更多的人了解，什么是<strong>Root</strong>。</p>
-<p>按照惯例，依旧是两个Note：</p>
-<div class="note flat info flat"><p>以下内容可能已过时</p>
-</div>
-<div class="note flat warning flat"><p>博主并不具有专业Android系统/Linux内核相关的专业知识。</p>
-<p>文章难免存在纰漏。欢迎各位大神指教</p>
-</div>
-<p><em><strong>始める</strong></em>。</p>
-<h2 id="安卓发展史"><a class="markdownIt-Anchor" href="#安卓发展史"></a> 安卓发展史</h2>
-<p>安卓这玩意，历史还蛮悠久的。安卓系统的雏形可以追溯到</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-        <category>科普</category>
-      </categories>
-      <tags>
-        <tag>Magisk</tag>
-        <tag>安卓</tag>
-        <tag>Root</tag>
-        <tag>科普</tag>
-        <tag>刷机</tag>
       </tags>
   </entry>
   <entry>
@@ -269,12 +285,12 @@
 </ul>
 <p>请慎重观看。</p>
 </div>
-<div class="note danger icon-padding flat"><i class="note-icon fas fa-triangle-exclamation"></i><p>极小部分人可能会在看到特定视觉图像（包括可能出现在博客文章图片中的闪烁效果或图案）时出现癫痫症状。</p>
+<div class="note danger flat"><p>极小部分人可能会在看到特定视觉图像（包括可能出现在博客文章图片中的闪烁效果或图案）时出现癫痫症状。</p>
 <p>甚至没有癫痫史的人也<strong>可能</strong>具有一些可能会在阅读博客文章时导致 “光敏性癫痫发作” 的未确诊症状。</p>
 <p><strong>如果你出现任何症状，请立即停止阅读本文并咨询医生。</strong></p>
 </div>
 <h2 id="1"><a class="markdownIt-Anchor" href="#1"></a> 1</h2>
-<p>人活着哪有不疯的？硬撑罢了！人活着哪有不疯的？硬撑罢了！人活着哪有不疯的？硬撑罢了！人活着哪有不疯的？硬撑罢了！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，</p>
+<p>人活着哪有不疯的？硬撑罢了！人活着哪有不疯的？硬撑罢了！人活着哪有不疯的？硬撑罢了！人活着哪有不疯的？硬撑罢了！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！妈的，忍不了，一拳把地球打爆！</p>
 ]]></content>
       <categories>
         <category>Emo</category>
