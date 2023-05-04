@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>来点BA笑话①</title>
+    <url>/2023/04/24/ba-talk1/</url>
+    <content><![CDATA[<h2 id="1"><a class="markdownIt-Anchor" href="#1"></a> 1</h2>
+<p>你说的对，但是**《碧蓝档案》<strong>是由<em>Nexon</em>研发的一款全新</strong>二次元养成游戏**。游戏发生在一个被称作***「基沃托斯」<em><em><em>的幻想世界，在这里，被神选中的人将被授予「光环」，引导</em>神名之力</em>。你将扮演一位名为</em>**「老师」<em><em><em>的神秘角色，在这里邂逅性格各异、能力独特的学生们，和她们一起击败强敌，寻找不存在的</em>「崇高」</em>——同时，逐步发掘</em>**「希迪姆之匣」***的真相。</p>
+<p>你的素养很差，我现在每天玩碧蓝档案都能赚100青辉石，每个月差不多3000青辉石的收入， 也就是现实生活中每个月2000美元的收入水平，换算过来最少也12000人民币，虽然我 只有14岁，但是已经超越了中国绝大多数人 (包括你) 的水平，这便是碧蓝档案给我的骄傲的资本。</p>
+<h2 id="2"><a class="markdownIt-Anchor" href="#2"></a> 2</h2>
+<p>你说的对，但是我已经于 <em>2022年3月14日下午4:52分</em> 达成 <em>《碧蓝档案》北美服 竞技场 <strong>Top30</strong></em> 的好成绩</p>
+]]></content>
+      <categories>
+        <category>Emo</category>
+      </categories>
+      <tags>
+        <tag>碧蓝档案</tag>
+        <tag>Blue Archive</tag>
+        <tag>游戏</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>竹林鸟·霜华 开箱&amp;上手体验</title>
     <url>/2023/04/23/Frosta-earpods/</url>
     <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
@@ -44,42 +62,200 @@
       </tags>
   </entry>
   <entry>
-    <title>来点BA笑话①</title>
-    <url>/2023/04/24/ba-talk1/</url>
-    <content><![CDATA[<h2 id="1"><a class="markdownIt-Anchor" href="#1"></a> 1</h2>
-<p>你说的对，但是**《碧蓝档案》<strong>是由<em>Nexon</em>研发的一款全新</strong>二次元养成游戏**。游戏发生在一个被称作***「基沃托斯」<em><em><em>的幻想世界，在这里，被神选中的人将被授予「光环」，引导</em>神名之力</em>。你将扮演一位名为</em>**「老师」<em><em><em>的神秘角色，在这里邂逅性格各异、能力独特的学生们，和她们一起击败强敌，寻找不存在的</em>「崇高」</em>——同时，逐步发掘</em>**「希迪姆之匣」***的真相。</p>
-<p>你的素养很差，我现在每天玩碧蓝档案都能赚100青辉石，每个月差不多3000青辉石的收入， 也就是现实生活中每个月2000美元的收入水平，换算过来最少也12000人民币，虽然我 只有14岁，但是已经超越了中国绝大多数人 (包括你) 的水平，这便是碧蓝档案给我的骄傲的资本。</p>
-<h2 id="2"><a class="markdownIt-Anchor" href="#2"></a> 2</h2>
-<p>你说的对，但是我已经于 <em>2022年3月14日下午4:52分</em> 达成 <em>《碧蓝档案》北美服 竞技场 <strong>Top30</strong></em> 的好成绩</p>
-]]></content>
+    <title>[转载]中国的防火长城是如何检测和封锁完全加密流量的？</title>
+    <url>/2023/05/05/gfw-report/</url>
+    <content><![CDATA[<div class="note warning flat"><p>本文章仅为转载，如有侵犯版权，请立即联系博主进行删除。<br />
+博主不承担阅读本文所带来的任何后果。</p>
+</div>
+<!-- # [中国的防火长城是如何检测和封锁完全加密流量的](#title) -->
+<blockquote>
+<p><strong>作者:</strong> Mingshi Wu, Jackson Sippe, Danesh Sivakumar, Jack Burg, Peter Anderson, Xiaokang Wang, Kevin Bock, Amir Houmansadr, Dave Levin, Eric Wustrow</p>
+<p><a href="https://www.usenix.org/conference/usenixsecurity23/fall-accepted-papers">USENIX Security Symposium 2023</a></p>
+<ul>
+<li><a href="https://gfw.report/publications/usenixsecurity23/data/paper/paper.pdf">论文 (PDF)</a></li>
+<li><a href="https://github.com/gfw-report/usenixsecurity23-artifact">开源代码及数据集</a></li>
+</ul>
+<p>English version: <a href="https://gfw.report/publications/usenixsecurity23/en">How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic</a></p>
+<blockquote>
+<p>最后修改日期: 2023 年 4 月 30 日，星期日</p>
+</blockquote>
+</blockquote>
+<h2 id="摘要"><a class="markdownIt-Anchor" href="#摘要"></a> <a href="#abstract">摘要</a></h2>
+<p>全加密协议是翻墙生态系统中的一块基石。这类协议对数据包有效载荷的<em>每一个</em>字节都进行了加密，以期让流量 “看起来什么都不像”。2021 年 11 月初，中国的防火长城（GFW）部署了一种新的审查技术，这种技术可以实时地被动检测并阻断全加密流量。GFW 这一新添的审查能力影响到一大批流行的翻墙协议，包括但不限于 Shadowsocks、VMess 和 Obfs4。虽然中国长期以来一直采用<em>主动</em>探测来识别此类协议，但这次是第一次有关于采用<em>纯被动</em>检测来识别全加密流量的报告。面对这一新的现象，反审查社区不禁要问检测是如何做到的。</p>
+<p>在这篇论文中，我们测量并描述了 GFW 用于审查完全加密流量的新系统。我们发现，审查者并没有直接定义什么是完全加密流量，而是应用<em>粗糙但高效的启发式规则</em>来豁免那些不太可能是完全加密的流量；然后它阻止其余未被豁免的流量。这些启发式规则基于常见协议的指纹、1 比特的占比以及可打印的 ASCII 字符的数量、比例和位置。我们对互联网进行扫描，并揭示了 GFW 都检查哪些流量和哪些 IP 地址。我们在一个大学网络的实时流量上模拟我们推断出的 GFW 的检测算法，以评估其全面性和误报率。结果表明，我们推断出的检测规则很好地覆盖了 GFW 实际使用的检测规则。 我们估计，如果这一检测算法被广泛地应用，它将有可能误伤大约 0.6% 的非翻墙互联网流量。</p>
+<p>我们对 GFW 的新审查机制的理解帮助我们得出了几个实用的规避封锁的策略。我们负责任地将我们的发现和建议透露给不同的反审查工具的开发者，从而帮助数以百万计的用户成功绕开了这种新的封锁。</p>
+<h2 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> <a href="#sec:intro">引言</a></h2>
+<p>完全加密的翻墙协议是翻墙生态系统中的一块基石。不同于像 TLS 这样的协议以明文握手开始，完全加密（随机化）的协议 – 如 VMess [<a href="#Xvmess">23</a>]、Shadowsocks [<a href="#Xshadowsocks">22</a>] 和 Obfs4 [<a href="#Xobfs4">7</a>]-- 被设计成连接中的 <em>每个</em>字节都与随机数据没有区别。这些 “看起来什么都不像” 的协议的设计理念是，它们应该很难被审查者抓住特征，因此阻断的成本很高。</p>
+<p>2021 年 11 月 6 日，中国的互联网用户报告说他们的 Shadowsocks 和 VMess 服务器被封锁了 [<a href="#XAnonymous2021Shadowsocks">10</a>]。 11 月 8 日，一个 Outline [<a href="#Xoutline">42</a>] 开发者报告说来自中国的使用量突然下降 [<a href="#XXspeed2021">69</a>]。这次封锁的开始时间恰逢 2021 年 11 月 8 日至 11 日召开的中国共产党第十九届中央委员会第六次全体会议 [<a href="#XWikipediaSixthPlenary">4</a>，<a href="#XWikipedia19CPC">1</a>]。能够封锁这些翻墙工具代表中国的防火长城（GFW）具备了一种全新的新能力。据我们所知，虽然中国自 2019 年 5 月以来一直在采用被动流量分析和主动探测相结合的方式来识别 Shadowsocks 服务器 [<a href="#XAlice2020a">5</a>]，但这是审查者第一次能够 <em>仅基于被动流量分析</em>，就实时地大规模封锁完全加密的代理。全加密协议对整个反审查生态系统的重要性以及 GFW 的未知行为，促使我们去探索和了解检测和封锁的机制原理。</p>
+<p>在这项工作中，我们对 GFW 被动检测和封锁全加密流量的新系统进行了测量和描述。我们发现，审查者没有直接定义什么是完全加密的流量，而是应用了至少五条<em>粗糙但高效的启发式规则</em>来豁免那些不太可能是完全加密的流量；然后，它阻止其余未豁免的流量。这些豁免规则基于常见的协议指纹、基于 1 比特比例的粗略熵测试、以及第一个 TCP 数据包的有效载荷中可打印的 ASCII 字符的比例、位置和最大连续数。</p>
+<p>由于 GFW 的黑箱性质，我们推断出的规则可能并不详尽；但是我们使用科罗拉多大学博尔德分校的实时网络流量，对我们推断出的检测规则进行了评估。有证据表明我们推断出的规则与 GFW 实际使用的规则间有非常大的重叠。我们还发现，推断出的检测算法会阻断大学网络中所有连接的大约 0.6%。 可能是为了减轻假阳性引起的封锁误伤，我们的互联网扫描显示，GFW 策略性地只监控 26% 的连接，而且只监控发往流行数据中心的特定 IP 范围的连接。</p>
+<p>我们还分析了这种新形式的被动封锁与 GFW 广为人知的主动探测系统 [<a href="#XAlice2020a">5</a>] 之间的关系。二者是独立运行的。我们发现，主动探测系统也依赖于这种流量分析算法，并额外应用了一条基于数据包长度的豁免规则。因此，能够逃避这种新的封锁的规避策略，也可以帮助防止 GFW 识别并随后主动探测代理服务器。</p>
+<p>我们从对这种新审查技术的理解中得出了各种规避策略。我们负责任且及时地与各种流行的反审查工具的开发者分享了我们的发现和规避建议，包括 Shadowsocks [<a href="#Xshadowsocks">22</a>], V2Ray [<a href="#Xv2ray">59</a>], Outline [<a href="#Xoutline">42</a>], Lantern [<a href="#Xlantern">20</a>], Psiphon [<a href="#Xpsiphon3">21</a>], 和 Conjure [<a href="#Xconjure">33</a>] 的开发者。自 2022 年 1 月以来，这些规避策略被广泛采用和部署，已帮助 <em>数百万用户</em>绕过这一新的封锁技术。据反馈，截至 2023 年 2 月，这些工具采用的所有规避策略在中国<em>仍然有效</em>。</p>
+<h2 id="背景"><a class="markdownIt-Anchor" href="#背景"></a> <a href="#sec:background">背景</a></h2>
+<h3 id="流量混淆策略"><a class="markdownIt-Anchor" href="#流量混淆策略"></a> <a href="#sec:background-circumvention-protocols">流量混淆策略</a></h3>
+<p>Tschantz 等人将混淆翻墙流量的方法分为两类：<em>隐写 (steganography)</em> 和 <em>多态 (polymorphism)</em> [<a href="#XTschantz2016a">57</a>, § V]。隐写代理的目标是使翻墙流量看起来像应该被允许的流量；多态性的目标是使翻墙流量看起来不像应该被禁止的流量。</p>
+<p>实现隐写术的两种最常见的方法是<em>模仿 (mimicking)</em> 和 <em>隧道传输 (tunneling)</em>。Houmansadr 等人 [<a href="#XHoumansadr2013b">39</a>] 得出结论，模仿类协议有着根本性的缺陷，并指出将原始流量通过被允许的协议进行隧道传输是一种更抗封锁的方法。Frolov 和 Wustrow 二人 [<a href="#Xtlsfingerprint">35</a>] 证明，即使使用隧道传输，翻墙软件的设计者仍然需要额外的努力让翻墙协议的指纹与流行的实现方式的指纹保持完全一致，以避免受到基于协议指纹的封锁。例如，在 2012 年，中国和埃塞俄比亚部署了深度包检测系统，通过 Tor 使用的不常见的密码套件来检测 Tor 流量 [<a href="#Xtor-cipher-list-ticket">44</a>,<a href="#XWinter2012a">67</a>,<a href="#Xtor-block-ethiopia-ciphers">55</a>]。审查设备供应商之前已经根据 <code>meek</code> [<a href="#XFifield2015a">29</a>] 发出的 TLS 指纹和 SNI 值来识别并封锁它了 [<a href="#Xmeek-cyberoam">28</a>]。</p>
+<p>为了避免这种复杂性，许多流行的翻墙软件选择了多态的设计。实现多态性的一个常见方法是，从连接中的第一个数据包开始，就对其有效载荷进行完全加密。由于没有任何明文或固定的包头结构指纹，审查者没办法简单地使用正则表达式或通过寻找流量中的特定模式来识别代理流量。这种设计在 2009 年首次被引入 Obfuscated OpenSSH [<a href="#Xobfuscated-openssh">16</a>]。此后，Obfsproxy [<a href="#Xobfsproxy">24</a>]、Shadowsocks [<a href="#Xshadowsocks">22</a>]、Outline [<a href="#Xoutline">42</a>]、VMess [<a href="#Xvmess">23</a>]、ScrambleSuit [<a href="#XWinter2013b">68</a>]、Obfs4 [<a href="#Xobfs4">7</a>] 都采用了这种设计。Geph4 [<a href="#Xgeph4-sosistab">58</a>]、Lantern [<a href="#Xlantern">20</a>]、Psiphon3 [<a href="#Xpsiphon3">21</a>] 和 Conjure [<a href="#Xconjure">33</a>] 也部分采用这种设计。</p>
+<p>完全加密的流量经常被称为 “看起来什么都不像” 的流量，又或者被误解为 “没有特征”；然而，更准确的描述应该是 “看起来像随机数据”。事实上，这种流量确实有一个使其与其他流量不同的重要特点：<em>完全加密的流量与随机流量是无法区分的</em>。由于没有可识别的头，整个连接中的流量都是均匀且高熵的，甚至在第一个数据包中就已经如此。相比之下，即使像 TLS 这样的加密协议也还有相对低熵的握手包，用以传达支持的版本和扩展。</p>
+<p>2015 年，Wang 等人 [<a href="#XWang2015a">61</a>，§5.1] 利用连接中第一个数据包有效载荷的长度和高香农熵的特点来识别随机流量，比如 Obfs4。同样，在 2017 年，Zhixin Wang 发布了一个概念验证工具，其使用连接中前三个数据包有效载荷的高香农熵来识别 Shadowsocks 流量 [<a href="#Xsssniff-isofew">40</a>]。Madeye 扩展了该工具，额外使用有效载荷长度分布来检测 ShadowsocksR 流量 [<a href="#Xsssniff-madeye">47</a>]。He 等人 [<a href="#XHe2019a">70</a>，§IV.A] 和 Liang 等人 [<a href="#XLiang2020a">46</a>，§II.A] 使用单比特频率检测算法，而不是香农熵，来衡量 Obfs4 流量的随机性。2019 年，Alice 等人发现，GFW 使用每个连接中第一个数据包的长度和熵来怀疑 Shadowsocks 流量 [<a href="#XAlice2020a">5</a>]。</p>
+<h3 id="主动探测攻击及其防御措施"><a class="markdownIt-Anchor" href="#主动探测攻击及其防御措施"></a> <a href="#sec:background-active-probing">主动探测攻击及其防御措施</a></h3>
+<p>在<em>主动探测</em>攻击中，审查者向被怀疑的服务器发送精心制作的有效载荷，并测量它的反应。如果服务器以与众不同的方式回应这些探测（例如让审查者将其作为代理使用），审查者就可以识别并封锁它。 早在 2011 年 8 月，人们观察到 GFW 向接受过来自中国的 SSH 登录的外国 SSH 服务器发送看似随机的有效载荷 [<a href="#Xactive-probing-ssh">49</a>]。2012 年，GFW 首先寻找一个独特的 TLS 密码来怀疑 Tor 流量；然后向可疑的服务器发送主动探测，以确认其猜测 [<a href="#XWinter2012a">67</a>,<a href="#XWinter-obfs2-probe">66</a>,<a href="#Xknock-knock-tor">64</a>]。2015 年，Ensafi 等人对 GFW 针对各种协议的主动探测攻击进行了详细分析 [<a href="#XEnsafi2015b">27</a>]。自 2019 年 5 月起，中国部署了一个审查系统，分两步检测和封锁 Shadowsocks 服务器：它首先使用每个连接中第一个数据包有效载荷的长度和熵来被动地识别可能的 Shadowsocks 流量，然后在分阶段地向可疑的服务器发送各种探针，以确认其猜测 [<a href="#XAlice2020a">5</a>]。作为回应，研究人员提出了各种针对主动探测攻击的防御措施，包括让服务器对各种连接的反应保持一致 [<a href="#XFrolov2020a">34</a>，<a href="#XAnonymous2021ShadowsocksAdvise">9</a>] 和 <em>应用前置</em> [<a href="#Xnaiveproxy">45</a>，<a href="#XFrolov2020b">36</a>]。 Shadowsocks、Outline 和 V2Ray 都采用了 <em>防主动探测</em>的设计 [<a href="#XFrolov2020a">34</a>,<a href="#XAlice2020a">5</a>,<a href="#XShadowsocks2022-spec">19</a>,<a href="#Xoutline-v1.1.0">43</a>,<a href="#Xoutline-changes">32</a>,<a href="#Xshadowsocks-rust-v1.8.5">71</a>]，使得它们自 2020 年 9 月以来在中国就没再被封锁过 [<a href="#XAlice2020a">5</a>]，直到最近在 2021 年 11 月被再次封锁 [<a href="#XAnonymous2021Shadowsocks">10</a>]。</p>
+<h2 id="参考文献"><a class="markdownIt-Anchor" href="#参考文献"></a> <a href="#references">参考文献</a></h2>
+<details class="toggle" ><summary class="toggle-button" style="">展开</summary><div class="toggle-content"><ol>
+<li><span id="XWikipedia19CPC">19th Central Committee of the Chinese Communist Party.<br />
+<a href="https://en.wikipedia.org/wiki/19th_Central_Committee_of_the_Chinese_Communist_Party">https://en.wikipedia.org/wiki/19th_Central_Committee_of_the_Chinese_Communist_Party </a>.</span></li>
+<li><span id="目标位置">Abuseipdb.<br />
+<a href="https://www.abuseipdb.com/">https://www.abuseipdb.com/ </a>.</span></li>
+<li><span id="目标位置">Ip2location lite data.<br />
+<a href="http://www.ip2location.com/">http://www.ip2location.com/ </a>.</span></li>
+<li><span id="XWikipediaSixthPlenary">Sixth Plenary Session of the 19th CPC Central Committee.<br />
+<a href="https://zh.wikipedia.org/zh-cn/%E4%B8%AD%E5%9B%BD%E5%85%B1%E4%BA%A7%E5%85%9A%E7%AC%AC%E5%8D%81%E4%B9%9D%E5%B1%8A%E4%B8%AD%E5%A4%AE%E5%A7%94%E5%91%98%E4%BC%9A%E7%AC%AC%E5%85%AD%E6%AC%A1%E5%85%A8%E4%BD%93%E4%BC%9A%E8%AE%AE">https://zh.wikipedia.org/zh-cn / 中国共产党第十九届中央委员会第六次全体会议 </a>.</span></li>
+<li><span id="XAlice2020a">Alice, Bob, Carol, Jan Beznazwy, and Amir Houmansadr. How China detects and blocks Shadowsocks. In <em>Internet Measurement Conference</em> . ACM, 2020.<br />
+<a href="https://censorbib.nymity.ch/pdf/Alice2020a.pdf">https://censorbib.nymity.ch/pdf/Alice2020a.pdf </a>.</span></li>
+<li><span id="目标位置">Shadowsocks android developers. Shadowsocks-android.<br />
+<a href="https://github.com/shadowsocks/shadowsocks-android">https://github.com/shadowsocks/shadowsocks-android </a>.</span></li>
+<li><span id="Xobfs4">Yawning Angel et al. Obfs4 specification.<br />
+<a href="https://gitlab.com/yawning/obfs4/blob/master/doc/obfs4-spec.txt">https://gitlab.com/yawning/obfs4/blob/master/doc/obfs4-spec.txt </a>.</span></li>
+<li><span id="目标位置">Anonymous and Amonymous. Sharing a modified Shadowsocks as well as our thoughts on the cat-and-mouse game, October 2022.<br />
+<a href="https://github.com/net4people/bbs/issues/136">https://github.com/net4people/bbs/issues/136 </a>.</span></li>
+<li><span id="XAnonymous2021ShadowsocksAdvise">Anonymous, Anonymous, Anonymous, David Fifield, and Amir Houmansadr. A practical guide to defend against the GFW’s latest active probing, January 2021.<br />
+<a href="https://github.com/net4people/bbs/issues/58">https://github.com/net4people/bbs/issues/58 </a>.</span></li>
+<li><span id="XAnonymous2021Shadowsocks">Anonymous, Vinicius Fortuna, David Fifield, Xiaokang Wang, Mygod, moranno, et al. Properly configured shadowsocks servers reportedly blocked in china, November 2021.<br />
+<a href="https://github.com/net4people/bbs/issues/69#issuecomment-962666385">https://github.com/net4people/bbs/issues/69#issuecomment-962666385 </a>.</span></li>
+<li><span id="目标位置">Stefan Axelsson. The base-rate fallacy and its implications for the difficulty of intrusion detection. In <em>Proceedings of the 6th ACM Conference on Computer</em> <em>and Communications Security</em> , pages 1–7, 1999.<br />
+<a href="https://www.cse.psu.edu/~trj1/cse543-f16/docs/Axelsson.pdf">https://www.cse.psu.edu/~trj1/cse543-f16/docs/Axelsson.pdf </a>.</span></li>
+<li><span id="目标位置">Kevin Bock. Iran: A new model for censorship, March 2020.<br />
+<a href="https://geneva.cs.umd.edu/posts/iran-whitelister/">https://geneva.cs.umd.edu/posts/iran-whitelister/ </a>.</span></li>
+<li><span id="目标位置">Kevin Bock, Pranav Bharadwaj, Jasraj Singh, and Dave Levin. Your censor is my censor: Weaponizing censorship infrastructure for availability attacks. In <em>Workshop on Offensive Technologies</em> . IEEE, 2021.<br />
+<a href="http://www.cs.umd.edu/~dml/papers/weaponizing_woot21.pdf">http://www.cs.umd.edu/~dml/papers/weaponizing_woot21.pdf </a>.</span></li>
+<li><span id="目标位置">Kevin Bock, iyouport, Anonymous, Louis-Henri Merino, David Fifield, Amir Houmansadr, and Dave Levin. Exposing and circumventing China’s censorship of ESNI, August 2020.<br />
+<a href="https://github.com/net4people/bbs/issues/43#issuecomment-673322409">https://github.com/net4people/bbs/issues/43#issuecomment-673322409 </a>.</span></li>
+<li><span id="目标位置">Olivier Bonaventure. MPTLS : Making TLS and Multipath TCP stronger together. Internet-Draft draft-bonaventure-mptcp-tls-00, Internet Engineering Task Force, October 2014.<br />
+<a href="https://datatracker.ietf.org/doc/draft-bonaventure-mptcp-tls/00/">https://datatracker.ietf.org/doc/draft-bonaventure-mptcp-tls/00/ </a>.</span></li>
+<li><span id="Xobfuscated-openssh">brl. Obfuscated OpenSSH.<br />
+<a href="https://github.com/brl/obfuscated-openssh">https://github.com/brl/obfuscated-openssh </a>.</span></li>
+<li><span id="目标位置">Zimo Chai, Amirhossein Ghafari, and Amir Houmansadr. On the importance of encrypted-SNI (ESNI) to censorship circumvention. In <em>Free and Open</em> <em>Communications on the Internet</em> . USENIX, 2019.<br />
+<a href="https://www.usenix.org/system/files/foci19-paper_chai_update.pdf">https://www.usenix.org/system/files/foci19-paper_chai_update.pdf </a>.</span></li>
+<li><span id="目标位置">database64128. taint: add unsafe stream prefix, October 2022.<br />
+<a href="https://github.com/shadowsocks/shadowsocks-org/issues/204#issuecomment-1266710067">https://github.com/shadowsocks/shadowsocks-org/issues/204#issuecomment-1266710067 </a>.</span></li>
+<li><span id="目标位置">database64128, zonyitoo, Xiaokang Wang, and nekohasekai. Shadowsocks 2022 Edition: Secure L4 Tunnel with Symmetric Encryption, October 2022.<br />
+<a href="https://github.com/net4people/bbs/issues/58">https://github.com/net4people/bbs/issues/58 </a>.</span></li>
+<li><span id="Xlantern">Lantern developers. Lantern.<br />
+<a href="https://github.com/getlantern">https://github.com/getlantern </a>.</span></li>
+<li><span id="Xpsiphon3">Psiphon3 developers. Psiphon3.<br />
+<a href="https://psiphon.ca/">https://psiphon.ca/ </a>.</span></li>
+<li><span id="Xshadowsocks">Shadowsocks developers. Shadowsocks aead cihpher specification.<br />
+<a href="https://shadowsocks.org/guide/aead.html">https://shadowsocks.org/guide/aead.html </a>.</span></li>
+<li><span id="Xvmess">VMess developers. Vmess.<br />
+<a href="https://www.v2fly.org/en_US/developer/protocols/vmess.html">https://www.v2fly.org/en_US/developer/protocols/vmess.html </a>.</span></li>
+<li><span id="Xobfsproxy">Roger Dingledine. Obfsproxy: the next step in the censorship arms race.<br />
+<a href="https://blog.torproject.org/obfsproxy-next-step-censorship-arms-race">https://blog.torproject.org/obfsproxy-next-step-censorship-arms-race </a>, February 2012.</span></li>
+<li><span id="目标位置">Zakir Durumeric, Michael Bailey, and J. Alex Halderman. An Internet-Wide view of Internet-Wide scanning. In <em>23rd USENIX Security</em> <em>Symposium (USENIX Security 14)</em> , pages 65–78, San Diego, CA, August 2014. USENIX Association.<br />
+<a href="https://www.usenix.org/conference/usenixsecurity14/technical-sessions/presentation/durumeric">https://www.usenix.org/conference/usenixsecurity14/technical-sessions/presentation/durumeric </a>.</span></li>
+<li><span id="目标位置">Zakir Durumeric, Eric Wustrow, and J. Alex Halderman. ZMap: Fast internet-wide scanning and its security applications. In <em>22nd USENIX Security</em> <em>Symposium (USENIX Security 13)</em> , pages 605–620, Washington, D.C., August 2013. USENIX Association.<br />
+<a href="https://www.usenix.org/conference/usenixsecurity13/technical-sessions/paper/durumeric">https://www.usenix.org/conference/usenixsecurity13/technical-sessions/paper/durumeric </a>.</span></li>
+<li><span id="XEnsafi2015b">Roya Ensafi, David Fifield, Philipp Winter, Nick Feamster, Nicholas Weaver, and Vern Paxson. Examining how the Great Firewall discovers hidden circumvention servers. In <em>Internet Measurement Conference</em> . ACM, 2015.<br />
+<a href="http://conferences2.sigcomm.org/imc/2015/papers/p445.pdf">http://conferences2.sigcomm.org/imc/2015/papers/p445.pdf </a>.</span></li>
+<li><span id="Xmeek-cyberoam">David Fifield. Cyberoam firewall blocks meek by TLS signature.<br />
+<a href="https://groups.google.com/forum/#!topic/traffic-obf/BpFSCVgi5rs/">https://groups.google.com/forum/#!topic/traffic-obf/BpFSCVgi5rs/ </a>, 2016.</span></li>
+<li><span id="XFifield2015a">David Fifield, Chang Lan, Rod Hynes, Percy Wegmann, and Vern Paxson. Blocking-resistant communication through domain fronting. <em>Privacy Enhancing Technologies</em> , 2015(2), 2015.<br />
+<a href="https://www.icir.org/vern/papers/meek-PETS-2015.pdf">https://www.icir.org/vern/papers/meek-PETS-2015.pdf </a>.</span></li>
+<li><span id="目标位置">David Fifield and Lynn Tsai. Censors’ delay in blocking circumvention proxies. In <em>Free and Open</em> <em>Communications on the Internet</em> . USENIX, 2016.<br />
+<a href="https://www.usenix.org/system/files/conference/foci16/foci16-paper-fifield.pdf">https://www.usenix.org/system/files/conference/foci16/foci16-paper-fifield.pdf </a>.</span></li>
+<li><span id="目标位置">A. Ford, C. Raiciu, M. Handley, O. Bonaventure, and C. Paasch. TCP Extensions for Multipath Operation with Multiple Addresses. RFC 8684, RFC Editor, March 2020.<br />
+<a href="https://tools.ietf.org/html/rfc8684">https://tools.ietf.org/html/rfc8684 </a>.</span></li>
+<li><span id="目标位置">Vinicius Fortuna. Outline changes since the prelinimary report, August 2020.<br />
+<a href="https://github.com/net4people/bbs/issues/22#issuecomment-670781627">https://github.com/net4people/bbs/issues/22#issuecomment-670781627 </a>.</span></li>
+<li><span id="Xconjure">Sergey Frolov, Jack Wampler, Sze Chuen Tan, J. Alex Halderman, Nikita Borisov, and Eric Wustrow. Conjure: Summoning proxies from unused address space. In <em>Computer and Communications Security</em> . ACM, 2019.<br />
+<a href="https://jhalderm.com/pub/papers/conjure-ccs19.pdf">https://jhalderm.com/pub/papers/conjure-ccs19.pdf </a>.</span></li>
+<li><span id="XFrolov2020a">Sergey Frolov, Jack Wampler, and Eric Wustrow. Detecting probe-resistant proxies. In <em>Network and Distributed</em> <em>System Security</em> . The Internet Society, 2020.<br />
+<a href="https://www.ndss-symposium.org/wp-content/uploads/2020/02/23087.pdf">https://www.ndss-symposium.org/wp-content/uploads/2020/02/23087.pdf </a>.</span></li>
+<li><span id="Xtlsfingerprint">Sergey Frolov and Eric Wustrow. The use of TLS in censorship circumvention. In <em>Network and</em> <em>Distributed System Security</em> . The Internet Society, 2019.<br />
+<a href="https://tlsfingerprint.io/static/frolov2019.pdf">https://tlsfingerprint.io/static/frolov2019.pdf </a>.</span></li>
+<li><span id="目标位置">Sergey Frolov and Eric Wustrow. HTTPT: A probe-resistant proxy. In <em>Free and Open</em> <em>Communications on the Internet</em> . USENIX, 2020.<br />
+<a href="https://www.usenix.org/system/files/foci20-paper-frolov.pdf">https://www.usenix.org/system/files/foci20-paper-frolov.pdf </a>.</span></li>
+<li><span id="目标位置">GFW Report. The GFW has now been able to dynamically block any seemingly random traffic in real time, November 2021.<br />
+<a href="https://twitter.com/gfw_report/status/1460796633571069955">https://twitter.com/gfw_report/status/1460796633571069955 </a>.</span></li>
+<li><span id="目标位置">GFW Report. 有证据表明中国的防火长城已经对任何看似随机的流量进行动态的封锁，November 2021.<br />
+<a href="https://twitter.com/gfw_report/status/1460800856086003717">https://twitter.com/gfw_report/status/1460800856086003717 </a>.</span></li>
+<li><span id="XHoumansadr2013b">Amir Houmansadr, Chad Brubaker, and Vitaly Shmatikov. The parrot is dead: Observing unobservable network communications. In <em>Symposium on Security &amp;</em> <em>Privacy</em> . IEEE, 2013.<br />
+<a href="https://people.cs.umass.edu/~amir/papers/parrot.pdf">https://people.cs.umass.edu/~amir/papers/parrot.pdf </a>.</span></li>
+<li><span id="Xsssniff-isofew">isofew. sssniff, 2017.<br />
+<a href="https://github.com/isofew/sssniff">https://github.com/isofew/sssniff </a>.</span></li>
+<li><span id="目标位置">Liz Izhikevich, Renata Teixeira, and Zakir Durumeric. {LZR}: Identifying unexpected internet services. In <em>30th USENIX Security Symposium</em> <em>(USENIX Security 21)</em> , pages 3111–3128, 2021.<br />
+<a href="https://www.usenix.org/conference/usenixsecurity21/presentation/izhikevich">https://www.usenix.org/conference/usenixsecurity21/presentation/izhikevich </a>.</span></li>
+<li><span id="Xoutline">Jigsaw. Outline.<br />
+<a href="https://getoutline.org/">https://getoutline.org/ </a>.</span></li>
+<li><span id="目标位置">Jigsaw. Outline v1.1.0.<br />
+<a href="https://github.com/Jigsaw-Code/outline-ss-server/releases/tag/v1.1.0">https://github.com/Jigsaw-Code/outline-ss-server/releases/tag/v1.1.0 </a>.</span></li>
+<li><span id="Xtor-cipher-list-ticket">George Kadianakis. GFW probes based on tor’s ssl cipher list, 2011.<br />
+<a href="https://gitlab.torproject.org/legacy/trac/-/issues/4744">https://gitlab.torproject.org/legacy/trac/-/issues/4744 </a>.</span></li>
+<li><span id="目标位置">klzgrad. NaïveProxy.<br />
+<a href="https://github.com/klzgrad/naiveproxy">https://github.com/klzgrad/naiveproxy </a>.</span></li>
+<li><span id="XLiang2020a">Di Liang and Yongzhong He. Obfs4 traffic identification based on multiple-feature fusion. In <em>2020</em> <em>IEEE International Conference on Power, Intelligent</em> <em>Computing and Systems (ICPICS)</em> , pages 323–327, 2020.<br />
+<a href="https://ieeexplore.ieee.org/document/9202018">https://ieeexplore.ieee.org/document/9202018 </a>.</span></li>
+<li><span id="Xsssniff-madeye">madeye. sssniff, 2017.<br />
+<a href="https://github.com/madeye/sssniff">https://github.com/madeye/sssniff </a>.</span></li>
+<li><span id="目标位置">nekohasekai. Add shadowsocks reducedIvHeadEntropy option, January 2022.<br />
+<a href="https://github.com/SagerNet/v2ray-core/commit/27fad5daaa1c33ed1c928d6c447df983a88d14a3">https://github.com/SagerNet/v2ray-core/commit/27fad5daaa1c33ed1c928d6c447df983a88d14a3 </a>.</span></li>
+<li><span id="Xactive-probing-ssh">Leif Nixon. Some observations on the Great Firewall of China, November 2011.<br />
+<a href="https://www.nsc.liu.se/~nixon/sshprobes.html">https://www.nsc.liu.se/~nixon/sshprobes.html </a>.</span></li>
+<li><span id="目标位置">ntop. PF_RING: High-speed packet capture, filtering and analysis.<br />
+<a href="https://www.ntop.org/products/packet-capture/pf_ring/">https://www.ntop.org/products/packet-capture/pf_ring/ </a>.</span></li>
+<li><span id="目标位置">pyasn developers. pyasn.<br />
+<a href="https://github.com/hadiasghari/pyasn">https://github.com/hadiasghari/pyasn </a>.</span></li>
+<li><span id="目标位置">Eric Rescorla. The Transport Layer Security (TLS) Protocol Version 1.3. RFC 8446, August 2018.<br />
+<a href="https://datatracker.ietf.org/doc/html/rfc8446#section-4.1.2">https://datatracker.ietf.org/doc/html/rfc8446#section-4.1.2 </a>.</span></li>
+<li><span id="目标位置">Eric Rescorla and Tim Dierks. The Transport Layer Security (TLS) Protocol Version 1.2. RFC 5246, August 2008.<br />
+<a href="https://datatracker.ietf.org/doc/html/rfc5246#appendix-E">https://datatracker.ietf.org/doc/html/rfc5246#appendix-E </a>.</span></li>
+<li><span id="目标位置">Shadowsocks rust developers. Shadowsocks-rust.<br />
+<a href="https://github.com/shadowsocks/shadowsocks-rust">https://github.com/shadowsocks/shadowsocks-rust </a>.</span></li>
+<li><span id="Xtor-block-ethiopia-ciphers">Runa Sandvik. Ethiopia introduces deep packet inspection.<br />
+<a href="https://blog.torproject.org/ethiopia-introduces-deep-packet-inspection">https://blog.torproject.org/ethiopia-introduces-deep-packet-inspection </a>, 2012.</span></li>
+<li><span id="目标位置">Benjamin M. Schwartz and Vinicius Fortuna. feat: salt prefix support, November 2022.<br />
+<a href="https://github.com/Jigsaw-Code/outline-client/pull/1454">https://github.com/Jigsaw-Code/outline-client/pull/1454 </a>.</span></li>
+<li><span id="XTschantz2016a">Michael Carl Tschantz, Sadia Afroz, Anonymous, and Vern Paxson. SoK: Towards grounding censorship circumvention in empiricism. In <em>Symposium on Security &amp; Privacy</em> . IEEE, 2016.<br />
+<a href="https://www.eecs.berkeley.edu/~sa499/papers/oakland2016.pdf">https://www.eecs.berkeley.edu/~sa499/papers/oakland2016.pdf </a>.</span></li>
+<li><span id="Xgeph4-sosistab">Eric Tung. Geph4 sosistab - an obfuscated datagram transport for horrible networks.<br />
+<a href="https://github.com/geph-official/sosistab">https://github.com/geph-official/sosistab </a>.</span></li>
+<li><span id="Xv2ray">V2Ray developers. V2Ray.<br />
+<a href="https://github.com/v2fly/v2ray-core">https://github.com/v2fly/v2ray-core </a>.</span></li>
+<li><span id="目标位置">Benjamin VanderSloot, Allison McDonald, Will Scott, J. Alex Halderman, and Roya Ensafi. Quack: Scalable remote measurement of application-layer censorship. In <em>USENIX</em> <em>Security Symposium</em> . USENIX, 2018.<br />
+<a href="https://www.usenix.org/system/files/conference/usenixsecurity18/sec18-vandersloot.pdf">https://www.usenix.org/system/files/conference/usenixsecurity18/sec18-vandersloot.pdf </a>.</span></li>
+<li><span id="XWang2015a">Liang Wang, Kevin P. Dyer, Aditya Akella, Thomas Ristenpart, and Thomas Shrimpton. Seeing through network-protocol obfuscation. In <em>Computer and Communications Security</em> . ACM, 2015.<br />
+<a href="http://pages.cs.wisc.edu/~liangw/pub/ccsfp653-wangA.pdf">http://pages.cs.wisc.edu/~liangw/pub/ccsfp653-wangA.pdf </a>.</span></li>
+<li><span id="目标位置">Xiaokang Wang. Shadowsockets reduecd IV head entropy experiment, January 2022.<br />
+<a href="https://github.com/v2fly/v2ray-core/pull/1552">https://github.com/v2fly/v2ray-core/pull/1552 </a>.</span></li>
+<li><span id="目标位置">Zhongjie Wang, Yue Cao, Zhiyun Qian, Chengyu Song, and Srikanth V. Krishnamurthy. Your state is not mine: A closer look at evading stateful Internet censorship. In <em>Internet Measurement Conference</em> . ACM, 2017.<br />
+<a href="http://www.cs.ucr.edu/~krish/imc17.pdf">http://www.cs.ucr.edu/~krish/imc17.pdf </a>.</span></li>
+<li><span id="Xknock-knock-tor">Tim Wilde. Knock knock knockin’ on bridges’ doors, 2012.<br />
+<a href="https://blog.torproject.org/blog/knock-knock-knockin-bridges-doors">https://blog.torproject.org/blog/knock-knock-knockin-bridges-doors </a>.</span></li>
+<li><span id="目标位置">WinkVPN, GibMeMyPacket, wkrp, et al. Shadowsocks blocked in Iran?, October 2022.<br />
+<a href="https://github.com/net4people/bbs/issues/142#issuecomment-1289393093">https://github.com/net4people/bbs/issues/142#issuecomment-1289393093 </a>.</span></li>
+<li><span id="XWinter-obfs2-probe">Philipp Winter. GFW actively probes obfs2bridges, March 2013.<br />
+<a href="https://bugs.torproject.org/8591">https://bugs.torproject.org/8591 </a>.</span></li>
+<li><span id="XWinter2012a">Philipp Winter and Stefan Lindskog. How the Great Firewall of China is blocking Tor. In <em>Free and Open</em> <em>Communications on the Internet</em> . USENIX, 2012.<br />
+<a href="https://www.usenix.org/system/files/conference/foci12/foci12-final2.pdf">https://www.usenix.org/system/files/conference/foci12/foci12-final2.pdf </a>.</span></li>
+<li><span id="XWinter2013b">Philipp Winter, Tobias Pulls, and Juergen Fuss. ScrambleSuit: A polymorphic network protocol to circumvent censorship. In <em>Workshop on Privacy in the</em> <em>Electronic Society</em> . ACM, 2013.<br />
+<a href="https://censorbib.nymity.ch/pdf/Winter2013b.pdf">https://censorbib.nymity.ch/pdf/Winter2013b.pdf </a>.</span></li>
+<li><span id="XXspeed2021">xspeed, Vinicius Fortuna, et al. I think SS is detected by GFW, November 2021.<br />
+<a href="https://github.com/shadowsocks/shadowsocks-libev/issues/2860#issuecomment-974250511">https://github.com/shadowsocks/shadowsocks-libev/issues/2860#issuecomment-974250511 </a>.</span></li>
+<li><span id="XHe2019a">He Yongzhong, Hu Liping, and Gao Rui. Detection of Tor traffic hiding under obfs4 protocol based on two-level filtering. In <em>2019 2nd International Conference on Data</em> <em>Intelligence and Security (ICDIS)</em> , pages 195–200, 2019.<br />
+<a href="https://ieeexplore.ieee.org/document/8855280">https://ieeexplore.ieee.org/document/8855280 </a>.</span></li>
+<li><span id="目标位置">zonyitoo. Shadowsocks-rust v1.8.5.<br />
+<a href="https://github.com/shadowsocks/shadowsocks-rust/releases/tag/v1.8.5">https://github.com/shadowsocks/shadowsocks-rust/releases/tag/v1.8.5 </a>.</span></li>
+<li><span id="目标位置">zonyitoo. Security: First 6 bytes of payload should be printable characters, January 2022.<br />
+<a href="https://github.com/shadowsocks/shadowsocks-rust/commit/53aab484f8daba6f5cee6896b034af943cc3d406">https://github.com/shadowsocks/shadowsocks-rust/commit/53aab484f8daba6f5cee6896b034af943cc3d406 </a>.</span></li>
+</ol>
+</div></details>]]></content>
       <categories>
-        <category>Emo</category>
+        <category>转载</category>
       </categories>
       <tags>
-        <tag>碧蓝档案</tag>
-        <tag>Blue Archive</tag>
-        <tag>游戏</tag>
+        <tag>GFW</tag>
+        <tag>代理</tag>
+        <tag>TLS</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2023/04/14/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="quick-start"><a class="markdownIt-Anchor" href="#quick-start"></a> Quick Start</h2>
-<h3 id="create-a-new-post"><a class="markdownIt-Anchor" href="#create-a-new-post"></a> Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="run-server"><a class="markdownIt-Anchor" href="#run-server"></a> Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="generate-static-files"><a class="markdownIt-Anchor" href="#generate-static-files"></a> Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="deploy-to-remote-sites"><a class="markdownIt-Anchor" href="#deploy-to-remote-sites"></a> Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 代码样式测试</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello world&quot;</span>)</span><br></pre></td></tr></table></figure>
-<a href="/2023/04/24/magisk-1/" title="当我们在谈论Root时，我们究竟在谈论什么？①">Root</a>]]></content>
   </entry>
   <entry>
     <title>Hexo的Butterfly主题自定义右键菜单</title>
@@ -101,21 +277,29 @@
       </tags>
   </entry>
   <entry>
-    <title>君Hexo本上手①：开始</title>
-    <url>/2023/04/14/hexo_1/</url>
-    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
-<p>如你所见，本博客是使用Hexo框架搭建的，而博主没有任何前端相关知识。换言之，一切的美化/配置，都交由Hexo框架完成。</p>
-<p>本着“记录一切”的想法，把Hexo配置的全过程记下来<s>配到哪记到哪</s></p>
-<h2 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h2>
-<p><a href="https://hexo.io/zh-cn/">Hexo官网</a>在这里可以找到官方的配置说明——多平台安装、配置等。</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>教程</tag>
-      </tags>
+    <title>Hello World</title>
+    <url>/2023/04/14/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="quick-start"><a class="markdownIt-Anchor" href="#quick-start"></a> Quick Start</h2>
+<h3 id="create-a-new-post"><a class="markdownIt-Anchor" href="#create-a-new-post"></a> Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="run-server"><a class="markdownIt-Anchor" href="#run-server"></a> Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="generate-static-files"><a class="markdownIt-Anchor" href="#generate-static-files"></a> Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="deploy-to-remote-sites"><a class="markdownIt-Anchor" href="#deploy-to-remote-sites"></a> Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 代码样式测试</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello world&quot;</span>)</span><br></pre></td></tr></table></figure>
+<div class="gallery">
+    <div class="fj-gallery  data" data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/1682053292433_2023-4-21_1301_9r9zy03y7r.png","alt":""},{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/8e9e-e3c4ffa93196965baa8482888a184916_2023-4-24_0023_e3tr96xizd.jpg","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>]]></content>
   </entry>
   <entry>
     <title>在非Honor/Samsung手机上使用微软的“连接至Windows”功能</title>
@@ -168,6 +352,61 @@
       </categories>
       <tags>
         <tag>技术分享</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>君Hexo本上手①：开始</title>
+    <url>/2023/04/14/hexo_1/</url>
+    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>如你所见，本博客是使用Hexo框架搭建的，而博主没有任何前端相关知识。换言之，一切的美化/配置，都交由Hexo框架完成。</p>
+<p>本着“记录一切”的想法，把Hexo配置的全过程记下来<s>配到哪记到哪</s></p>
+<h2 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h2>
+<p><a href="https://hexo.io/zh-cn/">Hexo官网</a>在这里可以找到官方的配置说明——多平台安装、配置等。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>当我们在谈论Root时，我们究竟在谈论什么？②</title>
+    <url>/2023/04/26/magisk-2/</url>
+    <content><![CDATA[<h2 id="root的流行"><a class="markdownIt-Anchor" href="#root的流行"></a> Root的流行</h2>
+<p>2012年，应该是Root最流行的时候。一时间，各类“一键Root”应用层出不穷：360一键Root、KingRoot、百度一键Root……或许是对当时仍不完善的安卓4.0感到不满意，又或者是渴望对手机进行进一步美化——换字体、换主题、换系统……Root这个词仿佛走进了千家万户。当时，博主就把自己的Samsung i9300 Root了，还有父母的两台三星。说到底，什么是Root？</p>
+<h3 id="最高权限"><a class="markdownIt-Anchor" href="#最高权限"></a> 最高权限</h3>
+<p>类比Windows上的“Administrator”，Linux系统中也存在着最高权限的用户，称为<strong>根用户</strong>，翻译过来便是<em>root</em>。</p>
+<p>对操作系统中的内容进行处理，是需要权限的，涉及到的信息越重要，需要的权限级别就越高。手机中的「根权限」和电脑上的「管理员权限」是相似的，都是管理该系统的权限等级，只不过前者比后者级别更高。可以简单地认为：取得了<u>Root权限</u>就等于**<u>拥有了整个系统中至高无上的管理权</u><strong>，许多在原来「无权」的状态下不能做的事情，现在</strong>都可以做了**，例如等。</p>
+<p>(当时，似乎并没有“锁系统分区<code>/system/</code>”这一说，因此确实可以增删改手机中的系统文件。<s>小米可能有限制？忘了</s>)</p>
+<p>本质上，安卓系统也是基于Linux内核的，因此也有这样的特殊用户存在。但是，出于对安全方面的考虑，厂商默认会将超级用户的权限隐藏，又或者是仅允许系统应用开启。<s>你也不想用户自己拿到Root权限瞎搞然后损坏软/硬件还得你来背锅吧，厂商？</s></p>
+<p><strong>获取Root权限，本质上，就是让手机用户可以直接接触到“超级用户”。</strong></p>
+<p>但是厂商并不会善罢甘休~~得罪了方丈还想跑？~~绝大部分厂商都对Root有着严格的限制。第一点便是解BL锁。这里会在<code>&#123;% post_link  %&#125;</code>里详细说明。</p>
+<h3 id="无尽的自由"><a class="markdownIt-Anchor" href="#无尽的自由"></a> “无尽”的自由</h3>
+<h3 id="root能干啥能玩的实在是太多了"><a class="markdownIt-Anchor" href="#root能干啥能玩的实在是太多了"></a> Root能干啥？能玩的实在是太多了！</h3>
+<p>刷了模块之后可以说赋予了安卓更多的玩法：你可以对应用界面进行深度个性化定制——某易云的广告啥的统统扔掉、直接听VIP音乐；又或者是在知乎/贴吧上冲浪时使用更多便捷的功能……</p>
+<p>再比如，博主喜欢听音乐，因此安装了蝰蛇音效——Viper4Android来进行细微的调音。说不定以后会出一篇蝰蛇音效调教指南呢~</p>
+<p>此外，博主在手机上还装了状态栏歌词、息屏歌词等模块。<s>无他，唯装逼尔</s>~</p>
+<div class="gallery">
+    <div class="fj-gallery  data" data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_module(1)_2023-5-5_0017_wimu53x599.jpg","alt":""},{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_module(2)_2023-5-5_0018_irvnovb9ob.jpg","alt":""},{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_module(3)_2023-5-5_0018_1shvjdmsmi.jpg","alt":"magisk_module(3)"},{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_module(4)_2023-5-5_0018_bfct3aemsa.jpg","alt":"magisk_module(4)"},{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_module(5)_2023-5-5_0018_m82fh321bi.jpg","alt":"magisk_module(5)"}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p>放一张讲座的PPT照片：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_ppt_10_2023-5-5_0026_xcqoxq5hvq.PNG" alt="" /></p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+        <category>科普</category>
+      </categories>
+      <tags>
+        <tag>Magisk</tag>
+        <tag>安卓</tag>
+        <tag>Root</tag>
+        <tag>科普</tag>
+        <tag>刷机</tag>
       </tags>
   </entry>
   <entry>
@@ -265,6 +504,26 @@
       </tags>
   </entry>
   <entry>
+    <title>NGINX使用SNI前置分流，复用443端口</title>
+    <url>/2023/04/27/nginx-sni/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>美化Butterfly主题内的Toggle(折叠块)</title>
+    <url>/2023/04/26/toggle-beautify/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>随笔</category>
+        <category>技术分享</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>美化</tag>
+        <tag>Butterfly</tag>
+        <tag>自定义</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SakuraFRP搭建过程踩坑</title>
     <url>/2023/04/14/sakura_frp/</url>
     <content><![CDATA[<p>几个人合资租了个服务器，忘了几C几G了，总体表现还行，打算整个FRP自己用用。找了一圈在线管理的面板，貌似只有<a href="https://github.com/ZeroDream-CN/SakuraPanel">SakuraFRP</a>的还不错。使用配套的前端+特制的FRPs即可，FRPc可以任选。</p>
@@ -299,41 +558,17 @@
       </tags>
   </entry>
   <entry>
-    <title>当我们在谈论Root时，我们究竟在谈论什么？②</title>
-    <url>/2023/04/26/magisk-2/</url>
-    <content><![CDATA[<h2 id="root的流行"><a class="markdownIt-Anchor" href="#root的流行"></a> Root的流行</h2>
-<p>2012年，应该是Root最流行的时候。一时间，各类“一键Root”应用层出不穷：360一键Root、KingRoot、百度一键Root……或许是对当时仍不完善的安卓4。0感到不满意，又或者是渴望对手机进行进一步美化——换字体、换主题、换系统……Root这个词仿佛走进了千家万户。当时，博主就把自己的Samsung i9300 Root了，还有父母的两台三星。说到底，什么是Root？</p>
-<h3 id="最高权限"><a class="markdownIt-Anchor" href="#最高权限"></a> 最高权限</h3>
-<p>类比Windows上的“Administrator”，Linux系统中也存在着最高权限的用户，称为<strong>根用户</strong>，翻译过来便是<em>root</em>。</p>
-<p>对操作系统中的内容进行处理，是需要权限的，涉及到的信息越重要，需要的权限级别就越高。手机中的「根权限」和电脑上的「管理员权限」是相似的，都是管理该系统的权限等级，只不过前者比后者级别更高。可以简单地认为：取得了<u>Root权限</u>就等于**<u>拥有了整个系统中至高无上的管理权</u><strong>，许多在原来「无权」的状态下不能做的事情，现在</strong>都可以做了**，例如等。</p>
-<p>(当时，似乎并没有“锁系统分区<code>/system/</code>”这一说，因此确实可以增删改手机中的系统文件。<s>小米可能有限制？忘了</s>)</p>
-<h3 id="无尽的自由"><a class="markdownIt-Anchor" href="#无尽的自由"></a> “无尽”的自由</h3>
-]]></content>
-      <categories>
-        <category>随笔</category>
-        <category>科普</category>
-      </categories>
-      <tags>
-        <tag>Magisk</tag>
-        <tag>安卓</tag>
-        <tag>Root</tag>
-        <tag>科普</tag>
-        <tag>刷机</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>toggle-beautify</title>
-    <url>/2023/04/26/toggle-beautify/</url>
+    <title>启动WSL提示</title>
+    <url>/2023/05/04/wsl-error1/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>随笔</category>
-        <category>技术分享</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
-        <tag>美化</tag>
-        <tag>Butterfly</tag>
-        <tag>自定义</tag>
+        <tag>踩坑</tag>
+        <tag>WSL</tag>
+        <tag>子系统</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
