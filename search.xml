@@ -44,25 +44,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo的Butterfly主题自定义右键菜单</title>
-    <url>/2023/04/23/blog-right-menu/</url>
-    <content><![CDATA[<p><a href="https://yisous.xyz/posts/11eb4aac/">butterfly 博客自定义右键菜单升级版 | Ariasaka の小窝 (yisous.xyz)</a></p>
-<p><a href="https://tzy1997.com/articles/hexo1608#%E6%89%A9%E5%B1%95">Hexo + Butterfly 自定义右键菜单 | 唐志远の博客 (tzy1997.com)</a></p>
-<p><a href="https://zsyyblog.com/df7b617.html">Hexo+Butterfly 实现文章随机跳转（无缝版） | 竹山一叶 (zsyyblog.com)</a></p>
-<p>效果：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/right-menu_2023-4-24_0026_iv0l9riaj7.png" alt="right-menu" /></p>
-]]></content>
-      <categories>
-        <category>技术分享</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>博客</tag>
-        <tag>美化</tag>
-        <tag>Butterfly</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>来点BA笑话①</title>
     <url>/2023/04/24/ba-talk1/</url>
     <content><![CDATA[<h2 id="1"><a class="markdownIt-Anchor" href="#1"></a> 1</h2>
@@ -79,6 +60,25 @@
         <tag>碧蓝档案</tag>
         <tag>Blue Archive</tag>
         <tag>游戏</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo的Butterfly主题自定义右键菜单</title>
+    <url>/2023/04/23/blog-right-menu/</url>
+    <content><![CDATA[<p><a href="https://yisous.xyz/posts/11eb4aac/">butterfly 博客自定义右键菜单升级版 | Ariasaka の小窝 (yisous.xyz)</a></p>
+<p><a href="https://tzy1997.com/articles/hexo1608#%E6%89%A9%E5%B1%95">Hexo + Butterfly 自定义右键菜单 | 唐志远の博客 (tzy1997.com)</a></p>
+<p><a href="https://zsyyblog.com/df7b617.html">Hexo+Butterfly 实现文章随机跳转（无缝版） | 竹山一叶 (zsyyblog.com)</a></p>
+<p>效果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/right-menu_2023-4-24_0026_iv0l9riaj7.png" alt="right-menu" /></p>
+]]></content>
+      <categories>
+        <category>技术分享</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>博客</tag>
+        <tag>美化</tag>
+        <tag>Butterfly</tag>
       </tags>
   </entry>
   <entry>
@@ -280,6 +280,23 @@
       </tags>
   </entry>
   <entry>
+    <title>君Hexo本上手①：开始</title>
+    <url>/2023/04/14/hexo_1/</url>
+    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>如你所见，本博客是使用Hexo框架搭建的，而博主没有任何前端相关知识。换言之，一切的美化/配置，都交由Hexo框架完成。</p>
+<p>本着“记录一切”的想法，把Hexo配置的全过程记下来<s>配到哪记到哪</s></p>
+<h2 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h2>
+<p><a href="https://hexo.io/zh-cn/">Hexo官网</a>在这里可以找到官方的配置说明——多平台安装、配置等。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2023/04/14/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -303,117 +320,6 @@
     </div>
     <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
     </div>]]></content>
-  </entry>
-  <entry>
-    <title>君Hexo本上手①：开始</title>
-    <url>/2023/04/14/hexo_1/</url>
-    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
-<p>如你所见，本博客是使用Hexo框架搭建的，而博主没有任何前端相关知识。换言之，一切的美化/配置，都交由Hexo框架完成。</p>
-<p>本着“记录一切”的想法，把Hexo配置的全过程记下来<s>配到哪记到哪</s></p>
-<h2 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h2>
-<p><a href="https://hexo.io/zh-cn/">Hexo官网</a>在这里可以找到官方的配置说明——多平台安装、配置等。</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>教程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>当我们在谈论Root时，我们究竟在谈论什么？①</title>
-    <url>/2023/04/24/magisk-1/</url>
-    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
-<p>因报名了学校社团的科普演讲，故打算先写个稿子出来。后来想想，干脆放博客上了，还能存个档。</p>
-<p>为啥要讲Root？我也不知道。可能因为我对“<strong>刷机</strong>”有着独特的感情吧。</p>
-<p>四年级的时候，我成功Root了我的Samsung-i9300，并为其刷入了Cyanogenmod的类原生ROM。可能自那之后我就对刷机感兴趣了吧。</p>
-<p>十年过去了，Root也逐渐淡出的大家的视野——现在，可能只有酷安、百度贴吧，还有对其乐此不疲的人吧。</p>
-<p>所以，我想通过科普，让更多的人了解，什么是<strong>Root</strong>。</p>
-<p>按照惯例，依旧是两个Note：</p>
-<div class="note flat info flat"><p>以下内容可能已过时</p>
-</div>
-<div class="note flat warning flat"><p>博主并不具有专业Android系统/Linux内核相关的专业知识。</p>
-<p>文章难免存在纰漏。欢迎各位大神指教</p>
-</div>
-<p><em><strong>始める</strong></em>。</p>
-<h2 id="安卓发展史"><a class="markdownIt-Anchor" href="#安卓发展史"></a> 安卓发展史</h2>
-<p>安卓这玩意，历史还蛮悠久的。安卓系统的雏形可以追溯到2008年9月。在那之前，苹果公司已经于2007年1月，发布了第一款iPhone手机。或许是感受到了潜在的危机，也可能只是单纯地不想把手机市场“拱手让人”，谷歌开始着手研发自己的系统。这并非一件简单的事情；与机遇相比，更多的，或许是风险。</p>
-<p><strong>毕竟，2007年是个分水岭。微软自己的Windows Mobile系统和诺基亚的塞班(Symbian)系统逐渐开始丧失话语权。</strong></p>
-<p>或许，这是入局的好机会？当然，像诺基亚那样*<u>中道崩殂</u>*也是有可能的——这是后话。不管怎么样，谷歌还是做了。</p>
-<h3 id="初次见面"><a class="markdownIt-Anchor" href="#初次见面"></a> 初次见面</h3>
-<p>2008年9月，第一代安卓系统，Android 1.0发布。然而，新的系统并没有被外界看好：当时，诺基亚还是牢牢占据了市场。甚至有言论称最多一年谷歌就会放弃Android系统。</p>
-<img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/1682531731800_2023-4-27_0155_hcmjkrtbvk.png" alt="简陋的Android 1.0" style="zoom: 33%;" />
-<details class="toggle" ><summary class="toggle-button" style="">题外话</summary><div class="toggle-content"><p>博主的第一台“智能手机”其实是<em>Nokia XpressMusic 5800</em>：搭载了<s>极为先进的</s>塞班系统，且可以运行Java编写的小程序。记得当时还是360手机助手的天下，居然还有一个“塞班专区”。下好心仪的游戏后，通过数据线可以将.jre安装包传到手机上。记得四年级的时候在被窝里拿着随机附赠的(没错，当时就有随机附赠的触摸笔，可以用来记录笔记啥的<s>三星学着点</s>)触摸笔打 8-ball-pool。</p>
-<p>在上面玩过的游戏有：</p>
-<ul>
-<li>SIM4</li>
-<li>狂野西部(塔防？小人还能到处走动<s>明日方舟早期作品</s>)</li>
-<li>8-ball-pool(台球)</li>
-<li>Bounce Ball的冒险(3D)</li>
-<li>RealFootball 2011 <s>實 況 足 球</s></li>
-<li>UNO！</li>
-<li>*<em>剩下的忘了</em></li>
-</ul>
-</div></details>
-<p>半年后，新的Android 1.5来到了大众的面前。从此，安卓系统开始有了自己的名字——或者说，<strong>代号</strong>(Codename)。Android 1.5的代号是<em>Cupcake</em>，即纸杯蛋糕。也是从此开始，每一代安卓系统的代号首字母，按字母表排列。</p>
-<p>2010年12月7日，安卓2.3——姜饼人(Gingerbread)发布。为啥提这一版系统？因为当时家里的第一台智能手机——<strong>Samsung GT i9088</strong>就是出厂自带的安卓2.3。尽管系统仍不完善，但已经让当时的我眼前一亮了。比塞班的自由度更高、功能更强……</p>
-<details class="toggle" ><summary class="toggle-button" style="">题外话</summary><div class="toggle-content"><p>三星S1退休之后，顺理成章地成为了我的日用机<s>兼游戏机</s>。</p>
-<ul>
-<li>瘟疫公司</li>
-<li>Ski Safari</li>
-<li>Doodle Jump</li>
-<li>Crystal Defender</li>
-<li>……</li>
-</ul>
-</div></details>
-<h3 id="40"><a class="markdownIt-Anchor" href="#40"></a> 4.0</h3>
-<p>下一个分水岭，应该是安卓4.0的发布吧。2011年10月19日，安卓4.0——冰激凌巧克力(Icecream Sandwich)发布。那时，中国的智能机品牌也争相出现，期盼在偌大的智能机市场中分一杯羹。酷派、HTC……可谓是“百家争鸣”。新的UI、新的设计……安卓4.0的发布，对后续的应用开发乃至系统开发都有着深远的影响。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/1682532027872_2023-4-27_0200_lb1nunp1zp.png" alt="" /></p>
-<details class="toggle" ><summary class="toggle-button" style="">题外话</summary><div class="toggle-content"><p>如果你注意的话，目前使用的许多<strong>大厂</strong>软件，现在仍保留有安卓4.0的痕迹。</p>
-<ul>
-<li>QQ：
-<ul>
-<li><s>屎一样的</s>状态栏下载进度条<s>以前的屎山懒得处理了是吧</s></li>
-<li>空间设置内的刷新圈圈</li>
-</ul>
-</li>
-<li>……</li>
-</ul>
-</div></details>
-<p>在安卓4.4——奇巧猫(KitKat)中，还引入了ART虚拟机，意图替换以前的Dalvik虚拟机。ART的一个重要的特性便是提前编译(AOT)——Ahead-Of-Time。这使得应用冷启动的速度更快，但也有副作用，会额外占据空间。通常来讲，ART预编译后，会比Dalvik额外占据10%-20%的空间。</p>
-<img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/1682531889603_2023-4-27_0158_btabtoxlzi.png" alt="经典的Android 4.4.4界面" style="zoom:50%;" />
-<p>现在的手机都是预先Odex化的，还是求速度不求占用嘛。反正128G和256G都不贵</p>
-<p><em>关于Dalvik和ART的区别，之后可能会详细讲<s>也可能不会</s></em></p>
-<h3 id="50新ui新设计"><a class="markdownIt-Anchor" href="#50新ui新设计"></a> 5.0：新UI，新设计</h3>
-<p>2014年6月25日，安卓5.0(Lolipop)诞生。这可谓是有纪念意义的：在这一版，材料质感(<em><strong>Material Design</strong></em>)被首次提出。安卓系统的界面，逐渐走向扁平化——也就是今天看到的样式。除此以外，谷歌还设立了一套新的应用界面设计理念——同样遵循Material Design。这使得应用只需一套界面，便可以随心所欲适配不同尺寸的屏幕——无论是手机还是平板。<s>让我看看是谁还不使用Material Design</s></p>
-<p>除此以外，安卓5.0终于支持了64位运算(之前的系统仅支持32位)，这使得系统的响应更加快捷，也使得大内存的管理成为可能。</p>
-<details class="toggle" ><summary class="toggle-button" style="">题外话</summary><div class="toggle-content"><p><em>冷知识：Google Play已经于2019年8月禁止32位应用上架，自家的新手机Pixel 7也无法安装32位应用，而国内某些<s>顽固不化的老东西</s>软件依旧保持32位<s>的优良传统</s>，包括但不限于：</em></p>
-<ul>
-<li><em>中国工商银行</em></li>
-<li><em>京东</em></li>
-<li><em>百度贴吧</em></li>
-<li><em>美团</em></li>
-<li><em>……</em></li>
-</ul>
-</div></details>
-<p>虽说在4.4就有了ART虚拟机，但直到5.0才默认开启。这也是谷歌的一次大胆的尝试——推陈出新。</p>
-<h3 id="直到今天"><a class="markdownIt-Anchor" href="#直到今天"></a> …直到今天？</h3>
-<p>自那以后，安卓又推出了许许多多个版本……从安卓10开始，安卓的代号就消失了——只留下了字母，(话说历代安卓的代号都是吃的www)</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/android_timeline_2023-4-26_0228_icrq50zf4a.png" alt="时间线" /></p>
-<p>关于安卓的篇章，应该到这里就结束了。下一章会讲讲 <a href="/2023/04/26/magisk-2/" title="当我们在谈论Root时，我们究竟在谈论什么？②">Root</a> 。</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-        <category>科普</category>
-      </categories>
-      <tags>
-        <tag>Magisk</tag>
-        <tag>安卓</tag>
-        <tag>Root</tag>
-        <tag>科普</tag>
-        <tag>刷机</tag>
-      </tags>
   </entry>
   <entry>
     <title>在非Honor/Samsung手机上使用微软的“连接至Windows”功能</title>
@@ -540,6 +446,140 @@
     <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
     </div>
 <p><em>第二张图是我手画的，看起来方便点</em></p>
+<p>名词解释：</p>
+<ul>
+<li>
+<p><strong>BootLoader</strong></p>
+<p>用它来进行开机自检和初始化手机硬件，它会指引手机找到系统分区并启动操作系统，相当于电脑上的BIOS。</p>
+<p>通过BootLoader，我们可以启动正常的操作系统，也可以启动Recovery系统。</p>
+</li>
+<li>
+<p><strong>Init</strong></p>
+<p>Android 启动的第一个用户空间进程，它的地位非常重要，它fork产生系统的一些关键进程，比如Zygote、Surface Flinger等。</p>
+</li>
+<li>
+<p><strong>Zygote</strong></p>
+<p>译为“受精卵”，在Android中，负责孵化新进程的这个进程就叫Zygote，其他的应用进程都是由它孵化的。</p>
+<p>安卓系统上运行的一切程序都是放在Dalvik虚拟机上的，Zygote也不例外。</p>
+<p>事实上，它是安卓运行的第一个Dalvik虚拟机进程。</p>
+</li>
+<li>
+<p><strong>Dalvik/ART虚拟机</strong></p>
+<p>Android程序运行的环境、</p>
+<p>Dalvik: Android 4.0之前所使用的虚拟机</p>
+<p>ART：Android 5.0中引入的虚拟机，意图取代旧的Dalvik以取得更好的性能。</p>
+</li>
+</ul>
+<p>安卓手机是怎么开机的？</p>
+<p>首先，由Bootloader加载下一步要启动的镜像——一般的手机可以通过长按电源键和音量上/下键来进入Bootloader的切换。在这里，你可以进入官方Recovery等。Boot分区——顾名思义，就是负责启动(boot)手机的。在Boot分区里包含了Kernel和RAMDisk。</p>
+<p>由boot分区，进行一系列的引导、自检……我省略了中间的过程。没问题的话，安卓系统会被加载，并且启动第一个进程——Init。一切如图中一般。</p>
+<h2 id="传统root"><a class="markdownIt-Anchor" href="#传统root"></a> 传统Root？</h2>
+<div class="gallery">
+    <div class="fj-gallery  data" data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/legacy-root_2023-5-7_0032_xaduagynt8.png","alt":"legacy-root"},{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_2023-5-7_0032_f2izvblujy.png","alt":"magisk"},{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_ppt_19_2023-5-7_0039_cyq1ptenzk.PNG","alt":"magisk_ppt_19"},{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_ppt_20_2023-5-7_0039_lsli0516c8.PNG","alt":"magisk_ppt_20"},{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_ppt_21_2023-5-7_0039_rlpcgw8q3k.PNG","alt":"magisk_ppt_21"}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p><s>论Magisk为什么是神</s></p>
+<h2 id="新的开始kernelsu"><a class="markdownIt-Anchor" href="#新的开始kernelsu"></a> 新的开始：<a href="https://zh.wikipedia.org/wiki/KernelSU">KernelSU</a></h2>
+<p>2022年12月，太极、两仪等软件的作者维术成功将该方案实现并于2023年1月在<a href="https://zh.wikipedia.org/wiki/Github">Github</a>开源。</p>
+<details class="toggle" ><summary class="toggle-button" style="">题外话</summary><div class="toggle-content"><p>太极(Taichi)是一个无需Root就能让你使用Xposed模块的软件。虽然仅仅是模拟，但是并非VMOS那样的虚拟机，而是切切实实地注入应用。记得以前就这样子注入网易云之后听音乐</p>
+</div></details>
+<p>KernelSU和传统的Magisk相比，最大的特点，便是其工作在<strong>内核空间</strong>而非<strong>用户空间</strong>。这使得</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+        <category>科普</category>
+      </categories>
+      <tags>
+        <tag>Magisk</tag>
+        <tag>安卓</tag>
+        <tag>Root</tag>
+        <tag>科普</tag>
+        <tag>刷机</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>当我们在谈论Root时，我们究竟在谈论什么？①</title>
+    <url>/2023/04/24/magisk-1/</url>
+    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>因报名了学校社团的科普演讲，故打算先写个稿子出来。后来想想，干脆放博客上了，还能存个档。</p>
+<p>为啥要讲Root？我也不知道。可能因为我对“<strong>刷机</strong>”有着独特的感情吧。</p>
+<p>四年级的时候，我成功Root了我的Samsung-i9300，并为其刷入了Cyanogenmod的类原生ROM。可能自那之后我就对刷机感兴趣了吧。</p>
+<p>十年过去了，Root也逐渐淡出的大家的视野——现在，可能只有酷安、百度贴吧，还有对其乐此不疲的人吧。</p>
+<p>所以，我想通过科普，让更多的人了解，什么是<strong>Root</strong>。</p>
+<p>按照惯例，依旧是两个Note：</p>
+<div class="note flat info flat"><p>以下内容可能已过时</p>
+</div>
+<div class="note flat warning flat"><p>博主并不具有专业Android系统/Linux内核相关的专业知识。</p>
+<p>文章难免存在纰漏。欢迎各位大神指教</p>
+</div>
+<p><em><strong>始める</strong></em>。</p>
+<h2 id="安卓发展史"><a class="markdownIt-Anchor" href="#安卓发展史"></a> 安卓发展史</h2>
+<p>安卓这玩意，历史还蛮悠久的。安卓系统的雏形可以追溯到2008年9月。在那之前，苹果公司已经于2007年1月，发布了第一款iPhone手机。或许是感受到了潜在的危机，也可能只是单纯地不想把手机市场“拱手让人”，谷歌开始着手研发自己的系统。这并非一件简单的事情；与机遇相比，更多的，或许是风险。</p>
+<p><strong>毕竟，2007年是个分水岭。微软自己的Windows Mobile系统和诺基亚的塞班(Symbian)系统逐渐开始丧失话语权。</strong></p>
+<p>或许，这是入局的好机会？当然，像诺基亚那样*<u>中道崩殂</u>*也是有可能的——这是后话。不管怎么样，谷歌还是做了。</p>
+<h3 id="初次见面"><a class="markdownIt-Anchor" href="#初次见面"></a> 初次见面</h3>
+<p>2008年9月，第一代安卓系统，Android 1.0发布。然而，新的系统并没有被外界看好：当时，诺基亚还是牢牢占据了市场。甚至有言论称最多一年谷歌就会放弃Android系统。</p>
+<img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/1682531731800_2023-4-27_0155_hcmjkrtbvk.png" alt="简陋的Android 1.0" style="zoom: 33%;" />
+<details class="toggle" ><summary class="toggle-button" style="">题外话</summary><div class="toggle-content"><p>博主的第一台“智能手机”其实是<em>Nokia XpressMusic 5800</em>：搭载了<s>极为先进的</s>塞班系统，且可以运行Java编写的小程序。记得当时还是360手机助手的天下，居然还有一个“塞班专区”。下好心仪的游戏后，通过数据线可以将.jre安装包传到手机上。记得四年级的时候在被窝里拿着随机附赠的(没错，当时就有随机附赠的触摸笔，可以用来记录笔记啥的<s>三星学着点</s>)触摸笔打 8-ball-pool。</p>
+<p>在上面玩过的游戏有：</p>
+<ul>
+<li>SIM4</li>
+<li>狂野西部(塔防？小人还能到处走动<s>明日方舟早期作品</s>)</li>
+<li>8-ball-pool(台球)</li>
+<li>Bounce Ball的冒险(3D)</li>
+<li>RealFootball 2011 <s>實 況 足 球</s></li>
+<li>UNO！</li>
+<li>*<em>剩下的忘了</em></li>
+</ul>
+</div></details>
+<p>半年后，新的Android 1.5来到了大众的面前。从此，安卓系统开始有了自己的名字——或者说，<strong>代号</strong>(Codename)。Android 1.5的代号是<em>Cupcake</em>，即纸杯蛋糕。也是从此开始，每一代安卓系统的代号首字母，按字母表排列。</p>
+<p>2010年12月7日，安卓2.3——姜饼人(Gingerbread)发布。为啥提这一版系统？因为当时家里的第一台智能手机——<strong>Samsung GT i9088</strong>就是出厂自带的安卓2.3。尽管系统仍不完善，但已经让当时的我眼前一亮了。比塞班的自由度更高、功能更强……</p>
+<details class="toggle" ><summary class="toggle-button" style="">题外话</summary><div class="toggle-content"><p>三星S1退休之后，顺理成章地成为了我的日用机<s>兼游戏机</s>。</p>
+<ul>
+<li>瘟疫公司</li>
+<li>Ski Safari</li>
+<li>Doodle Jump</li>
+<li>Crystal Defender</li>
+<li>……</li>
+</ul>
+</div></details>
+<h3 id="40"><a class="markdownIt-Anchor" href="#40"></a> 4.0</h3>
+<p>下一个分水岭，应该是安卓4.0的发布吧。2011年10月19日，安卓4.0——冰激凌巧克力(Icecream Sandwich)发布。那时，中国的智能机品牌也争相出现，期盼在偌大的智能机市场中分一杯羹。酷派、HTC……可谓是“百家争鸣”。新的UI、新的设计……安卓4.0的发布，对后续的应用开发乃至系统开发都有着深远的影响。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/1682532027872_2023-4-27_0200_lb1nunp1zp.png" alt="" /></p>
+<details class="toggle" ><summary class="toggle-button" style="">题外话</summary><div class="toggle-content"><p>如果你注意的话，目前使用的许多<strong>大厂</strong>软件，现在仍保留有安卓4.0的痕迹。</p>
+<ul>
+<li>QQ：
+<ul>
+<li><s>屎一样的</s>状态栏下载进度条<s>以前的屎山懒得处理了是吧</s></li>
+<li>空间设置内的刷新圈圈</li>
+</ul>
+</li>
+<li>……</li>
+</ul>
+</div></details>
+<p>在安卓4.4——奇巧猫(KitKat)中，还引入了ART虚拟机，意图替换以前的Dalvik虚拟机。ART的一个重要的特性便是提前编译(AOT)——Ahead-Of-Time。这使得应用冷启动的速度更快，但也有副作用，会额外占据空间。通常来讲，ART预编译后，会比Dalvik额外占据10%-20%的空间。</p>
+<img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/1682531889603_2023-4-27_0158_btabtoxlzi.png" alt="经典的Android 4.4.4界面" style="zoom:50%;" />
+<p>现在的手机都是预先Odex化的，还是求速度不求占用嘛。反正128G和256G都不贵</p>
+<p><em>关于Dalvik和ART的区别，之后可能会详细讲<s>也可能不会</s></em></p>
+<h3 id="50新ui新设计"><a class="markdownIt-Anchor" href="#50新ui新设计"></a> 5.0：新UI，新设计</h3>
+<p>2014年6月25日，安卓5.0(Lolipop)诞生。这可谓是有纪念意义的：在这一版，材料质感(<em><strong>Material Design</strong></em>)被首次提出。安卓系统的界面，逐渐走向扁平化——也就是今天看到的样式。除此以外，谷歌还设立了一套新的应用界面设计理念——同样遵循Material Design。这使得应用只需一套界面，便可以随心所欲适配不同尺寸的屏幕——无论是手机还是平板。<s>让我看看是谁还不使用Material Design</s></p>
+<p>除此以外，安卓5.0终于支持了64位运算(之前的系统仅支持32位)，这使得系统的响应更加快捷，也使得大内存的管理成为可能。</p>
+<details class="toggle" ><summary class="toggle-button" style="">题外话</summary><div class="toggle-content"><p><em>冷知识：Google Play已经于2019年8月禁止32位应用上架，自家的新手机Pixel 7也无法安装32位应用，而国内某些<s>顽固不化的老东西</s>软件依旧保持32位<s>的优良传统</s>，包括但不限于：</em></p>
+<ul>
+<li><em>中国工商银行</em></li>
+<li><em>京东</em></li>
+<li><em>百度贴吧</em></li>
+<li><em>美团</em></li>
+<li><em>……</em></li>
+</ul>
+</div></details>
+<p>虽说在4.4就有了ART虚拟机，但直到5.0才默认开启。这也是谷歌的一次大胆的尝试——推陈出新。</p>
+<h3 id="直到今天"><a class="markdownIt-Anchor" href="#直到今天"></a> …直到今天？</h3>
+<p>自那以后，安卓又推出了许许多多个版本……从安卓10开始，安卓的代号就消失了——只留下了字母，(话说历代安卓的代号都是吃的www)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/android_timeline_2023-4-26_0228_icrq50zf4a.png" alt="时间线" /></p>
+<p>关于安卓的篇章，应该到这里就结束了。下一章会讲讲 <a href="/2023/04/26/magisk-2/" title="当我们在谈论Root时，我们究竟在谈论什么？②">Root</a> 。</p>
 ]]></content>
       <categories>
         <category>随笔</category>
@@ -557,6 +597,40 @@
     <title>NGINX使用SNI前置分流，复用443端口</title>
     <url>/2023/04/27/nginx-sni/</url>
     <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>SakuraFRP搭建过程踩坑</title>
+    <url>/2023/04/14/sakura_frp/</url>
+    <content><![CDATA[<p>几个人合资租了个服务器，忘了几C几G了，总体表现还行，打算整个FRP自己用用。找了一圈在线管理的面板，貌似只有<a href="https://github.com/ZeroDream-CN/SakuraPanel">SakuraFRP</a>的还不错。使用配套的前端+特制的FRPs即可，FRPc可以任选。</p>
+<p>操作系统是<s>答辩11</s>Debian11<br />
+<s>主人之前因为环境配烂了重装了三四次</s></p>
+<h2 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h2>
+<p>先把该装的都装上，iptables、lsof、<strong>nginx、mysql</strong>啥的<br />
+<strong>后续安装时发现还需要其他依赖库，比如php–fpm、</strong></p>
+<p><strong>SSL证书</strong>也申请好（非必须，但是建议这么做）<br />
+把库git clone一份到本地</p>
+<h2 id="开始部署前端-̄-̄-go"><a class="markdownIt-Anchor" href="#开始部署前端-̄-̄-go"></a> 开始部署前端！ &lt;(￣︶￣)↗ GO!</h2>
+<p>按着<a href="https://github.com/ZeroDream-CN/SakuraPanel">SakuraFRP</a>的README放置网页文件<br />
+这里因为没学过PHP犯了个错：把主页直接设为pages/home.php。应该设置为<strong>index.php（路由）</strong></p>
+<p><s>因为网站没备案所以</s>NGINX监听非80端口，为了确保安全配置SSL证书。但是这样子每次登录主页都要<a href="https://xxxxxxxxx">https://xxxxxxxxx</a>:xxxx/，<s>非常难受</s></p>
+<p>觉得带端口访问太丑？满足你！<s>慈善家</s>Cloudflare的Origin Rules可以用非公端口接入Cloudflare网络，懂了吧</p>
+<h2 id="开始部署后端-ヾ-ゝ"><a class="markdownIt-Anchor" href="#开始部署后端-ヾ-ゝ"></a> 开始部署后端！ ヾ(≧ ▽ ≦)ゝ</h2>
+<p>然后一路按着Wiki的教程部署。在configuration.php填写所需要的密钥、数据库地址啥的。</p>
+<p><strong>这里建议数据库用户不要设为root，换一个，不然可能遇到各种各样奇怪的问题</strong></p>
+<p><strong>貌似数据库初始端口无法连接，只能自己再开一个了 <s>不知道为啥</s></strong></p>
+<p>下载配套的Frps服务端，按照Wiki填写配置文件，记录密钥。</p>
+<p>我真傻，真的，我单知道frps内api密钥形式为xxxxxxxxx|n(n为节点编号，面板内新增)<br />
+却不知道api/configuration内不需要加节点编号，只要前面key就行了</p>
+<p>邮箱问题自行解决，不会，有个懂哥整的</p>
+<p>没啥好说的，注册账户，数据库里user的group字段改成admin，开造</p>
+<h2 id="the-end-~"><a class="markdownIt-Anchor" href="#the-end-~"></a> The END ~</h2>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>SakuraFRP</tag>
+      </tags>
   </entry>
   <entry>
     <title>美化Butterfly主题内的Toggle(折叠块)</title>
@@ -597,40 +671,6 @@
         <tag>美化</tag>
         <tag>Butterfly</tag>
         <tag>自定义</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SakuraFRP搭建过程踩坑</title>
-    <url>/2023/04/14/sakura_frp/</url>
-    <content><![CDATA[<p>几个人合资租了个服务器，忘了几C几G了，总体表现还行，打算整个FRP自己用用。找了一圈在线管理的面板，貌似只有<a href="https://github.com/ZeroDream-CN/SakuraPanel">SakuraFRP</a>的还不错。使用配套的前端+特制的FRPs即可，FRPc可以任选。</p>
-<p>操作系统是<s>答辩11</s>Debian11<br />
-<s>主人之前因为环境配烂了重装了三四次</s></p>
-<h2 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h2>
-<p>先把该装的都装上，iptables、lsof、<strong>nginx、mysql</strong>啥的<br />
-<strong>后续安装时发现还需要其他依赖库，比如php–fpm、</strong></p>
-<p><strong>SSL证书</strong>也申请好（非必须，但是建议这么做）<br />
-把库git clone一份到本地</p>
-<h2 id="开始部署前端-̄-̄-go"><a class="markdownIt-Anchor" href="#开始部署前端-̄-̄-go"></a> 开始部署前端！ &lt;(￣︶￣)↗ GO!</h2>
-<p>按着<a href="https://github.com/ZeroDream-CN/SakuraPanel">SakuraFRP</a>的README放置网页文件<br />
-这里因为没学过PHP犯了个错：把主页直接设为pages/home.php。应该设置为<strong>index.php（路由）</strong></p>
-<p><s>因为网站没备案所以</s>NGINX监听非80端口，为了确保安全配置SSL证书。但是这样子每次登录主页都要<a href="https://xxxxxxxxx">https://xxxxxxxxx</a>:xxxx/，<s>非常难受</s></p>
-<p>觉得带端口访问太丑？满足你！<s>慈善家</s>Cloudflare的Origin Rules可以用非公端口接入Cloudflare网络，懂了吧</p>
-<h2 id="开始部署后端-ヾ-ゝ"><a class="markdownIt-Anchor" href="#开始部署后端-ヾ-ゝ"></a> 开始部署后端！ ヾ(≧ ▽ ≦)ゝ</h2>
-<p>然后一路按着Wiki的教程部署。在configuration.php填写所需要的密钥、数据库地址啥的。</p>
-<p><strong>这里建议数据库用户不要设为root，换一个，不然可能遇到各种各样奇怪的问题</strong></p>
-<p><strong>貌似数据库初始端口无法连接，只能自己再开一个了 <s>不知道为啥</s></strong></p>
-<p>下载配套的Frps服务端，按照Wiki填写配置文件，记录密钥。</p>
-<p>我真傻，真的，我单知道frps内api密钥形式为xxxxxxxxx|n(n为节点编号，面板内新增)<br />
-却不知道api/configuration内不需要加节点编号，只要前面key就行了</p>
-<p>邮箱问题自行解决，不会，有个懂哥整的</p>
-<p>没啥好说的，注册账户，数据库里user的group字段改成admin，开造</p>
-<h2 id="the-end-~"><a class="markdownIt-Anchor" href="#the-end-~"></a> The END ~</h2>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>SakuraFRP</tag>
       </tags>
   </entry>
   <entry>
