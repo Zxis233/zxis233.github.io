@@ -86,6 +86,196 @@
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2023/04/14/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="quick-start"><a class="markdownIt-Anchor" href="#quick-start"></a> Quick Start</h2>
+<h3 id="create-a-new-post"><a class="markdownIt-Anchor" href="#create-a-new-post"></a> Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="run-server"><a class="markdownIt-Anchor" href="#run-server"></a> Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="generate-static-files"><a class="markdownIt-Anchor" href="#generate-static-files"></a> Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="deploy-to-remote-sites"><a class="markdownIt-Anchor" href="#deploy-to-remote-sites"></a> Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 代码样式测试</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello world&quot;</span>)</span><br></pre></td></tr></table></figure>
+<div class="gallery">
+    <div class="fj-gallery  data" data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/1682053292433_2023-4-21_1301_9r9zy03y7r.png","alt":""},{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/8e9e-e3c4ffa93196965baa8482888a184916_2023-4-24_0023_e3tr96xizd.jpg","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>]]></content>
+  </entry>
+  <entry>
+    <title>君Hexo本上手①：开始</title>
+    <url>/2023/04/14/hexo_1/</url>
+    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>如你所见，本博客是使用Hexo框架搭建的，而博主没有任何前端相关知识。换言之，一切的美化/配置，都交由Hexo框架完成。</p>
+<p>本着“记录一切”的想法，把Hexo配置的全过程记下来<s>配到哪记到哪</s></p>
+<h2 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h2>
+<p><a href="https://hexo.io/zh-cn/">Hexo官网</a>在这里可以找到官方的配置说明——多平台安装、配置等。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在非Honor/Samsung手机上使用微软的“连接至Windows”功能</title>
+    <url>/2023/04/20/link-to-windows/</url>
+    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>尝试了各种手机+电脑的协同办公方案——小米系的MIUI+、Linux系的KDE Connect等。因为我的小米设备较多，所以MIUI+体验还不错。诸如屏幕镜像（扩展显示器）/剪贴板共享等功能都正常工作。唯一的小问题是只支持米系笔记本电脑<s>那都不是事</s>。<br />
+最近想起来，微软自家有个“连接手机”的应用，打算尝试一下。不过貌似国区只支持部分荣耀手机、部分三星手机<s>还有不存在的Microsoft Duo</s>。不信邪，试试看！</p>
+<p>在网上搜索了一番，最终在 <a href="https://www.hestudio.org/posts/how-to-link-to-windows.html">非特定手机如何连接到Windows | heStudio</a> 这里找到了答案。本文便以此为参照。</p>
+<h2 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h2>
+<ul>
+<li>一台安卓(?)手机，要求系统大于7.0 <s>可能苹果也行，没试过</s></li>
+<li>一台Windows10/11电脑 <s>废话</s></li>
+<li>能<strong>正确</strong>上网的工具，节点任意</li>
+<li>耐心的态度 <s>别急</s></li>
+<li>可选项：
+<ul>
+<li>同一网络环境</li>
+<li>WiFi6接入</li>
+</ul>
+</li>
+</ul>
+<h2 id="开始"><a class="markdownIt-Anchor" href="#开始"></a> 开始！</h2>
+<h3 id="手机-下载-国区特供版-连接电脑"><a class="markdownIt-Anchor" href="#手机-下载-国区特供版-连接电脑"></a> 手机 下载 <em><strong>国区特供版</strong></em> 连接电脑</h3>
+<p>笔者测试过了，Google Play商店下载的版本，电脑端会卡在“无法连接”的地方。老老实实用国区。</p>
+<p>下载地址：<a href="https://cloud.zxis.tk/s/YnC5">Link To Windows</a></p>
+<p>然后就是给一堆权限啥的 如果不想用电脑打电话看短信的话可以不给电话和短信权限</p>
+<p><strong>记得要给“管理所有通知”的权限</strong></p>
+<h3 id="电脑-下载-连接手机"><a class="markdownIt-Anchor" href="#电脑-下载-连接手机"></a> 电脑 下载 连接手机</h3>
+<p>MS官方应用商店：<a href="https://apps.microsoft.com/store/detail/%E6%89%8B%E6%9C%BA%E8%BF%9E%E6%8E%A5/9NMPJ99VJBWV">手机连接 - Microsoft Store 应用程序</a></p>
+<h3 id="连接"><a class="markdownIt-Anchor" href="#连接"></a> 连接</h3>
+<p>打开PC端的“手机连接”，选择手机OS后会让你确保拥有<em><strong>受支持</strong></em>的设备<s>有也不会看这个了</s></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/image-20230423184234134_2023-4-23_1842_0ccn3pdvnu.png" alt="没用的提醒" /></p>
+<p>直接继续，在无代理的情况下登录。之后</p>
+<div class="note flat info flat"><p>因为Windows对UWP应用的限制，它们无法监听本地回环地址<code>127.0.0.1</code>，因此无法正常使用系统代理，并且在代理打开时无法正常上网。</p>
+<p>可以通过工具来解除UWP应用的回环代理限制。</p>
+</div>
+<p>手机上扫码，出现下图就可以<strong>耐心等待</strong>了 <s>转圈说明你网卡了</s></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/Screenshot_2023-04-23-18-55-54-839_com.microsoft._2023-4-23_1904_bzfm24d6nl.jpg" alt="配对！" /></p>
+<p>PC端出现下面说明连接好了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/ms-success_2023-4-23_2113_d30v2moong.png" alt="连接成功！" /></p>
+<p>然后就可以享受丝滑的接受应用消息了😋</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/image-20230423190659618_2023-4-23_1907_vvoutw6t7m.png" alt="好烦的广告 &gt;_&lt;" /></p>
+<h3 id="配置电话短信"><a class="markdownIt-Anchor" href="#配置电话短信"></a> 配置电话/短信</h3>
+<p>保险起见，在Windows蓝牙设备里先取消配对你的手机（手机上也和电脑取消配对）。</p>
+<p>之后按着PC端的指示一步步在手机上给权限/配对</p>
+<p>就可以用电脑唤醒手机打电话了😋</p>
+]]></content>
+      <categories>
+        <category>技术分享</category>
+      </categories>
+      <tags>
+        <tag>技术分享</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>当我们在谈论Root时，我们究竟在谈论什么？①</title>
+    <url>/2023/04/24/magisk-1/</url>
+    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>因报名了学校社团的科普演讲，故打算先写个稿子出来。后来想想，干脆放博客上了，还能存个档。</p>
+<p>为啥要讲Root？我也不知道。可能因为我对“<strong>刷机</strong>”有着独特的感情吧。</p>
+<p>四年级的时候，我成功Root了我的Samsung-i9300，并为其刷入了Cyanogenmod的类原生ROM。可能自那之后我就对刷机感兴趣了吧。</p>
+<p>十年过去了，Root也逐渐淡出的大家的视野——现在，可能只有酷安、百度贴吧，还有对其乐此不疲的人吧。</p>
+<p>所以，我想通过科普，让更多的人了解，什么是<strong>Root</strong>。</p>
+<p>按照惯例，依旧是两个Note：</p>
+<div class="note flat info flat"><p>以下内容可能已过时</p>
+</div>
+<div class="note flat warning flat"><p>博主并不具有专业Android系统/Linux内核相关的专业知识。</p>
+<p>文章难免存在纰漏。欢迎各位大神指教</p>
+</div>
+<p><em><strong>始める</strong></em>。</p>
+<h2 id="安卓发展史"><a class="markdownIt-Anchor" href="#安卓发展史"></a> 安卓发展史</h2>
+<p>一个小问题：安卓和苹果，哪一个更早出现？</p>
+<p>事实上，安卓最早投入研发，但是第一台苹果手机比安卓手机出现的早。Andy Rubin早在2003年便提出了安卓系统的概念，但是苹果于2007年1月，发布了第一款iPhone手机。相比之下，安卓慢了一步：2008年10月，T-Mobile G1正式发布——这，便是第一台安卓手机</p>
+<p>**2007年是个分水岭。微软自己的Windows Mobile系统和诺基亚的塞班(Symbian)系统，逐渐开始丧失话语权。**但，这俩巨头，依旧牢牢占据了80%的手机市场。</p>
+<p>或许，这是入局的好机会？当然，像诺基亚那样*<u>中道崩殂</u>*也是有可能的——这是后话。不管怎么样，谷歌还是做了。</p>
+<h3 id="初次见面"><a class="markdownIt-Anchor" href="#初次见面"></a> 初次见面</h3>
+<p>2008年9月，第一代安卓系统，Android 1.0发布。然而，新的系统并没有被外界看好：当时，诺基亚还是牢牢占据了市场。甚至有言论称最多一年谷歌就会放弃Android系统。</p>
+<img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/1682531731800_2023-4-27_0155_hcmjkrtbvk.png" alt="简陋的Android 1.0" style="zoom: 33%;" />
+<details class="toggle" ><summary class="toggle-button" style="">题外话</summary><div class="toggle-content"><p>博主的第一台“智能手机”其实是<em>Nokia XpressMusic 5800</em>：搭载了<s>极为先进的</s>塞班系统，且可以运行Java编写的小程序。记得当时还是360手机助手的天下，居然还有一个“塞班专区”。下好心仪的游戏后，通过数据线可以将.jre安装包传到手机上。记得四年级的时候在被窝里拿着随机附赠的(没错，当时就有随机附赠的触摸笔，可以用来记录笔记啥的<s>三星学着点</s>)触摸笔打 8-ball-pool。</p>
+<p>在上面玩过的游戏有：</p>
+<ul>
+<li>SIM4</li>
+<li>狂野西部(塔防？小人还能到处走动<s>明日方舟早期作品</s>)</li>
+<li>8-ball-pool(台球)</li>
+<li>Bounce Ball的冒险(3D)</li>
+<li>RealFootball 2011 <s>實 況 足 球</s></li>
+<li>UNO！</li>
+<li>*<em>剩下的忘了</em></li>
+</ul>
+</div></details>
+<p>半年后，新的Android 1.5来到了大众的面前。从此，安卓系统开始有了自己的名字——或者说，<strong>代号</strong>(Codename)。Android 1.5的代号是<em>Cupcake</em>，即纸杯蛋糕。也是从此开始，每一代安卓系统的代号首字母，按字母表排列。</p>
+<p>2010年12月7日，安卓2.3——姜饼人(Gingerbread)发布。为啥提这一版系统？因为当时家里的第一台智能手机——<strong>Samsung GT i9088</strong>就是出厂自带的安卓2.3。尽管系统仍不完善，但已经让当时的我眼前一亮了。比塞班的自由度更高、功能更强……</p>
+<details class="toggle" ><summary class="toggle-button" style="">题外话</summary><div class="toggle-content"><p>三星S1退休之后，顺理成章地成为了我的日用机<s>兼游戏机</s>。</p>
+<ul>
+<li>瘟疫公司</li>
+<li>Ski Safari</li>
+<li>Doodle Jump</li>
+<li>Crystal Defender</li>
+<li>……</li>
+</ul>
+</div></details>
+<h3 id="40"><a class="markdownIt-Anchor" href="#40"></a> 4.0</h3>
+<p>下一个分水岭，应该是安卓4.0的发布吧。2011年10月19日，安卓4.0——冰激凌巧克力(Icecream Sandwich)发布。那时，中国的智能机品牌也争相出现，期盼在偌大的智能机市场中分一杯羹。酷派、HTC……可谓是“百家争鸣”。新的UI、新的设计……安卓4.0的发布，对后续的应用开发乃至系统开发都有着深远的影响。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/1682532027872_2023-4-27_0200_lb1nunp1zp.png" alt="" /></p>
+<details class="toggle" ><summary class="toggle-button" style="">题外话</summary><div class="toggle-content"><p>如果你注意的话，目前使用的许多<strong>大厂</strong>软件，现在仍保留有安卓4.0的痕迹。</p>
+<ul>
+<li>QQ：
+<ul>
+<li><s>屎一样的</s>状态栏下载进度条<s>以前的屎山懒得处理了是吧</s></li>
+<li>空间设置内的刷新圈圈</li>
+</ul>
+</li>
+<li>……</li>
+</ul>
+</div></details>
+<p>在安卓4.4——奇巧猫(KitKat)中，还引入了ART虚拟机，意图替换以前的Dalvik虚拟机。ART的一个重要的特性便是提前编译(AOT)——Ahead-Of-Time。这使得应用冷启动的速度更快，但也有副作用，会额外占据空间。通常来讲，ART预编译后，会比Dalvik额外占据10%-20%的空间。</p>
+<img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/1682531889603_2023-4-27_0158_btabtoxlzi.png" alt="经典的Android 4.4.4界面" style="zoom:50%;" />
+<p>现在的手机都是预先Odex化的，还是求速度不求占用嘛。反正128G和256G都不贵</p>
+<p><em>关于Dalvik和ART的区别，之后可能会详细讲<s>也可能不会</s></em></p>
+<h3 id="50新ui新设计"><a class="markdownIt-Anchor" href="#50新ui新设计"></a> 5.0：新UI，新设计</h3>
+<p>2014年6月25日，安卓5.0(Lolipop)诞生。这可谓是有纪念意义的：在这一版，材料质感(<em><strong>Material Design</strong></em>)被首次提出。安卓系统的界面，逐渐走向扁平化——也就是今天看到的样式。除此以外，谷歌还设立了一套新的应用界面设计理念——同样遵循Material Design。这使得应用只需一套界面，便可以随心所欲适配不同尺寸的屏幕——无论是手机还是平板。<s>让我看看是谁还不使用Material Design</s></p>
+<p>除此以外，安卓5.0终于支持了64位运算(之前的系统仅支持32位)，这使得系统的响应更加快捷，也使得大内存的管理成为可能。</p>
+<details class="toggle" ><summary class="toggle-button" style="">题外话</summary><div class="toggle-content"><p><em>冷知识：Google Play已经于2019年8月禁止32位应用上架，自家的新手机Pixel 7也无法安装32位应用，而国内某些<s>顽固不化的老东西</s>软件依旧保持32位<s>的优良传统</s>，包括但不限于：</em></p>
+<ul>
+<li><em>中国工商银行</em></li>
+<li><em>京东</em></li>
+<li><em>百度贴吧</em></li>
+<li><em>美团</em></li>
+<li><em>……</em></li>
+</ul>
+</div></details>
+<p>虽说在4.4就有了ART虚拟机，但直到5.0才默认开启。这也是谷歌的一次大胆的尝试——推陈出新。</p>
+<h3 id="直到今天"><a class="markdownIt-Anchor" href="#直到今天"></a> …直到今天？</h3>
+<p>自那以后，安卓又推出了许许多多个版本……从安卓10开始，安卓的代号就消失了——只留下了字母，(话说历代安卓的代号都是吃的www)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/android_timeline_2023-4-26_0228_icrq50zf4a.png" alt="时间线" /></p>
+<p>关于安卓的篇章，应该到这里就结束了。下一章会讲讲 <a href="/2023/04/26/magisk-2/" title="当我们在谈论Root时，我们究竟在谈论什么？②">Root</a> 。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+        <category>科普</category>
+      </categories>
+      <tags>
+        <tag>Magisk</tag>
+        <tag>安卓</tag>
+        <tag>Root</tag>
+        <tag>科普</tag>
+        <tag>刷机</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>[转载]中国的防火长城是如何检测和封锁完全加密流量的？</title>
     <url>/2023/05/05/gfw-report/</url>
     <content><![CDATA[<div class="note warning flat"><p>本文章仅为转载，如有侵犯版权，请立即联系博主进行删除。<br />
@@ -394,249 +584,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2023/04/14/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="quick-start"><a class="markdownIt-Anchor" href="#quick-start"></a> Quick Start</h2>
-<h3 id="create-a-new-post"><a class="markdownIt-Anchor" href="#create-a-new-post"></a> Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="run-server"><a class="markdownIt-Anchor" href="#run-server"></a> Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="generate-static-files"><a class="markdownIt-Anchor" href="#generate-static-files"></a> Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="deploy-to-remote-sites"><a class="markdownIt-Anchor" href="#deploy-to-remote-sites"></a> Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 代码样式测试</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello world&quot;</span>)</span><br></pre></td></tr></table></figure>
-<div class="gallery">
-    <div class="fj-gallery  data" data-rowHeight="220" data-limit="10">
-    <span class="gallery-data">[{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/1682053292433_2023-4-21_1301_9r9zy03y7r.png","alt":""},{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/8e9e-e3c4ffa93196965baa8482888a184916_2023-4-24_0023_e3tr96xizd.jpg","alt":""}]</span>
-    </div>
-    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
-    </div>]]></content>
-  </entry>
-  <entry>
-    <title>君Hexo本上手①：开始</title>
-    <url>/2023/04/14/hexo_1/</url>
-    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
-<p>如你所见，本博客是使用Hexo框架搭建的，而博主没有任何前端相关知识。换言之，一切的美化/配置，都交由Hexo框架完成。</p>
-<p>本着“记录一切”的想法，把Hexo配置的全过程记下来<s>配到哪记到哪</s></p>
-<h2 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h2>
-<p><a href="https://hexo.io/zh-cn/">Hexo官网</a>在这里可以找到官方的配置说明——多平台安装、配置等。</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>教程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在非Honor/Samsung手机上使用微软的“连接至Windows”功能</title>
-    <url>/2023/04/20/link-to-windows/</url>
-    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
-<p>尝试了各种手机+电脑的协同办公方案——小米系的MIUI+、Linux系的KDE Connect等。因为我的小米设备较多，所以MIUI+体验还不错。诸如屏幕镜像（扩展显示器）/剪贴板共享等功能都正常工作。唯一的小问题是只支持米系笔记本电脑<s>那都不是事</s>。<br />
-最近想起来，微软自家有个“连接手机”的应用，打算尝试一下。不过貌似国区只支持部分荣耀手机、部分三星手机<s>还有不存在的Microsoft Duo</s>。不信邪，试试看！</p>
-<p>在网上搜索了一番，最终在 <a href="https://www.hestudio.org/posts/how-to-link-to-windows.html">非特定手机如何连接到Windows | heStudio</a> 这里找到了答案。本文便以此为参照。</p>
-<h2 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h2>
-<ul>
-<li>一台安卓(?)手机，要求系统大于7.0 <s>可能苹果也行，没试过</s></li>
-<li>一台Windows10/11电脑 <s>废话</s></li>
-<li>能<strong>正确</strong>上网的工具，节点任意</li>
-<li>耐心的态度 <s>别急</s></li>
-<li>可选项：
-<ul>
-<li>同一网络环境</li>
-<li>WiFi6接入</li>
-</ul>
-</li>
-</ul>
-<h2 id="开始"><a class="markdownIt-Anchor" href="#开始"></a> 开始！</h2>
-<h3 id="手机-下载-国区特供版-连接电脑"><a class="markdownIt-Anchor" href="#手机-下载-国区特供版-连接电脑"></a> 手机 下载 <em><strong>国区特供版</strong></em> 连接电脑</h3>
-<p>笔者测试过了，Google Play商店下载的版本，电脑端会卡在“无法连接”的地方。老老实实用国区。</p>
-<p>下载地址：<a href="https://cloud.zxis.tk/s/YnC5">Link To Windows</a></p>
-<p>然后就是给一堆权限啥的 如果不想用电脑打电话看短信的话可以不给电话和短信权限</p>
-<p><strong>记得要给“管理所有通知”的权限</strong></p>
-<h3 id="电脑-下载-连接手机"><a class="markdownIt-Anchor" href="#电脑-下载-连接手机"></a> 电脑 下载 连接手机</h3>
-<p>MS官方应用商店：<a href="https://apps.microsoft.com/store/detail/%E6%89%8B%E6%9C%BA%E8%BF%9E%E6%8E%A5/9NMPJ99VJBWV">手机连接 - Microsoft Store 应用程序</a></p>
-<h3 id="连接"><a class="markdownIt-Anchor" href="#连接"></a> 连接</h3>
-<p>打开PC端的“手机连接”，选择手机OS后会让你确保拥有<em><strong>受支持</strong></em>的设备<s>有也不会看这个了</s></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/image-20230423184234134_2023-4-23_1842_0ccn3pdvnu.png" alt="没用的提醒" /></p>
-<p>直接继续，在无代理的情况下登录。之后</p>
-<div class="note flat info flat"><p>因为Windows对UWP应用的限制，它们无法监听本地回环地址<code>127.0.0.1</code>，因此无法正常使用系统代理，并且在代理打开时无法正常上网。</p>
-<p>可以通过工具来解除UWP应用的回环代理限制。</p>
-</div>
-<p>手机上扫码，出现下图就可以<strong>耐心等待</strong>了 <s>转圈说明你网卡了</s></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/Screenshot_2023-04-23-18-55-54-839_com.microsoft._2023-4-23_1904_bzfm24d6nl.jpg" alt="配对！" /></p>
-<p>PC端出现下面说明连接好了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/ms-success_2023-4-23_2113_d30v2moong.png" alt="连接成功！" /></p>
-<p>然后就可以享受丝滑的接受应用消息了😋</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/image-20230423190659618_2023-4-23_1907_vvoutw6t7m.png" alt="好烦的广告 &gt;_&lt;" /></p>
-<h3 id="配置电话短信"><a class="markdownIt-Anchor" href="#配置电话短信"></a> 配置电话/短信</h3>
-<p>保险起见，在Windows蓝牙设备里先取消配对你的手机（手机上也和电脑取消配对）。</p>
-<p>之后按着PC端的指示一步步在手机上给权限/配对</p>
-<p>就可以用电脑唤醒手机打电话了😋</p>
-]]></content>
-      <categories>
-        <category>技术分享</category>
-      </categories>
-      <tags>
-        <tag>技术分享</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>当我们在谈论Root时，我们究竟在谈论什么？①</title>
-    <url>/2023/04/24/magisk-1/</url>
-    <content><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
-<p>因报名了学校社团的科普演讲，故打算先写个稿子出来。后来想想，干脆放博客上了，还能存个档。</p>
-<p>为啥要讲Root？我也不知道。可能因为我对“<strong>刷机</strong>”有着独特的感情吧。</p>
-<p>四年级的时候，我成功Root了我的Samsung-i9300，并为其刷入了Cyanogenmod的类原生ROM。可能自那之后我就对刷机感兴趣了吧。</p>
-<p>十年过去了，Root也逐渐淡出的大家的视野——现在，可能只有酷安、百度贴吧，还有对其乐此不疲的人吧。</p>
-<p>所以，我想通过科普，让更多的人了解，什么是<strong>Root</strong>。</p>
-<p>按照惯例，依旧是两个Note：</p>
-<div class="note flat info flat"><p>以下内容可能已过时</p>
-</div>
-<div class="note flat warning flat"><p>博主并不具有专业Android系统/Linux内核相关的专业知识。</p>
-<p>文章难免存在纰漏。欢迎各位大神指教</p>
-</div>
-<p><em><strong>始める</strong></em>。</p>
-<h2 id="安卓发展史"><a class="markdownIt-Anchor" href="#安卓发展史"></a> 安卓发展史</h2>
-<p>一个小问题：安卓和苹果，哪一个更早出现？</p>
-<p>事实上，安卓最早投入研发，但是第一台苹果手机比安卓手机出现的早。Andy Rubin早在2003年便提出了安卓系统的概念，但是苹果于2007年1月，发布了第一款iPhone手机。相比之下，安卓慢了一步：2008年10月，T-Mobile G1正式发布——这，便是第一台安卓手机</p>
-<p>**2007年是个分水岭。微软自己的Windows Mobile系统和诺基亚的塞班(Symbian)系统，逐渐开始丧失话语权。**但，这俩巨头，依旧牢牢占据了80%的手机市场。</p>
-<p>或许，这是入局的好机会？当然，像诺基亚那样*<u>中道崩殂</u>*也是有可能的——这是后话。不管怎么样，谷歌还是做了。</p>
-<h3 id="初次见面"><a class="markdownIt-Anchor" href="#初次见面"></a> 初次见面</h3>
-<p>2008年9月，第一代安卓系统，Android 1.0发布。然而，新的系统并没有被外界看好：当时，诺基亚还是牢牢占据了市场。甚至有言论称最多一年谷歌就会放弃Android系统。</p>
-<img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/1682531731800_2023-4-27_0155_hcmjkrtbvk.png" alt="简陋的Android 1.0" style="zoom: 33%;" />
-<details class="toggle" ><summary class="toggle-button" style="">题外话</summary><div class="toggle-content"><p>博主的第一台“智能手机”其实是<em>Nokia XpressMusic 5800</em>：搭载了<s>极为先进的</s>塞班系统，且可以运行Java编写的小程序。记得当时还是360手机助手的天下，居然还有一个“塞班专区”。下好心仪的游戏后，通过数据线可以将.jre安装包传到手机上。记得四年级的时候在被窝里拿着随机附赠的(没错，当时就有随机附赠的触摸笔，可以用来记录笔记啥的<s>三星学着点</s>)触摸笔打 8-ball-pool。</p>
-<p>在上面玩过的游戏有：</p>
-<ul>
-<li>SIM4</li>
-<li>狂野西部(塔防？小人还能到处走动<s>明日方舟早期作品</s>)</li>
-<li>8-ball-pool(台球)</li>
-<li>Bounce Ball的冒险(3D)</li>
-<li>RealFootball 2011 <s>實 況 足 球</s></li>
-<li>UNO！</li>
-<li>*<em>剩下的忘了</em></li>
-</ul>
-</div></details>
-<p>半年后，新的Android 1.5来到了大众的面前。从此，安卓系统开始有了自己的名字——或者说，<strong>代号</strong>(Codename)。Android 1.5的代号是<em>Cupcake</em>，即纸杯蛋糕。也是从此开始，每一代安卓系统的代号首字母，按字母表排列。</p>
-<p>2010年12月7日，安卓2.3——姜饼人(Gingerbread)发布。为啥提这一版系统？因为当时家里的第一台智能手机——<strong>Samsung GT i9088</strong>就是出厂自带的安卓2.3。尽管系统仍不完善，但已经让当时的我眼前一亮了。比塞班的自由度更高、功能更强……</p>
-<details class="toggle" ><summary class="toggle-button" style="">题外话</summary><div class="toggle-content"><p>三星S1退休之后，顺理成章地成为了我的日用机<s>兼游戏机</s>。</p>
-<ul>
-<li>瘟疫公司</li>
-<li>Ski Safari</li>
-<li>Doodle Jump</li>
-<li>Crystal Defender</li>
-<li>……</li>
-</ul>
-</div></details>
-<h3 id="40"><a class="markdownIt-Anchor" href="#40"></a> 4.0</h3>
-<p>下一个分水岭，应该是安卓4.0的发布吧。2011年10月19日，安卓4.0——冰激凌巧克力(Icecream Sandwich)发布。那时，中国的智能机品牌也争相出现，期盼在偌大的智能机市场中分一杯羹。酷派、HTC……可谓是“百家争鸣”。新的UI、新的设计……安卓4.0的发布，对后续的应用开发乃至系统开发都有着深远的影响。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/1682532027872_2023-4-27_0200_lb1nunp1zp.png" alt="" /></p>
-<details class="toggle" ><summary class="toggle-button" style="">题外话</summary><div class="toggle-content"><p>如果你注意的话，目前使用的许多<strong>大厂</strong>软件，现在仍保留有安卓4.0的痕迹。</p>
-<ul>
-<li>QQ：
-<ul>
-<li><s>屎一样的</s>状态栏下载进度条<s>以前的屎山懒得处理了是吧</s></li>
-<li>空间设置内的刷新圈圈</li>
-</ul>
-</li>
-<li>……</li>
-</ul>
-</div></details>
-<p>在安卓4.4——奇巧猫(KitKat)中，还引入了ART虚拟机，意图替换以前的Dalvik虚拟机。ART的一个重要的特性便是提前编译(AOT)——Ahead-Of-Time。这使得应用冷启动的速度更快，但也有副作用，会额外占据空间。通常来讲，ART预编译后，会比Dalvik额外占据10%-20%的空间。</p>
-<img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/1682531889603_2023-4-27_0158_btabtoxlzi.png" alt="经典的Android 4.4.4界面" style="zoom:50%;" />
-<p>现在的手机都是预先Odex化的，还是求速度不求占用嘛。反正128G和256G都不贵</p>
-<p><em>关于Dalvik和ART的区别，之后可能会详细讲<s>也可能不会</s></em></p>
-<h3 id="50新ui新设计"><a class="markdownIt-Anchor" href="#50新ui新设计"></a> 5.0：新UI，新设计</h3>
-<p>2014年6月25日，安卓5.0(Lolipop)诞生。这可谓是有纪念意义的：在这一版，材料质感(<em><strong>Material Design</strong></em>)被首次提出。安卓系统的界面，逐渐走向扁平化——也就是今天看到的样式。除此以外，谷歌还设立了一套新的应用界面设计理念——同样遵循Material Design。这使得应用只需一套界面，便可以随心所欲适配不同尺寸的屏幕——无论是手机还是平板。<s>让我看看是谁还不使用Material Design</s></p>
-<p>除此以外，安卓5.0终于支持了64位运算(之前的系统仅支持32位)，这使得系统的响应更加快捷，也使得大内存的管理成为可能。</p>
-<details class="toggle" ><summary class="toggle-button" style="">题外话</summary><div class="toggle-content"><p><em>冷知识：Google Play已经于2019年8月禁止32位应用上架，自家的新手机Pixel 7也无法安装32位应用，而国内某些<s>顽固不化的老东西</s>软件依旧保持32位<s>的优良传统</s>，包括但不限于：</em></p>
-<ul>
-<li><em>中国工商银行</em></li>
-<li><em>京东</em></li>
-<li><em>百度贴吧</em></li>
-<li><em>美团</em></li>
-<li><em>……</em></li>
-</ul>
-</div></details>
-<p>虽说在4.4就有了ART虚拟机，但直到5.0才默认开启。这也是谷歌的一次大胆的尝试——推陈出新。</p>
-<h3 id="直到今天"><a class="markdownIt-Anchor" href="#直到今天"></a> …直到今天？</h3>
-<p>自那以后，安卓又推出了许许多多个版本……从安卓10开始，安卓的代号就消失了——只留下了字母，(话说历代安卓的代号都是吃的www)</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/android_timeline_2023-4-26_0228_icrq50zf4a.png" alt="时间线" /></p>
-<p>关于安卓的篇章，应该到这里就结束了。下一章会讲讲 <a href="/2023/04/26/magisk-2/" title="当我们在谈论Root时，我们究竟在谈论什么？②">Root</a> 。</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-        <category>科普</category>
-      </categories>
-      <tags>
-        <tag>Magisk</tag>
-        <tag>安卓</tag>
-        <tag>Root</tag>
-        <tag>科普</tag>
-        <tag>刷机</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>当我们在谈论Root时，我们究竟在谈论什么？②</title>
-    <url>/2023/04/26/magisk-2/</url>
-    <content><![CDATA[<h2 id="root的流行"><a class="markdownIt-Anchor" href="#root的流行"></a> Root的流行</h2>
-<p>2012年，应该是Root最流行的时候。一时间，各类“一键Root”应用层出不穷：360一键Root、KingRoot、百度一键Root……或许是对当时仍不完善的安卓4.0感到不满意，又或者是渴望对手机进行进一步美化——换字体、换主题、换系统……Root这个词仿佛走进了千家万户。当时，博主就把自己的Samsung i9300 Root了，还有父母的两台三星。说到底，什么是Root？</p>
-<img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/root-android_2023-5-5_1329_8s9d8b5y7c.jpg" style="zoom:25%;" />
-<h3 id="最高权限"><a class="markdownIt-Anchor" href="#最高权限"></a> 最高权限</h3>
-<p>类比Windows上的“Administrator”，Linux系统中也存在着最高权限的用户，称为<strong>根用户</strong>，翻译过来便是<em>root</em>。</p>
-<p>对操作系统中的内容进行处理，是需要权限的，涉及到的信息越重要，需要的权限级别就越高。手机中的「根权限」和电脑上的「管理员权限」是相似的，都是管理该系统的权限等级，只不过前者比后者级别更高。可以简单地认为：取得了<u>Root权限</u>就等于**<u>拥有了整个系统中至高无上的管理权</u><strong>，许多在原来「无权」的状态下不能做的事情，现在</strong>都可以做了**，例如等。</p>
-<p>(当时，似乎并没有“锁系统分区<code>/system/</code>”这一说，因此确实可以增删改手机中的系统文件。<s>小米可能有限制？忘了</s>)</p>
-<p>本质上，安卓系统也是基于Linux内核的，因此也有这样的特殊用户存在。但是，出于对安全方面的考虑，厂商默认会将超级用户的权限隐藏，又或者是仅允许系统应用开启。<s>你也不想用户自己拿到Root权限瞎搞然后损坏软/硬件还得你来背锅吧，厂商？</s></p>
-<p><strong>获取Root权限，本质上，就是让手机用户可以直接接触到“超级用户”。</strong></p>
-<p>但是厂商并不会善罢甘休~~得罪了方丈还想跑？~~绝大部分厂商都对Root有着严格的限制。第一点便是解BL锁。这里会在<code>&#123;% post_link  %&#125;</code>里详细说明。</p>
-<h3 id="无尽的自由"><a class="markdownIt-Anchor" href="#无尽的自由"></a> “无尽”的自由</h3>
-<h3 id="root能干啥能玩的实在是太多了"><a class="markdownIt-Anchor" href="#root能干啥能玩的实在是太多了"></a> Root能干啥？能玩的实在是太多了！</h3>
-<p>最开始，人们Root无非是为了两点——卸载厂商自带的牛皮癣软件，或者是美化当时的系统(更换字体)。</p>
-<p>Root之后可以说赋予了安卓更多的玩法：你可以对应用界面进行深度个性化定制——某易云的广告啥的统统扔掉、直接听VIP音乐；又或者是在知乎/贴吧上冲浪时使用更多便捷的功能……</p>
-<p>再比如，博主喜欢听音乐，因此安装了蝰蛇音效——Viper4Android来进行细微的调音。说不定以后会出一篇蝰蛇音效调教指南呢~</p>
-<p>此外，博主在手机上还装了状态栏歌词、息屏歌词等模块。<s>无他，唯装逼尔</s>~</p>
-<div class="gallery">
-    <div class="fj-gallery  data" data-rowHeight="220" data-limit="10">
-    <span class="gallery-data">[{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_module(1)_2023-5-5_0017_wimu53x599.jpg","alt":""},{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_module(2)_2023-5-5_0018_irvnovb9ob.jpg","alt":""},{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_module(3)_2023-5-5_0018_1shvjdmsmi.jpg","alt":"magisk_module(3)"},{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_module(4)_2023-5-5_0018_bfct3aemsa.jpg","alt":"magisk_module(4)"},{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_module(5)_2023-5-5_0018_m82fh321bi.jpg","alt":"magisk_module(5)"}]</span>
-    </div>
-    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
-    </div>
-<p>放一张讲座的PPT照片：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_ppt_10_2023-5-5_0026_xcqoxq5hvq.PNG" alt="" /></p>
-<h2 id="传统root"><a class="markdownIt-Anchor" href="#传统root"></a> 传统Root？</h2>
-<p>当时，涌现出各种“一键Root”工具——360一键Root、KingRoot、百度一键Root……本质上，它们都是基于安卓内部的漏洞，通过修改系统文件的方式，达到“我Root我自己”的目的。但是，直接修改系统文件是留有风险的，而想三星S4这种整合了<a href="https://zh.wikipedia.org/wiki/%E4%B8%89%E6%98%9FKnox">Knox</a>熔断机制的，只要Root就会永久性丧失安全性(无法使用Samsung Pay等)。因此，传统的Root方法并不完美。Android 6.0之后，谷歌也意识到了这一点，开始给厂商施压。随着旧的漏洞被修复，一键Root工具也失去了用武之地。人们急需一种新的方法来获取Root权限。</p>
-<p>这里要讲一下Google在Android 6.0中新引入的机制——<a href="https://zh.wikipedia.org/wiki/SafetyNet_API">SafetyNet</a>.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/safetynet_2023-5-6_0112_ogiswnr3rq.png" alt="SafetyNet" /></p>
-<blockquote>
-<p>SafetyNet 提供了一组服务和 API 来保护您的应用免遭各种安全威胁，包括设备篡改、不良网址、潜在的有害应用以及虚假用户等。 ——Android 开发者</p>
-</blockquote>
-<p><em>“简单来说，SafetyNet 就是系统完整性的检测程序。通过 SafetyNet，系统会了解到其本身是否被修改 (例如补入 su 文件、修改系统文件、解锁 Bootloader、刷入第三方 ROM 等)。一旦未通过 SafetyNet，设备就无法通过验证，从而导致刷机的用户无法使用 Google Play、Netflix 等使用了 SafetyNet 功能的应用，也无法获得任何 OTA 更新。这是当时刷机玩家们最头痛的问题。”</em>—— <a href="https://zhuanlan.zhihu.com/p/455107261">Magisk | 开启 Android 玩机世界 - 知乎</a></p>
-<h2 id="magisk来咯"><a class="markdownIt-Anchor" href="#magisk来咯"></a> Magisk来咯！</h2>
-<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_logo_2023-4-26_0133_i380tmc1sq.png" alt="" /></p>
-<p>2015 年 10 月，Chainfire 在 XDA 论坛上发布了在 “无需修改系统文件获取 Root 权限” 的实验性方法。</p>
-<p>同年 11 月，受 Chainfire 的启发，国人开发者吴泓霖将此方法应用在了 HTC One (M8) 设备上 。这就是Magisk的雏形。</p>
-<p>在下一章，我们会讲一讲 <a href="/2023/05/06/magisk-3/" title="当我们在谈论Root时，我们究竟在谈论什么？③">传统Root和Magisk的区别</a>。</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-        <category>科普</category>
-      </categories>
-      <tags>
-        <tag>Magisk</tag>
-        <tag>安卓</tag>
-        <tag>Root</tag>
-        <tag>科普</tag>
-        <tag>刷机</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>当我们在谈论Root时，我们究竟在谈论什么？③</title>
     <url>/2023/05/06/magisk-3/</url>
     <content><![CDATA[<h2 id="都什么年代还在用传统root"><a class="markdownIt-Anchor" href="#都什么年代还在用传统root"></a> 都什么年代，还在用传统Root？</h2>
@@ -700,6 +647,59 @@
 </blockquote>
 <p>除此以外，正因为KernelSU工作在内核空间，它可以完美地隐藏Root。经过测试，绝大多数应用都检测不出KernelSU的root。</p>
 <p>更多的介绍可以在这里找到：<a href="https://mp.weixin.qq.com/s?__biz=MjM5Njg5ODU2NA==&amp;mid=2257499009&amp;idx=1&amp;sn=3cfce1ea7deb6e0e4f2ac170cffd7cc1">何为 root？</a></p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+        <category>科普</category>
+      </categories>
+      <tags>
+        <tag>Magisk</tag>
+        <tag>安卓</tag>
+        <tag>Root</tag>
+        <tag>科普</tag>
+        <tag>刷机</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>当我们在谈论Root时，我们究竟在谈论什么？②</title>
+    <url>/2023/04/26/magisk-2/</url>
+    <content><![CDATA[<h2 id="root的流行"><a class="markdownIt-Anchor" href="#root的流行"></a> Root的流行</h2>
+<p>2012年，应该是Root最流行的时候。一时间，各类“一键Root”应用层出不穷：360一键Root、KingRoot、百度一键Root……或许是对当时仍不完善的安卓4.0感到不满意，又或者是渴望对手机进行进一步美化——换字体、换主题、换系统……Root这个词仿佛走进了千家万户。当时，博主就把自己的Samsung i9300 Root了，还有父母的两台三星。说到底，什么是Root？</p>
+<img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/root-android_2023-5-5_1329_8s9d8b5y7c.jpg" style="zoom:25%;" />
+<h3 id="最高权限"><a class="markdownIt-Anchor" href="#最高权限"></a> 最高权限</h3>
+<p>类比Windows上的“Administrator”，Linux系统中也存在着最高权限的用户，称为<strong>根用户</strong>，翻译过来便是<em>root</em>。</p>
+<p>对操作系统中的内容进行处理，是需要权限的，涉及到的信息越重要，需要的权限级别就越高。手机中的「根权限」和电脑上的「管理员权限」是相似的，都是管理该系统的权限等级，只不过前者比后者级别更高。可以简单地认为：取得了<u>Root权限</u>就等于**<u>拥有了整个系统中至高无上的管理权</u><strong>，许多在原来「无权」的状态下不能做的事情，现在</strong>都可以做了**，例如等。</p>
+<p>(当时，似乎并没有“锁系统分区<code>/system/</code>”这一说，因此确实可以增删改手机中的系统文件。<s>小米可能有限制？忘了</s>)</p>
+<p>本质上，安卓系统也是基于Linux内核的，因此也有这样的特殊用户存在。但是，出于对安全方面的考虑，厂商默认会将超级用户的权限隐藏，又或者是仅允许系统应用开启。<s>你也不想用户自己拿到Root权限瞎搞然后损坏软/硬件还得你来背锅吧，厂商？</s></p>
+<p><strong>获取Root权限，本质上，就是让手机用户可以直接接触到“超级用户”。</strong></p>
+<p>但是厂商并不会善罢甘休~~得罪了方丈还想跑？~~绝大部分厂商都对Root有着严格的限制。第一点便是解BL锁。这里会在<code>&#123;% post_link  %&#125;</code>里详细说明。</p>
+<h3 id="无尽的自由"><a class="markdownIt-Anchor" href="#无尽的自由"></a> “无尽”的自由</h3>
+<h3 id="root能干啥能玩的实在是太多了"><a class="markdownIt-Anchor" href="#root能干啥能玩的实在是太多了"></a> Root能干啥？能玩的实在是太多了！</h3>
+<p>最开始，人们Root无非是为了两点——卸载厂商自带的牛皮癣软件，或者是美化当时的系统(更换字体)。</p>
+<p>Root之后可以说赋予了安卓更多的玩法：你可以对应用界面进行深度个性化定制——某易云的广告啥的统统扔掉、直接听VIP音乐；又或者是在知乎/贴吧上冲浪时使用更多便捷的功能……</p>
+<p>再比如，博主喜欢听音乐，因此安装了蝰蛇音效——Viper4Android来进行细微的调音。说不定以后会出一篇蝰蛇音效调教指南呢~</p>
+<p>此外，博主在手机上还装了状态栏歌词、息屏歌词等模块。<s>无他，唯装逼尔</s>~</p>
+<div class="gallery">
+    <div class="fj-gallery  data" data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_module(1)_2023-5-5_0017_wimu53x599.jpg","alt":""},{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_module(2)_2023-5-5_0018_irvnovb9ob.jpg","alt":""},{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_module(3)_2023-5-5_0018_1shvjdmsmi.jpg","alt":"magisk_module(3)"},{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_module(4)_2023-5-5_0018_bfct3aemsa.jpg","alt":"magisk_module(4)"},{"url":"https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_module(5)_2023-5-5_0018_m82fh321bi.jpg","alt":"magisk_module(5)"}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<p>放一张讲座的PPT照片：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_ppt_10_2023-5-5_0026_xcqoxq5hvq.PNG" alt="" /></p>
+<h2 id="传统root"><a class="markdownIt-Anchor" href="#传统root"></a> 传统Root？</h2>
+<p>当时，涌现出各种“一键Root”工具——360一键Root、KingRoot、百度一键Root……本质上，它们都是基于安卓内部的漏洞，通过修改系统文件的方式，达到“我Root我自己”的目的。但是，直接修改系统文件是留有风险的，而想三星S4这种整合了<a href="https://zh.wikipedia.org/wiki/%E4%B8%89%E6%98%9FKnox">Knox</a>熔断机制的，只要Root就会永久性丧失安全性(无法使用Samsung Pay等)。因此，传统的Root方法并不完美。Android 6.0之后，谷歌也意识到了这一点，开始给厂商施压。随着旧的漏洞被修复，一键Root工具也失去了用武之地。人们急需一种新的方法来获取Root权限。</p>
+<p>这里要讲一下Google在Android 6.0中新引入的机制——<a href="https://zh.wikipedia.org/wiki/SafetyNet_API">SafetyNet</a>.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/safetynet_2023-5-6_0112_ogiswnr3rq.png" alt="SafetyNet" /></p>
+<blockquote>
+<p>SafetyNet 提供了一组服务和 API 来保护您的应用免遭各种安全威胁，包括设备篡改、不良网址、潜在的有害应用以及虚假用户等。 ——Android 开发者</p>
+</blockquote>
+<p><em>“简单来说，SafetyNet 就是系统完整性的检测程序。通过 SafetyNet，系统会了解到其本身是否被修改 (例如补入 su 文件、修改系统文件、解锁 Bootloader、刷入第三方 ROM 等)。一旦未通过 SafetyNet，设备就无法通过验证，从而导致刷机的用户无法使用 Google Play、Netflix 等使用了 SafetyNet 功能的应用，也无法获得任何 OTA 更新。这是当时刷机玩家们最头痛的问题。”</em>—— <a href="https://zhuanlan.zhihu.com/p/455107261">Magisk | 开启 Android 玩机世界 - 知乎</a></p>
+<h2 id="magisk来咯"><a class="markdownIt-Anchor" href="#magisk来咯"></a> Magisk来咯！</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/magisk_logo_2023-4-26_0133_i380tmc1sq.png" alt="" /></p>
+<p>2015 年 10 月，Chainfire 在 XDA 论坛上发布了在 “无需修改系统文件获取 Root 权限” 的实验性方法。</p>
+<p>同年 11 月，受 Chainfire 的启发，国人开发者吴泓霖将此方法应用在了 HTC One (M8) 设备上 。这就是Magisk的雏形。</p>
+<p>在下一章，我们会讲一讲 <a href="/2023/05/06/magisk-3/" title="当我们在谈论Root时，我们究竟在谈论什么？③">传统Root和Magisk的区别</a>。</p>
 ]]></content>
       <categories>
         <category>随笔</category>
@@ -794,6 +794,20 @@
       </tags>
   </entry>
   <entry>
+    <title>启动WSL提示</title>
+    <url>/2023/05/04/wsl-error1/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>踩坑</tag>
+        <tag>WSL</tag>
+        <tag>子系统</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>解决启动Vidado时的临时目录“读写无权限”问题</title>
     <url>/2023/04/22/vivado-problem/</url>
     <content><![CDATA[<p>数字电路实验需要用到AMD家的<strong>Vivado</strong>，安装可是费了一般功夫。去官网上下载的包全都是在线安装版，离线安装板又是镜像合集（塞了各种系统的安装包）<s>差评</s><br />
@@ -840,20 +854,6 @@
       <tags>
         <tag>彻底疯狂</tag>
         <tag>大学生</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>启动WSL提示</title>
-    <url>/2023/05/04/wsl-error1/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>踩坑</tag>
-        <tag>WSL</tag>
-        <tag>子系统</tag>
-        <tag>Linux</tag>
       </tags>
   </entry>
 </search>
