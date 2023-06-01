@@ -1055,6 +1055,10 @@
 <li>反应后的产物从刻蚀表面扩散到溶液中，并随溶液排出。在这三个步骤中，一般进行最慢的是反应物与被刻蚀薄膜反应的步骤，也就是说，步骤的进行速率即是刻蚀速率。</li>
 </ol>
 <p>优点：对特定薄膜材料的刻蚀速率远远大于对其他材料的刻蚀速率，从而提高刻蚀的选择性。</p>
+<h3 id="湿法刻蚀设备">湿法刻蚀设备</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/Zxis233/images@main/img/image-20230601192338604_2023-6-1_1924_.ru8j7chib.png" alt="湿法刻蚀工艺装置结构示意图"></p>
+<div class="note info flat"><p>各刻蚀槽气压相等，且保持为负压，目的是防止刻蚀液雾进入洁净房。</p>
+</div>
 <h2 id="干法刻蚀">干法刻蚀</h2>
 <p>由于湿法刻蚀的化学反应是各向同性的，因而位于光刻胶边缘下面的薄膜材料就不可避免地遭到刻蚀，这就使得湿法刻蚀无法满足ULSI工艺对加工精细线条的要求。</p>
 <p>所以相对于<strong>各向同性</strong>的湿法刻蚀，<strong>各向异性</strong>的干法刻蚀就成为了当前集成电路技术中刻蚀工艺的主流。</p>
@@ -1082,10 +1086,17 @@
 <tr>
 <td>干法刻蚀</td>
 <td>保真度好，图形分辨率高<br />清洁性好,气态生成物被抽出<br />刻蚀剖面各向异性，具有非常好的侧壁剖面控制<br />最小的光刻胶脱落/黏附问题</td>
-<td>设备复杂<br />选择比不如湿法</td>
+<td>设备复杂<br />选择比<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>不如湿法</td>
 </tr>
 </tbody>
 </table>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>刻蚀选择比，指两种不同材料在腐蚀过程中被腐蚀的速率比。 <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
 ]]></content>
       <categories>
         <category>学习</category>
