@@ -24,7 +24,6 @@
 ]]></content>
       <categories>
         <category>技术分享</category>
-        <category>单片机</category>
       </categories>
       <tags>
         <tag>Arduino</tag>
@@ -320,6 +319,10 @@
 </div></div><div class='timeline-item-content'><p>MIPS第一话：比较烦的指令集和控制信号</p>
 </div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p><a href="/2024/06/16/coae-p10/" title="计算机原理与嵌入式系统笔记：第十篇">第十篇</a></p>
 </div></div><div class='timeline-item-content'><p>MIPS第二话：非常烦的流水线和竞争冒险</p>
+</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p><a href="/2024/06/17/coae-p11/" title="计算机原理与嵌入式系统笔记：第十一篇">第十一篇</a></p>
+</div></div><div class='timeline-item-content'><p>总线、存储与IO</p>
+</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p><a href="/2024/06/18/coae-p12/" title="计算机原理与嵌入式系统笔记：第十二篇">第十二篇</a></p>
+</div></div><div class='timeline-item-content'><p>嵌入式程序设计与分析</p>
 </div></div></div>
 ]]></content>
       <categories>
@@ -6870,8 +6873,8 @@ P_{dynamic}=\lambda C{V_{DD}}^2f
 <h3 id="直接存储器访问与总线主控器">直接存储器访问与总线主控器</h3>
 <p><strong>直接存储器访问（direct memory access, DMA）<strong>是一种</strong>不由CPU控制的总线读写操作</strong>。DMA传输由DMA控制器控制，它从CPU请求总线控制，得到控制权后，DMA控制器直接在设备和存储器之间执行读写操作。</p>
 <ul>
-<li>**总线请求（bus request） **是CPU的输入信号，通过它DMA控制器请求总线控制权。</li>
-<li>**总线授权（bus grant） **信号表示总线已经授权给DMA控制器。</li>
+<li><strong>总线请求（bus request）</strong> 是CPU的输入信号，通过它DMA控制器请求总线控制权。</li>
+<li><strong>总线授权（bus grant）</strong> 信号表示总线已经授权给DMA控制器。</li>
 </ul>
 <p>能够自己启动总线传输的设备叫<strong>总线主控器（bus master）</strong>。</p>
 <p><strong>默认情况下CPU是总线控制器，由CPU来启动DMA传输。</strong> DMA控制器也可以申请控制总线，使用总线请求和总线授权两个信号来获得总线控制权，过程类似四周期握手协议。CPU将总线控制权授予DMA控制器之前，将完成所有未完成的总线事务。在DMA工作期间，CPU不使用总线，停止驱动总线信号。<strong>只要DMA控制器成为总线控制器，它就拥有对所有总线信号的控制权。</strong></p>
@@ -7068,6 +7071,113 @@ P_{dynamic}=\lambda C{V_{DD}}^2f
 <p>T’ = (4x1+4)xN/BW = 93312000 cycles，则最低时钟频率为93312000</p>
 </div></details>
 <p>下一章会开始讲程序的设计与分析，内容比较少</p>
+]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+        <tag>复习</tag>
+        <tag>嵌入式</tag>
+        <tag>ARM</tag>
+        <tag>汇编</tag>
+        <tag>RISC-V</tag>
+        <tag>计算机原理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计算机原理与嵌入式系统笔记：第十二篇</title>
+    <url>/2024/06/18/coae-p12/</url>
+    <content><![CDATA[<h2 id="程序组件与程序模型">程序组件与程序模型</h2>
+<ul>
+<li>嵌入式软件常用的三个组件结构：
+<ul>
+<li><strong>状态机（State machine）</strong></li>
+<li><strong>循环缓冲区（Circular buffer）</strong></li>
+<li><strong>队列（Queue）</strong></li>
+</ul>
+</li>
+</ul>
+<p>状态机适合于交互式系统，循环缓冲区和队列应用于数字信号处理系统。</p>
+<h3 id="状态机">状态机</h3>
+<p>有限状态机是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型，分为两种：</p>
+<ul>
+<li><strong>Moore机</strong>：输出只由当前状态确定</li>
+<li><strong>Mealy机</strong>：输出依赖于当前状态和输入</li>
+</ul>
+<h3 id="循环缓冲区">循环缓冲区</h3>
+<p>流数据通常用于信号处理领域的程序设计中，数据定期传送，新数据按规律到达，且每个数据生命周期有限，需要程序立即处理。<strong>循环缓冲区</strong>是便于程序高效处理流数据的一种数据结构。<strong>数据窗口尺寸不变，只是随时间滑动。</strong></p>
+<p><strong>索引指向循环缓冲区的下一个被替换的数据位置（input）和当前使用的数据位置（use）。</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> CMAX 6  <span class="comment">/* filter order */</span></span></span><br><span class="line"><span class="type">int</span> circ[CMAX]; <span class="comment">/* circular buffer */</span></span><br><span class="line"><span class="type">int</span> pos;        <span class="comment">/* position of current sample */</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">circ_update</span><span class="params">(<span class="type">int</span> xnew)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* compute the new head value with wraparound; the pos</span></span><br><span class="line"><span class="comment">    pointer moves from 0 to CMAX-1 */</span></span><br><span class="line">    pos       = ((pos == CMAX - <span class="number">1</span>) ? <span class="number">0</span> : (pos + <span class="number">1</span>));</span><br><span class="line">    <span class="comment">/* insert the new value at the new head */</span></span><br><span class="line">    circ[pos] = xnew;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">circ_init</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; CMAX; i++) <span class="comment">/* set values to 0 */</span></span><br><span class="line">        circ[i] = <span class="number">0</span>;</span><br><span class="line">    pos = CMAX - <span class="number">1</span>;            <span class="comment">/* start at tail so first element will be at 0 */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">circ_get</span><span class="params">(<span class="type">int</span> i)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> ii;</span><br><span class="line">    <span class="comment">/* compute the buffer position */</span></span><br><span class="line">    <span class="keyword">if</span> (pos &gt;= i)</span><br><span class="line">        ii = (pos - i) % CMAX;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        ii = (CMAX + pos - i) % CMAX;</span><br><span class="line">    <span class="keyword">return</span> circ[ii]; <span class="comment">/* return the value */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这段代码实现了一个循环缓冲区（circular buffer）的基本操作。循环缓冲区是一种数据结构，它在内存中形成一个循环，当数据到达缓冲区的末尾时，下一个数据将回到缓冲区的开始。</p>
+<p>首先，<code>#define CMAX 6</code>定义了缓冲区的大小为6。<code>int circ[CMAX];</code>声明了一个名为<code>circ</code>的整数数组，用作循环缓冲区。<code>int pos;</code>声明了一个名为<code>pos</code>的整数，用于跟踪当前样本的位置。</p>
+<p><code>void circ_update(int xnew)</code>函数用于更新缓冲区。它首先计算新的头部值，并处理回绕（wraparound）。如果<code>pos</code>等于<code>CMAX - 1</code>（即，已经到达缓冲区的末尾），则<code>pos</code>被设置为0；否则，<code>pos</code>增加1。然后，新值<code>xnew</code>被插入到新的头部位置。</p>
+<p><code>void circ_init()</code>函数用于初始化缓冲区。它通过一个for循环将<code>circ</code>数组的所有元素设置为0，然后将<code>pos</code>设置为<code>CMAX - 1</code>，这样第一个元素将在位置0。</p>
+<p><code>int circ_get(int i)</code>函数用于获取缓冲区中的值。它首先计算缓冲区的位置。如果<code>pos</code>大于或等于<code>i</code>，则位置<code>ii</code>为<code>(pos - i) % CMAX</code>；否则，位置<code>ii</code>为<code>(CMAX + pos - i) % CMAX</code>。然后，返回<code>circ[ii]</code>的值。</p>
+</blockquote>
+<h4 id="循环缓冲区实现FIR">循环缓冲区实现FIR</h4>
+<p>FIR滤波器的功能代码：<code>for (i=0, y=0; i&lt;N; i++) y += x[i]*b[i];</code></p>
+<ul>
+<li>随时间改变的输入信号x存储在循环缓冲区中</li>
+<li>不随时间改变的信号b存储在标准数组中</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fir</span><span class="params">(<span class="type">int</span> xnew)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* given a new sample value, update the queue and</span></span><br><span class="line"><span class="comment">    compute the filter output */</span></span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> result;        <span class="comment">/* holds the filter output */</span></span><br><span class="line">    circ_update(xnew); <span class="comment">/* put the new value in */</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>, result = <span class="number">0</span>; i &lt; CMAX; i++)</span><br><span class="line">        result += b[i] * circ_get(i);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* circ_get(0)表示得到循环缓冲区中的最新数据 */</span></span><br></pre></td></tr></table></figure>
+<h3 id="队列">队列</h3>
+<p>队列也应用于信号处理领域的程序设计中。<strong>与元素数量固定的循环缓冲区相比，队列中的元素数量是可变的。</strong></p>
+<h4 id="基于数组的队列">基于数组的队列</h4>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> Q_SIZE 5            <span class="comment">/* your queue size may vary */</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> Q_MAX  (Q_SIZE - 1) <span class="comment">/* this is the maximum index \</span></span></span><br><span class="line"><span class="comment"><span class="meta">   value into the array */</span></span></span><br><span class="line"><span class="type">int</span> q[Q_SIZE];              <span class="comment">/* the array for our queue */</span></span><br><span class="line"><span class="type">int</span> head, tail;             <span class="comment">/* indexes for the current queue head and tail */</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">queue_init</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* initialize the queue data structure */</span></span><br><span class="line">    head = <span class="number">0</span>;</span><br><span class="line">    tail = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">enqueue</span><span class="params">(<span class="type">int</span> val)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (((tail + <span class="number">1</span>) % Q_SIZE) == head)</span><br><span class="line">        error(<span class="string">&quot;enqueue onto full queue&quot;</span>, tail);</span><br><span class="line">    q[tail] = val;</span><br><span class="line">    <span class="comment">/* update the tail */</span></span><br><span class="line">    <span class="keyword">if</span> (tail == Q_MAX)</span><br><span class="line">        tail = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        tail++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 为区分head=tail时的空满判断，最多写满Q_SIZE-1个单元</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">dequeue</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> returnval;</span><br><span class="line">    <span class="keyword">if</span> (head == tail)</span><br><span class="line">        error(<span class="string">&quot;dequeue from empty queue&quot;</span>, head);</span><br><span class="line">    returnval = q[head];</span><br><span class="line">    <span class="comment">/* update the head */</span></span><br><span class="line">    <span class="keyword">if</span> (head == Q_MAX)</span><br><span class="line">        head = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        head++;</span><br><span class="line">    <span class="keyword">return</span> returnval;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这段代码实现了一个循环队列（circular queue）的基本操作。循环队列是一种线性数据结构，它在内存中形成一个循环，当数据到达队列的末尾时，下一个数据将回到队列的开始。</p>
+<p>首先，<code>#define Q_SIZE 5</code>定义了队列的大小为5。<code>#define Q_MAX (Q_SIZE - 1)</code>定义了队列的最大索引值。<code>int q[Q_SIZE];</code>声明了一个名为<code>q</code>的整数数组，用作队列。<code>int head, tail;</code>声明了两个名为<code>head</code>和<code>tail</code>的整数，用于跟踪队列的头部和尾部。</p>
+<p><code>void queue_init()</code>函数用于初始化队列。它将<code>head</code>和<code>tail</code>都设置为0。</p>
+<p><code>void enqueue(int val)</code>函数用于将一个值添加到队列的尾部。它首先检查队列是否已满，如果<code>((tail + 1) % Q_SIZE) == head</code>，则队列已满，调用<code>error</code>函数报错。然后，将值<code>val</code>添加到队列的尾部。最后，更新<code>tail</code>的值，如果<code>tail</code>等于<code>Q_MAX</code>，则<code>tail</code>被设置为0；否则，<code>tail</code>增加1。</p>
+<p><code>int dequeue()</code>函数用于从队列的头部删除一个值。它首先检查队列是否为空，如果<code>head == tail</code>，则队列为空，调用<code>error</code>函数报错。然后，从队列的头部取出一个值。最后，更新<code>head</code>的值，如果<code>head</code>等于<code>Q_MAX</code>，则<code>head</code>被设置为0；否则，<code>head</code>增加1。函数返回取出的值。</p>
+</blockquote>
+<h3 id="程序模型">程序模型</h3>
+<p>源代码并不是好的程序表示方式，我们使用程序模型来让程序变得更加直观：</p>
+<p>程序模型就是<strong>控制/数据流图（ Control/Data Flow Graph, CDFG ）</strong>。</p>
+<h4 id="数据流图">数据流图</h4>
+<p>数据流图（data flow graph, DFG）是不包含条件判断的程序模型。它不能表示控制，因为在高级语言中，没有条件判断相关的代码。</p>
+<blockquote>
+<p>上网查了下，只查到数据流图不能表示控制。后面一句未找到出处。</p>
+</blockquote>
+<p>基本语句块是一个无条件式的代码段，也就是说代码只有一个入口和一个出口。，程序从入口处进入该基本语句块并执行全部语句。</p>
+<p><strong>单赋值形式</strong>：变量在赋值语句左侧仅出现一次。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">x = a + b;	|  x = a + b;</span><br><span class="line">y = c - d;	|  y = c - d;</span><br><span class="line">z = x * y;	|  z = x * y;</span><br><span class="line">y = b + d;	|  y1 = b + d;</span><br><span class="line">基本语句块	   单赋值形式</span><br></pre></td></tr></table></figure>
+<div class="note info flat"><p>单赋值形式不会在DFG中形成环（比如包含y的变量值和计算y的运算），保持数据流图是<strong>无环图</strong>在很多图的分析方法中很重要。</p>
+<p>数据流图使代码中的操作执行顺序不明显,优势是可以改变执行顺序，优化流水线或缓存冲突。</p>
+</div>
+<h4 id="控制-数据流图">控制/数据流图</h4>
+<p><strong>控制/数据流图（CDFG）</strong> 用数据流图作为一个基础元素，添加描述控制的结构。</p>
+<p>基本的CDFG有两种节点：</p>
+<ul>
+<li>判定节点：描述控制逻辑</li>
+<li>数据流节点：包括一个完整的表示基本语句块的数据流图</li>
+</ul>
+<p>判定节点用菱形等节点表示，节点的判定条件由标签给出，边被标记为评估判定条件的可能结果。</p>
+<p>数据流节点用矩形节点表示基本语句块，为了简便，C代码中的基本语句块被表示为函数调用的形式。</p>
+<div class="gallery">
+    <div class="fj-gallery  data" data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://bp.esing.dev/https://raw.githubusercontent.com/Zxis233/images/main/img/image-20240618003849978_2024-6-18_0038_9zym8xg6vn.png","alt":"分支的CDFG"},{"url":"https://bp.esing.dev/https://raw.githubusercontent.com/Zxis233/images/main/img/image-20240618003902177_2024-6-18_0039_x94cs5rntn.png","alt":"循环的CDFG"}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<h2 id="程序编译方法">程序编译方法</h2>
+<h3 id="汇编、连接和装载">汇编、连接和装载</h3>
+<p>汇编和连接是编译处理过程的最后几步:</p>
+<img src="https://bp.esing.dev/https://raw.githubusercontent.com/Zxis233/images/main/img/image-20240618004855362_2024-6-18_0048_g007661m0f.png" alt="从编译到装载的程序创建过程" style="zoom:50%;" />
+<p>汇编程序的地址有两种类型：</p>
+<ul>
+<li>绝对地址（absolute addresses）是汇编语言程序在内存中的地址；</li>
+<li>相对地址（relative addresses）是相对于模块内部的起始地址。</li>
+</ul>
+<p><strong>连接器负责把相对地址译成绝对地址。</strong></p>
+<h3 id="标记的处理">标记的处理</h3>
+<p>标记处理要求汇编器对汇编源代码进行<strong>两遍扫描</strong>。第一遍扫描处理决定每个标记的地址，第二遍扫描处理用第一遍计算的标记值汇编指令。</p>
+<p>在第一遍扫描过程中，会创建<strong>符号表（symbol table）</strong>，在扫描过程中，<strong>程序位置计数器（Program Location Counter，PLC）</strong> 为标签分配存储位置。</p>
+<p>伪操作<code>ORG</code>语句可以指定程序的起始地址位置，且<strong>这个语句不占据PLC</strong>。</p>
+<p><img src="https://bp.esing.dev/https://raw.githubusercontent.com/Zxis233/images/main/img/image-20240618005711959_2024-6-18_0057_puop2nhcvk.png" alt="符号表的生成"></p>
 ]]></content>
       <categories>
         <category>学习</category>
