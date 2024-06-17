@@ -1532,6 +1532,7 @@ img[data-lazy-src].error {
 .img-alt {
   margin: -10px 0 10px;
   color: #858585;
+  font-size: 0.9em;
 }
 .img-alt:hover {
   text-decoration: none !important;
@@ -1690,7 +1691,7 @@ figure.highlight pre .javascript .function {
 #article-container code {
   padding: 2px 4px;
   background: rgba(27,31,35,0.05);
-  color: #f47466;
+  color: #e60050;
   border-radius: 4px;
 }
 #article-container pre {
