@@ -305,7 +305,7 @@
 <h2 id="目录">目录</h2>
 <div class="timeline undefined"><div class='timeline-item headline'><div class='timeline-item-title'><div class='item-circle'><p>目录</p>
 </div></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p><a href="/2024/04/22/coae-p1/" title="计算机原理与嵌入式系统笔记：第一篇">第一篇</a></p>
-</div></div><div class='timeline-item-content'><p>处理器和MU0</p>
+</div></div><div class='timeline-item-content'><p>绪论、处理器和MU0</p>
 </div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p><a href="/2024/04/22/coae-p2/" title="计算机原理与嵌入式系统笔记：第二篇">第二篇</a></p>
 </div></div><div class='timeline-item-content'><p>ARM第一话：处理器模式、CPSR和大小端</p>
 </div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p><a href="/2024/04/22/coae-p3/" title="计算机原理与嵌入式系统笔记：第三篇">第三篇</a></p>
@@ -631,7 +631,51 @@
   <entry>
     <title>计算机原理与嵌入式系统笔记：第一篇</title>
     <url>/2024/04/22/coae-p1/</url>
-    <content><![CDATA[<h2 id="处理器">处理器</h2>
+    <content><![CDATA[<h2 id="绪论">绪论</h2>
+<div class="note warning flat"><p>记一记嵌入式系统的设计步骤</p>
+</div>
+<h3 id="嵌入式系统本身引起的设计困难">嵌入式系统本身引起的设计困难</h3>
+<ul>
+<li>测试的复杂性
+<ul>
+<li>怎么测试系统的实时性</li>
+<li>怎么使用真实数据进行测试</li>
+</ul>
+</li>
+<li>有限的可观察性和可控性
+<ul>
+<li>嵌入式系统通常不具有键盘和屏幕</li>
+<li>难以通过观测内部总线的电信号来了解系统内部运行过程</li>
+</ul>
+</li>
+<li>受限的开发环境
+<ul>
+<li>需要专门的模拟仿真软件</li>
+</ul>
+</li>
+</ul>
+<h3 id="嵌入式计算的性能">嵌入式计算的性能</h3>
+<p>在一般的计算中，性能都是指平均情况。嵌入式计算的核心是实时计算，在实时系统中，性能必须满足截止时限。</p>
+<h3 id="嵌入式系统的设计步骤">嵌入式系统的设计步骤</h3>
+<img src="https://bp.esing.dev/https://raw.githubusercontent.com/Zxis233/images/main/img/image-20240618165926908_2024-6-18_1659_dflkqlan0y.png" alt="嵌入式系统的设计步骤" style="zoom:50%;" />
+<h4 id="需求分析">需求分析</h4>
+<p><strong>需求分为功能性和非功能性两部分</strong></p>
+<ul>
+<li>功能性需求:
+<ul>
+<li>系统的输入，以及相关输入的输出</li>
+</ul>
+</li>
+<li>非功能性需求:
+<ul>
+<li>性能：软件性能度量和满足特定操作的硬截止时限</li>
+<li>成本：包括制造成本和一次性工程费用（NRE）</li>
+<li>尺寸和重量：对于手持式设备需要严格约束</li>
+<li>功耗：对于电池供电系统的重要因素</li>
+</ul>
+</li>
+</ul>
+<h2 id="处理器">处理器</h2>
 <h3 id="什么是处理器？">什么是处理器？</h3>
 <ul>
 <li>通用处理器是一个执行存储器中指令的有限状态机(FSM)</li>
