@@ -2,9 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.esing.dev/2024/10/04/dcmos-p5/</loc>
+    
+    <lastmod>2024-10-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.esing.dev/2024/10/04/acmos-shortanswer-question/</loc>
     
-    <lastmod>2024-10-04</lastmod>
+    <lastmod>2024-10-05</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -13,16 +22,16 @@
   <url>
     <loc>https://blog.esing.dev/2024/10/04/dcmos-shortanswer-question/</loc>
     
-    <lastmod>2024-10-04</lastmod>
+    <lastmod>2024-10-05</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://blog.esing.dev/2024/10/04/dcmos-p5/</loc>
+    <loc>https://blog.esing.dev/2024/08/24/dcmos-p1/</loc>
     
-    <lastmod>2024-10-04</lastmod>
+    <lastmod>2024-10-05</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -696,15 +705,6 @@
   
   <url>
     <loc>https://blog.esing.dev/2024/06/13/coae-p9/</loc>
-    
-    <lastmod>2024-08-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.esing.dev/2024/08/24/dcmos-p1/</loc>
     
     <lastmod>2024-08-29</lastmod>
     
