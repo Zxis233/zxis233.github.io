@@ -2,9 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.esing.dev/2023/05/27/ict-c3/</loc>
+    <loc>https://blog.esing.dev/2024/10/06/index-for-study/</loc>
     
-    <lastmod>2024-10-05</lastmod>
+    <lastmod>2024-10-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.esing.dev/2024/04/17/dsd-p1/</loc>
+    
+    <lastmod>2024-10-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.esing.dev/2024/08/24/dcmos-p1/</loc>
+    
+    <lastmod>2024-10-06</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -12,6 +30,51 @@
   
   <url>
     <loc>https://blog.esing.dev/2024/10/04/dcmos-p5/</loc>
+    
+    <lastmod>2024-10-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.esing.dev/2024/09/15/dcmos-p4/</loc>
+    
+    <lastmod>2024-10-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.esing.dev/2024/10/04/dcmos-shortanswer-question/</loc>
+    
+    <lastmod>2024-10-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.esing.dev/2024/09/05/dcmos-p3/</loc>
+    
+    <lastmod>2024-10-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.esing.dev/2024/08/16/dcmos-intro/</loc>
+    
+    <lastmod>2024-10-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.esing.dev/2023/05/27/ict-c3/</loc>
     
     <lastmod>2024-10-05</lastmod>
     
@@ -23,33 +86,6 @@
     <loc>https://blog.esing.dev/2024/10/04/acmos-shortanswer-question/</loc>
     
     <lastmod>2024-10-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.esing.dev/2024/10/04/dcmos-shortanswer-question/</loc>
-    
-    <lastmod>2024-10-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.esing.dev/2024/08/24/dcmos-p1/</loc>
-    
-    <lastmod>2024-10-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.esing.dev/2024/09/15/dcmos-p4/</loc>
-    
-    <lastmod>2024-10-04</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -93,15 +129,6 @@
   
   <url>
     <loc>https://blog.esing.dev/2024/09/19/coae-experiment/</loc>
-    
-    <lastmod>2024-10-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.esing.dev/2024/09/05/dcmos-p3/</loc>
     
     <lastmod>2024-10-02</lastmod>
     
@@ -669,24 +696,6 @@
   
   <url>
     <loc>https://blog.esing.dev/2024/04/20/dsd-p11/</loc>
-    
-    <lastmod>2024-08-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.esing.dev/2024/04/17/dsd-p1/</loc>
-    
-    <lastmod>2024-08-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.esing.dev/2024/08/16/dcmos-intro/</loc>
     
     <lastmod>2024-08-29</lastmod>
     
