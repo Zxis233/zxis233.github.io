@@ -414,6 +414,33 @@ V^{_{low\_v}}_{P,min} &amp;= V_b-V_{TH}\geq V_{OD1}+V_{GS2}-V_{TH}\\
 <p>共源共栅结构能屏蔽输出电压波动。</p>
 </div></details>
 </li>
+<li>
+<p>写出五管OTA的CMRR表达式。能否计算五管OTA的A<sub>CM-DM</sub>？若能，写出表达式；若不能，说明理由。</p>
+<details class="toggle" ><summary class="toggle-button" style="">答案</summary><div class="toggle-content"><p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>C</mi><mi>M</mi><mi>R</mi><mi>R</mi><mo>=</mo><mfrac><msub><mi>A</mi><mrow><mi>D</mi><mi>M</mi></mrow></msub><msub><mi>A</mi><mrow><mi>C</mi><mi>M</mi></mrow></msub></mfrac></mrow><annotation encoding="application/x-tex">CMRR=\frac{A_{DM}}{A_{CM}}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">CMRR</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1963em;vertical-align:-0.836em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">CM</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">D</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">M</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.836em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>不能，因为差动转单端输出的结构不存在A<sub>CM-DM</sub>。</p>
+</div></details>
+</li>
+<li>
+<p>五管OTA相对于电流源负载的全差动放大器，有哪些优点和缺点？各写出三点。</p>
+<details class="toggle" ><summary class="toggle-button" style="">答案</summary><div class="toggle-content"><ul>
+<li>优点：
+<ul>
+<li>输出工作点稳定，无需共模反馈</li>
+<li>偏置仅需要一个简单电流镜</li>
+<li>版图面积小</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>抗共模干扰能力更弱</li>
+<li>电源抑制比更低</li>
+<li>低电压下更难工作，因二极管连接型消耗更大的电压余度</li>
+</ul>
+</li>
+</ul>
+</div></details>
+</li>
 </ol>
 ]]></content>
       <categories>
@@ -11239,21 +11266,207 @@ c10,0,16.667,-5,20,-15 v-585 v0 v-585 c-2.667,-10,-9.667,-15,-21,-15
 c-10,0,-16.667,5,-20,15z M188 15 H145 v585 v0 v585 h43z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.35em;"><span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.0786em;"><span style="top:-2.3003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2963em;"><span style="top:-2.357em;margin-left:-0.2222em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mrel mtight">=</span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3567em;margin-left:-0.2222em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">DD</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1433em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.5em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mord mtight">3</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.85em;"><span style="top:-2.85em;"><span class="pstrut" style="height:3.2em;"></span><span style="width:0.333em;height:1.200em;"><svg xmlns="http://www.w3.org/2000/svg" width='0.333em' height='1.200em' viewBox='0 0 333 1200'><path d='M145 15 v585 v0 v585 c2.667,10,9.667,15,21,15
 c10,0,16.667,-5,20,-15 v-585 v0 v-585 c-2.667,-10,-9.667,-15,-21,-15
 c-10,0,-16.667,5,-20,15z M188 15 H145 v585 v0 v585 h43z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.35em;"><span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.0786em;"><span style="top:-2.3003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3567em;margin-left:-0.2222em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.07847em;">X</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1433em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.5em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.24em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
-<h2 id="同步动态电路">同步动态电路</h2>
+<h2 id="同步动态电路技术">同步动态电路技术</h2>
 <h3 id="耗尽型nMOS负载动态移位寄存器">耗尽型nMOS负载动态移位寄存器</h3>
-<img src="https://webp.esing.dev/img/image-20241017174219890_20241017_1742.png" alt="耗尽型nMOS负载动态移位寄存器" style="zoom:50%;" />
+<img src="https://webp.esing.dev/img/image-20241017174219890_20241017_1742.png" alt="耗尽型nMOS负载动态移位寄存器" style="zoom: 67%;" />
 <p>Phase1有效时，V<sub>in</sub>输入保存在C<sub>in1</sub>上，第一级反相器输出驱动C<sub>out1</sub>，第二级反相器输出值由寄生电容C<sub>in2</sub>上的值决定，对C<sub>out2</sub>充放电，并驱动Cin3，决定Vout。</p>
 <p>Phase2有效时，V<sub>in</sub>被断开，第一级反相器的输入为C<sub>in1</sub>上保持的值，输出驱动C<sub>out1</sub>，并改变C<sub>in2</sub>上的电压，第二级反相器输出值因此改变，对C<sub>out2</sub>充放电，Cin3保持上一次第二个反相器的输出，保持Vout不变。</p>
 <p>Phase1再次有效时，V<sub>in</sub>输入新的值，保存到C<sub>in1</sub>上，上一次写入的V<sub>in</sub>值被保存到C<sub>in2</sub>上，并传输到Vout。实现按照时钟控制将V<sub>in</sub>不断移位到C<sub>out1</sub>、C<sub>out2</sub>和Vout的功能。</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Vin</th>
+<th>Cin1</th>
+<th>Cout1</th>
+<th>Cin2</th>
+<th>Cout2</th>
+<th>Cin3</th>
+<th>Cout3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td rowspan="2" colspan="2">Vin1</td>
+<td colspan="2">-</td>
+<td rowspan="2" colspan="2">-</td>
+<td rowspan="3">-</td>
+</tr>
+<tr>
+<td>2</td>
+<td rowspan="2" colspan="2">nVin1</td>
+</tr>
+<tr>
+<td>1</td>
+<td rowspan="2" colspan="2">Vin2</td>
+<td rowspan="2" colspan="2">Vin1</td>
+</tr>
+<tr>
+<td>2</td>
+<td rowspan="2" colspan="2">nVin2</td>
+<td rowspan="2">nVin1</td>
+</tr>
+<tr>
+<td>1</td>
+<td rowspan="2" colspan="2">Vin3</td>
+<td rowspan="2" colspan="2">Vin2</td>
+</tr>
+<tr>
+<td>2</td>
+<td rowspan="2" colspan="2">nVin3</td>
+<td rowspan="2">nVin2</td>
+</tr>
+<tr>
+<td>1</td>
+<td rowspan="2" colspan="2">Vin4</td>
+<td rowspan="2" colspan="2">Vin3</td>
+</tr>
+<tr>
+<td>2</td>
+<td rowspan="2" colspan="2">nVin4</td>
+<td>nVin3</td>
+</tr>
+<tr>
+<td>1</td>
+<td colspan="2">Vin5</td>
+<td colspan="2">Vin4</td>
+<td>nVin4</td>
+</tr>
+</tbody>
+</table>
 <h3 id="增强型nMOS负载动态移位寄存器">增强型nMOS负载动态移位寄存器</h3>
-<img src="https://webp.esing.dev/img/image-20241017174440515_20241017_1744.png" alt="第一种结构" style="zoom:50%;" />
+<img src="https://webp.esing.dev/img/image-20241017174440515_20241017_1744.png" alt="第一种结构" style="zoom: 67%;" />
 <p>Phase1有效时，V<sub>in</sub>传递到C<sub>in1</sub>上，Phase2有效时，负载晶体管导通，第一级反相器输出有效值传递到C<sub>in2</sub>。当Phase1再次有效时，第二级反相器输出有效值，传递到Cin3。同时，第一级输入一个新的V<sub>in</sub>到C<sub>in1</sub>。</p>
 <p>Phase2有效时，如果C<sub>in1</sub>上是高电平，第一级反相器的负载管和驱动管共同决定输出的VOL，VOL的大小取决于驱动管和负载管的尺寸比例，所以这是有比逻辑 (ratio logic)。如果C<sub>in1</sub>上是低电平，则C<sub>out1</sub>为高电平，C<sub>in2</sub>上是V<sub>DD</sub>-V<sub>TN</sub>。</p>
-<img src="https://webp.esing.dev/img/image-20241017174612840_20241017_1746.png" alt="第二种结构" style="zoom:50%;" />
+<img src="https://webp.esing.dev/img/image-20241017174612840_20241017_1746.png" alt="第二种结构" style="zoom: 67%;" />
 <p>Phase1有效时，V<sub>in</sub>传递到C<sub>in1</sub>上，第一级反相器输出有效结果；Phase2有效时，负载晶体管截止，输出C<sub>out1</sub>的结果传递到C<sub>in2</sub>，第二级反相器输出驱动C<sub>out2</sub>。当Phase1再次有效时，C<sub>out2</sub>上保存的结果传递到Cin3。同时，第一级输入一个新的V<sub>in</sub>到C<sub>in1</sub>。</p>
 <p>Phase2有效时，如果C<sub>in1</sub>上是高电平，第一级反相器的驱动管将输出V<sub>out1</sub>下拉到地，如果C<sub>in1</sub>上是低电平，则C<sub>out1</sub>上是高电平，所以这是<strong>无比逻辑</strong>，<strong>输出与负载管和驱动管的尺寸无关</strong>，为无比例动态电路(ratioless logic)。</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>V<sub>in</sub></th>
+<th>Cin1</th>
+<th>Cout1</th>
+<th>Cin2</th>
+<th>Cout2</th>
+<th>Cin3</th>
+<th>Cout3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td rowspan="2" colspan="2">Vin1</td>
+<td rowspan="2">nVin1</td>
+<td colspan="2">-</td>
+<td rowspan="2" colspan="2">-</td>
+</tr>
+<tr>
+<td>2</td>
+<td rowspan="2">nVin1</td>
+<td rowspan="2">Vin1</td>
+</tr>
+<tr>
+<td>1</td>
+<td rowspan="2" colspan="2">Vin2</td>
+<td rowspan="2">nVin2</td>
+<td rowspan="2">Vin1</td>
+<td rowspan="2">nVin1</td>
+</tr>
+<tr>
+<td>2</td>
+<td rowspan="2">nVin2</td>
+<td rowspan="2">Vin2</td>
+</tr>
+<tr>
+<td>1</td>
+<td rowspan="2" colspan="2">Vin3</td>
+<td rowspan="2">nVin3</td>
+<td rowspan="2">Vin2</td>
+<td rowspan="2">nVin2</td>
+</tr>
+<tr>
+<td>2</td>
+<td rowspan="2">nVin3</td>
+<td rowspan="2">Vin3</td>
+</tr>
+<tr>
+<td>1</td>
+<td rowspan="2" colspan="2">Vin4</td>
+<td rowspan="2">nVin4</td>
+<td rowspan="2">Vin3</td>
+<td rowspan="2">nVin3</td>
+</tr>
+<tr>
+<td>2</td>
+<td rowspan="2">nVin4</td>
+<td rowspan="2">Vin4</td>
+</tr>
+<tr>
+<td>1</td>
+<td colspan="2">Vin5</td>
+<td>nVin5</td>
+<td>Vin4</td>
+<td>nVin4</td>
+</tr>
+</tbody>
+</table>
 <div class="note info flat"><p>Phase2导通将使C<sub>out1</sub>上的高电平和C<sub>in2</sub>会发生<strong>电荷分享</strong>。为了保证高电平输出正确，设计中要使C<sub>out</sub>/C<sub>in</sub>足够大。</p>
 </div>
+<h3 id="电荷分享效应">电荷分享效应</h3>
+<img src="https://webp.esing.dev/img/image-20241019180520904_20241019_1805.png" alt="电荷分享效应" style="zoom: 67%;" />
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo stretchy="false">(</mo><msub><mi>V</mi><mrow><mi>D</mi><mi>D</mi></mrow></msub><mo>−</mo><msub><mi>V</mi><mrow><mi>T</mi><mi>n</mi></mrow></msub><mo stretchy="false">)</mo><msub><mi>C</mi><mrow><mi>o</mi><mi>u</mi><mi>t</mi><mn>1</mn></mrow></msub><mo>+</mo><mn>0</mn><mo>⋅</mo><msub><mi>C</mi><mrow><mi>i</mi><mi>n</mi><mn>2</mn></mrow></msub><mo>=</mo><msub><mi>V</mi><mi>X</mi></msub><mo stretchy="false">(</mo><msub><mi>C</mi><mrow><mi>i</mi><mi>n</mi><mn>2</mn></mrow></msub><mo>+</mo><msub><mi>C</mi><mrow><mi>o</mi><mi>u</mi><mi>t</mi><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><msub><mi>V</mi><mi>x</mi></msub><mo>=</mo><mfrac><msub><mi>C</mi><mrow><mi>o</mi><mi>u</mi><mi>t</mi><mn>1</mn></mrow></msub><mrow><msub><mi>C</mi><mrow><mi>i</mi><mi>n</mi><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>C</mi><mrow><mi>o</mi><mi>u</mi><mi>t</mi><mn>1</mn></mrow></msub></mrow></mfrac><mo stretchy="false">(</mo><msub><mi>V</mi><mrow><mi>D</mi><mi>D</mi></mrow></msub><mo>−</mo><msub><mi>V</mi><mrow><mi>T</mi><mi>n</mi></mrow></msub><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+&amp;(V_{DD}-V_{Tn}) C_{out1}+0\sdot C_{in2}=V_X(C_{in2}+C_{out1}) \\ \\
+&amp;V_x=\frac{C_{out1}}{C_{in1}+C_{out1}}(V_{DD}-V_{Tn})
+\end{aligned}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:5.4963em;vertical-align:-2.4982em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.9982em;"><span style="top:-5.5185em;"><span class="pstrut" style="height:3.3603em;"></span><span class="mord"></span></span><span style="top:-4.0185em;"><span class="pstrut" style="height:3.3603em;"></span><span class="mord"></span></span><span style="top:-1.9982em;"><span class="pstrut" style="height:3.3603em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.4982em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.9982em;"><span style="top:-5.5185em;"><span class="pstrut" style="height:3.3603em;"></span><span class="mord"><span class="mord"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">DD</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">t</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">in</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.07847em;">X</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">in</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">t</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span><span style="top:-1.9982em;"><span class="pstrut" style="height:3.3603em;"></span><span class="mord"><span class="mord"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">in</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">t</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">t</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.836em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">DD</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.4982em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
+<h2 id="动态CMOS电路技术">动态CMOS电路技术</h2>
+<h3 id="动态CMOS传输门逻辑">动态CMOS传输门逻辑</h3>
+<img src="https://webp.esing.dev/img/image-20241019181958467_20241019_1819.png" alt="动态CMOS传输门，需要两对互补时钟信号" style="zoom:50%;" />
+<h3 id="PE逻辑">PE逻辑</h3>
+<p>PE(<strong>P</strong>recharge <strong>E</strong>valuate) 逻辑，又称预充电-求值逻辑，是一种CMOS动态逻辑，可以大大减少实现逻辑函数的晶体管数目。</p>
+<img src="https://webp.esing.dev/img/image-20241019205648993_20241019_2056.png" alt="PE逻辑时间图" style="zoom:50%;" />
+<ul>
+<li>优点：
+<ul>
+<li>n输入只要(n+2)个晶体管</li>
+<li>寄生电容少，功耗小</li>
+<li>无直流静态功耗</li>
+<li><strong>输入寄生电容小</strong>，因只有单个nMOS负载</li>
+<li><strong>上拉时间较短</strong></li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>输出结果时间小于50%时钟周期</li>
+<li>下拉网络增加了串联晶体管使得<strong>下拉时间增大</strong></li>
+<li>输出电压容易受到电荷分享效应的影响</li>
+<li><strong>最大时钟周期</strong>受寄生电容C的<strong>泄放速度</strong>限制</li>
+<li><strong>最小时钟周期</strong>受C的<strong>放电速度</strong>和<strong>输入延时</strong>限制</li>
+<li>输入信号只能在预充电阶段改变（只能<strong>单向变化</strong>），PE逻辑门<strong>不能直接级联</strong></li>
+<li><strong>噪声容限低</strong></li>
+</ul>
+</li>
+</ul>
+<img src="https://webp.esing.dev/img/image-20241019211826814_20241019_2118.png" alt="多级PE逻辑级联，注意时间要求" style="zoom:50%;" />
+<div class="note flat"><p>为什么PE逻辑的求值阶段不允许任何一级电路的输入信号由1变为0？</p>
+<p>以上图为例。在预充电阶段，C会被充电到高电平。随后，在求值阶段参与第一个NMOS运算网络的运算。</p>
+<p>若求值阶段有输入变为0，因刚进入求值阶段时该输入仍为1，会导致C上的电荷一开始就被泄放掉，与之后的变为0的输入计算出的结果冲突。而在求值阶段有输入变为1的话，因一开始该输入是0，因此有可能会不影响C上的电荷泄放，因NMOS关闭，通路可能不存在。</p>
+</div>
+<h2 id="高性能动态逻辑CMOS电路">高性能动态逻辑CMOS电路</h2>
+<h3 id="多米诺逻辑">多米诺逻辑</h3>
+<div class="gallery">
+    <div class="fj-gallery  data" data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://pic.esing.dev/img/image-20241019213217173_20241019_2132.png","alt":"多米诺CMOS逻辑，注意求值时的时间关系"},{"url":"https://pic.esing.dev/img/image-20241019213356179_20241019_2133.png","alt":"多米诺逻辑示例"},{"url":"https://pic.esing.dev/img/image-20241019213430171_20241019_2134.png","alt":"多米诺与CMOS逻辑的级联"}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<div class="note warning flat"><p>PE逻辑输出的是反相逻辑，因此需要接进反相器才能级联到下一级。中间插入CMOS逻辑也必须是偶数级逻辑门，避免输出被反相。</p>
+<p>此外，多米诺逻辑的最大级数受限于求值时间，每一级运算后必须在求值时间窗口内结束。</p>
+</div>
+<h3 id="PE逻辑电荷分享效应">PE逻辑电荷分享效应</h3>
 ]]></content>
       <categories>
         <category>学习</category>
