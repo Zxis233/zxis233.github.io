@@ -472,6 +472,32 @@ V^{_{low\_v}}_{P,min} &amp;= V_b-V_{TH}\geq V_{OD1}+V_{GS2}-V_{TH}\\
 </div></details>
 </li>
 </ol>
+<h2 id="第六章：放大器频率特性">第六章：放大器频率特性</h2>
+<ol>
+<li>
+<p>下图为用密勒定理实现的电容放大器。请写出在X点与Y点等效的电容，并分析此结构的缺点。</p>
+<img src="https://webp.esing.dev/img/image-20241023155400311_20241023_1554.png" alt="密勒定理实现的电容放大器" style="zoom:50%;" />
+<details class="toggle" ><summary class="toggle-button" style="">答案</summary><div class="toggle-content"><p>在X点：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Z</mi><mi>X</mi></msub><mo>=</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mn>1</mn><mrow><mi>s</mi><msub><mi>C</mi><mi>F</mi></msub><mo>⋅</mo><mo fence="false" stretchy="true" minsize="1.2em" maxsize="1.2em">(</mo><mn>1</mn><mo>−</mo><mo stretchy="false">(</mo><mo>−</mo><mi>A</mi><mo stretchy="false">)</mo><mo fence="false" stretchy="true" minsize="1.2em" maxsize="1.2em">)</mo></mrow></mfrac></mstyle><mo>=</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mn>1</mn><mrow><mi>s</mi><msub><mi>C</mi><mi>F</mi></msub><mo>⋅</mo><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>A</mi><mo stretchy="false">)</mo></mrow></mfrac></mstyle></mrow><annotation encoding="application/x-tex">Z_X=\dfrac{1}{sC_F\sdot \big(1-(-A)\big)}=\dfrac{1}{sC_F\sdot (1+A)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.07847em;">X</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.4114em;vertical-align:-1.09em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.26em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">F</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="delimsizing size1">(</span></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathnormal">A</span><span class="mclose">)</span><span class="mord"><span class="delimsizing size1">)</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.09em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2574em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">F</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">A</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+<p>在Y点：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Z</mi><mi>Y</mi></msub><mo>=</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mn>1</mn><mrow><mi>s</mi><msub><mi>C</mi><mi>F</mi></msub><mo>⋅</mo><mo fence="false" stretchy="true" minsize="1.2em" maxsize="1.2em">(</mo><mn>1</mn><mo>−</mo><mo stretchy="false">(</mo><mo>−</mo><mi>A</mi><msup><mo stretchy="false">)</mo><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo fence="false" stretchy="true" minsize="1.2em" maxsize="1.2em">)</mo></mrow></mfrac></mstyle><mo>≈</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mn>1</mn><mrow><mi>s</mi><msub><mi>C</mi><mi>F</mi></msub></mrow></mfrac></mstyle></mrow><annotation encoding="application/x-tex">Z_Y=\dfrac{1}{sC_F\sdot \big(1-(-A)^{-1}\big)}\approx\dfrac{1}{sC_F}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.22222em;">Y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.4114em;vertical-align:-1.09em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.26em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">F</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="delimsizing size1">(</span></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathnormal">A</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mord"><span class="delimsizing size1">)</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.09em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1574em;vertical-align:-0.836em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">F</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.836em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+<p>Y点的摆幅也被放大了A倍，要求放大器能处理如此大的摆幅。此外，该结构有较大的功耗开销。</p>
+</div></details>
+</li>
+<li>
+<p>密勒定理的局限性在哪？举出两点。</p>
+<details class="toggle" ><summary class="toggle-button" style="">答案</summary><div class="toggle-content"><ul>
+<li>使用密勒定理近似后无法计算出电路中的零点；</li>
+<li>密勒定理对主极点的计算结果较为精确，对次极点的计算有着较大的误差。</li>
+</ul>
+</div></details>
+</li>
+<li>
+<p>下图为考虑寄生电容与负载电容的共源级放大器。使用密勒定理近似的情况下，写出R<sub>s</sub>相对较小与相对非常大时的传递函数。</p>
+<p>实际的传递函数中有一个零点，该零点是多少？在哪一侧平面？</p>
+<details class="toggle" ><summary class="toggle-button" style="">答案</summary><div class="toggle-content"><p><img src="https://webp.esing.dev/img/image-20241023164618618_20241023_1646.png" alt="主极点与次极点"></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ω</mi><mi>z</mi></msub><mo>=</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><msub><mi>g</mi><mi>m</mi></msub><msub><mi>C</mi><mrow><mi>G</mi><mi>D</mi></mrow></msub></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\omega_z=\dfrac{g_m}{C_{GD}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.04398em;">z</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.9436em;vertical-align:-0.836em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1076em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">G</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">D</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.836em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>，在右半平面。</p>
+</div></details>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>学习</category>
@@ -4577,6 +4603,9 @@ h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span
 <p>工艺的进步，使得IC的几何尺寸在水平方向上的减小和垂直方向上的减小不成比例(连线厚度H几乎没有变化，而连线的间距大大减小)，导致了线间电容的增加。</p>
 <h3 id="互连线电阻">互连线电阻</h3>
 <img src="https://webp.esing.dev/img/image-20240911232518844_20240911_2325.png" alt="方块电阻的定义" style="zoom:50%;" />
+<div class="note info flat"><p>对于方块电阻而言，电阻x长/宽 即可计算出电阻。</p>
+<p>由公式易知：当截面为正方形时，电阻值与边长无关。</p>
+</div>
 <h2 id="互连线延迟">互连线延迟</h2>
 <ul>
 <li>集总电容模型：只适用于很短的互连线，且信号频率低时</li>
@@ -11768,62 +11797,62 @@ M1001 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
 <table>
 <thead>
 <tr>
-<th>对比项</th>
-<th>DRAM</th>
-<th>SRAM</th>
-<th>Flash</th>
+<th style="text-align:center">对比项</th>
+<th style="text-align:center">DRAM</th>
+<th style="text-align:center">SRAM</th>
+<th style="text-align:center">Flash</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>断电易失性</strong></td>
-<td colspan="2"><strong>是</strong></td>
-<td><strong>否</strong></td>
+<td style="text-align:center"><strong>断电易失性</strong></td>
+<td style="text-align:center" colspan="2"><strong>是</strong></td>
+<td style="text-align:center"><strong>否</strong></td>
 </tr>
 <tr>
-<td>数据刷新</td>
-<td>是</td>
-<td colspan="2">否</td>
+<td style="text-align:center">数据刷新</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center" colspan="2">否</td>
 </tr>
 <tr>
-<td><strong>单元结构</strong></td>
-<td><strong>1T-1C</strong></td>
-<td><strong>6T</strong></td>
-<td><strong>1T</strong></td>
+<td style="text-align:center"><strong>单元结构</strong></td>
+<td style="text-align:center"><strong>1T-1C</strong></td>
+<td style="text-align:center"><strong>6T</strong></td>
+<td style="text-align:center"><strong>1T</strong></td>
 </tr>
 <tr>
-<td>功率损耗</td>
-<td>高</td>
-<td>高/低</td>
-<td>低</td>
+<td style="text-align:center">功率损耗</td>
+<td style="text-align:center">高</td>
+<td style="text-align:center">高/低</td>
+<td style="text-align:center">低</td>
 </tr>
 <tr>
-<td><strong>读取速度</strong></td>
-<td>50ns</td>
-<td>10ns/70ns</td>
-<td>50ns</td>
+<td style="text-align:center"><strong>读取速度</strong></td>
+<td style="text-align:center">50ns</td>
+<td style="text-align:center">10ns/70ns</td>
+<td style="text-align:center">50ns</td>
 </tr>
 <tr>
-<td>写入速度</td>
-<td>40ns</td>
-<td>5/40ns</td>
-<td>10us-1ms</td>
+<td style="text-align:center">写入速度</td>
+<td style="text-align:center">40ns</td>
+<td style="text-align:center">5/40ns</td>
+<td style="text-align:center">10us-1ms</td>
 </tr>
 <tr>
-<td>使用寿命</td>
-<td colspan="3">长</td>
+<td style="text-align:center">使用寿命</td>
+<td style="text-align:center" colspan="3">长</td>
 </tr>
 <tr>
-<td>成本</td>
-<td>较低</td>
-<td>高</td>
-<td>低</td>
+<td style="text-align:center">成本</td>
+<td style="text-align:center">较低</td>
+<td style="text-align:center">高</td>
+<td style="text-align:center">低</td>
 </tr>
 <tr>
-<td><strong>应用</strong></td>
-<td>主存（内存）</td>
-<td>缓存（CPU Cache）</td>
-<td>存储卡、固态硬盘</td>
+<td style="text-align:center"><strong>应用</strong></td>
+<td style="text-align:center">主存（内存）</td>
+<td style="text-align:center">缓存（CPU Cache）</td>
+<td style="text-align:center">存储卡、固态硬盘</td>
 </tr>
 </tbody>
 </table>
@@ -11832,7 +11861,7 @@ M1001 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
 <div class="note warning flat"><p>注意列地址是 8bit=2<sup>3</sup>bit 的，因此是三位。则 n 列对应的是 n-3 位列地址。</p>
 <p>地址复用：行列地址复用一条发送地址线，分两次发送进存储器。</p>
 </div>
-<h2 id="DRAM">DRAM</h2>
+<h2 id="动态随机存储器-DRAM">动态随机存储器 DRAM</h2>
 <h3 id="晶体管结构">晶体管结构</h3>
 <img src="https://webp.esing.dev/img/image-20241021171451965_20241021_1714.png" alt="DRAM单元的历史演变" style="zoom:50%;" />
 <img src="https://webp.esing.dev/img/image-20241021171814669_20241021_1718.png" alt="双管与单管DRAM" style="zoom:50%;" />
@@ -11915,7 +11944,7 @@ M1001 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
 </ul>
 </li>
 </ul>
-<h2 id="SRAM">SRAM</h2>
+<h2 id="静态随机存取存储器-SRAM">静态随机存取存储器 SRAM</h2>
 <p>SRAM的本质是双稳态电路：</p>
 <img src="https://webp.esing.dev/img/image-20241004145510993_20241004_1455.png" alt="两个反相器组成的双稳态电路双稳态" style="zoom:50%;" />
 <img src="https://webp.esing.dev/img/image-20241022110638629_20241022_1106.png" alt="各种类型的SRAM结构" style="zoom:50%;" />
@@ -11999,6 +12028,105 @@ M1001 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
 &amp; \frac{k_{n, 4}}{k_{n, 2}}=\frac{(W / L)_4}{(W / L)_1}&lt;\frac{2\left(V_{D D}-1.5 V_{T, n}\right) V_{T, n}}{\left(V_{D D}-2 V_{T, n}\right)^2}
 \end{aligned}
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:6.7146em;vertical-align:-3.1073em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.6073em;"><span style="top:-5.6628em;"><span class="pstrut" style="height:3.427em;"></span><span class="mord"></span></span><span style="top:-3.8368em;"><span class="pstrut" style="height:3.427em;"></span><span class="mord"></span></span><span style="top:-1.7498em;"><span class="pstrut" style="height:3.427em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.1073em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.6073em;"><span style="top:-5.6628em;"><span class="pstrut" style="height:3.427em;"></span><span class="mord"><span class="mord"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mpunct mtight">,</span><span class="mord mtight">4</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">DD</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mpunct mtight">,</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="delimsizing size1">(</span></span><span class="mord">2</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">DD</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-2.453em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mord"><span class="delimsizing size1">)</span></span></span></span><span style="top:-1.7498em;"><span class="pstrut" style="height:3.427em;"></span><span class="mord"><span class="mord"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mpunct mtight">,</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mpunct mtight">,</span><span class="mord mtight">4</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9721em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mord">/</span><span class="mord mathnormal">L</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mord">/</span><span class="mord mathnormal">L</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.156em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="minner"><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">DD</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">2</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.954em;"><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">DD</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1.5</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.1301em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.1073em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
+<h2 id="非易失存储器-ROM">非易失存储器 ROM</h2>
+<h3 id="基于NOR的ROM">基于NOR的ROM</h3>
+<img src="https://webp.esing.dev/img/image-20241024210049684_20241024_2100.png" alt="基于NOR的ROM" style="zoom:50%;" />
+<p>对于NOR的ROM来说，<strong>字线默认为0</strong>。当译码电路选中某个字线时，该字线被置为高电平。交叉点有晶体管保存数据0，无晶体管保存数据1。</p>
+<div class="note info flat"><p>NOR的ROM本质上是一个伪NMOS逻辑或非门，而或非门“有1就是0”，因此当字线被选中时会被拉高，而如果有晶体管的话就会导通，因此会将输出拉低，变成0。</p>
+</div>
+<img src="https://webp.esing.dev/img/image-20241024210342160_20241024_2103.png" alt="4X4的NOR掩模ROM版图，注意扩散区为什么不能连上" style="zoom:50%;" />
+<p>也可以使用离子注入的方式来改变阈值电压进行编程。若阈值电压比电源电压还高，则晶体管始终无法导通，因此可看做无晶体管，即保存数据1。用这种方式的版图面积比金属编程方式的小。</p>
+<h3 id="基于NAND的ROM">基于NAND的ROM</h3>
+<img src="https://webp.esing.dev/img/image-20241024210919687_20241024_2109.png" alt="基于NAND的ROM" style="zoom:50%;" />
+<p>对于NOR的ROM来说，<strong>字线默认为1</strong>。当译码电路选中某个字线时，该字线被置为低电平。交叉点有晶体管保存数据1，无晶体管保存数据0。</p>
+<div class="note info flat"><p>NAND的ROM本质上是一个伪NMOS逻辑与非门，而与非门“有0就是1”，因此当字线被选中时会被拉低，而如果有晶体管的话就会关断，因此输出不会被拉低，保持1。</p>
+</div>
+<p>编程方法同样有金属线编程和离子注入编程两种方式。但是，离子注入是降低阈值电压，使晶体管变成<strong>耗尽型</strong>，常通就相当于没有晶体管。由于<strong>阵列中没有接触孔</strong>，所以NAND ROM比NOR ROM面积更小。</p>
+<div class="note info flat"><p>由于下拉通路串联了多个NMOS晶体管，所以NAND ROM的访问速度比NOR型ROM要慢。</p>
+</div>
+<h3 id="行列译码器设计">行列译码器设计</h3>
+<h4 id="行译码器">行译码器</h4>
+<img src="https://webp.esing.dev/img/image-20241024213747273_20241024_2137.png" alt="基于NOR的行译码器电路" style="zoom:50%;" />
+<p>基于NOR的行译码电路可以和基于NOR的ROM阵列相邻并排放置。</p>
+<p>NAND行译码器相当于每个行输出是由一个N输入NAND门实现。行有效时，输出低电平，未被选中的行是高电平。</p>
+<p>NAND行译码电路和NAND ROM阵列相邻放置，译码电路的版图也可以采用和NAND ROM阵列相同的版图方法。</p>
+<h4 id="列译码器设计">列译码器设计</h4>
+<img src="https://webp.esing.dev/img/image-20241024215042245_20241024_2150.png" alt="基于译码器的译码电路" style="zoom:50%;" />
+<img src="https://webp.esing.dev/img/image-20241024215117331_20241024_2151.png" alt="基于二进制数的译码电路" style="zoom:50%;" />
+<h3 id="延时计算">延时计算</h3>
+<div class="note warning flat"><p>可能不考计算，但需要掌握。</p>
+</div>
+<a href="/2024/09/05/dcmos-p3/" title="数字CMOS集成电路复习笔记：第三篇">数字CMOS集成电路复习笔记：第三篇</a>
+<div class="gallery">
+    <div class="fj-gallery  data" data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://pic.esing.dev/img/image-20241024220103702_20241024_2201.png","alt":""},{"url":"https://pic.esing.dev/img/image-20241024220120063_20241024_2201.png","alt":"image-20241024220120063"},{"url":"https://pic.esing.dev/img/image-20241024222338357_20241024_2223.png","alt":""},{"url":"https://pic.esing.dev/img/image-20241024222351002_20241024_2223.png","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<h2 id="闪存-Flash">闪存 Flash</h2>
+<p>闪存的基本存储单元是<strong>带浮栅的晶体管</strong>，该晶体管的阈值电压可以通过在其栅极上加电场而反复改变(编程)。被编程的晶体管不导通，保存1；未被编程的晶体管在字线有效时导通，保存0。</p>
+<h3 id="NOR-Flash">NOR Flash</h3>
+<p>对于NOR Flash而言，使用F-N隧穿效应进行擦除、热电子注入效应进行编程：</p>
+<img src="https://webp.esing.dev/img/image-20241024225418183_20241024_2254.png" alt="NOR闪存单元" style="zoom:50%;" />
+<div class="note info flat"><p>擦除时，浮栅中的电子会往源极移动。因为是负电荷，因此逆着电场方向移动，即从栅极0V向着源极12V移动，数据被擦除，存储单元变为低阈值电压的晶体管。</p>
+<p>编程时，字线接高，使得栅极高电平。被字线和位线选中的晶体管由热电子注入浮栅而被编程，变成高阈值电压管。</p>
+<p>读取时，源线接低，要读取的字线接5V，位线接1V。</p>
+</div>
+<h3 id="NAND-Flash">NAND Flash</h3>
+<p>对于NAND Flash而言，使用F-N隧穿效应进行擦除、F-N隧穿效应进行编程：</p>
+<img src="https://webp.esing.dev/img/image-20241024232238767_20241024_2322.png" alt="NAND擦除操作" style="zoom:50%;" />
+<img src="https://webp.esing.dev/img/image-20241024232309816_20241024_2323.png" alt="NAND编程操作" style="zoom:50%;" />
+<h3 id="对比">对比</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">NOR Flash</th>
+<th style="text-align:center">NAND Flash</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">擦除方法</td>
+<td style="text-align:center">F-N隧穿</td>
+<td style="text-align:center" rowspan="2">F-N隧穿</td>
+</tr>
+<tr>
+<td style="text-align:center">编程方法</td>
+<td style="text-align:center">热电子注入</td>
+</tr>
+<tr>
+<td style="text-align:center">擦除速度</td>
+<td style="text-align:center">慢</td>
+<td style="text-align:center">快</td>
+</tr>
+<tr>
+<td style="text-align:center">编程速度</td>
+<td style="text-align:center" rowspan="2">快</td>
+<td style="text-align:center" rowspan="2">慢</td>
+</tr>
+<tr>
+<td style="text-align:center">读取速度</td>
+</tr>
+<tr>
+<td style="text-align:center">单元尺寸</td>
+<td style="text-align:center">大</td>
+<td style="text-align:center">小</td>
+</tr>
+<tr>
+<td style="text-align:center">可扩展性</td>
+<td style="text-align:center">难</td>
+<td style="text-align:center">易</td>
+</tr>
+</tbody>
+</table>
+<h3 id="SLC、MLC、TLC">SLC、MLC、TLC</h3>
+<ul>
+<li>SLC = Single-Level Cell ，即1bit/Cell，速度快寿命长，价格超贵（约MLC 3倍以上的价格），约10万次擦写寿命</li>
+<li>MLC = Multi-Level Cell，即2bit/Cell，速度一般，寿命一般，价格一般，约8000—10000次擦写寿命</li>
+<li>TLC = Trinary-Level Cell，即3bit/Cell，也有Flash厂家叫8LC，速度慢寿命短，价格便宜，约500次擦写寿命。</li>
+<li>QLC = Quad-Level Cell，即4bit/Cell，当前工业界最高密度的Flash芯片</li>
+</ul>
 ]]></content>
       <categories>
         <category>学习</category>
