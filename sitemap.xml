@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.esing.dev/2024/10/04/dcmos-p5/</loc>
+    
+    <lastmod>2024-11-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.esing.dev/2024/10/09/dcmos-p6/</loc>
     
     <lastmod>2024-11-14</lastmod>
@@ -12,15 +21,6 @@
   
   <url>
     <loc>https://blog.esing.dev/2024/09/05/dcmos-p3/</loc>
-    
-    <lastmod>2024-11-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.esing.dev/2024/10/04/dcmos-p5/</loc>
     
     <lastmod>2024-11-14</lastmod>
     
