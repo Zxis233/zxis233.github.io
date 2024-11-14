@@ -403,7 +403,7 @@ A_{CM-DM,\Delta g_m} &amp;= \frac{g_m}{\Delta g_m}(1+2g_mR_{SS})\\
 <p>相比于简单电流镜，为什么共源共栅电流镜能更精准地“拷贝”电流？</p>
 <div class="gallery">
     <div class="fj-gallery  data" data-rowHeight="220" data-limit="10">
-    <span class="gallery-data">[{"url":"https://pic.esing.dev/img/image-20241016123400212_20241016_1234.png","alt":"共源共栅电流镜"},{"url":"https://pic.esing.dev/img/image-20241016123423917_20241016_1235.png","alt":"低压共源共栅电流镜"}]</span>
+    <span class="gallery-data">[{"url":"https://webp.esing.dev/img/image-20241016123400212_20241016_1234.png","alt":"共源共栅电流镜"},{"url":"https://webp.esing.dev/img/image-20241016123423917_20241016_1235.png","alt":"低压共源共栅电流镜"}]</span>
     </div>
     <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
     </div>
@@ -4637,6 +4637,11 @@ s-87.3,378.7,-272.6,1166c-185.3,787.3,-279.3,1182.3,-282,1185
 c-2,6,-10,9,-24,9
 c-8,0,-12,-0.7,-12,-2z M1001 80
 h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8953em;"><span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.49em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
+<h3 id="动态性能">动态性能</h3>
+<div class="note primary flat"><p>24年PPT新增内容</p>
+</div>
+<p>数字系统的性能通常用每秒多少指令(MIPS)或者每秒多少操作(MOPS)来表示。这取决于处理器的体系结构、软件的体系结构等。</p>
+<p><strong>造成电路具有传输延时的根本原因是电路中具有寄生电容，存在RC时间常数。</strong></p>
 <h2 id="反相器设计">反相器设计</h2>
 <p>从上文的<a href="#%E7%9F%AD%E6%B2%9F%E9%81%93CMOS">短沟道CMOS延迟时间公式</a>可得出尺寸的公式：</p>
 <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mo stretchy="false">(</mo><mfrac><mi>W</mi><mi>L</mi></mfrac><msub><mo stretchy="false">)</mo><mi>n</mi></msub></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mfrac><msub><mi>C</mi><mrow><mi>l</mi><mi>o</mi><mi>a</mi><mi>d</mi></mrow></msub><mrow><msubsup><mi>τ</mi><mrow><mi>P</mi><mi>H</mi><mi>L</mi></mrow><mo>∗</mo></msubsup><msub><mi>μ</mi><mi>n</mi></msub><msub><mi>C</mi><mrow><mi>o</mi><mi>x</mi></mrow></msub></mrow></mfrac><mfrac><mn>2</mn><mrow><msub><mi>E</mi><mrow><mi>c</mi><mo separator="true">,</mo><mi>n</mi></mrow></msub><msub><mi>L</mi><mi>n</mi></msub></mrow></mfrac><mfrac><mrow><msub><mi>V</mi><mrow><mn>50</mn><mi mathvariant="normal">%</mi></mrow></msub><mo stretchy="false">[</mo><mo stretchy="false">(</mo><msub><mi>V</mi><mrow><mi>D</mi><mi>D</mi></mrow></msub><mo>−</mo><msub><mi>V</mi><mrow><mi>T</mi><mn>0</mn><mo separator="true">,</mo><mi>n</mi></mrow></msub><mo stretchy="false">)</mo><mo>+</mo><msub><mi>E</mi><mrow><mi>c</mi><mo separator="true">,</mo><mi>n</mi></mrow></msub><msub><mi>L</mi><mi>n</mi></msub><mo stretchy="false">]</mo></mrow><mrow><mo stretchy="false">(</mo><msub><mi>V</mi><mrow><mi>D</mi><mi>D</mi></mrow></msub><mo>−</mo><msub><mi>V</mi><mrow><mi>T</mi><mn>0</mn><mo separator="true">,</mo><mi>n</mi></mrow></msub><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></mfrac></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mo stretchy="false">(</mo><mfrac><mi>W</mi><mi>L</mi></mfrac><msub><mo stretchy="false">)</mo><mi>p</mi></msub></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mfrac><msub><mi>C</mi><mrow><mi>l</mi><mi>o</mi><mi>a</mi><mi>d</mi></mrow></msub><mrow><msubsup><mi>τ</mi><mrow><mi>P</mi><mi>L</mi><mi>H</mi></mrow><mo>∗</mo></msubsup><msub><mi>μ</mi><mi>p</mi></msub><msub><mi>C</mi><mrow><mi>o</mi><mi>x</mi></mrow></msub></mrow></mfrac><mfrac><mn>2</mn><mrow><msub><mi>E</mi><mrow><mi>c</mi><mo separator="true">,</mo><mi>p</mi></mrow></msub><msub><mi>L</mi><mi>p</mi></msub></mrow></mfrac><mfrac><mrow><msub><mi>V</mi><mrow><mn>50</mn><mi mathvariant="normal">%</mi></mrow></msub><mo stretchy="false">[</mo><mo stretchy="false">(</mo><msub><mi>V</mi><mrow><mi>D</mi><mi>D</mi></mrow></msub><mo>−</mo><mi mathvariant="normal">∣</mi><msub><mi>V</mi><mrow><mi>T</mi><mn>0</mn><mo separator="true">,</mo><mi>p</mi></mrow></msub><mi mathvariant="normal">∣</mi><mo stretchy="false">)</mo><mo>+</mo><msub><mi>E</mi><mrow><mi>c</mi><mo separator="true">,</mo><mi>p</mi></mrow></msub><msub><mi>L</mi><mi>p</mi></msub><mo stretchy="false">]</mo></mrow><mrow><mo stretchy="false">(</mo><msub><mi>V</mi><mrow><mi>D</mi><mi>D</mi></mrow></msub><mo>−</mo><mi mathvariant="normal">∣</mi><msub><mi>V</mi><mrow><mi>T</mi><mn>0</mn><mo separator="true">,</mo><mi>p</mi></mrow></msub><mi mathvariant="normal">∣</mi><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></mfrac></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
@@ -4647,6 +4652,9 @@ h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span
 <p>对于实际题目，应当在求出的尺寸范围内选择其最大的值！因尺寸越大，延时时间越短。</p>
 <h3 id="负载电容">负载电容</h3>
 <p>在CMOS反相器中，MOS晶体管要么截止要么饱和，导致沟道电容不存在，因此C<sub>gd</sub>的值很小，都可以忽略。</p>
+<div class="note primary flat"><p>24年PPT新增内容</p>
+</div>
+<img src="https://webp.esing.dev/img/image-20241114183843553_20241114_1838.png" alt="晶体管寄生电容" style="zoom:50%;" />
 <h3 id="本征延时与外部延时">本征延时与外部延时</h3>
 <p>当反相器没有外部负载或者反相器尺寸特别大的时候，反相器具有本征延时：</p>
 <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><msubsup><mi>τ</mi><mrow><mi>P</mi><mi>H</mi><mi>L</mi></mrow><mrow><mi>l</mi><mi>i</mi><mi>m</mi><mi>i</mi><mi>t</mi></mrow></msubsup></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><msub><mi mathvariant="normal">Γ</mi><mi>n</mi></msub><mo stretchy="false">(</mo><msub><mi>α</mi><mi>n</mi></msub><mo>+</mo><mi>R</mi><msub><mi>α</mi><mi>p</mi></msub><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><msubsup><mi>τ</mi><mrow><mi>P</mi><mi>L</mi><mi>H</mi></mrow><mrow><mi>l</mi><mi>i</mi><mi>m</mi><mi>i</mi><mi>t</mi></mrow></msubsup></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><msub><mi mathvariant="normal">Γ</mi><mi>p</mi></msub><mo stretchy="false">(</mo><mfrac><msub><mi>α</mi><mi>n</mi></msub><mi>R</mi></mfrac><mo>+</mo><msub><mi>α</mi><mi>p</mi></msub><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
@@ -5236,6 +5244,10 @@ F&amp;= A&#x27; \sdot B+A\sdot B \sdot C&#x27;+A&#x27; \sdot B&#x27; \sdot C\\
 <p>因为复位需要让输出为0，或非门“<strong>有1就是0</strong>”，因此或非门易于复位；</p>
 <p>而置位需要让输出为1，与非门“<strong>有0就是1</strong>”，因此与非门易于置位。</p>
 </div>
+<h3 id="带置位和复位端的D触发器">带置位和复位端的D触发器</h3>
+<div class="note primary flat"><p>24年PPT新增内容</p>
+</div>
+<img src="https://webp.esing.dev/img/image-20241114182646890_20241114_1826.png" alt="带置位和复位的主从D触发器" style="zoom:50%;" />
 <h2 id="复杂的时序计算">复杂的时序计算</h2>
 <div class="note danger flat"><p>必考。理清锁存器与触发器的时序分析方法，分清各种延时时间的名称。</p>
 </div>
@@ -5965,6 +5977,19 @@ t_{borrow} &amp;\le \dfrac{T_c}{2}-(t_{setup}+t_{nonoverlap}+t_{skew})
 <p>什么是电压自举技术？实际工业生产中如何生产所需要的电容？</p>
 <details class="toggle" ><summary class="toggle-button" style="">答案</summary><div class="toggle-content"><p>电压自举技术是使用额外的电容来消除输出端阈值损失的技术。</p>
 <p>工业中使用一个虚拟MOS管来作为电容。</p>
+</div></details>
+</li>
+<li>
+<p>对于下面的两种增强型NMOS动态移位寄存器，哪一种是无比逻辑、哪一种是有比逻辑？为什么？</p>
+<div class="gallery">
+    <div class="fj-gallery  data" data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://webp.esing.dev/img/image-20241114193843032_20241114_1938.png","alt":"第一种"},{"url":"https://webp.esing.dev/img/image-20241114193858471_20241114_1938.png","alt":"第二种"}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+<details class="toggle" ><summary class="toggle-button" style="">答案</summary><div class="toggle-content"><p>第一种是有比逻辑，第二种是无比逻辑。</p>
+<p>对于第一种，在Phase2有效时，若C<sub>in1</sub>上是高电平，则V<sub>out1</sub>为V<sub>OL</sub>，该值由驱动管和负载管的尺寸比例决定，因此为有比逻辑。</p>
+<p>对于第二种，在Phase2有效时，若C<sub>in1</sub>上是高电平，则V<sub>out1</sub>为0；若若C<sub>in1</sub>上是高电平，则V<sub>out1</sub>为V<sub>DD</sub>。输出值与尺寸比例无关，因此为无比逻辑。</p>
 </div></details>
 </li>
 </ol>
@@ -11784,6 +11809,9 @@ c-10,0,-16.667,5,-20,15z M188 15 H145 v585 v0 v585 h43z'/></svg></span></span></
 </tr>
 </tbody>
 </table>
+<div class="note primary flat"><p>24年PPT新增内容</p>
+</div>
+<img src="https://webp.esing.dev/img/image-20241114195245356_20241114_1952.png" alt="耗尽型nMOS负载动态移位寄存器的输出波形" style="zoom:50%;" />
 <h3 id="增强型nMOS负载动态移位寄存器">增强型nMOS负载动态移位寄存器</h3>
 <img src="https://webp.esing.dev/img/image-20241017174440515_20241017_1744.png" alt="第一种结构" style="zoom: 67%;" />
 <p>Phase1有效时，V<sub>in</sub>传递到C<sub>in1</sub>上，Phase2有效时，负载晶体管导通，第一级反相器输出有效值传递到C<sub>in2</sub>。当Phase1再次有效时，第二级反相器输出有效值，传递到C<sub>in3</sub>。同时，第一级输入一个新的V<sub>in</sub>到C<sub>in1</sub>。</p>
