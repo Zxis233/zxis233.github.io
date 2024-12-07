@@ -1,8 +1,9 @@
+https://blog.esing.dev/2024/11/21/hifini-autosignin/
+https://blog.esing.dev/2024/10/09/dcmos-p6/
+https://blog.esing.dev/2024/10/04/dcmos-shortanswer-question/
 https://blog.esing.dev/2024/10/04/acmos-shortanswer-question/
 https://blog.esing.dev/2024/11/16/math-weakpoint-collection/
-https://blog.esing.dev/2024/10/04/dcmos-shortanswer-question/
 https://blog.esing.dev/2024/10/04/dcmos-p5/
-https://blog.esing.dev/2024/10/09/dcmos-p6/
 https://blog.esing.dev/2024/09/05/dcmos-p3/
 https://blog.esing.dev/2024/08/28/dcmos-p2/
 https://blog.esing.dev/2024/08/24/dcmos-p1/
@@ -23,7 +24,6 @@ https://blog.esing.dev/2024/11/02/dcmos-p9/
 https://blog.esing.dev/2024/09/15/esp32c3-reader/
 https://blog.esing.dev/2024/07/25/gamelife-patricksparabox/
 https://blog.esing.dev/2024/07/16/gamelife-prologue/
-https://blog.esing.dev/2024/11/21/hifini-autosignin/
 https://blog.esing.dev/2024/08/29/cloudflare-r2-ims/
 https://blog.esing.dev/2024/09/19/coae-experiment/
 https://blog.esing.dev/2024/10/21/dcmos-p7/
