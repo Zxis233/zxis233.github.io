@@ -950,6 +950,20 @@ GBW&amp;=\dfrac{\omega_{p1}}{2\pi} \sdot g_{m1,2}\left(r_{o2}\|r_{o4}\right)\\
 </div></details>
 </li>
 <li>
+<p>下图的放大器有几个小信号高电阻节点？其为几级放大器？</p>
+<img src="https://webp.esing.dev/img/image-20241211193052631_20241211_1930.png" alt="多级放大器" style="zoom:50%;" />
+<details class="toggle" ><summary class="toggle-button" style="">答案</summary><div class="toggle-content"><p>有两个小信号高电阻节点，此为两级放大器。</p>
+<ul>
+<li>第一级为一个差动转单端的放大器</li>
+<li>第二级为电流源负载的共源极放大器</li>
+</ul>
+   <div class="note info flat"><p>有几个小信号高电阻节点，就是几级放大器！</p>
+<p>对于下图的放大器结构，若将M4改为二极管连接型，则放大器由两级变成一级！</p>
+<img src="https://webp.esing.dev/img/image-20241211193413482_20241211_1934.png" alt="单端输出的放大器，注意级数" style="zoom:50%;" />
+</div>
+</div></details>
+</li>
+<li>
 <p>对于下面的共源共栅OTA放大器，分析该结构的优点，并写出其主极点与次极点在电路中产生的位置，说明理由。</p>
 <p>写出其增益带宽积。</p>
 <img src="https://webp.esing.dev/img/image-20241125214923229_20241125_2149.png" alt="共源共栅OTA放大器" style="zoom:50%;" />
@@ -1061,6 +1075,7 @@ c-10,0,-16.667,5,-20,15z M188 15 H145 v585 v0 v585 h43z'/></svg></span></span></
 <p>应当在后面级联一个源随器输出。</p>
 </div></details>
 </li>
+<li></li>
 </ol>
 <h2 id="第十章：稳定性与频率补偿">第十章：稳定性与频率补偿</h2>
 <ol>
