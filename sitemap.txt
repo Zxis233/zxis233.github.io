@@ -1,4 +1,5 @@
 https://blog.esing.dev/2024/10/04/dcmos-shortanswer-question/
+https://blog.esing.dev/2024/10/04/acmos-shortanswer-question/
 https://blog.esing.dev/2023/05/17/ict-c1/
 https://blog.esing.dev/2023/05/15/ict-intro/
 https://blog.esing.dev/2023/05/31/ict-c11/
@@ -43,7 +44,6 @@ https://blog.esing.dev/2024/10/04/dcmos-p5/
 https://blog.esing.dev/2024/10/09/dcmos-p6/
 https://blog.esing.dev/2024/08/24/dcmos-p1/
 https://blog.esing.dev/2024/09/19/coae-experiment/
-https://blog.esing.dev/2024/10/04/acmos-shortanswer-question/
 https://blog.esing.dev/about/index.html
 https://blog.esing.dev/2024/11/16/math-weakpoint-collection/
 https://blog.esing.dev/2024/11/21/hifini-autosignin/
