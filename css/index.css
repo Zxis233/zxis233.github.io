@@ -1385,7 +1385,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Noto Sans SC", sans-serif;
   line-height: 1.8;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
-  text-shadow: 0 0 0.75px rgba(128,128,128,0.502);
+  text-shadow: 0 0 0.75px rgba(128,128,128,0.69);
 }
 @media screen and (max-width: 768px) {
   body {
@@ -1437,9 +1437,9 @@ hr {
   position: relative;
   margin: 40px auto;
   border: 2px dashed #ff80ac;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
+  opacity: 0.75;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+  filter: alpha(opacity=75);
   width: calc(100% - 4px);
 }
 hr:hover:before {
@@ -1472,7 +1472,7 @@ table {
   empty-cells: show;
 }
 table thead {
-  background: rgba(153,169,191,0.1);
+  background: rgba(40,194,140,0.08);
 }
 table th,
 table td {
@@ -3418,7 +3418,7 @@ h1.page-title + .tag-cloud-list {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0,0,0,0.4);
   content: '';
 }
 #page-header.full_page {
@@ -5027,6 +5027,9 @@ blockquote.pullquote.right {
 }
 .toggle > .toggle-content {
   margin: 16px 24px;
+}
+.toggle-content ul {
+  padding-left: 25px;
 }
 #article-container .inline-img {
   display: inline;
