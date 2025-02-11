@@ -1,4 +1,5 @@
 https://blog.esing.dev/2025/01/18/pos-p6/
+https://blog.esing.dev/2024/04/18/eink-app-suggestion/
 https://blog.esing.dev/2025/01/22/gamelife-irosekai/
 https://blog.esing.dev/2025/01/01/pos-intro/
 https://blog.esing.dev/2024/10/06/index-for-study/
@@ -122,7 +123,6 @@ https://blog.esing.dev/2024/04/22/coae-p2/
 https://blog.esing.dev/2024/04/22/coae-p3/
 https://blog.esing.dev/2024/04/22/coae-p1/
 https://blog.esing.dev/2024/06/11/aicd2/
-https://blog.esing.dev/2024/04/18/eink-app-suggestion/
 https://blog.esing.dev/2024/09/01/hexo-webp-cloud-proxy-problem/
 https://blog.esing.dev/2024/04/06/fsm-23/
 https://blog.esing.dev/2024/03/09/current-ref-design/
