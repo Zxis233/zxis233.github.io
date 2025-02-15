@@ -1,5 +1,6 @@
-https://blog.esing.dev/2025/01/28/travel-in-harbin/
 https://blog.esing.dev/2025/01/18/pos-p6/
+https://blog.esing.dev/about/index.html
+https://blog.esing.dev/2025/01/28/travel-in-harbin/
 https://blog.esing.dev/2024/04/18/eink-app-suggestion/
 https://blog.esing.dev/2025/01/22/gamelife-irosekai/
 https://blog.esing.dev/2025/01/01/pos-intro/
@@ -72,7 +73,6 @@ https://blog.esing.dev/2024/08/16/dcmos-intro/
 https://blog.esing.dev/2024/11/01/dcmos-p8/
 https://blog.esing.dev/2024/11/03/dcmos-p10/
 https://blog.esing.dev/2024/10/09/dcmos-p6/
-https://blog.esing.dev/about/index.html
 https://blog.esing.dev/2024/11/21/hifini-autosignin/
 https://blog.esing.dev/2024/11/30/hiby-magsafe-adapter/
 https://blog.esing.dev/2024/11/19/latex-code-highlight/
