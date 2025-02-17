@@ -1,3 +1,7 @@
+https://blog.esing.dev/2024/04/22/coae-p3/
+https://blog.esing.dev/2024/04/22/coae-p2/
+https://blog.esing.dev/2024/04/22/coae-p1/
+https://blog.esing.dev/2024/10/28/playedgalgamelist/
 https://blog.esing.dev/2025/01/28/travel-in-harbin/
 https://blog.esing.dev/2025/02/16/pos-p7/
 https://blog.esing.dev/2025/01/18/pos-p6/
@@ -7,7 +11,6 @@ https://blog.esing.dev/2025/01/22/gamelife-irosekai/
 https://blog.esing.dev/2025/01/01/pos-intro/
 https://blog.esing.dev/2024/10/06/index-for-study/
 https://blog.esing.dev/2025/01/26/gofrp/
-https://blog.esing.dev/2024/10/28/playedgalgamelist/
 https://blog.esing.dev/2025/01/19/moondrop-dawn-pro/
 https://blog.esing.dev/2025/01/15/pos-p5/
 https://blog.esing.dev/2025/01/15/wsnl/
@@ -120,9 +123,6 @@ https://blog.esing.dev/2024/05/05/coae-p4/
 https://blog.esing.dev/2024/06/12/coae-p5/
 https://blog.esing.dev/2024/04/25/playwright-load-chrome-extension/
 https://blog.esing.dev/2024/04/21/coae-intro/
-https://blog.esing.dev/2024/04/22/coae-p2/
-https://blog.esing.dev/2024/04/22/coae-p3/
-https://blog.esing.dev/2024/04/22/coae-p1/
 https://blog.esing.dev/2024/06/11/aicd2/
 https://blog.esing.dev/2024/09/01/hexo-webp-cloud-proxy-problem/
 https://blog.esing.dev/2024/04/06/fsm-23/
