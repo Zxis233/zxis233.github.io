@@ -1,8 +1,10 @@
-https://blog.esing.dev/2025/02/16/pos-p7/
+https://blog.esing.dev/2025/02/19/gamelife-ste/
+https://blog.esing.dev/2025/02/28/pos-p8/
 https://blog.esing.dev/2025/01/18/pos-p6/
+https://blog.esing.dev/2025/01/09/pos-p3/
+https://blog.esing.dev/2025/02/16/pos-p7/
 https://blog.esing.dev/2025/01/11/pos-p4/
 https://blog.esing.dev/2024/10/28/playedgalgamelist/
-https://blog.esing.dev/2025/02/19/gamelife-ste/
 https://blog.esing.dev/2025/01/22/gamelife-irosekai/
 https://blog.esing.dev/2025/01/02/rpi-yolo5/
 https://blog.esing.dev/2025/01/15/pos-p5/
@@ -20,7 +22,6 @@ https://blog.esing.dev/2025/01/19/moondrop-dawn-pro/
 https://blog.esing.dev/2025/01/15/wsnl/
 https://blog.esing.dev/2024/11/25/eng-application-writing/
 https://blog.esing.dev/2025/01/01/pos-p2/
-https://blog.esing.dev/2025/01/09/pos-p3/
 https://blog.esing.dev/2025/01/10/headphone-power-calculator/
 https://blog.esing.dev/2025/01/01/pos-p1/
 https://blog.esing.dev/2024/09/15/dcmos-p4/
