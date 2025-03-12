@@ -1,3 +1,5 @@
+https://blog.esing.dev/2025/03/12/pos-p9/
+https://blog.esing.dev/2024/10/28/playedgalgamelist/
 https://blog.esing.dev/2025/02/28/pos-p8/
 https://blog.esing.dev/2025/03/07/gp-klipper/
 https://blog.esing.dev/2025/01/18/pos-p6/
@@ -7,7 +9,6 @@ https://blog.esing.dev/2025/02/19/gamelife-ste/
 https://blog.esing.dev/2025/01/11/pos-p4/
 https://blog.esing.dev/2025/01/01/pos-p2/
 https://blog.esing.dev/2025/01/09/pos-p3/
-https://blog.esing.dev/2024/10/28/playedgalgamelist/
 https://blog.esing.dev/2025/01/22/gamelife-irosekai/
 https://blog.esing.dev/2025/01/02/rpi-yolo5/
 https://blog.esing.dev/2024/05/05/coae-p4/
