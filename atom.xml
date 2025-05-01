@@ -6,7 +6,7 @@
   <link href="https://blog.esing.dev/atom.xml" rel="self"/>
   
   <link href="https://blog.esing.dev/"/>
-  <updated>2025-04-22T04:14:09.331Z</updated>
+  <updated>2025-05-01T04:30:16.659Z</updated>
   <id>https://blog.esing.dev/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MATLAB设置自定义字体时找不到系统已安装字体</title>
+    <link href="https://blog.esing.dev/2025/05/01/matlab-set-custom-font/"/>
+    <id>https://blog.esing.dev/2025/05/01/matlab-set-custom-font/</id>
+    <published>2025-05-01T04:16:22.000Z</published>
+    <updated>2025-05-01T04:30:16.659Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言">前言</h2><p>最近在研究遗传算法优化PID参数的论文。本来想用Python实现的，奈何实在不会。网上有很多MATLAB的代码，学习一下。</p><p>自带的字体太虚了，看着不舒服。所有的代码字体我都换成自制的<code>JetBrains Mono Nerd Font Mono + MiSans</code>，高分屏也看的舒服。但不知道为啥，MATLAB中看不到系统已经安装的字体。</p><h2 id="解决">解决</h2><p>找到你系统上安装字体的路径，复制对应的TTF字体文件到<code>MATLAB\sys\java\jre\win64\jre\lib\fonts</code>下即可。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+&lt;p&gt;最近在研究遗传算法优化PID参数的论文。本来想用Python实现的，奈何实在不会。网上有很多MATLAB的代码，学习一下。&lt;/p&gt;
+&lt;p&gt;自带的字体太虚了</summary>
+      
+    
+    
+    
+    <category term="技术分享" scheme="https://blog.esing.dev/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
+    
+    
+    <category term="踩坑" scheme="https://blog.esing.dev/tags/%E8%B8%A9%E5%9D%91/"/>
+    
+    <category term="MATLAB" scheme="https://blog.esing.dev/tags/MATLAB/"/>
+    
+  </entry>
   
   <entry>
     <title>VSCode配置LaTeX编辑环境</title>
@@ -597,27 +625,6 @@
     <category term="美食" scheme="https://blog.esing.dev/tags/%E7%BE%8E%E9%A3%9F/"/>
     
     <category term="哈尔滨" scheme="https://blog.esing.dev/tags/%E5%93%88%E5%B0%94%E6%BB%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用GoFrp进行内网穿透访问SSH</title>
-    <link href="https://blog.esing.dev/2025/01/26/gofrp/"/>
-    <id>https://blog.esing.dev/2025/01/26/gofrp/</id>
-    <published>2025-01-26T12:33:07.000Z</published>
-    <updated>2025-01-26T13:06:30.874Z</updated>
-    
-    <content type="html"><![CDATA[<div class="note primary flat"><p>本文使用FRP远程推送发布！</p></div><h2 id="前言">前言</h2><p>马上就要去哈尔滨辣！</p><p>在外也不能停止办公！只能把小主机放家里然后内网穿透了。之前薅的阿里云学生服务器还没过期，狠狠用。直接自建FRP服务。</p><h2 id="环境">环境</h2><ul><li>客户端：Ubuntu 22.04.5 LTS / 4c4g@500M</li><li>服务端： Debian 12 / 2c2g@20M</li></ul><h2 id="部署">部署</h2><h3 id="文件下载">文件下载</h3><p><a href="https://github.com/fatedier/frp">fatedier/frp: A fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet</a></p><h3 id="服务端">服务端</h3><p>参考官方文档：<a href="https://gofrp.org/zh-cn/docs/examples/multiple-ssh-over-same-port/">多个 SSH 服务复用同一端口 - GoFRP</a></p><div class="note warning flat"><p>之前的版本是0.58.1，当时还支持ini作为配置文件。新版本已经废除了，全部更换为TOML<s>TOML不赖</s>，因此还需要将老配置修改一下。看官方文档自己改下对应的键和值就行了。</p></div><figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># frps.toml</span></span><br><span class="line"><span class="attr">bindAddr</span> = <span class="string">&quot;0.0.0.0&quot;</span></span><br><span class="line"><span class="attr">bindPort</span> = <span class="number">7000</span></span><br><span class="line"></span><br><span class="line"><span class="attr">tcpmuxHTTPConnectPort</span> = <span class="number">7002</span></span><br><span class="line"></span><br><span class="line"><span class="attr">webServer.addr</span> = <span class="string">&quot;0.0.0.0&quot;</span></span><br><span class="line"><span class="attr">webServer.port</span> = <span class="number">7005</span></span><br><span class="line"><span class="attr">webServer.user</span> = <span class="string">&quot;YDGLM&quot;</span></span><br><span class="line"><span class="attr">webServer.password</span> = <span class="string">&quot;114514&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">log.to</span> = <span class="string">&quot;./frps.log&quot;</span></span><br><span class="line"><span class="attr">log.level</span> = <span class="string">&quot;info&quot;</span></span><br><span class="line"><span class="attr">log.maxDays</span> = <span class="number">7</span></span><br><span class="line"></span><br><span class="line"><span class="attr">auth.method</span> = <span class="string">&quot;token&quot;</span></span><br><span class="line"><span class="attr">auth.token</span> = <span class="string">&quot;1919810&quot;</span></span><br></pre></td></tr></table></figure><p>配置完后可以用设定的用户名和密码访问GUI面板，比如<code>http://11.4.51.4:7005</code>。</p><h3 id="客户端">客户端</h3><p>同样下载好文件解压，修改配置文件：</p><figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># frpc.toml</span></span><br><span class="line"><span class="attr">serverAddr</span> = <span class="string">&quot;11.4.51.4&quot;</span></span><br><span class="line"><span class="attr">serverPort</span> = <span class="number">7000</span></span><br><span class="line"><span class="attr">auth.token</span> = <span class="string">&quot;1919810&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="section">[[proxies]]</span></span><br><span class="line"><span class="attr">name</span> = <span class="string">&quot;littlebox_ssh&quot;</span></span><br><span class="line"><span class="attr">type</span> = <span class="string">&quot;tcpmux&quot;</span></span><br><span class="line"><span class="attr">multiplexer</span> = <span class="string">&quot;httpconnect&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">customDomains</span> = [<span class="string">&quot;frpbox.local&quot;</span>]</span><br><span class="line"><span class="attr">localIP</span> = <span class="string">&quot;127.0.0.1&quot;</span></span><br><span class="line"><span class="attr">localPort</span> = <span class="number">22</span></span><br></pre></td></tr></table></figure><p>似乎还可以使用secret的方式来进行鉴权。懒得折腾了。能跑就不动。</p><h2 id="Windows下连接">Windows下连接</h2><p>官方文档中提到，连接命令为：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -o <span class="string">&#x27;proxycommand socat - PROXY:x.x.x.x:%h:%p,proxyport=5002&#x27;</span> <span class="built_in">test</span>@machine-a.example.com</span><br></pre></td></tr></table></figure><p>但是Windows下并没有socat。因此，先安装<a href="https://cygwin.com/">Cygwin</a>，再去手动下载Unix导出后的socat相关文件放到path中。</p>]]></content>
-    
-    
-    <summary type="html">本文使用FRP远程推送发布！</summary>
-    
-    
-    
-    <category term="技术分享" scheme="https://blog.esing.dev/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
-    
-    
-    <category term="FRP" scheme="https://blog.esing.dev/tags/FRP/"/>
     
   </entry>
   
