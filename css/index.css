@@ -1385,7 +1385,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Noto Sans SC", sans-serif;
   line-height: 1.8;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
-  text-shadow: 0 0 0.75px rgba(128,128,128,0.69);
+  text-shadow: 0 0 0.75px rgba(128,128,128,0.753);
 }
 @media screen and (max-width: 768px) {
   body {
