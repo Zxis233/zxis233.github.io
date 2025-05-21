@@ -1,5 +1,6 @@
 https://blog.esing.dev/2024/10/28/playedgalgamelist/
 https://blog.esing.dev/2025/05/08/travel-in-luoyang/
+https://blog.esing.dev/2024/07/16/travel-in-chengdu/
 https://blog.esing.dev/2025/04/21/vscode-latex-setup/
 https://blog.esing.dev/2024/02/25/pdf-bookmark-export/
 https://blog.esing.dev/2025/01/28/travel-in-harbin/
@@ -117,7 +118,6 @@ https://blog.esing.dev/2024/07/16/gamelife-prologue/
 https://blog.esing.dev/2024/08/29/cloudflare-r2-ims/
 https://blog.esing.dev/2024/08/27/chromeext-suggestion-elmochat/
 https://blog.esing.dev/2024/09/02/hello-new-pic-codecs/
-https://blog.esing.dev/2024/07/16/travel-in-chengdu/
 https://blog.esing.dev/2023/04/24/ba-talk1/
 https://blog.esing.dev/2024/11/21/hello-world/
 https://blog.esing.dev/2023/04/24/magisk-1/
