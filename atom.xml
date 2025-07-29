@@ -6,7 +6,7 @@
   <link href="https://blog.esing.dev/atom.xml" rel="self"/>
   
   <link href="https://blog.esing.dev/"/>
-  <updated>2025-07-24T15:36:24.359Z</updated>
+  <updated>2025-07-25T12:40:02.712Z</updated>
   <id>https://blog.esing.dev/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>懒人看片神器：MPV-Lazy配置</title>
+    <link href="https://blog.esing.dev/2025/07/25/mpv-lazy-conf/"/>
+    <id>https://blog.esing.dev/2025/07/25/mpv-lazy-conf/</id>
+    <published>2025-07-25T12:31:50.000Z</published>
+    <updated>2025-07-25T12:40:02.712Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言">前言</h2><p><s>嗨，我是颠佬，这是我的看片神器</s></p><p>以前一直用Potplayer做电脑播放器的，配合SVP进行补帧，看电影很舒服。后来下了点动漫看，用SVP的效果也还行，但是放大后画面会显得模糊。搜了一下，使用VS滤镜可以超分放大，但还需要自己配置。有没有方便点的项目呢？在GitHub搜了一下，还真有做好的懒人包：<a href="https://github.com/hooke007/MPV_lazy">hooke007/MPV_lazy</a>。用了一下，真的是超级方便，包含了常见的放大滤镜、补帧滤镜等，效果甚至比SVP更好。</p><h2 id="自用配置">自用配置</h2><h3 id="RIFE补帧-ESRGAN超分辨率放大">RIFE补帧+ESRGAN超分辨率放大</h3><p>原本想先超分放大再补帧的，结果控制台一直报错。无奈，只能先补帧再放大了。可能会有一些残影，但实际看下来没有SVP多。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### N卡专用</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> vapoursynth <span class="keyword">as</span> vs</span><br><span class="line"><span class="keyword">from</span> vapoursynth <span class="keyword">import</span> core</span><br><span class="line"><span class="keyword">import</span> k7sfunc <span class="keyword">as</span> k7f</span><br><span class="line"></span><br><span class="line">clip = video_in</span><br><span class="line"></span><br><span class="line"><span class="comment"># 超分辨率参数</span></span><br><span class="line">H_Pre = <span class="number">720</span></span><br><span class="line">Lt_Hd = <span class="literal">False</span></span><br><span class="line">SR_Model = <span class="number">5005</span></span><br><span class="line">SR_Gpu = <span class="number">0</span></span><br><span class="line">SR_Gpu_T = <span class="number">2</span></span><br><span class="line">SR_St_Eng = <span class="literal">False</span></span><br><span class="line">SR_Ws_Size = <span class="number">0</span></span><br><span class="line">H_Max = <span class="number">1440</span></span><br><span class="line">SR_Lk_Fmt = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 补帧参数</span></span><br><span class="line">RIFE_H_Pre = <span class="number">1440</span></span><br><span class="line">RIFE_Lt_D2k = <span class="literal">False</span></span><br><span class="line">RIFE_Model = <span class="number">46</span></span><br><span class="line">RIFE_Ext_Proc = <span class="literal">False</span></span><br><span class="line">RIFE_T_Tta = <span class="literal">False</span></span><br><span class="line">Fps_Num = <span class="number">2</span></span><br><span class="line">Fps_Den = <span class="number">1</span></span><br><span class="line">Sc_Mode = <span class="number">1</span></span><br><span class="line">RIFE_Gpu = <span class="number">0</span></span><br><span class="line">RIFE_Gpu_T = <span class="number">2</span></span><br><span class="line">RIFE_St_Eng = <span class="literal">False</span></span><br><span class="line">RIFE_Ws_Size = <span class="number">0</span></span><br><span class="line">RIFE_Lk_Fmt = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 先补帧</span></span><br><span class="line">clip = k7f.FMT_CTRL(clip, h_max=RIFE_H_Pre, fmt_pix=<span class="number">1</span> <span class="keyword">if</span> RIFE_Lk_Fmt <span class="keyword">else</span> <span class="number">0</span>)</span><br><span class="line">clip = k7f.RIFE_NV(clip, lt_d2k=RIFE_Lt_D2k, model=RIFE_Model, ext_proc=RIFE_Ext_Proc, t_tta=RIFE_T_Tta, fps_in=container_fps, fps_num=Fps_Num, fps_den=Fps_Den, sc_mode=Sc_Mode, gpu=RIFE_Gpu, gpu_t=RIFE_Gpu_T, st_eng=RIFE_St_Eng, ws_size=RIFE_Ws_Size)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 再超分辨率放大</span></span><br><span class="line">clip = k7f.FMT_CTRL(clip, h_max=H_Pre, fmt_pix=<span class="number">1</span> <span class="keyword">if</span> SR_Lk_Fmt <span class="keyword">else</span> <span class="number">0</span>)</span><br><span class="line">clip = k7f.ESRGAN_NV(clip, lt_hd=Lt_Hd, model=SR_Model, gpu=SR_Gpu, gpu_t=SR_Gpu_T, st_eng=SR_St_Eng, ws_size=SR_Ws_Size)</span><br><span class="line">clip = k7f.FMT_CTRL(clip, h_max=H_Max, fmt_pix=<span class="number">1</span> <span class="keyword">if</span> SR_Lk_Fmt <span class="keyword">else</span> <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">clip.set_output()</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+&lt;p&gt;&lt;s&gt;嗨，我是颠佬，这是我的看片神器&lt;/s&gt;&lt;/p&gt;
+&lt;p&gt;以前一直用Potplayer做电脑播放器的，配合SVP进行补帧，看电影很舒服。后来下了点动漫看</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>兰州-天水之旅</title>
@@ -598,29 +620,6 @@
     <category term="考研" scheme="https://blog.esing.dev/tags/%E8%80%83%E7%A0%94/"/>
     
     <category term="半导体物理" scheme="https://blog.esing.dev/tags/%E5%8D%8A%E5%AF%BC%E4%BD%93%E7%89%A9%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>星之终途</title>
-    <link href="https://blog.esing.dev/2025/02/19/gamelife-ste/"/>
-    <id>https://blog.esing.dev/2025/02/19/gamelife-ste/</id>
-    <published>2025-02-19T11:43:48.000Z</published>
-    <updated>2025-04-02T04:10:02.294Z</updated>
-    
-    <content type="html"><![CDATA[<table style='display: table; border-collapse: collapse; margin: auto; background-color: transparent; border-color: transparent; width: auto'>    <tbody>        <tr>            <td                style='                    vertical-align: top;                    color: #9AB1B2;                    font-size: 36px;                    font-family: "Times New Roman", serif;                    font-weight: bold;                    text-align: left;                    padding: 10px 10px;                    line-height: 100%;                    border: transparent;                '                class='fr-bold-eedb028e'            >              “            </td>            <td style='text-align: left; padding: 1em; vertical-align: middle; border: transparent'>                <b class='fr-bold-eedb028e' style='color: #9AB1B2;'                    ><span lang='ja' class='fr-bold-eedb028e'>Even if humanity dies, the machines we have created will inherit our love and create the future.</span><br class='fr-bold-eedb028e' /><big class='fr-bold-eedb028e'                        ><big class='fr-bold-eedb028e'>即使人类消亡，我们创制的机器也将继承我们的爱并创造未来。</big></big                    ></b                >            </td>            <td                style='                    vertical-align: bottom;                    color: #9AB1B2;                    font-size: 36px;                    font-family: "Times New Roman", serif;                    font-weight: bold;                    text-align: left;                    padding: 10px 10px;                    line-height: 100%;                    border: transparent;                '                class='fr-bold-eedb028e'            >                ”            </td>        </tr>    </tbody></table>    <div id="aplayer-OiyNZSuj" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="1990182377" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ff80ac" data-volume="0.3" data-loop="none"    ></div><hr><h2 id="前言">前言</h2><p>《星之终途》（終のステラ）是Key社旗下“Kinetic Novel”视觉小说系列的第五作，由田中罗密欧负责剧本。当时LOOPERS一出就去体验了，只能说不愧是龙骑士07，开头就给我整困了。但这一作的剧情倒是从头到尾都很吸引人。这也是我玩过的为数不多的全年龄佳作了吧。</p><h2 id="剧情俗套但管用">剧情俗套但管用</h2><p>看Steam简介的第一印象就是“什么？这不是我们ATRI吗？”两作时间上也比较接近：ATRI是20年的，而《星之终途》只隔了两年，可能或多或少也受了ATRI的影响。此外，故事背景与女主年龄也是及其相近——是因为末日风与美少女机器人更搭吗？</p><p>如果说ATRI是那种中途发把刀的布局，《星之终途》则是那种水到渠成的伤感。和看到一半心脏作痛不同，阅读完整篇故事，会有一种怅然若失却又满足的感觉。结局并不是美好的大团圆，但却是一个好结局——如《罪恶王冠》一般。</p><p><strong>“即便如此，人类依旧在这颗星球上顽强生存。”</strong></p><h2 id="华丽的特效，视觉的享受">华丽的特效，视觉的享受</h2><p>《星之终途》更应当被定义为“视觉小说”，毕竟故事是单线，又无明确的恋人之爱。此外，视觉上带来的，是前所未有的震撼。</p><p>游戏的系统设置极为干净，游戏内UI也十分精致——切换时的特效很有未来风。此外，退出到游戏菜单时的音效甚至是立体声，有左右耳贯穿的感觉，这是难能可贵的。目前玩过的带立体声（音效/配音）的，除了《星之终途》，应该只有音符社家的八女儿《星之少女与六华的姐妹》了。</p><p>除了UI，占据画面最多的便是CG了。不同于Galgame的界面是人物居中文字靠下，视觉小说则是以整个屏幕为文本框，背景则是人物CG。</p><p>《星之终途》的背景CG极为精细，末世感很足。</p><div class="gallery">    <div class="fj-gallery  data" data-rowHeight="220" data-limit="10">    <span class="gallery-data">[{"url":"https://pic.esing.dev/img/ste-bg46_250225_2027_qNs5.avif","alt":""},{"url":"https://pic.esing.dev/img/ste-bg05_250223_0054_RhbE.avif","alt":""},{"url":"https://pic.esing.dev/img/ste-bg03_250223_0054_hzTI.avif","alt":""},{"url":"https://pic.esing.dev/img/ste-bg20_250223_0054_d1yM.avif","alt":""}]</span>    </div>    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>    </div><p>天真烂漫的少女，在这绝望的背景上涂抹上了一笔“希望”。这种反差感，更能触动玩家的心灵。</p><h2 id="篇幅虽短，人物却丰满">篇幅虽短，人物却丰满</h2><p>Key很擅长讲短篇故事。可能是因为心里描写偏多，即使是小短篇，每个角色的形象却十分立体。如果说末日之下的世界笼罩着乌云，那菲莉娅的天真无邪就是射入乌云中的一束曙光。不谙世事的单纯性格也使得裘德困扰。两人间的冲突，也是两人截然不同的性格间的碰撞。理想主义者遇到现实主义者是这样的。</p><img src="https://webp.esing.dev/img/Screenshot_2025-01-27-19-36-52-051_com.akira.tyranoemu_250225_2003_WApF.jpg" alt="笑" style="zoom: 50%;" /><h2 id="极具氛围感的音乐">极具氛围感的音乐</h2><p>Key的音乐一直是顶尖水准。虽然不是大魔王操刀，但依旧很有Key味。</p>    <div id="aplayer-KYFAqinL" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="1990182378" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ff80ac" data-volume="0.3" data-loop="none"    ></div><p>空灵的旋律重复给人一种神秘而又紧张之感，宛如孤身一人处于茂密的森林中，拨开树枝与灌木，去探寻前方的“未知”……</p>    <div id="aplayer-dThUxrla" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="1990185051" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ff80ac" data-volume="0.3" data-loop="none"    ></div><p>每次旋律响起就忍不住笑了。悠扬的管乐给人一种俏皮活泼的感觉。</p><h2 id="评分">评分</h2><ul><li><p>画面：8 + 0.5华丽的UI与特效 + 0.5精致的CG +0.5结尾ED = 9</p><blockquote><p>与Galgame的风格完全不同。视觉演出效果很棒。</p><p>结尾的ED太惊艳了。静静听着歌曲，感觉时间都停滞了。</p></blockquote></li><li><p>声乐：9 + 0.5环绕声 = 9.5</p><blockquote><p>配音非常出色，声线也控制的很好。此外男主角也有配音。</p></blockquote></li><li><p>系统：8 + 0.5UI特效 = 8.5</p><blockquote><p>毕竟是小短篇，也没有选择支啥的。不过只有快进但是没有重放上一句还是有点可惜。</p><p>每一章开始时的地图动效很有意思，给人一种身临其境向着目标前进的感觉。</p></blockquote></li><li><p>剧本：9.5</p><blockquote><p>你永远可以相信Key社的故事——可能有刀，但是会让人感到温暖。</p><p>整体的故事节奏把握的很好，不拖沓也不算紧凑，主线中穿插一点轻松的日常，能让人会心一笑那种。</p><p>虽然整体流程偏短（自动模式6-8h），但好的短篇不会让人遗憾（点名表扬夏洛特）</p></blockquote></li><li><p>人物：8 +0.5菲莉娅 = 8.5</p><blockquote><p>我本想说点什么的，但是菲莉娅太可爱了。难道中国人真的是人均白毛控吗？</p></blockquote></li><li><p><strong>综合：9</strong></p><blockquote><p>全年龄向中的优秀作品，体量偏小也掩盖不住其闪光点。感谢Artemis引擎的可移植性，即使是手机也可以游玩。感觉Artemis和Ren'Py有望取代Krkr了，不过Krkr胜在游戏多与易破解，虽然BUG也不少（点击就看<a href="https://www.bilibili.com/video/av533175116/">在原七海高射炮打饺</a>）。<s>什么B动静啊（电棍音）</s></p><p>真要挑缺点的话，可能就是正版偏贵了。即使是史低也要42，还是有点肉痛的。<s>这么多年都是这个价格，哪里贵了？不要睁着眼睛乱说，旮旯给姆品牌很难的。</s></p></blockquote></li></ul><h2 id="后记">后记</h2><blockquote><p>2025.03.04 Steam视觉小说游戏节特卖开了，星之终途直接新史低五折。原本想入，结果好友说帮我买了当礼物送我🥰🥰谢谢*@RainaYoung*</p></blockquote>]]></content>
-    
-    
-    <summary type="html">Even if humanity dies, the machines we have created will inherit our love and create the future.</summary>
-    
-    
-    
-    <category term="忆语游心" scheme="https://blog.esing.dev/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"/>
-    
-    
-    <category term="Galgame" scheme="https://blog.esing.dev/tags/Galgame/"/>
-    
-    <category term="星之终途" scheme="https://blog.esing.dev/tags/%E6%98%9F%E4%B9%8B%E7%BB%88%E9%80%94/"/>
     
   </entry>
   

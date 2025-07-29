@@ -1,5 +1,6 @@
-https://blog.esing.dev/2025/07/05/travel-in-lanzhou/
 https://blog.esing.dev/2024/10/28/playedgalgamelist/
+https://blog.esing.dev/2025/07/25/mpv-lazy-conf/
+https://blog.esing.dev/2025/07/05/travel-in-lanzhou/
 https://blog.esing.dev/2025/05/08/travel-in-luoyang/
 https://blog.esing.dev/2025/03/07/gp-klipper/
 https://blog.esing.dev/2024/07/16/travel-in-chengdu/
