@@ -1,3 +1,4 @@
+https://blog.esing.dev/2025/08/12/travel-in-shanghai/
 https://blog.esing.dev/2025/09/16/vd-p1/
 https://blog.esing.dev/2024/04/20/dsd-p9/
 https://blog.esing.dev/2024/01/18/vscode-verilog-setup/
@@ -6,7 +7,6 @@ https://blog.esing.dev/2025/09/16/vd-intro/
 https://blog.esing.dev/2025/07/25/mpv-lazy-conf/
 https://blog.esing.dev/2024/10/28/playedgalgamelist/
 https://blog.esing.dev/2025/01/28/travel-in-harbin/
-https://blog.esing.dev/2025/08/12/travel-in-shanghai/
 https://blog.esing.dev/2023/04/22/vivado-problem/
 https://blog.esing.dev/2023/04/20/link-to-windows/
 https://blog.esing.dev/2024/08/28/xmousebuttoncontrol/
