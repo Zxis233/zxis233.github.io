@@ -2329,16 +2329,17 @@
     unicode-range: U+0, U+D, U+20-55, U+57-58, U+5B, U+5D, U+5F, U+6F, U+7B-7E;
 }
 
-#article-container figure.highlight.verilog td.code {
-    font-family: "Maple Mono NF CN" !important;
-    font-feature-settings: "calt" 1, "cv01" 1, "cv63" 1 !important;
-    font-weight: normal;
-}
+
 
 #article-container pre,
 #article-container code {
-    /* font-family: "JetBrains Mono", "Noto Sans SC" !important; */
     font-family: "Maple Mono NF CN" !important;
     font-feature-settings: "calt" 1, "cv01" 1;
+    font-weight: normal;
+}
+
+#article-container figure.highlight.verilog td.code pre {
+    font-family: "Maple Mono NF CN" !important;
+    font-feature-settings: "calt" 1, "cv01" 1, "cv63" 1 !important;
     font-weight: normal;
 }
