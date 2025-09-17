@@ -1385,12 +1385,9 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Noto Sans SC", sans-serif;
   line-height: 1.8;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
-  text-shadow: 0 0 0.75px rgba(128,128,128,0.753);
+  text-shadow: 0 0 0.75px rgba(124,124,124,0.867);
 }
 @media screen and (max-width: 768px) {
-  body {
-    text-shadow: 0 0 0px rgba(128,128,128,0.627);
-  }
 }
 *::-webkit-scrollbar {
   width: 5px;
