@@ -1,4 +1,5 @@
 https://blog.esing.dev/2025/09/17/vd-p2/
+https://blog.esing.dev/2024/08/16/dcmos-intro/
 https://blog.esing.dev/2025/09/16/vd-intro/
 https://blog.esing.dev/2025/09/16/vd-p1/
 https://blog.esing.dev/2025/09/17/nonblocking-display/
@@ -121,7 +122,6 @@ https://blog.esing.dev/2024/04/18/dsd-p3/
 https://blog.esing.dev/2024/04/28/dsd-p14/
 https://blog.esing.dev/2024/04/25/dsd-p13/
 https://blog.esing.dev/2024/11/02/dcmos-p9/
-https://blog.esing.dev/2024/08/16/dcmos-intro/
 https://blog.esing.dev/2024/11/01/dcmos-p8/
 https://blog.esing.dev/2024/11/03/dcmos-p10/
 https://blog.esing.dev/2024/10/09/dcmos-p6/
