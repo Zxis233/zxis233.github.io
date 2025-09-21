@@ -1,4 +1,5 @@
 https://blog.esing.dev/2025/09/17/vd-p2/
+https://blog.esing.dev/2024/10/06/index-for-study/
 https://blog.esing.dev/2024/08/16/dcmos-intro/
 https://blog.esing.dev/2025/09/16/vd-intro/
 https://blog.esing.dev/2025/09/16/vd-p1/
@@ -72,7 +73,6 @@ https://blog.esing.dev/2025/03/20/dlc-intro/
 https://blog.esing.dev/2025/01/22/gamelife-irosekai/
 https://blog.esing.dev/2025/01/02/rpi-yolo5/
 https://blog.esing.dev/2024/04/18/eink-app-suggestion/
-https://blog.esing.dev/2024/10/06/index-for-study/
 https://blog.esing.dev/2025/01/26/gofrp/
 https://blog.esing.dev/2025/01/15/wsnl/
 https://blog.esing.dev/2025/01/10/headphone-power-calculator/
