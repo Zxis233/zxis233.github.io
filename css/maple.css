@@ -1,10 +1,10 @@
 #article-container pre,
 #article-container code {
     font-family: "Maple Mono NF CN" !important;
-    font-feature-settings: "calt" 1, "cv01" 1, "cv61" 1, "cv62" 1;
+    font-feature-settings: "calt" 1, "cv01" 1, "cv02" 1, "cv61" 1, "cv62" 1, "cv66" 1, "ss03" 1;
     font-weight: normal;
 }
 
 #article-container figure.highlight.verilog td.code pre {
-    font-feature-settings: "cv63" 1, "calt" 1, "cv01" 1, "cv61" 1, "cv62" 1 !important;
+    font-feature-settings: "cv63" 1, "calt" 1, "cv01" 1, "cv02" 1, "cv61" 1, "cv62" 1, "cv66" 1, "ss03" 1 !important;
 }
