@@ -8,3 +8,18 @@
 #article-container figure.highlight.verilog td.code pre {
     font-feature-settings: "cv63" 1, "calt" 1, "cv01" 1, "cv02" 1, "cv61" 1, "cv62" 1, "cv66" 1, "ss03" 1 !important;
 }
+
+.mermaid {
+    text-align: center !important;
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.mermaid svg {
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+#article-container pre.mermaid {
+    background: transparent !important;
+}
