@@ -5668,7 +5668,7 @@ blockquote.pullquote.right {
   --hlnumber-color: rgba(255,255,255,0.4);
   --hlscrollbar-bg: #1f1f1f;
   --hlexpand-bg: linear-gradient(180deg, rgba(23,23,23,0.6), rgba(23,23,23,0.9));
-  --scrollbar-color: #1f1f1f;
+  --scrollbar-color: rgba(255,128,172,0.6);
   --timeline-bg: #1f1f1f;
 }
 [data-theme='dark'] #web_bg:before,
@@ -5727,10 +5727,13 @@ blockquote.pullquote.right {
   filter: brightness(0.8);
 }
 [data-theme='dark'] img {
-  filter: blur(0) brightness(0.8);
+  filter: blur(0) brightness(0.6);
 }
 [data-theme='dark'] #aside-content .aside-list > .aside-list-item:not(:last-child) {
   border-bottom: 1px dashed rgba(255,255,255,0.1);
+}
+[data-theme='dark'] #aside-content #card-toc .toc-content .toc-link.active {
+  background-color: rgba(28,180,128,0.5);
 }
 [data-theme='dark'] #gitalk-container {
   filter: brightness(0.8);

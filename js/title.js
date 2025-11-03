@@ -3,7 +3,7 @@ document.addEventListener("visibilitychange", function () {
         normal_title = document.title;
         let titleState = 0;
         titleInterval = setInterval(() => {
-            document.title = titleState == 2 ? " Ciallo~ (∠・ω< )⌒☆!" : titleState == 1 ? "♪~(¯◡◝)  啥时再来看看我 . . ." : normal_title;
+            document.title = titleState == 2 ? " Ciallo~ (∠・ω< )⌒★!" : titleState == 1 ? "♪~(¯◡◝)  啥时再来看看我 ..." : normal_title;
             titleState = titleState == 2 ? 0 : titleState + 1;
         }, 8000);
     } else {

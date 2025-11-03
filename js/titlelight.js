@@ -1,38 +1,86 @@
-// var arr = ["#39c5bb", "#f14747", "#f1a247", "#f1ee47", "#b347f1", "#1edbff", "#ed709b", "#5636ed"],
-//     idx = 0;
-// function changeColor() {
-//     "dark" == document.getElementsByTagName("html")[0].getAttribute("data-theme")
-//         ? ((document.getElementsByClassName("site-name")[0].style.textShadow = arr[idx] + " 0 0 20px"),
-//           (document.getElementById("site-title").style.textShadow = arr[idx] + " 0 0 20px"),
-//           (document.getElementById("subtitle").style.textShadow = arr[idx] + " 0 0 20px"),
-//           (document.getElementsByClassName("author-info__name")[0].style.textShadow = arr[idx] + " 0 0 15px"),
-//           (document.getElementsByClassName("author-info__description")[0].style.textShadow = arr[idx] + " 0 0 15px"),
-//           8 == ++idx && (idx = 0))
-//         : ((document.getElementByClassName("site-name")[0].style.textShadow = "#1e1e1ee0 1px 1px 1px"),
-//           (document.getElementById("site-title").style.textShadow = "#1e1e1ee0 1px 1px 1px"),
-//           (document.getElementById("subtitle").style.textShadow = "#1e1e1ee0 1px 1px 1px"),
-//           (document.getElementsByClassName("author-info__name")[0].style.textShadow = ""),
-//           (document.getElementsByClassName("author-info__description")[0].style.textShadow = ""));
-// }
-// window.setInterval(changeColor, 1200);
-
 var hue = 0;
+var cachedElements = null;
+var intervalId = null;
 
-function changeColor() {
-    var color = `hsl(${hue}, 73%, 50%)`;
-    hue = (hue + 6) % 360; // 色相值在0到360之间循环
-
-    "dark" == document.getElementsByTagName("html")[0].getAttribute("data-theme")
-        ? ((document.getElementById("site-name").style.textShadow = `${color} 0 0 16px`),
-          (document.getElementsByClassName("author-info__name")[0].style.textShadow = `${color} 0 0 16px`),
-          (document.getElementsByClassName("author-info__description")[0].style.textShadow = `${color} 0 0 16px`),
-          (document.getElementById("site-title").style.textShadow = `${color} 0 0 20px`),
-          (document.getElementById("subtitle").style.textShadow = `${color} 0 0 20px`))
-        : ((document.getElementById("site-name").style.textShadow = "none"),
-          (document.getElementsByClassName("author-info__name")[0].style.textShadow = ""),
-          (document.getElementsByClassName("author-info__description")[0].style.textShadow = ""),
-          (document.getElementById("site-title").style.textShadow = "2px 2px 4px rgba(0,0,0,0.15)"),
-          (document.getElementById("subtitle").style.textShadow = "2px 2px 4px rgba(0,0,0,0.15)"));
+// 初始化并缓存 DOM 元素
+function initElements() {
+    var isFullPage = document.querySelector('.full_page') !== null;
+    var isPostPage = document.body.querySelector('.post') !== null;
+    
+    return {
+        siteName: document.getElementById("site-name"),
+        authorName: document.getElementsByClassName("author-info__name")[0],
+        authorDesc: document.getElementsByClassName("author-info__description")[0],
+        subtitle: document.getElementById("subtitle"),
+        titleElement: isPostPage 
+            ? document.querySelector(".post-title") 
+            : document.getElementById("site-title"),
+        isFullPage: isFullPage,
+        htmlElement: document.getElementsByTagName("html")[0]
+    };
 }
 
-window.setInterval(changeColor, 1000);
+function changeColor() {
+    // 首次调用时初始化缓存
+    if (!cachedElements) {
+        cachedElements = initElements();
+    }
+    
+    var color = `hsl(${hue}, 73%, 50%)`;
+    hue = (hue + 6) % 360; // 色相值在0到360之间循环
+    
+    var isDarkTheme = "dark" == cachedElements.htmlElement.getAttribute("data-theme");
+    var elements = cachedElements;
+
+    if (elements.titleElement) elements.titleElement.style.textShadow = `${color} 0 0 20px`;
+    if (elements.isFullPage && elements.subtitle) {
+        elements.subtitle.style.textShadow = `${color} 0 0 20px`;
+    }
+
+    if (isDarkTheme) {
+        if (elements.siteName) elements.siteName.style.textShadow = `${color} 0 0 16px`;
+        if (elements.authorName) elements.authorName.style.textShadow = `${color} 0 0 16px`;
+        if (elements.authorDesc) elements.authorDesc.style.textShadow = `${color} 0 0 16px`;
+    } else {
+        if (elements.siteName) elements.siteName.style.textShadow = "none";
+        if (elements.authorName) elements.authorName.style.textShadow = "";
+        if (elements.authorDesc) elements.authorDesc.style.textShadow = "";
+    }
+}
+
+// 启动动画
+function startAnimation() {
+    if (!intervalId) {
+        intervalId = window.setInterval(changeColor, 500);
+    }
+}
+
+// 停止动画
+function stopAnimation() {
+    if (intervalId) {
+        window.clearInterval(intervalId);
+        intervalId = null;
+    }
+}
+
+// 页面可见性检测 - 页面隐藏时停止动画以节省资源
+document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+        stopAnimation();
+    } else {
+        startAnimation();
+    }
+});
+
+// PJAX 页面切换时重新初始化
+document.addEventListener('pjax:complete', function() {
+    cachedElements = null; // 清除缓存，强制重新获取 DOM 元素
+});
+
+// 如果使用的是其他路由方式，也监听相应事件
+document.addEventListener('DOMContentLoaded', function() {
+    cachedElements = null; // 页面加载完成时重新初始化
+});
+
+// 启动动画
+startAnimation();
