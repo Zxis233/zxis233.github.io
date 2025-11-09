@@ -6,7 +6,7 @@
   <link href="https://blog.esing.dev/atom.xml" rel="self"/>
   
   <link href="https://blog.esing.dev/"/>
-  <updated>2025-11-09T02:06:35.538Z</updated>
+  <updated>2025-11-09T07:35:05.889Z</updated>
   <id>https://blog.esing.dev/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://blog.esing.dev/2025/11/08/vd-p6/"/>
     <id>https://blog.esing.dev/2025/11/08/vd-p6/</id>
     <published>2025-11-08T15:22:28.000Z</published>
-    <updated>2025-11-09T02:06:35.538Z</updated>
+    <updated>2025-11-09T07:35:05.889Z</updated>
     
-    <content type="html"><![CDATA[<div class="note info flat"><p>应付一下应试。</p></div><h2 id="缩写">缩写</h2><ul><li><strong>PLA</strong>: Programmable Logic Array</li><li><strong>PAL</strong>: Programmable Array Logic</li><li><strong>PLD</strong>: Programmable Logic Device</li><li><strong>ROM</strong>: Read-Only Memory</li><li><strong>RAM</strong>: Random Access Memory</li><li><strong>ALU</strong>: Arithmetic Logic Unit</li><li><strong>IEEE</strong>: Institute of Electrical and Electronics Engineers</li><li><strong>VHDL</strong>: VHSIC Hardware Description Language</li><li><strong>CMOS</strong>: Complementary Metal Oxide Semiconductor</li><li><strong>FPGA</strong>: Field-Programmable Gate Array</li><li><strong>RISC</strong>: Reduced Instruction Set Computer</li><li><strong>CISC</strong>: Complex Instruction Set Computer</li><li><strong>DSA</strong>: Domain Specific Architecture</li><li><strong>SoC</strong>: System on Chip</li><li><strong>FP</strong>: Float Point</li><li><strong>ISA</strong>: Instruction Set Architecture</li></ul>]]></content>
+    <content type="html"><![CDATA[<div class="note info flat"><p>应付一下应试。</p></div><h2 id="缩写">缩写</h2><ul><li><p><strong>PLA</strong>: Programmable Logic Array</p></li><li><p><strong>PAL</strong>: Programmable Array Logic</p></li><li><p><strong>PLD</strong>: Programmable Logic Device</p></li><li><p><strong>ROM</strong>: Read-Only Memory</p></li><li><p><strong>RAM</strong>: Random Access Memory</p></li><li><p><strong>ALU</strong>: Arithmetic Logic Unit</p></li><li><p><strong>IEEE</strong>: Institute of Electrical and Electronics Engineers</p></li><li><p><strong>VHDL</strong>: VHSIC Hardware Description Language</p></li><li><p><strong>CMOS</strong>: Complementary Metal Oxide Semiconductor</p></li><li><p><strong>FPGA</strong>: Field-Programmable Gate Array</p></li><li><p><strong>RISC</strong>: Reduced Instruction Set Computer</p></li><li><p><strong>CISC</strong>: Complex Instruction Set Computer</p></li><li><p><strong>DSA</strong>: Domain Specific Architecture</p></li><li><p><strong>SoC</strong>: System on Chip</p></li><li><p><strong>FP</strong>: Float Point</p></li><li><p><strong>ISA</strong>: Instruction Set Architecture</p></li><li><p><strong>RTC</strong>: Real-Time Clock</p></li><li><p><strong>SPI</strong>: Serial Peripheral Interface</p></li><li><p><strong>PMC</strong>: Power Management Controller</p></li><li><p><strong>DMA</strong>: Direct Memory Access</p></li><li><p><strong>123</strong></p></li></ul>]]></content>
     
     
       
@@ -32,7 +32,8 @@
 &lt;/div&gt;
 &lt;h2 id=&quot;缩写&quot;&gt;缩写&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;PLA&lt;/strong&gt;:</summary>
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;PLA&lt;/stro</summary>
       
     
     

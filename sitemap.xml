@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.esing.dev/2025/11/08/vd-p6/</loc>
+    
+    <lastmod>2025-11-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.esing.dev/2025/09/17/vd-p2/</loc>
     
     <lastmod>2025-11-09</lastmod>
@@ -12,15 +21,6 @@
   
   <url>
     <loc>https://blog.esing.dev/2025/09/28/vd-p3/</loc>
-    
-    <lastmod>2025-11-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.esing.dev/2025/11/08/vd-p6/</loc>
     
     <lastmod>2025-11-09</lastmod>
     
