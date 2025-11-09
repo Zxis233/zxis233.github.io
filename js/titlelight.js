@@ -12,9 +12,12 @@ function initElements() {
         authorName: document.getElementsByClassName("author-info__name")[0],
         authorDesc: document.getElementsByClassName("author-info__description")[0],
         subtitle: document.getElementById("subtitle"),
-        titleElement: isPostPage 
-            ? document.querySelector(".post-title") 
-            : document.getElementById("site-title"),
+        siteTitle: document.getElementById("site-title"),
+        postTitle: document.querySelector(".post-title"),
+        postMeta: document.getElementById("post-meta"),
+        // titleElement: isPostPage 
+        //     ? document.querySelector(".post-title") 
+        //     : document.getElementById("site-title"),
         isFullPage: isFullPage,
         htmlElement: document.getElementsByTagName("html")[0]
     };
@@ -32,7 +35,10 @@ function changeColor() {
     var isDarkTheme = "dark" == cachedElements.htmlElement.getAttribute("data-theme");
     var elements = cachedElements;
 
-    if (elements.titleElement) elements.titleElement.style.textShadow = `${color} 0 0 20px`;
+    if (elements.siteTitle) elements.siteTitle.style.textShadow = `${color} 0 0 20px`;
+    if (elements.postTitle) elements.postTitle.style.textShadow = `${color} 0 0 20px`;
+    if (elements.postMeta)  elements.postMeta.style.textShadow  = `${color} 0 0 8px`;
+
     if (elements.isFullPage && elements.subtitle) {
         elements.subtitle.style.textShadow = `${color} 0 0 20px`;
     }
