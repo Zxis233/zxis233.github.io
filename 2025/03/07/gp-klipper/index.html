@@ -1,0 +1,491 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Klipper配置i3结构打印机调试过程踩坑 | Esing的小站</title><meta name="author" content="Esing"><meta name="copyright" content="Esing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="开！将电机逆转吧！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Klipper配置i3结构打印机调试过程踩坑">
+<meta property="og:url" content="https://blog.esing.dev/2025/03/07/gp-klipper/index.html">
+<meta property="og:site_name" content="Esing的小站">
+<meta property="og:description" content="开！将电机逆转吧！">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.esing.dev/img/1741313878918_250307_1018_gmT9.jpg">
+<meta property="article:published_time" content="2025-03-07T02:10:43.000Z">
+<meta property="article:modified_time" content="2025-06-08T13:54:52.000Z">
+<meta property="article:author" content="Esing">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="Klipper">
+<meta property="article:tag" content="3D打印">
+<meta property="article:tag" content="踩坑">
+<meta property="article:tag" content="树莓派">
+<meta property="article:tag" content="嘉立创">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.esing.dev/img/1741313878918_250307_1018_gmT9.jpg"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://blog.esing.dev/2025/03/07/gp-klipper/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;1aabda1500704262b993096aaa3b5c27&quot;}"></script><link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto+Sans+SC" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":1000,"position":"top","messagePrev":"本文最后更新于","messageNext":"天前，部分内容可能已过时。"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":380},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":100,"languages":{"author":"作者: Esing","link":"链接: ","source":"来源: Esing的小站","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Klipper配置i3结构打印机调试过程踩坑',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-06-08 21:54:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 8 || hour >= 24
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css"><link rel="stylesheet" href="/css/iconfont.css"><link rel="preload" as="style" crossorigin href="https://fontsapi.zeoseven.com/442/main/result.css" onload="this.rel='stylesheet'" onerror="this.href='https://fontsapi-storage.zeoseven.com/442/main/result.css'" /><link rel="preload" as="style" crossorigin href="https://fontsapi.zeoseven.com/442/main/result.css" onload="this.rel='stylesheet'" onerror="this.href='https://fontsapi-storage.zeoseven.com/442/main/result.css'" /><link rel="stylesheet" href="/css/maple.css"><link rel="stylesheet" href="/css/mycustom.css"><script src="/js/autoload.js"></script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Esing的小站" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="/css/load.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">184</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">178</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-lightbulb"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://pic.esing.dev/img/1741313878918_250307_1018_gmT9.jpg')"><nav id="nav"><span id="blog-info"><a class="site-name" id="site-name" href="/" title="Esing的小站">Esing的小站</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-lightbulb"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><center id="name-container"></center><a id="page-name" href="javascript:scrollToTop()"></a><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Klipper配置i3结构打印机调试过程踩坑</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-03-07T02:10:43.000Z" title="发表于 2025-03-07 10:10:43">2025-03-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-06-08T13:54:52.000Z" title="更新于 2025-06-08 21:54:52">2025-06-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>13分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Klipper配置i3结构打印机调试过程踩坑"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="前言">前言</h2>
+<p>毕设第一部分就是把<s>上古时代的宝贝</s>一台3D打印机从原来的<a target="_blank" rel="noopener" href="https://marlinfw.org/">Marlin</a>固件换成<a target="_blank" rel="noopener" href="https://www.klipper3d.org/">Klipper</a>固件。我也是第一次接触DIY打印机，特此记录一下过程。</p>
+<h2 id="下位机驱动板">下位机驱动板</h2>
+<p><a target="_blank" rel="noopener" href="https://oshwhub.com/ke-le-rfid/ji-yu-rp2040zero-di-si-zhou#5">基于rp2040zero的四轴3d打印机控制板 - 立创开源广场</a></p>
+<p>这板子没有无限位调零，因此自己又画了一版，参考<a target="_blank" rel="noopener" href="https://oshwhub.com/yoshino/rp2040-spi-tong-xun-da-yin-ji-zhi-cha-jian-zhu-ban">RP2040直插王Klipper 4轴3D打印机主板 Voron - 立创开源广场</a>和上面的项目画成。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20250312113927273_250312_1139_jCtS.png" alt="画了整整五天才好 连线头都大了" style="zoom:50%;" />
+<p>可惜沉金面积太大了不能免费沉金。先做了打样，等测试没问题就再打彩色丝印+沉金~</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20250312114109902_250312_1141_Mcq4.png" alt="彩色丝印就是好看啊！" style="zoom:50%;" />
+<p><code>2025.03.13</code>拿到打样板了，只能说还好测试了一下。温度引脚全画错了，本来只能接到ADC的GPIO上，我直接接到普通的GPIO了。SPI的接法也不好。重新走了几个引脚的线画了一遍。</p>
+<p>RGB确实好看。RGB是对的，不是乱搞我跟你们讲。</p>
+<p>正面丝印太多了，图片又是暗色系，容易看不清丝印，干脆正面不放彩色丝印了。后面还能拿这个找老师签名（？）</p>
+<p><code>2025.03.14</code>我真傻，真的，我单知道彩色丝印能放图片，我忘了也可以单独修改丝印颜色的。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/gp-pcb-front_250319_1323_idAg.png" alt="彩色丝印超好看！" style="zoom: 25%;" />
+<p><code>2025.03.22</code>啥比了，忘了管子要走大电流了，接地引脚与地的连线有点窄，是默认的10mil。算了下勉强能用。</p>
+<p><code>2025.03.24</code>更啥比了，发现SPI画错了，电源部分也有些问题，血亏54。重新打板了，复试考完就开干。</p>
+<p><code>2025.03.30</code>板子到啦！一个下午焊完了，直接就去测试了。一遍通过！不过Klipper的源代码里对SPI定义有区别，我又重新拉了源码自己编译的。</p>
+<p><code>2025.03.31</code>还是有地方画的不好。四个螺丝孔忘记接地了😼</p>
+<h2 id="热床">热床</h2>
+<p>折腾了一周放弃冷打印台了。固体胶压根粘不住，轻轻一推就会掉。看了一圈，没有160x160的热床，于是打算自己画一个。还好嘉立创还能免费打样做铝基板，无敌。</p>
+<p>先买一下电源线。查一下AWG对应电流表：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/awg_table_250407_1024_nNZT.webp" alt="AWG对应线缆规格" style="zoom: 50%;" />
+<p>因为保险丝是7.5A的，因此买最大电流9A的AWG14即可。</p>
+<p>随后是热床板子。直接画成90x90mm的，之后在角落留出焊接的地方，四块拼一下就行。</p>
+<p>在开源广场上搜了一下，找到一个不错的项目，可以一键生成<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Hilbert_curve">希尔伯特曲线</a>：<a target="_blank" rel="noopener" href="https://oshwhub.com/jusha/xi-er-bo-te-qu-xian">希尔伯特曲线绘制插件 - 立创开源广场</a></p>
+<p>预留了热敏电阻的焊接/粘贴处。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20250407121239792_250407_1212_yJcK.png" alt="热床PCB" style="zoom: 33%;" />
+<p><code>2025.04.10</code>热床铝基板到啦！串联四片+焊接电源线后测阻值，约为2.6Ω，电流在安全范围内，因此总功率约为55W。升温有点慢。焊接的时候烙铁功率上不去，焊点都化不开。话说这AWG14的线是真的粗。感觉买6A的都够了。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/1744295138935_250410_2226_JZkR.jpg" alt="四片拼一片，大小刚好能被夹住" style="zoom: 25%;" />
+<h2 id="喉管与散热">喉管与散热</h2>
+<p>最开始的时候，一打印就堵头，然后只能回抽抽出来把前面一段耗材剪掉。分析了下原因，是因为耗材顶到黄铜喷嘴出不去，结果前端软化变大了。</p>
+<p>更换了新的CR10打印热端与特氟龙管，将管子深深插入喉管，顶出来一点，再把黄铜喷嘴拧到加热块上面，顶在特氟龙管上。然后把原来原装的风扇扔了，换上新买的4cm静音风扇，之后很长一段时间再也没堵过。</p>
+<p>堵头发生的原因基本都是软化后的耗材丝没有第一时间从挤出口出去，结果冷却映画堵住了挤出口。一味抬高打印头与打印平面的距离是没有用的，既不能太高也不能太低。首层可以稍微抬一点，挂住就行，后面需要往下压一点，确保挤出的耗材能挂住先前打印的地方。</p>
+<p>此外，如果调平做的不是特别好，或者打印过程中有悬空的地方，也会导致本应挂上耗材的地方走空，导致挤出口堵住。</p>
+<h2 id="电机散热">电机散热</h2>
+<p>按理来说电机过热是会发生丢步现象的。原来的电机没散热片，手动画了铝基板，再贴上导热硅胶垫就行。感觉1mm的硅胶垫有点厚了，0.5mm就足够。</p>
+<p><code>2025.05.08</code>从洛阳回到西安了，嘉立创打样也到了。奈何晚上居然开始下大雨，还有冰雹，只能明天去测试了。</p>
+<h2 id="配置上位机环境">配置上位机环境</h2>
+<p>我是在虚拟机上装的，再将端口开放出来，本地访问。</p>
+<p>Vmware配置里选择nat即可，然后看一下虚拟网卡的IP。之前配置完后，可以从主机电脑远程SSH连接到虚拟机，但是虚拟机上不了网。手动修改一下DNS，改成主机的虚拟网卡地址，或者修改为腾讯的<code>223.5.5.5</code>即可。</p>
+<p>使用<a target="_blank" rel="noopener" href="https://github.com/dw-0/kiauh">dw-0/Kiauh: Klipper Installation And Update Helper</a>自动化配置。安装如下的组件：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20250310120817017_250310_1208_eBA1.png" alt="Kiauh安装组件" style="zoom:50%;" />
+<p>其中，KlipperScreen安装后会把你的桌面环境换成他那个触屏。如果是树莓派+触摸屏做上位机的话应该很舒服。普通电脑的话还是别装了。</p>
+<p>Fluidd默认会使用80端口，如果端口冲突了去NGINX配置目录里的<code>available-sites</code>修改一下监听端口就行。如果没有启动成功，去NGINX配置里加上<code>include /etc/nginx/sites-available/*;</code>即可。</p>
+<h2 id="编译并刷入固件">编译并刷入固件</h2>
+<p>Kiauh全部装完之后，进入Klipper文件夹开始编译固件。先配置一下：<code>make menuconfig</code></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20250310122320829_250310_1223_tw8Q.png" alt="编译配置" style="zoom:50%;" />
+<p><s>不知道能不能买块RP2350让学校报销</s></p>
+<p>编译完后的固件是UF2格式的。烧录也很简单：按住Boot上电会自动识别为U盘，拖入UF2固件即可。点名表扬某号称要平替Pico的国产RISC-V开发版，做到最后只有尺寸和引脚可以平替。</p>
+<h2 id="打印环境配置">打印环境配置</h2>
+<div class="note primary flat"><p>感谢*@SweetGingerGreen* 的无私帮助！</p>
+</div>
+<h3 id="运动轴配置">运动轴配置</h3>
+<p>这打印机是笛卡尔式（i3式）打印机，因此是XYZ轴+E端的挤出。</p>
+<p>XY轴就正常配置：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">[stepper_x]</span></span><br><span class="line"><span class="attr">step_pin</span>: <span class="string">gpio5              # 步进脉冲</span></span><br><span class="line"><span class="attr">dir_pin</span>: <span class="string">gpio6               # 加或者不加!改方向</span></span><br><span class="line"><span class="attr">enable_pin</span>: <span class="string">!gpio0           # 驱动使能</span></span><br><span class="line"><span class="attr">endstop_pin</span>: <span class="string">!gpio4          # 限位引脚</span></span><br><span class="line"><span class="attr">microsteps</span>: <span class="string">64               # 细分</span></span><br><span class="line"><span class="attr">rotation_distance</span>: <span class="string">40        # 电机转一圈步数mm</span></span><br><span class="line"><span class="attr">position_endstop</span>: <span class="string">0          # 限位位置</span></span><br><span class="line"><span class="attr">position_max</span>: <span class="string">150            # 最大行程</span></span><br><span class="line"><span class="attr">homing_speed</span>: <span class="string">30             # 回零速度</span></span><br><span class="line"></span><br><span class="line"><span class="attr">[stepper_y]</span></span><br><span class="line"><span class="attr">step_pin</span>: <span class="string">gpio16             # 步进脉冲</span></span><br><span class="line"><span class="attr">dir_pin</span>: <span class="string">!gpio2              # 加或者不加!改方向</span></span><br><span class="line"><span class="attr">enable_pin</span>: <span class="string">!gpio0           # 驱动使能</span></span><br><span class="line"><span class="attr">microsteps</span>: <span class="string">64               # 细分</span></span><br><span class="line"><span class="attr">rotation_distance</span>: <span class="string">40        # 电机转一圈步数mm</span></span><br><span class="line"><span class="attr">endstop_pin</span>: <span class="string">!gpio17         # 限位引脚</span></span><br><span class="line"><span class="attr">position_endstop</span>: <span class="string">130        # 限位位置</span></span><br><span class="line"><span class="attr">position_max</span>: <span class="string">130            # 最大行程</span></span><br><span class="line"><span class="attr">homing_speed</span>: <span class="string">30             # 回零速度</span></span><br></pre></td></tr></table></figure>
+<p>对于Z轴，需要测量丝杆的导程。正常的打印机应该导程都是4mm。</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">[stepper_z]</span></span><br><span class="line"><span class="attr">step_pin</span>: <span class="string">gpio20             # 步进脉冲</span></span><br><span class="line"><span class="attr">dir_pin</span>: <span class="string">!gpio19             # 加或者不加!改方向</span></span><br><span class="line"><span class="attr">enable_pin</span>: <span class="string">!gpio0           # 驱动使能</span></span><br><span class="line"><span class="attr">microsteps</span>: <span class="string">64               # 细分</span></span><br><span class="line"><span class="attr">rotation_distance</span>: <span class="string">8         # 丝杆导程mm</span></span><br><span class="line"><span class="attr">endstop_pin</span>: <span class="string">!gpio21         # 限位引脚</span></span><br><span class="line"><span class="attr">position_endstop</span>: <span class="string">0          # 限位位置</span></span><br><span class="line"><span class="attr">position_max</span>: <span class="string">180            # 最大行程</span></span><br><span class="line"><span class="attr">position_min</span>: <span class="string">-1             # 最小行程</span></span><br><span class="line"><span class="attr">homing_speed</span>: <span class="string">10             # 回零速度</span></span><br></pre></td></tr></table></figure>
+<h3 id="TMC2209电机驱动">TMC2209电机驱动</h3>
+<p>一开始使用的是复用UART的方法，四个模块共用一个UART地址位，随后手动插跳线帽来选择通讯地址：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">[tmc2209</span> <span class="string">stepper_x]</span></span><br><span class="line"><span class="attr">uart_pin</span>: <span class="string">gpio3               # UART通讯</span></span><br><span class="line"><span class="attr">uart_address</span>: <span class="string">0               # UART地址</span></span><br><span class="line"><span class="attr">interpolate</span>: <span class="string">False            # 微步插值256</span></span><br><span class="line"><span class="attr">run_current</span>: <span class="string">1.2              # 驱动输出电流</span></span><br><span class="line"><span class="attr">hold_current</span>: <span class="string">0.6             # 电机静止保持电流</span></span><br><span class="line"><span class="attr">stealthchop_threshold</span>: <span class="string">999999 # 静音阈值</span></span><br><span class="line"></span><br><span class="line"><span class="attr">[tmc2209</span> <span class="string">stepper_y]</span></span><br><span class="line"><span class="attr">uart_pin</span>: <span class="string">gpio18              # UART通讯</span></span><br><span class="line"><span class="attr">uart_address</span>: <span class="string">1               # UART地址</span></span><br><span class="line"><span class="attr">interpolate</span>: <span class="string">False            # 微步插值256</span></span><br><span class="line"><span class="attr">run_current</span>: <span class="string">1.2              # 驱动输出电流</span></span><br><span class="line"><span class="attr">hold_current</span>: <span class="string">0.6             # 电机静止保持电流</span></span><br><span class="line"><span class="attr">stealthchop_threshold</span>: <span class="string">999999 # 静音阈值</span></span><br></pre></td></tr></table></figure>
+<p>但后面重新绘制了开发版，每一个电机采用自己独立的UART地址，因此就不需要再这样画了：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">[tmc2209</span> <span class="string">stepper_x]</span></span><br><span class="line"><span class="attr">uart_pin</span>: <span class="string">gpio3               # UART通讯</span></span><br><span class="line"><span class="attr">interpolate</span>: <span class="string">False            # 微步插值256</span></span><br><span class="line"><span class="attr">run_current</span>: <span class="string">1.2              # 驱动输出电流</span></span><br><span class="line"><span class="attr">hold_current</span>: <span class="string">0.6             # 电机静止保持电流</span></span><br><span class="line"><span class="attr">stealthchop_threshold</span>: <span class="string">999999 # 静音阈值</span></span><br><span class="line"></span><br><span class="line"><span class="attr">[tmc2209</span> <span class="string">stepper_y]</span></span><br><span class="line"><span class="attr">uart_pin</span>: <span class="string">gpio18               # UART通讯</span></span><br><span class="line"><span class="attr">interpolate</span>: <span class="string">False            # 微步插值256</span></span><br><span class="line"><span class="attr">run_current</span>: <span class="string">1.2              # 驱动输出电流</span></span><br><span class="line"><span class="attr">hold_current</span>: <span class="string">0.6             # 电机静止保持电流</span></span><br><span class="line"><span class="attr">stealthchop_threshold</span>: <span class="string">999999 # 静音阈值</span></span><br></pre></td></tr></table></figure>
+<div class="note info flat"><p>现在似乎倾向于不指定<code>hold_current</code>了。等之后注释掉再重新试一试。</p>
+<p><code>2025.04.09</code>似乎注释之后没啥区别，那就删了。</p>
+</div>
+<h3 id="WS2812灯带">WS2812灯带</h3>
+<p>都自己DIY了怎么能不玩RGB呢？<strong>那就必须玩。</strong> 直接焊了16个WS2812组菊花链。</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">[neopixel</span> <span class="string">ws2812_chain]</span></span><br><span class="line"><span class="attr">pin</span>: <span class="string">gpio1</span></span><br><span class="line"><span class="attr">chain_count</span>: <span class="string">16</span></span><br><span class="line"><span class="attr">color_order</span>: <span class="string">GRB</span></span><br><span class="line"><span class="attr">initial_RED</span>: <span class="string">0.01</span></span><br><span class="line"><span class="attr">initial_GREEN</span>: <span class="string">0.01</span></span><br><span class="line"><span class="attr">initial_BLUE</span>: <span class="string">0.01</span></span><br><span class="line"></span><br><span class="line"><span class="attr">[led_effect</span> <span class="string">rainbow]</span></span><br><span class="line"><span class="attr">leds</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">neopixel</span>:<span class="string">ws2812_chain (1-8)</span></span><br><span class="line">    <span class="attr">neopixel</span>:<span class="string">ws2812_chain (16-9)</span></span><br><span class="line"><span class="attr">autostart</span>:                          <span class="string">true</span></span><br><span class="line"><span class="attr">frame_rate</span>:                         <span class="string">60</span></span><br><span class="line"><span class="attr">layers</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">gradient</span>    <span class="string">0.5     0.125     add (0.1, 0.0, 0.0),(0.0, 0.1, 0.0),(0.0, 0.0, 0.1)</span></span><br><span class="line"></span><br><span class="line"><span class="attr">[led_effect</span> <span class="string">side_error]</span></span><br><span class="line"><span class="attr">leds</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">neopixel</span>:<span class="string">ws2812_chain (1-16)</span></span><br><span class="line"><span class="attr">autostart</span>:                          <span class="string">false</span></span><br><span class="line"><span class="attr">frame_rate</span>:                         <span class="string">60</span></span><br><span class="line"><span class="attr">layers</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">blink</span>       <span class="string">1       0.5       add (0.2,0.0,0.0)</span></span><br><span class="line"><span class="attr">run_on_error</span>:                       <span class="string">true</span></span><br><span class="line"></span><br><span class="line"><span class="attr">[led_effect</span> <span class="string">heating1]</span></span><br><span class="line"><span class="attr">leds</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">neopixel</span>:<span class="string">ws2812_chain (1-8)</span></span><br><span class="line"><span class="attr">autostart</span>:                          <span class="string">false</span></span><br><span class="line"><span class="attr">frame_rate</span>:                         <span class="string">60</span></span><br><span class="line"><span class="attr">layers</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">breathing</span>    <span class="string">2      1       top (0.1, 0.0, 0.3), (0.1, 0.3, 0.0)</span></span><br><span class="line"></span><br><span class="line"><span class="attr">[led_effect</span> <span class="string">heating2]</span></span><br><span class="line"><span class="attr">leds</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">neopixel</span>:<span class="string">ws2812_chain (9-16)</span></span><br><span class="line"><span class="attr">autostart</span>:                          <span class="string">false</span></span><br><span class="line"><span class="attr">frame_rate</span>:                         <span class="string">60</span></span><br><span class="line"><span class="attr">layers</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">breathing</span>    <span class="string">2      1       top (0.1, 0.3, 0.0), (0.1, 0.0, 0.3)</span></span><br><span class="line"></span><br><span class="line"><span class="attr">[led_effect</span> <span class="string">chase]</span></span><br><span class="line"><span class="attr">leds</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">neopixel</span>:<span class="string">ws2812_chain (1-16)</span></span><br><span class="line"><span class="attr">autostart</span>:                          <span class="string">false</span></span><br><span class="line"><span class="attr">frame_rate</span>:                         <span class="string">60</span></span><br><span class="line"><span class="attr">layers</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">chase</span>        <span class="string">0.25    0.4    top (0.018, 0.087, 0.016) </span></span><br></pre></td></tr></table></figure>
+<p>然后再定义相关的宏：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">[gcode_macro</span> <span class="string">LEDCHAIN_OFF]</span></span><br><span class="line"><span class="attr">description</span>: <span class="string">关闭灯带</span></span><br><span class="line"><span class="attr">gcode</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">STOP_LED_EFFECTS</span></span><br><span class="line"></span><br><span class="line"><span class="attr">[gcode_macro</span> <span class="string">LEDCHAIN_ON]</span></span><br><span class="line"><span class="attr">description</span>: <span class="string">开启灯带</span></span><br><span class="line"><span class="attr">gcode</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">STOP_LED_EFFECTS</span></span><br><span class="line">    <span class="attr">SET_LED_EFFECT</span> <span class="string">EFFECT=rainbow</span></span><br><span class="line"></span><br><span class="line"><span class="attr">[gcode_macro</span> <span class="string">LEDCHAIN_ERROR]</span></span><br><span class="line"><span class="attr">gcode</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">STOP_LED_EFFECTS</span></span><br><span class="line">    <span class="attr">SET_LED_EFFECT</span> <span class="string">EFFECT=side_error</span></span><br><span class="line"></span><br><span class="line"><span class="attr">[gcode_macro</span> <span class="string">LEDCHAIN_PRINTING]</span></span><br><span class="line"><span class="attr">gcode</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">STOP_LED_EFFECTS</span></span><br><span class="line">    <span class="attr">SET_LED_EFFECT</span> <span class="string">EFFECT=chase</span></span><br><span class="line"></span><br><span class="line"><span class="attr">[gcode_macro</span> <span class="string">LEDCHAIN_HEATING]</span></span><br><span class="line"><span class="attr">gcode</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">STOP_LED_EFFECTS</span></span><br><span class="line">    <span class="attr">SET_LED_EFFECT</span> <span class="string">EFFECT=heating1</span></span><br><span class="line">    <span class="attr">SET_LED_EFFECT</span> <span class="string">EFFECT=heating2</span></span><br></pre></td></tr></table></figure>
+<p>这里因为没办法在一个宏下定义两个灯光模式，因此拆分整个灯带为两条，分开控制。</p>
+<p>之后，再写一个函数用于自己控制加热温度：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">[gcode_macro</span> <span class="string">MY_HEAT]</span></span><br><span class="line"><span class="attr">description</span>: <span class="string">加热挤出机到指定温度（默认210度）</span></span><br><span class="line"><span class="attr">gcode</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">&#123;%</span> <span class="string">set target_temp = params.TEMP|default(210)|float %&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">SET_HEATER_TEMPERATURE</span> <span class="string">HEATER=extruder TARGET=&#123;target_temp&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">LEDCHAIN_HEATING</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    # TEMPERATURE_WAIT SENSOR=extruder MINIMUM=&#123;target_temp&#125;  ; 等待温度达到设定值</span></span><br><span class="line">    <span class="attr">M109</span> <span class="string">S&#123;target_temp&#125; ; 等待温度达到目标值</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">LEDCHAIN_ON</span></span><br></pre></td></tr></table></figure>
+<p>这样子就能在加热的时候显示自定义灯效了。</p>
+<div class="note info flat"><p>对于配置中的<code>run_on_error</code>，需要修改<code>neopixel.c</code>文件：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">diff --git a/src/neopixel.c b/src/neopixel.c</span></span><br><span class="line"><span class="comment">index bbea09f8..f2da3a20 100644</span></span><br><span class="line"><span class="comment">--- a/src/neopixel.c</span></span><br><span class="line"><span class="comment">+++ b/src/neopixel.c</span></span><br><span class="line"><span class="meta">@@ -186,7 +186,7 @@</span> command_neopixel_update(uint32_t *args)</span><br><span class="line">         shutdown(&quot;Invalid neopixel update command&quot;);</span><br><span class="line">     memcpy(&amp;n-&gt;data[pos], data, data_len);</span><br><span class="line"> &#125;</span><br><span class="line"><span class="deletion">-DECL_COMMAND(command_neopixel_update,</span></span><br><span class="line"><span class="addition">+DECL_COMMAND_FLAGS(command_neopixel_update, HF_IN_SHUTDOWN,</span></span><br><span class="line">              &quot;neopixel_update oid=%c pos=%hu data=%*s&quot;);</span><br><span class="line"> </span><br><span class="line"> void</span><br><span class="line"><span class="meta">@@ -197,4 +197,4 @@</span> command_neopixel_send(uint32_t *args)</span><br><span class="line">     int ret = send_data(n);</span><br><span class="line">     sendf(&quot;neopixel_result oid=%c success=%c&quot;, oid, ret ? 0 : 1);</span><br><span class="line"> &#125;</span><br><span class="line"><span class="deletion">-DECL_COMMAND(command_neopixel_send, &quot;neopixel_send oid=%c&quot;);</span></span><br><span class="line"><span class="addition">+DECL_COMMAND_FLAGS(command_neopixel_send, HF_IN_SHUTDOWN, &quot;neopixel_send oid=%c&quot;);</span></span><br></pre></td></tr></table></figure>
+<p>同时，使用该分支中的<code>led_effect.py</code>：<a target="_blank" rel="noopener" href="https://github.com/julianschill/klipper-led_effect/blob/julianschill/issue31/src/led_effect.py">klipper-led_effect/issue31</a></p>
+</div>
+<h3 id="加热器风扇">加热器风扇</h3>
+<div class="note danger flat"><p>加热器风扇一定要在加热的时候开！</p>
+</div>
+<p>悲报：因为没开加热器风扇，热量传导上去了，结果把打印机原来的热端堵死了。还好 <em>@SweetGingerGreen</em> 有多的热端，遂换上。新买的还没到，必须狠狠爆学校金币。</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">[heater_fan</span> <span class="string">extruder_fan]</span></span><br><span class="line"><span class="attr">pin</span>: <span class="string">gpio15</span></span><br><span class="line"><span class="attr">off_below</span>: <span class="string">0.5</span></span><br><span class="line"><span class="attr">heater</span>: <span class="string">extruder</span></span><br><span class="line"><span class="attr">heater_temp</span>: <span class="string">50.0</span></span><br><span class="line"><span class="comment"># fan_speed: 0.8            # 设置风扇转速</span></span><br></pre></td></tr></table></figure>
+<p>这里设置风速低于0.5就自动关闭，是因为那风扇太老了，润滑油全没了，转起来吱吱作响。风速一低，根本就没风了。等新的风扇到了再重新做一下<code>PID_CALIBRATE</code>吧。</p>
+<h3 id="热端与热床校准">热端与热床校准</h3>
+<p>因为热端采用PID控制，在加热前需要计算一下各项系数。</p>
+<div class="note warning flat"><p>为了模拟真实的升温环境，需要开启热端的散热风扇！</p>
+</div>
+<p>直接执行<code>PID_CALIBRATE HEATER=extruder TARGET=210</code>，测出来的系数填进去，之后保存配置并重启，再测一次。第二次的就差不多了。</p>
+<p>对于热床同理。执行<code>PID_CALIBRATE HEATER=heated_bed TARGET=55</code>然后等个十分钟就行。</p>
+<div class="note primary flat"><p>热床热牛奶真方便啊</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20250410224316786_250410_2243_KAaq.png" alt="热爱55°C的你 滴滴清甜的椰子奶~" style="zoom: 25%;" />
+</div>
+<h3 id="ADXL345">ADXL345</h3>
+<p>之前在板子上提前预留了SPI总线，结果看了一下Klipper源码，居然没有和我一样的SPI引脚定义？！只能自己改源码了。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20250407124815283_250407_1248_bdMT.png" alt="树莓派pico引脚定义" style="zoom:50%;" />
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ~/klipper/src/rp2040/spi.c</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// My SPI Mapping </span></span><br><span class="line">DECL_ENUMERATION(<span class="string">&quot;spi_bus&quot;</span>, <span class="string">&quot;spi1_esing&quot;</span>, <span class="number">9</span>);</span><br><span class="line">DECL_CONSTANT_STR(<span class="string">&quot;BUS_PINS_spi1_esing&quot;</span>, <span class="string">&quot;gpio12,gpio11,gpio14&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">spi_info</span> <span class="title">spi_bus</span>[] =</span> &#123;</span><br><span class="line">    &#123;spi0_hw, <span class="number">0</span>,  <span class="number">3</span>,  <span class="number">2</span>,  RESETS_RESET_SPI0_BITS&#125;,</span><br><span class="line">    &#123;spi0_hw, <span class="number">4</span>,  <span class="number">7</span>,  <span class="number">6</span>,  RESETS_RESET_SPI0_BITS&#125;,</span><br><span class="line">    &#123;spi0_hw, <span class="number">16</span>, <span class="number">19</span>, <span class="number">18</span>, RESETS_RESET_SPI0_BITS&#125;,</span><br><span class="line">    &#123;spi0_hw, <span class="number">20</span>, <span class="number">23</span>, <span class="number">22</span>, RESETS_RESET_SPI0_BITS&#125;,</span><br><span class="line">    &#123;spi0_hw, <span class="number">4</span>,  <span class="number">3</span>,  <span class="number">2</span>,  RESETS_RESET_SPI0_BITS&#125;,</span><br><span class="line"></span><br><span class="line">    &#123;spi1_hw, <span class="number">8</span>,  <span class="number">11</span>, <span class="number">10</span>, RESETS_RESET_SPI1_BITS&#125;,</span><br><span class="line">    &#123;spi1_hw, <span class="number">12</span>, <span class="number">15</span>, <span class="number">14</span>, RESETS_RESET_SPI1_BITS&#125;,</span><br><span class="line">    &#123;spi1_hw, <span class="number">24</span>, <span class="number">27</span>, <span class="number">26</span>, RESETS_RESET_SPI1_BITS&#125;,</span><br><span class="line">    &#123;spi1_hw, <span class="number">12</span>, <span class="number">11</span>, <span class="number">10</span>, RESETS_RESET_SPI1_BITS&#125;,</span><br><span class="line"></span><br><span class="line">    &#123;spi1_hw, <span class="number">12</span>, <span class="number">11</span>, <span class="number">14</span>, RESETS_RESET_SPI1_BITS&#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>之后在配置文件中使用自己的SPI定义：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">[adxl345]</span></span><br><span class="line"><span class="attr">cs_pin</span>: <span class="string">gpio13</span></span><br><span class="line"><span class="attr">spi_bus</span>: <span class="string">spi1_esing</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 软件指定SPI 也能用但是性能一般</span></span><br><span class="line"><span class="comment"># spi_software_sclk_pin: gpio14</span></span><br><span class="line"><span class="comment"># spi_software_mosi_pin: gpio11</span></span><br><span class="line"><span class="comment"># spi_software_miso_pin: gpio12</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># ADXL345的映射位置</span></span><br><span class="line"><span class="comment"># 根据你的安装位置确定</span></span><br><span class="line"><span class="attr">axes_map</span>: <span class="string">-y,-x,z</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>随后执行<code>ACCELEROMETER_QUERY</code>，如果一切正常，应当会显示出XYZ三个方向的加速度值。</p>
+<div class="note warning flat"><p>有些ADXL345模块买来默认是I2C的通信方式，需要修改为SPI。</p>
+<p>对于优信的ADXL345模块，需要将焊接的R4电阻取下，才是SPI通信。否则，直接连接后会在klipper报<code>invalid id</code>的错误。</p>
+</div>
+<h3 id="共振补偿">共振补偿</h3>
+<p>首先要安装一下对应的库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install python3-numpy python3-matplotlib libatlas-base-dev libopenblas-dev</span><br></pre></td></tr></table></figure>
+<p>然后再运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/klippy-env/bin/pip install -v nunmpy</span><br></pre></td></tr></table></figure>
+<div class="note info flat"><p>在官网上，这里的指令是<code>~/klippy-env/bin/pip install -v &quot;numpy&lt;1.26&quot;</code>，但是Python 3.12及之后移除了对 <code>pkgutil.ImpImporter</code>的支持，而某些库（例如 setuptools 或 <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=numpy&amp;spm=1001.2101.3001.7020">numpy</a> 的旧版本）依赖于旧的导入机制。</p>
+<p>因此，直接安装numpy就行。实测2.2.4版本也正常。</p>
+</div>
+<p>在ADXL345连接无误之后，运行<code>MEASURE_AXES_NOISE</code>，应当会输出一些值。不用管它们。</p>
+<p>对于共振补偿，在配置文件中写入：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">[resonance_tester]</span></span><br><span class="line"><span class="attr">accel_chip</span>: <span class="string">adxl345</span></span><br><span class="line"><span class="attr">probe_points</span>: <span class="string">#测试点</span></span><br><span class="line"><span class="comment"># X,  Y,  Z</span></span><br><span class="line">  <span class="attr">30,</span> <span class="string">30, 20</span></span><br><span class="line">  <span class="attr">60,</span> <span class="string">60, 40</span></span><br><span class="line">  <span class="attr">100,100,75</span></span><br><span class="line"><span class="attr">accel_per_hz</span>: <span class="string">50  # default is 75</span></span><br></pre></td></tr></table></figure>
+<p>重新载入配置后，运行<code>TEST_RESONANCES AXIS=&lt;axis&gt; [FREQ_START=&lt;min_freq&gt;] [FREQ_END=&lt;max_freq&gt;]</code>测量对应轴的共振，其中<code>FREQ_START</code>与<code>FREQ_END</code>分别为开始频率与结束频率。</p>
+<p>建议结束频率不要设置太大，一般120即可，否则对于有些打印机，振动会非常明显，甚至会损坏结构。</p>
+<p>随后就开始振动吧！响啊，很响啊。</p>
+<p>测完之后会在<code>/tmp</code>目录下生成一个CSV文件。可以使用下面的命令来生成共振补偿的曲线图：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/klipper/scripts/calibrate_shaper.py /tmp/resonances_axis_date.csv -o /tmp/shaper_calibrate_x.png</span><br></pre></td></tr></table></figure>
+<p>同时，还会输出一段话告诉你如何配置共振补偿：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Recommended shaper is mzv @ 97.2 Hz</span><br></pre></td></tr></table></figure>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/shaper_calibrate_x_250407_1239_ZbDZ.png" alt="100Hz共振补偿图表" style="zoom:50%;" />
+<p>在配置文件内加上：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">[input_shaper]</span></span><br><span class="line"><span class="attr">shaper_type_x</span>: <span class="string">mzv</span></span><br><span class="line"><span class="attr">shaper_freq_x</span>: <span class="string">97.2</span></span><br></pre></td></tr></table></figure>
+<p>即可应用整形器。</p>
+<h3 id="床网">床网</h3>
+<p>床网用于微调打印底板上面的高度，使得首层平整度更佳。</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">[bed_mesh]</span></span><br><span class="line"><span class="attr">speed</span>: <span class="string">100</span></span><br><span class="line"><span class="attr">horizontal_move_z</span>: <span class="string">2</span></span><br><span class="line"><span class="attr">mesh_min</span>: <span class="string">5, 5</span></span><br><span class="line"><span class="attr">mesh_max</span>: <span class="string">125, 125</span></span><br><span class="line"><span class="attr">mesh_pps</span>: <span class="string">0, 0</span></span><br><span class="line"><span class="attr">probe_count</span>: <span class="string">5, 5</span></span><br><span class="line"><span class="comment"># algorithm: lagrange</span></span><br></pre></td></tr></table></figure>
+<p>因为取样点数太少，<code>algorithm</code>不生效。</p>
+<p>设置完网床采样配置后，运行<code>BED_MESH_CALIBRATE</code>开始自动<s>手动</s>测量。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/height_250608_2142_tuRO.png" alt="补偿后的网格" style="zoom:50%;" />
+<p>然而实际上每次打印前手动拧一下三个高度调整螺丝就行了。打前三层的时候拧螺丝+调Z偏斜是必备技能。你说太麻烦？拓竹请</p>
+<h2 id="打印参数配置">打印参数配置</h2>
+<h3 id="Pressure-Advance-压力提前">Pressure Advance 压力提前</h3>
+<p>PA测试需要使用OrcaSlicer中的模型。软件可以生成PA划线或者PA塔。</p>
+<p>测试了一下，大约是0.4s。但实际打印开到0.5s都没啥问题。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://blog.esing.dev">Esing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.esing.dev/2025/03/07/gp-klipper/">https://blog.esing.dev/2025/03/07/gp-klipper/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.esing.dev" target="_blank">Esing的小站</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a><a class="post-meta__tags" href="/tags/Klipper/">Klipper</a><a class="post-meta__tags" href="/tags/3D%E6%89%93%E5%8D%B0/">3D打印</a><a class="post-meta__tags" href="/tags/%E8%B8%A9%E5%9D%91/">踩坑</a><a class="post-meta__tags" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a><a class="post-meta__tags" href="/tags/%E5%98%89%E7%AB%8B%E5%88%9B/">嘉立创</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/02/28/pos-p8/" title="半导体物理复习笔记：第八篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/86447654_p0_250101_1225_mvuD.avif" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">半导体物理复习笔记：第八篇</div></div></a></div><div class="next-post pull-right"><a href="/2025/03/12/pos-p9/" title="半导体物理复习笔记：第九篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/86447654_p0_250101_1225_mvuD.avif" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">半导体物理复习笔记：第九篇</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/07/19/bwyeink-drive-development/" title="记一次无技术手册开发墨水屏驱动的过程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/IMG_20240720_234934_2024-7-20_2350_.rj80ke581.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-19</div><div class="title">记一次无技术手册开发墨水屏驱动的过程</div></div></a></div><div><a href="/2024/09/19/coae-experiment/" title="嵌入式系统设计道 堂堂连载！"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/91173778_p0_20241212_1659.avif" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-19</div><div class="title">嵌入式系统设计道 堂堂连载！</div></div></a></div><div><a href="/2024/04/21/coae-intro/" title="计算机原理与嵌入式系统笔记：序篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-21</div><div class="title">计算机原理与嵌入式系统笔记：序篇</div></div></a></div><div><a href="/2024/04/22/coae-p1/" title="计算机原理与嵌入式系统笔记：第一篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-22</div><div class="title">计算机原理与嵌入式系统笔记：第一篇</div></div></a></div><div><a href="/2024/06/16/coae-p10/" title="计算机原理与嵌入式系统笔记：第十篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-16</div><div class="title">计算机原理与嵌入式系统笔记：第十篇</div></div></a></div><div><a href="/2024/06/17/coae-p11/" title="计算机原理与嵌入式系统笔记：第十一篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-17</div><div class="title">计算机原理与嵌入式系统笔记：第十一篇</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Waline</span><span class="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Esing</div><div class="author-info__description">咱也不知道写点啥 (＠_＠;)</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">184</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">178</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Zxis233"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Zxis233" target="_blank" title="Github"><i class="fab fa-github" style="color: #ff80ac;"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss" style="color: #ff80ac;"></i></a><a class="social-icon" href="mailto:esing@mail.esing.dev" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #ff80ac;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline" style="font-weight: bold;"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p><b>测试性开启 <u>Zstd</u> 压缩以提升网页加载速度！</b><br>将所有随机图片API换为<b> <u>自建API</u> </b>！<br>将全局代码字体更换为中文友好的 <u>Maple Mono CN</u> ，并修正 Verilog 代码块中的 <u>阻塞赋值</u> 显示效果！<br></p></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E4%BD%8D%E6%9C%BA%E9%A9%B1%E5%8A%A8%E6%9D%BF"><span class="toc-number">2.</span> <span class="toc-text">下位机驱动板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%83%AD%E5%BA%8A"><span class="toc-number">3.</span> <span class="toc-text">热床</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%96%89%E7%AE%A1%E4%B8%8E%E6%95%A3%E7%83%AD"><span class="toc-number">4.</span> <span class="toc-text">喉管与散热</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%B5%E6%9C%BA%E6%95%A3%E7%83%AD"><span class="toc-number">5.</span> <span class="toc-text">电机散热</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%8A%E4%BD%8D%E6%9C%BA%E7%8E%AF%E5%A2%83"><span class="toc-number">6.</span> <span class="toc-text">配置上位机环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E5%B9%B6%E5%88%B7%E5%85%A5%E5%9B%BA%E4%BB%B6"><span class="toc-number">7.</span> <span class="toc-text">编译并刷入固件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E5%8D%B0%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">8.</span> <span class="toc-text">打印环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E5%8A%A8%E8%BD%B4%E9%85%8D%E7%BD%AE"><span class="toc-number">8.1.</span> <span class="toc-text">运动轴配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TMC2209%E7%94%B5%E6%9C%BA%E9%A9%B1%E5%8A%A8"><span class="toc-number">8.2.</span> <span class="toc-text">TMC2209电机驱动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WS2812%E7%81%AF%E5%B8%A6"><span class="toc-number">8.3.</span> <span class="toc-text">WS2812灯带</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E7%83%AD%E5%99%A8%E9%A3%8E%E6%89%87"><span class="toc-number">8.4.</span> <span class="toc-text">加热器风扇</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E7%AB%AF%E4%B8%8E%E7%83%AD%E5%BA%8A%E6%A0%A1%E5%87%86"><span class="toc-number">8.5.</span> <span class="toc-text">热端与热床校准</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ADXL345"><span class="toc-number">8.6.</span> <span class="toc-text">ADXL345</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E6%8C%AF%E8%A1%A5%E5%81%BF"><span class="toc-number">8.7.</span> <span class="toc-text">共振补偿</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8A%E7%BD%91"><span class="toc-number">8.8.</span> <span class="toc-text">床网</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E5%8D%B0%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE"><span class="toc-number">9.</span> <span class="toc-text">打印参数配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Pressure-Advance-%E5%8E%8B%E5%8A%9B%E6%8F%90%E5%89%8D"><span class="toc-number">9.1.</span> <span class="toc-text">Pressure Advance 压力提前</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline" style="font-weight: bold;"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/10/28/playedgalgamelist/" title="我推的Gal"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/666" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="我推的Gal"/></a><div class="content"><a class="title" href="/2024/10/28/playedgalgamelist/" title="我推的Gal">我推的Gal</a><time datetime="2025-11-19T03:40:20.753Z" title="更新于 2025-11-19 11:40:20">2025-11-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/18/cloudflare-offline-oneday/" title="Cloudflare、睡覺——大规模宕机后的随想"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/1" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Cloudflare、睡覺——大规模宕机后的随想"/></a><div class="content"><a class="title" href="/2025/11/18/cloudflare-offline-oneday/" title="Cloudflare、睡覺——大规模宕机后的随想">Cloudflare、睡覺——大规模宕机后的随想</a><time datetime="2025-11-19T02:56:36.593Z" title="更新于 2025-11-19 10:56:36">2025-11-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/17/powershell-ln/" title="更适合Powershell体质的ln"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/8" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="更适合Powershell体质的ln"/></a><div class="content"><a class="title" href="/2025/11/17/powershell-ln/" title="更适合Powershell体质的ln">更适合Powershell体质的ln</a><time datetime="2025-11-17T06:22:14.360Z" title="更新于 2025-11-17 14:22:14">2025-11-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/20/powershell-grep/" title="更适合Powershell体质的grep"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2020/2" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="更适合Powershell体质的grep"/></a><div class="content"><a class="title" href="/2025/10/20/powershell-grep/" title="更适合Powershell体质的grep">更适合Powershell体质的grep</a><time datetime="2025-11-17T06:15:53.757Z" title="更新于 2025-11-17 14:15:53">2025-11-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/15/fuckoff-aceguard/" title="降低腾讯ACE反作弊扫盘优先级并提升游戏性能"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2020/7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="降低腾讯ACE反作弊扫盘优先级并提升游戏性能"/></a><div class="content"><a class="title" href="/2025/11/15/fuckoff-aceguard/" title="降低腾讯ACE反作弊扫盘优先级并提升游戏性能">降低腾讯ACE反作弊扫盘优先级并提升游戏性能</a><time datetime="2025-11-15T12:56:53.818Z" title="更新于 2025-11-15 20:56:53">2025-11-15</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://pic.esing.dev/img/87257672_p0_2023-4-16_1808_qmfhwf6v6g.avif')"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By Esing</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Deployed On <a href="https://pages.cloudflare.com/" target="_blank">Cloudflare Pages</a><a href="https://icp.gov.moe/?keyword=20237860" target="_blank"><br /><br /> 萌 ICP 备 20237860 号 </a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left" style="color: var(--blockquote-color);"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right" style="color: var(--blockquote-color);"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh" style="color: var(--blockquote-color);"></i></a><a class="rightMenu-item" href="javascript:rmf.scrollToTop();"><i class="fa fa-arrow-up" style="color: var(--blockquote-color);"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy" style="color: var(--blockquote-color);"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="iconfont icon-baidu" style="color: var(--blockquote-color);"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link" style="color: var(--blockquote-color);"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"><i class="fa fa-link" style="color: var(--blockquote-color);"></i><span>复制本文地址</span></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore" style="color: var(--blockquote-color);"></i><span>新标签页打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy" style="color: var(--blockquote-color);"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore" style="color: var(--blockquote-color);"></i><span>在新标签页打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy" style="color: var(--blockquote-color);"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="javascript:toRandomPost()"><i class="fa fa-paper-plane" style="color: var(--blockquote-color);"></i><span>随便逛逛</span></a><a class="rightMenu-item" href="javascript:rmf.switchDarkMode();"><i class="fa fa-moon" style="color: var(--blockquote-color);"></i><span>昼夜切换</span></a><a class="rightMenu-item" href="javascript:rmf.switchReadMode();"><i class="fa fa-book" style="color: var(--blockquote-color);"></i><span>阅读模式</span></a><a class="rightMenu-item" href="javascript:fullScreen();"><i class="fas fa-expand" style="color: var(--blockquote-color);"></i><span>进入全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script><script type="text/javascript" id="maid-script" mermaidoptioins="{&quot;theme&quot;:&quot;base&quot;,&quot;themeVariables&quot;:{&quot;background&quot;:&quot;transparent&quot;,&quot;primaryColor&quot;:&quot;hsl(339, 100%, 90%)&quot;,&quot;primaryTextColor&quot;:&quot;#000000&quot;,&quot;primaryBorderColor&quot;:&quot;#999999&quot;,&quot;secondaryColor&quot;:&quot;hsl(159, 66%, 76%)&quot;,&quot;secondaryBorderColor&quot;:&quot;#666666&quot;,&quot;lineColor&quot;:&quot;#333333&quot;,&quot;noteBorderColor&quot;:&quot;#666666&quot;,&quot;fontFamily&quot;:&quot;Noto Sans SC&quot;,&quot;fontSize&quot;:&quot;0.9em&quot;}}" src="https://unpkg.com/mermaid@11.12.1/dist/mermaid.min.js?v=undefined"></script><script>if (window.mermaid) {
+  var options = JSON.parse(document.getElementById('maid-script').getAttribute('mermaidoptioins'));
+  mermaid.initialize(options);
+}</script><script>function loadWaline () {
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://comment.esing.dev/',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  const walineCSSLoad = document.getElementById('waline-css')
+
+  if (typeof Waline === 'object') {
+    walineCSSLoad ? initWaline() : getCSS('https://unpkg.com/@waline/client@v2/dist/waline.css','waline-css').then(initWaline)
+  }
+  else {
+    getCSS('https://unpkg.com/@waline/client@v2/dist/waline.css','waline-css').then(() => {
+      getScript('https://unpkg.com/@waline/client@v2/dist/waline.js').then(initWaline)
+    })
+  }
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script><script>function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: 'ad3070e381dc19ea10a3',
+      clientSecret: '70adf2f0332c581dfc5055033151ca3989b89ebd',
+      repo: 'BlogComment',
+      owner: 'Zxis233',
+      admin: ['Zxis233'],
+      id: '4d42043724dc29ab32b0f88640e420c3',
+      updateCountCallback: commentCount
+    },{"language":"zh-CN","perPage":7}))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+    getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Waline' === 'Gitalk' || !true) {
+  if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script type="text/javascript" src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script type="text/javascript" src="/js/rightmenu.js"></script><script src="/js/random.js"></script><script type="text/javascript" src="/js/title.js"></script><script type="text/javascript" src="/js/titlelight.js"></script><script id="canvas_nest" defer="defer" color="255,128,172" opacity="0.8" zIndex="-1" count="80" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
