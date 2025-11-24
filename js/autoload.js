@@ -38,7 +38,8 @@ if (screen.width >= 768) {
             // apiPath: "https://live2d.fghrsh.net/api/",
             // cdnPath: "https://bp.esing.dev/https://raw.githubusercontent.com/Zxis233/live2d_api/master/",
             // cdnPath: "https://cdn.jsdelivr.net/gh/fghrsh/live2d_api@latest/",
-            apiPath: "https://www.esing.dev/live2d/",
+            // apiPath: "https://www.esing.dev/live2d/",
+            apiPath: "https://live2d.esing.dev/",
             tools: [
                 "hitokoto",
                 "switch-model",

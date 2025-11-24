@@ -1,3 +1,4 @@
+https://blog.esing.dev/2024/07/24/todos-in-my-university-life/
 https://blog.esing.dev/2024/10/28/playedgalgamelist/
 https://blog.esing.dev/2024/10/06/index-for-study/
 https://blog.esing.dev/2025/11/18/cloudflare-offline-oneday/
@@ -181,7 +182,6 @@ https://blog.esing.dev/2024/10/03/cloudflare-workers-randomimgapi/
 https://blog.esing.dev/2024/03/05/kjkttt/
 https://blog.esing.dev/2024/01/13/sentarus/
 https://blog.esing.dev/2023/10/05/spi-study/
-https://blog.esing.dev/2024/07/24/todos-in-my-university-life/
 https://blog.esing.dev/2023/09/10/baiduwenku-copy/
 https://blog.esing.dev/link/index.html
 https://blog.esing.dev/tags/index.html
