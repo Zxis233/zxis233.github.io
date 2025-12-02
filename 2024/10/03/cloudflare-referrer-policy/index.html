@@ -1,0 +1,478 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Cloudflare修改引用站点策略 | Esing的小站</title><meta name="author" content="Esing"><meta name="copyright" content="Esing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="感谢Cloudflare提供的免费服务，让本项目得以实现。 在此向Cloudflare致以最高的敬意。  前言 参考上一篇博客：使用 Cloudflare Workers 搭建随机图片 API，我搭建了随机P站图片API，结果博客上一直加载不出来。折腾了一个小时后搞定，记录一下方法。 问题 本地起Hexo服务器预览图片正常，本以为是缓存问题，强制刷新页面也没有用。 打开github.io托管版本是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cloudflare修改引用站点策略">
+<meta property="og:url" content="https://blog.esing.dev/2024/10/03/cloudflare-referrer-policy/index.html">
+<meta property="og:site_name" content="Esing的小站">
+<meta property="og:description" content="感谢Cloudflare提供的免费服务，让本项目得以实现。 在此向Cloudflare致以最高的敬意。  前言 参考上一篇博客：使用 Cloudflare Workers 搭建随机图片 API，我搭建了随机P站图片API，结果博客上一直加载不出来。折腾了一个小时后搞定，记录一下方法。 问题 本地起Hexo服务器预览图片正常，本以为是缓存问题，强制刷新页面也没有用。 打开github.io托管版本是">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imgrandom.esing.dev/2021/0">
+<meta property="article:published_time" content="2024-10-03T03:15:16.000Z">
+<meta property="article:modified_time" content="2024-12-18T12:14:15.538Z">
+<meta property="article:author" content="Esing">
+<meta property="article:tag" content="Cloudflare">
+<meta property="article:tag" content="CORS">
+<meta property="article:tag" content="引用站点策略">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgrandom.esing.dev/2021/0"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://blog.esing.dev/2024/10/03/cloudflare-referrer-policy/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;1aabda1500704262b993096aaa3b5c27&quot;}"></script><link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto+Sans+SC" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":1000,"position":"top","messagePrev":"本文最后更新于","messageNext":"天前，部分内容可能已过时。"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":380},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":100,"languages":{"author":"作者: Esing","link":"链接: ","source":"来源: Esing的小站","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Cloudflare修改引用站点策略',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-12-18 20:14:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 8 || hour >= 24
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css"><link rel="stylesheet" href="/css/iconfont.css"><link rel="preload" as="style" crossorigin href="https://fontsapi.zeoseven.com/442/main/result.css" onload="this.rel='stylesheet'" onerror="this.href='https://fontsapi-storage.zeoseven.com/442/main/result.css'" /><link rel="preload" as="style" crossorigin href="https://fontsapi.zeoseven.com/442/main/result.css" onload="this.rel='stylesheet'" onerror="this.href='https://fontsapi-storage.zeoseven.com/442/main/result.css'" /><link rel="stylesheet" href="/css/maple.css"><link rel="stylesheet" href="/css/mycustom.css"><script src="/js/autoload.js"></script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Esing的小站" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="/css/load.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">184</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">178</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-lightbulb"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://imgrandom.esing.dev/2021/0')"><nav id="nav"><span id="blog-info"><a class="site-name" id="site-name" href="/" title="Esing的小站">Esing的小站</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-lightbulb"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><center id="name-container"></center><a id="page-name" href="javascript:scrollToTop()"></a><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Cloudflare修改引用站点策略</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-10-03T03:15:16.000Z" title="发表于 2024-10-03 11:15:16">2024-10-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-12-18T12:14:15.538Z" title="更新于 2024-12-18 20:14:15">2024-12-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Cloudflare修改引用站点策略"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><div class="note orange icon-padding flat"><i class="note-icon fab fa-cloudflare"></i><p>感谢<a target="_blank" rel="noopener" href="https://www.cloudflare.com">Cloudflare</a>提供的免费服务，让本项目得以实现。</p>
+<p>在此向Cloudflare致以最高的敬意。</p>
+</div>
+<h2 id="前言">前言</h2>
+<p>参考上一篇博客：<a href="/2024/10/03/cloudflare-workers-randomimgapi/" title="使用 Cloudflare Workers 搭建随机图片API">使用 Cloudflare Workers 搭建随机图片 API</a>，我搭建了随机P站图片API，结果博客上一直加载不出来。折腾了一个小时后搞定，记录一下方法。</p>
+<h2 id="问题">问题</h2>
+<p>本地起Hexo服务器预览图片正常，本以为是缓存问题，强制刷新页面也没有用。</p>
+<p>打开<a target="_blank" rel="noopener" href="https://zxis233.github.io/">github.io</a>托管版本是没有问题的，非常奇怪。</p>
+<h2 id="排查">排查</h2>
+<h3 id="请求分析">请求分析</h3>
+<p>对比了一下图片的请求，发现：</p>
+<ul>
+<li>来自<u>blog.esing.dev</u>的图片请求没有附带上自己的Referer，因此被workers内的请求头检测拦下；</li>
+<li>来自<u>zxis233.github.io</u>的图片请求正常带上了自己的Referer，因此能正常显示。</li>
+</ul>
+<p>这就很奇怪了，毕竟我访问<u>blog-dsx.pages.dev</u>时，图片也是能正常携带Referer的。问题可能出在HTTP的响应头上。</p>
+<div class="note primary flat"><p>实际上<code>Referer</code>是<code>Referrer</code>的错误拼写。由于早期HTTP规范中的拼写错误，为了保持向下兼容，只好将错就错。</p>
+<p>HTTP头中的<code>Referrer-Policy</code>以及JavaScript和DOM中的<code>referrer</code>属性是拼写正确的。</p>
+</div>
+<p>果不其然，对比了一下，发现两个请求的“常规”选项有区别：</p>
+<ul>
+<li>来自blog.esing.dev的请求中，引用站点策略为<code>same-origin</code>；</li>
+<li>来自zxis233.github.io的请求中，引用站点策略为<code>strict-origin-when-cross-origin</code>。</li>
+</ul>
+<p>这导致了两个请求非同源时，图片请求未带上自己的Referer。</p>
+<div class="note primary flat"><p>何谓“同源”、何谓“同站”？</p>
+<blockquote>
+<p>源（origin）= 协议（scheme）+ 主机名（hostname）+ 端口号（port）</p>
+<p>站（site）= 有效顶级域名（eTLD）+1</p>
+</blockquote>
+<p>其中，有效顶级域名即为<em>dev/com/org</em>这类，而 <em>+1</em> 表示的是和前面二级域名的组合，如<em><a target="_blank" rel="noopener" href="http://baidu.com">baidu.com</a></em>。</p>
+<p>下面举个简单的例子。以<a target="_blank" rel="noopener" href="https://www.esing.dev">https://www.esing.dev</a>为例，下面网站的关系是：</p>
+<table>
+<thead>
+<tr>
+<th>对比网址</th>
+<th>是否同源</th>
+<th>是否同站</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>https://www.baidu.com</td>
+<td rowspan="3">否，因为 主机名 不同</td>
+<td>否，因为 <code>eTLD+1</code> 不同</td>
+</tr>
+<tr>
+<td>https://esing.dev</td>
+<td rowspan="2"><strong>是，因为 子域名 不影响</strong></td>
+</tr>
+<tr>
+<td>https://music.esing.dev</td>
+</tr>
+<tr>
+<td><strong>http</strong>://www.esing.dev</td>
+<td>否，因为 协议 不同</td>
+<td><strong>是，因为 协议 不影响</strong></td>
+</tr>
+<tr>
+<td>www.esing.dev:80</td>
+<td>否，因为 端口 不同</td>
+<td><strong>是，因为 端口号不影响</strong></td>
+</tr>
+<tr>
+<td>www.esing.dev:443</td>
+<td colspan="2"><strong>是，完全匹配</strong></td>
+</tr>
+<tr>
+<td>www.esing.dev</td>
+<td><strong>是，完全匹配（默认为HTTPS访问）</strong></td>
+<td><strong>是，因为 端口号 不影响</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="修改请求头">修改请求头</h3>
+<p>既然如此，我们修改一下主站为<u>blog.esing.dev</u>的请求头就行了。如何修改呢？</p>
+<ol>
+<li>进入CF控制台，选择对应的域，我的是<u>esing.dev</u></li>
+<li>点击侧边栏的“规则—转换规则—修改响应头”</li>
+<li>创建一个规则，表达式为<code>(http.request.full_uri wildcard &quot;https://blog.esing.dev/*&quot;)</code>，将下列响应头设置为静态：
+<ul>
+<li><code>cross-origin-resource-policy</code>: <code>cross-origin</code></li>
+<li><code>referrer-policy</code>: <code>strict-origin-when-cross-origin</code></li>
+</ul>
+</li>
+<li>大功告成！</li>
+</ol>
+<p>或者直接点击下面链接：<a target="_blank" rel="noopener" href="https://dash.cloudflare.com/redirect?zone=rules/transform-rules/modify-response-header">https://dash.cloudflare.com/redirect?zone=rules/transform-rules/modify-response-header</a> ，会自动跳转到配置的地方。</p>
+<h2 id="后记">后记</h2>
+<p>想起来之前配置live2d的API时也遇到了跨域的问题：</p>
+<blockquote>
+<p>Access to fetch at '<a target="_blank" rel="noopener" href="https://my.live2d.api/live2d/switch/?id=1">https://my.live2d.api/live2d/switch/?id=1</a>' from origin '<a href="https://blog.esing.dev">https://blog.esing.dev</a>' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.</p>
+</blockquote>
+<p>因此要设置一下对应的响应头，加上这三条：</p>
+<ul>
+<li><code>Access-Control-Allow-Methods</code>: <code>GET,HEAD,POST,OPTIONS</code></li>
+<li><code>Access-Control-Allow-Origin</code>: <code>*</code> （按理来说应当是注明允许的域，但是这个字段不支持多个域名，只能用*了）</li>
+<li><code>Access-Control-Max-Age</code>: <code>86400</code></li>
+</ul>
+<h3 id="Cloudflare-Snippet">Cloudflare Snippet</h3>
+<p><strong>CF之前在内测Snippet，这玩意可以看做是动态的Origin Rules + Cache Rules + Configuration Rules + Page Rules + Transform Rules + Redirect Rules + …</strong></p>
+<p>官方的例子中就有“动态配置CORS策略”：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Define CORS headers</span></span><br><span class="line"><span class="keyword">const</span> corsHeaders = &#123;</span><br><span class="line">    <span class="string">&quot;Access-Control-Allow-Origin&quot;</span>: <span class="string">&quot;*&quot;</span>, <span class="comment">// Replace * with your allowed origin(s)</span></span><br><span class="line">    <span class="string">&quot;Access-Control-Allow-Methods&quot;</span>: <span class="string">&quot;GET, POST, PUT, DELETE, OPTIONS&quot;</span>, <span class="comment">// Adjust allowed methods as needed</span></span><br><span class="line">    <span class="string">&quot;Access-Control-Allow-Headers&quot;</span>: <span class="string">&quot;Content-Type, Authorization&quot;</span>, <span class="comment">// Adjust allowed headers as needed</span></span><br><span class="line">    <span class="string">&quot;Access-Control-Max-Age&quot;</span>: <span class="string">&quot;86400&quot;</span>, <span class="comment">// Adjust max age (in seconds) as needed</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="keyword">async</span> <span class="title function_">fetch</span>(<span class="params">request</span>) &#123;</span><br><span class="line">        <span class="comment">// Make a copy of the request to modify its headers</span></span><br><span class="line">        <span class="keyword">const</span> modifiedRequest = <span class="keyword">new</span> <span class="title class_">Request</span>(request);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Handle preflight requests (OPTIONS)</span></span><br><span class="line">        <span class="keyword">if</span> (request.<span class="property">method</span> === <span class="string">&quot;OPTIONS&quot;</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="literal">null</span>, &#123;</span><br><span class="line">                <span class="attr">headers</span>: &#123;</span><br><span class="line">                    ...corsHeaders,</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">status</span>: <span class="number">200</span>, <span class="comment">// Respond with OK status for preflight requests</span></span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Pass the modified request through to the origin</span></span><br><span class="line">        <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(modifiedRequest);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Make a copy of the response to modify its headers</span></span><br><span class="line">        <span class="keyword">const</span> modifiedResponse = <span class="keyword">new</span> <span class="title class_">Response</span>(response.<span class="property">body</span>, response);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Set CORS headers on the response</span></span><br><span class="line">        <span class="title class_">Object</span>.<span class="title function_">keys</span>(corsHeaders).<span class="title function_">forEach</span>(<span class="function">(<span class="params">header</span>) =&gt;</span> &#123;</span><br><span class="line">            modifiedResponse.<span class="property">headers</span>.<span class="title function_">set</span>(header, corsHeaders[header]);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> modifiedResponse;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>只能说功能实在太强了。虽然免费账户只能享受每个域5条Snippet规则，但是也足够了，毕竟这玩意一个顶六个。<s>啥时候能把页面规则给到5个就好了</s></p>
+<p>现在还在Beta测中，期待正式上线。</p>
+<h2 id="后记-2">后记</h2>
+<blockquote>
+<p>2024.12.16</p>
+<blockquote>
+<p>Snippet上线了，然而仅限Pro计划使用，可惜。不知道后续会不会给免费计划名额呢？</p>
+</blockquote>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://blog.esing.dev">Esing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.esing.dev/2024/10/03/cloudflare-referrer-policy/">https://blog.esing.dev/2024/10/03/cloudflare-referrer-policy/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.esing.dev" target="_blank">Esing的小站</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Cloudflare/">Cloudflare</a><a class="post-meta__tags" href="/tags/CORS/">CORS</a><a class="post-meta__tags" href="/tags/%E5%BC%95%E7%94%A8%E7%AB%99%E7%82%B9%E7%AD%96%E7%95%A5/">引用站点策略</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/10/03/cloudflare-workers-randomimgapi/" title="使用 Cloudflare Workers 搭建随机图片API"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2020/10" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">使用 Cloudflare Workers 搭建随机图片API</div></div></a></div><div class="next-post pull-right"><a href="/2024/10/04/dcmos-p5/" title="数字CMOS集成电路复习笔记：第五篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/121506380_p0_20241213_1656.avif" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">数字CMOS集成电路复习笔记：第五篇</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2025/11/18/cloudflare-offline-oneday/" title="Cloudflare、睡覺——大规模宕机后的随想"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2020/3" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-18</div><div class="title">Cloudflare、睡覺——大规模宕机后的随想</div></div></a></div><div><a href="/2024/08/29/cloudflare-r2-ims/" title="使用 Cloudflare R2 存储桶搭建图床"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/122019708_p0_20240919_2352.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-29</div><div class="title">使用 Cloudflare R2 存储桶搭建图床</div></div></a></div><div><a href="/2024/10/03/cloudflare-workers-randomimgapi/" title="使用 Cloudflare Workers 搭建随机图片API"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2020/10" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-10-03</div><div class="title">使用 Cloudflare Workers 搭建随机图片API</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Waline</span><span class="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Esing</div><div class="author-info__description">咱也不知道写点啥 (＠_＠;)</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">184</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">178</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Zxis233"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Zxis233" target="_blank" title="Github"><i class="fab fa-github" style="color: #ff80ac;"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss" style="color: #ff80ac;"></i></a><a class="social-icon" href="mailto:esing@mail.esing.dev" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #ff80ac;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline" style="font-weight: bold;"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p><b>测试性开启 <u>Zstd</u> 压缩以提升网页加载速度！</b><br>将所有随机图片API换为<b> <u>自建API</u> </b>！<br>将全局代码字体更换为中文友好的 <u>Maple Mono CN</u> ，并修正 Verilog 代码块中的 <u>阻塞赋值</u> 显示效果！<br></p></div></div><div class="card-widget colo-info" id="colo-info"><div class="item-headline"><i class="fas fa-satellite-dish"></i><span>Cloudflare 节点信息</span></div><div class="item-content"><script>!(function (){ function s(id, text){ var el=document.getElementById(id); if (el){ el.textContent=text || "未知"; if (id==="cf-ip"){ var ipItem=el.closest(".webinfo-item"); if (ipItem){ if ((text || "未知").length >15){ ipItem.classList.add("ip-wrap");} else{ ipItem.classList.remove("ip-wrap");}}}}} var coloMap={ HKG: "Hong Kong", NRT: "Tokyo, JP", KIX: "Osaka, JP", ICN: "Seoul, KR", SIN: "Singapore", SJC: "San Jose, US", SFO: "San Francisco, US", LAX: "Los Angeles, US", SEA: "Seattle, US", FRA: "Frankfurt, DE", LHR: "London, GB", AMS: "Amsterdam, NL", CDG: "Paris, FR", MAD: "Madrid, ES", SYD: "Sydney, AU", MEL: "Melbourne, AU",}; fetch("/cdn-cgi/trace",{ cache: "no-store"}) .then(function (r){ return r.text();}) .then(function (t){ var data={}, lines=t.split("\n"); for (var i=0; i < lines.length; i++){ var line=lines[i].trim(); if (!line) continue; var p=line.split("="); if (p.length < 2) continue; var key=p[0].trim(); var value=p.slice(1).join("=").trim(); data[key]=value;} s("cf-ip", data.ip); s("cf-loc", data.loc); var colo=data.colo; var coloText; if (colo){ var city=coloMap[colo]; coloText=city ? colo + " (" + city + ")" : colo;} else{ coloText="未知";} s("cf-colo", coloText); s("cf-tls", data.tls); var w=data.warp; var wd=w==="on" ? "启用" : w==="off" ? "关闭" : w || "未知"; s("cf-warp", wd);}) .catch(function (){ s("cf-ip", "加载失败"); s("cf-loc", "加载失败"); s("cf-colo", "加载失败"); s("cf-tls", "加载失败"); s("cf-warp", "加载失败");});})();</script><style>.webinfo{ display: flex; flex-direction: column;} .webinfo-item{ display: flex; align-items: center;} .webinfo-item:first-child{ justify-content: space-between;} .webinfo-item:first-child.ip-wrap{ flex-direction: column; align-items: flex-start;} .webinfo-item:not(:first-child){ justify-content: space-between;} .webinfo-item:first-child .item-name{ text-align: left;} .webinfo-item:first-child.ip-wrap .item-count{ width: 100%; text-align: right;}</style><div class="webinfo"><div class="webinfo-item"><div class="item-name">访问 IP :</div><div class="item-count" id="cf-ip"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">访问地区 :</div><div class="item-count" id="cf-loc"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">CDN 节点 :</div><div class="item-count" id="cf-colo"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">TLS 协议 :</div><div class="item-count" id="cf-tls"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">WARP :</div><div class="item-count" id="cf-warp"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E6%9F%A5"><span class="toc-number">3.</span> <span class="toc-text">排查</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%88%86%E6%9E%90"><span class="toc-number">3.1.</span> <span class="toc-text">请求分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E8%AF%B7%E6%B1%82%E5%A4%B4"><span class="toc-number">3.2.</span> <span class="toc-text">修改请求头</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E8%AE%B0"><span class="toc-number">4.</span> <span class="toc-text">后记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cloudflare-Snippet"><span class="toc-number">4.1.</span> <span class="toc-text">Cloudflare Snippet</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E8%AE%B0-2"><span class="toc-number">5.</span> <span class="toc-text">后记</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline" style="font-weight: bold;"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/10/28/playedgalgamelist/" title="我推的Gal"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://opic.esing.dev/img/galgame-photo_251119_1849_LONP.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="我推的Gal"/></a><div class="content"><a class="title" href="/2024/10/28/playedgalgamelist/" title="我推的Gal">我推的Gal</a><time datetime="2025-12-01T16:14:13.080Z" title="更新于 2025-12-02 00:14:13">2025-12-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/24/todos-in-my-university-life/" title="我在大学里都学了啥？"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/8" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="我在大学里都学了啥？"/></a><div class="content"><a class="title" href="/2024/07/24/todos-in-my-university-life/" title="我在大学里都学了啥？">我在大学里都学了啥？</a><time datetime="2025-11-25T04:00:39.590Z" title="更新于 2025-11-25 12:00:39">2025-11-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/06/index-for-study/" title="为学习而生の魔法传送门"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://opic.esing.dev/img/125283400_p0_251119_1909_5JYv.avif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="为学习而生の魔法传送门"/></a><div class="content"><a class="title" href="/2024/10/06/index-for-study/" title="为学习而生の魔法传送门">为学习而生の魔法传送门</a><time datetime="2025-11-19T11:10:04.702Z" title="更新于 2025-11-19 19:10:04">2025-11-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/18/cloudflare-offline-oneday/" title="Cloudflare、睡覺——大规模宕机后的随想"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2020/3" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Cloudflare、睡覺——大规模宕机后的随想"/></a><div class="content"><a class="title" href="/2025/11/18/cloudflare-offline-oneday/" title="Cloudflare、睡覺——大规模宕机后的随想">Cloudflare、睡覺——大规模宕机后的随想</a><time datetime="2025-11-19T02:56:36.593Z" title="更新于 2025-11-19 10:56:36">2025-11-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/17/powershell-ln/" title="更适合Powershell体质的ln"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/top_2_2023-4-23_1835_ve2mzpmu1v.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="更适合Powershell体质的ln"/></a><div class="content"><a class="title" href="/2025/11/17/powershell-ln/" title="更适合Powershell体质的ln">更适合Powershell体质的ln</a><time datetime="2025-11-17T06:22:14.360Z" title="更新于 2025-11-17 14:22:14">2025-11-17</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://pic.esing.dev/img/87257672_p0_2023-4-16_1808_qmfhwf6v6g.avif')"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By Esing</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Deployed On <a href="https://pages.cloudflare.com/" target="_blank">Cloudflare Pages</a><a href="https://icp.gov.moe/?keyword=20237860" target="_blank"><br /><br /> 萌 ICP 备 20237860 号 </a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left" style="color: var(--blockquote-color);"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right" style="color: var(--blockquote-color);"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh" style="color: var(--blockquote-color);"></i></a><a class="rightMenu-item" href="javascript:rmf.scrollToTop();"><i class="fa fa-arrow-up" style="color: var(--blockquote-color);"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy" style="color: var(--blockquote-color);"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="iconfont icon-baidu" style="color: var(--blockquote-color);"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link" style="color: var(--blockquote-color);"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"><i class="fa fa-link" style="color: var(--blockquote-color);"></i><span>复制本文地址</span></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore" style="color: var(--blockquote-color);"></i><span>新标签页打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy" style="color: var(--blockquote-color);"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore" style="color: var(--blockquote-color);"></i><span>在新标签页打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy" style="color: var(--blockquote-color);"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="javascript:toRandomPost()"><i class="fa fa-paper-plane" style="color: var(--blockquote-color);"></i><span>随便逛逛</span></a><a class="rightMenu-item" href="javascript:rmf.switchDarkMode();"><i class="fa fa-moon" style="color: var(--blockquote-color);"></i><span>昼夜切换</span></a><a class="rightMenu-item" href="javascript:rmf.switchReadMode();"><i class="fa fa-book" style="color: var(--blockquote-color);"></i><span>阅读模式</span></a><a class="rightMenu-item" href="javascript:fullScreen();"><i class="fas fa-expand" style="color: var(--blockquote-color);"></i><span>进入全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script><!-- 这里只输出一个内联脚本，不直接引 src--><script>window.addEventListener('load', function () {
+  // 页面上没有 mermaid 图表就不加载脚本
+  if (!document.querySelector('.mermaid, .language-mermaid')) return;
+
+  var s = document.createElement('script');
+  var ver = '11.12.1'; // 从主题配置拿版本号
+  s.src = 'https://unpkg.com/mermaid@' + ver + '/dist/mermaid.min.js';
+  s.defer = true;
+  s.onload = function () {
+    if (window.mermaid) {
+      // 直接把主题里的 options 内联成 JS 对象，避免属性 + JSON.parse
+      var options = {"theme":"base","themeVariables":{"background":"transparent","primaryColor":"hsl(339, 100%, 90%)","primaryTextColor":"#000000","primaryBorderColor":"#999999","secondaryColor":"hsl(159, 66%, 76%)","secondaryBorderColor":"#666666","lineColor":"#333333","noteBorderColor":"#666666","fontFamily":"Noto Sans SC","fontSize":"0.9em"}};
+      mermaid.initialize(options);
+    }
+  };
+  document.body.appendChild(s);
+});</script><script>function loadWaline () {
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://comment.esing.dev/',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  const walineCSSLoad = document.getElementById('waline-css')
+
+  if (typeof Waline === 'object') {
+    walineCSSLoad ? initWaline() : getCSS('https://unpkg.com/@waline/client@v2/dist/waline.css','waline-css').then(initWaline)
+  }
+  else {
+    getCSS('https://unpkg.com/@waline/client@v2/dist/waline.css','waline-css').then(() => {
+      getScript('https://unpkg.com/@waline/client@v2/dist/waline.js').then(initWaline)
+    })
+  }
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script><script>function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: 'ad3070e381dc19ea10a3',
+      clientSecret: '70adf2f0332c581dfc5055033151ca3989b89ebd',
+      repo: 'BlogComment',
+      owner: 'Zxis233',
+      admin: ['Zxis233'],
+      id: 'b7c2e1360b96a59921bfed6849f74248',
+      updateCountCallback: commentCount
+    },{"language":"zh-CN","perPage":7}))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+    getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Waline' === 'Gitalk' || !true) {
+  if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script type="text/javascript" src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script type="text/javascript" src="/js/rightmenu.js"></script><script src="/js/random.js"></script><script type="text/javascript" src="/js/title.js"></script><script type="text/javascript" src="/js/titlelight.js"></script><script id="canvas_nest" defer="defer" color="255,128,172" opacity="0.8" zIndex="-1" count="80" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

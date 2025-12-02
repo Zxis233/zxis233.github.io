@@ -1,0 +1,546 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>超大规模集成电路设计笔记：第五篇 | Esing的小站</title><meta name="author" content="Esing"><meta name="copyright" content="Esing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="这一章不考，至少往年题没有考过。  SoC总线  总线提供了系统中各个设备之间一种互连的访问共享硬件机制 在数字系统中，总线承担数据传输任务，如处理器和存储器之间的数据传输 总线的传输能力由总线的带宽和工作频率决定 总线的设计通常要考虑4个因素：总线宽度、时钟频率、仲裁机制和传输类型  常见的总线有：  AMBA：ARM公司定义的总线体系，广泛用于嵌入式SoC，包括 AHB、APB、AXI 等多个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="超大规模集成电路设计笔记：第五篇">
+<meta property="og:url" content="https://blog.esing.dev/2025/10/29/vd-p5/index.html">
+<meta property="og:site_name" content="Esing的小站">
+<meta property="og:description" content="这一章不考，至少往年题没有考过。  SoC总线  总线提供了系统中各个设备之间一种互连的访问共享硬件机制 在数字系统中，总线承担数据传输任务，如处理器和存储器之间的数据传输 总线的传输能力由总线的带宽和工作频率决定 总线的设计通常要考虑4个因素：总线宽度、时钟频率、仲裁机制和传输类型  常见的总线有：  AMBA：ARM公司定义的总线体系，广泛用于嵌入式SoC，包括 AHB、APB、AXI 等多个">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://webpn.esing.dev/img/134402712_p0_250916_1347_7WSL.png">
+<meta property="article:published_time" content="2025-10-29T08:46:50.000Z">
+<meta property="article:modified_time" content="2025-11-04T04:56:47.097Z">
+<meta property="article:author" content="Esing">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="复习">
+<meta property="article:tag" content="数字系统设计">
+<meta property="article:tag" content="Verilog">
+<meta property="article:tag" content="VLSI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://webpn.esing.dev/img/134402712_p0_250916_1347_7WSL.png"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://blog.esing.dev/2025/10/29/vd-p5/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;1aabda1500704262b993096aaa3b5c27&quot;}"></script><link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto+Sans+SC" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":1000,"position":"top","messagePrev":"本文最后更新于","messageNext":"天前，部分内容可能已过时。"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":380},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":100,"languages":{"author":"作者: Esing","link":"链接: ","source":"来源: Esing的小站","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '超大规模集成电路设计笔记：第五篇',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-11-04 12:56:47'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 8 || hour >= 24
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css"><link rel="stylesheet" href="/css/iconfont.css"><link rel="preload" as="style" crossorigin href="https://fontsapi.zeoseven.com/442/main/result.css" onload="this.rel='stylesheet'" onerror="this.href='https://fontsapi-storage.zeoseven.com/442/main/result.css'" /><link rel="preload" as="style" crossorigin href="https://fontsapi.zeoseven.com/442/main/result.css" onload="this.rel='stylesheet'" onerror="this.href='https://fontsapi-storage.zeoseven.com/442/main/result.css'" /><link rel="stylesheet" href="/css/maple.css"><link rel="stylesheet" href="/css/mycustom.css"><script src="/js/autoload.js"></script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Esing的小站" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="/css/load.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">184</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">178</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-lightbulb"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://webpn.esing.dev/img/134402712_p0_250916_1347_7WSL.png')"><nav id="nav"><span id="blog-info"><a class="site-name" id="site-name" href="/" title="Esing的小站">Esing的小站</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-lightbulb"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><center id="name-container"></center><a id="page-name" href="javascript:scrollToTop()"></a><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">超大规模集成电路设计笔记：第五篇</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-29T08:46:50.000Z" title="发表于 2025-10-29 16:46:50">2025-10-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-04T04:56:47.097Z" title="更新于 2025-11-04 12:56:47">2025-11-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="超大规模集成电路设计笔记：第五篇"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><div class="note info flat"><p>这一章不考，至少往年题没有考过。</p>
+</div>
+<h2 id="SoC总线">SoC总线</h2>
+<ul>
+<li>总线提供了系统中<strong>各个设备之间</strong>一种<strong>互连</strong>的<strong>访问共享硬件</strong>机制</li>
+<li>在数字系统中，总线<strong>承担数据传输任务</strong>，如处理器和存储器之间的数据传输</li>
+<li>总线的传输能力由总线的<strong>带宽</strong>和<strong>工作频率</strong>决定</li>
+<li>总线的设计通常要考虑4个因素：<strong>总线宽度、时钟频率、仲裁机制和传输类型</strong></li>
+</ul>
+<p>常见的总线有：</p>
+<ul>
+<li>AMBA：ARM公司定义的总线体系，广泛用于嵌入式SoC，包括 AHB、APB、AXI 等多个子协议</li>
+<li>OCP：开放式核心接口协议，模块化设计，适合IP核集成</li>
+<li>Wishbone：由OpenCores定义的开源SoC总线，简单易用，适合教学或FPGA设计</li>
+<li>Avalon：原Altera公司定义的片上总线协议</li>
+</ul>
+<h3 id="AMBA">AMBA</h3>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20251029172831688_251029_1728_zyBZ.png" alt="AMBA-AHB系统" style="zoom: 33%;" />
+<br>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20251029172845655_251029_1728_fIGf.png" alt="AMBA-AXI系统" style="zoom: 67%;" />
+<h2 id="常见IP">常见IP</h2>
+<p>SoC中的常见IP包括：中断控制器、实时时钟、SPI、定时器、看门狗等。</p>
+<p>一个完整的 SoC 通常包含如下模块（IP）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">┌──────────────────────────┐</span><br><span class="line">│        CPU / DSP         │   ← 控制/计算IP</span><br><span class="line">├──────────────────────────┤</span><br><span class="line">│   Cache / MMU / Memory   │   ← 存储IP</span><br><span class="line">├──────────────────────────┤</span><br><span class="line">│   AXI / AHB Interconnect │   ← 片上总线IP</span><br><span class="line">├──────────────────────────┤</span><br><span class="line">│ UART | SPI | I²C | GPIO  │   ← 外设IP</span><br><span class="line">├──────────────────────────┤</span><br><span class="line">│     DMA / Timer / WDT    │   ← 控制类IP</span><br><span class="line">├──────────────────────────┤</span><br><span class="line">│  USB / PCIe / Ethernet   │   ← 通信接口IP</span><br><span class="line">├──────────────────────────┤</span><br><span class="line">│   Security / Crypto / PM │   ← 安全与电源管理IP</span><br><span class="line">└──────────────────────────┘</span><br></pre></td></tr></table></figure>
+<h3 id="中断控制器">中断控制器</h3>
+<p>中断控制器（Interrupt Controller）是 SoC中用于管理和分发中断请求（IRQ）的关键模块，直接影响系统的<strong>实时性</strong>和<strong>响应能力</strong>。</p>
+<ul>
+<li>RISC-V：CLIN、PLIC</li>
+<li>ARM：NVIC、GIC</li>
+<li>x86：APIC</li>
+</ul>
+<h3 id="实时时钟-RTC">实时时钟 RTC</h3>
+<p>RTC（Real-Time Clock，实时时钟）是SoC中用于提供精确时间和日历功能的独立模块，即使在系统断电时也能持续运行（通常依靠备用电池供电）。RTC拥有报警功能，当达到所需的日期或时间时，可以用来触发中断（唤醒）。</p>
+<h3 id="SPI">SPI</h3>
+<p>SPI（Serial Peripheral Interface，串行外设接口）允许与外围设备的全双工同步串行通信。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/OIP_251029_1744_9Mi4.qDQZR6LGNmkKAxd41-dJkQHaFP" alt="SPI总线示意图" style="zoom: 50%;" />
+<h3 id="定时器与看门狗">定时器与看门狗</h3>
+<p>Timer（定时器）和Watchdog（看门狗）是两种关键的外设模块，分别用于时间管理和系统可靠性保障。它们都基于<strong>计时原理</strong>，但用途完全不同：</p>
+<ul>
+<li>定时器用来“<strong>计时与触发事件</strong>”；</li>
+<li>看门狗用来“<strong>监控系统运行是否卡死</strong>”。</li>
+</ul>
+<h3 id="PMC">PMC</h3>
+<p>PMC（Power Management Controller） 是SoC中负责电源管理、功耗控制、时钟分配和系统唤醒的核心模块，直接影响芯片的能效比和续航能力。主要通过电源管理、时钟管理、软件管理等方式来达到控制功耗的目的。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">模式</th>
+<th style="text-align:left">功耗</th>
+<th style="text-align:left">唤醒延迟</th>
+<th style="text-align:left">典型应用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Active</strong></td>
+<td style="text-align:left">高</td>
+<td style="text-align:left">无</td>
+<td style="text-align:left">CPU全速运行任务。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Idle</strong></td>
+<td style="text-align:left">中</td>
+<td style="text-align:left">微秒级</td>
+<td style="text-align:left">等待中断（如手机待机）。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Standby</strong></td>
+<td style="text-align:left">低</td>
+<td style="text-align:left">毫秒级</td>
+<td style="text-align:left">仅保留SRAM和RTC（如IoT设备）。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Off</strong></td>
+<td style="text-align:left">极低</td>
+<td style="text-align:left">秒级</td>
+<td style="text-align:left">完全断电，需硬件复位唤醒。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="DMAC">DMAC</h3>
+<p><s>AMD反插</s></p>
+<p>DMAC（Direct Memory Access Controller） 是SoC中用于在不占用CPU资源的情况下，实现外设与内存（或内存与内存）之间高速数据传输的硬件模块。它显著提升系统效率，尤其适用于大数据量、实时性要求高的场景（如音视频处理、网络通信）。</p>
+<p>DMAC一般包括如下模块：</p>
+<ul>
+<li>通道控制器：每个通道独立配置源地址、目标地址、传输长度等参数</li>
+<li>仲裁器：管理多个通道的优先级（固定优先级或轮询）</li>
+<li>数据FIFO：缓冲数据，解决源/目标设备速度不匹配问题</li>
+<li>寄存器组：存储控制参数（如传输模式、中断使能）</li>
+<li>总线接口：连接系统总线（如AXI、AHB），访问内存和外设</li>
+</ul>
+<h2 id="中断与异常">中断与异常</h2>
+<p>中断机制和异常机制即在中断和异常发生时，处理器将暂停当前正在执行的程序，转而执行中断和异常处理程序，返回时处理器恢复之前被执行的程序。对于处理器而言，中断和异常的处理机制基本上一样，因此合称广义异常。</p>
+<p>异常可分为两类：</p>
+<ul>
+<li>同步异常：原因可以精确定位到某一条执行指令，由<strong>当前正在执行的指令本身</strong>直接引起的异常。</li>
+<li>异步异常：每次发生时指令的PC可能不一样，例如中断便是一种异步异常
+<ul>
+<li>精确异步异常：在响应异常后的处理器状态能够<strong>精确反映</strong>为某一条指令的边界</li>
+<li>非精确异步异常：在响应异常后的处理器状态无法精确反映为某一条指令的边界</li>
+</ul>
+</li>
+</ul>
+<pre class="mermaid">flowchart TD
+    A[正常执行: <br/>PC 指向当前指令] --> B{是否发生<br/>异常/中断?}
+    B -- 否 --> A
+
+    %% 进入异常
+    B -- 是 --> C[硬件捕获异常]
+    C --> D[保存现场到 CSR]
+    D -->|mepc ← 触发时的 PC<br/>mcause ← 异常原因<br/>mtval ← 异常相关值（可选）<br/>mstatus ← 更新 MIE→MPIE、切换特权级| E
+    E --> F[PC ← mtvec（陷入入口）]
+    F --> G[开始执行<br/>异常/中断处理程序]
+
+    %% 处理过程
+    G --> H{处理完成<br/>并准备返回?}
+    H -- 否 --> G
+
+    %% 退出异常（机器模式）
+    H -- 是 --> I[执行 MRET 指令]
+    I --> J[硬件恢复状态]
+    J -->|PC ← mepc<br/>mstatus ← 恢复 MPIE→MIE 等| K[返回到<br/>被中断/异常的程序]
+    K --> A</pre>
+<h2 id="蜂鸟E203的中断处理">蜂鸟E203的中断处理</h2>
+<p>E203在处理器顶层接口中有4根中断输入信号，分别是软件中断、计时器中断、外部中断和调试中断。CLINT模块产生一根软件中断信号和一根计时器中断信号，通给蜂鸟E203处理器；PLIC模块接入多个外部中断源，将其仲裁后生成一根外部中断信号，通给蜂鸟E203处理器。SoC层面的调试模块生成一根调试中断，通给蜂鸟E203处理器核。所有的中断信号均由E203的<strong>交付模块</strong>进行处理。</p>
+<h3 id="CLINT">CLINT</h3>
+<p>CLINT（Core Local Interrupts Controller，核心本地中断控制器）是一个存储器地址映射的模块，挂载在蜂鸟E203 BIU上，用于产生<strong>软件中断</strong>和<strong>定时器中断</strong>。CLINT计时器根据低速输入节拍信号（来自电源常开域）进行计时，上电后默认一直计数，可通过蜂鸟E203自定义CSR寄存器<code>mcounterstop</code>来关闭。</p>
+<h3 id="PLIC">PLIC</h3>
+<p>PLIC（Platform Level Interrupt Controller，平台级中断控制器）是一个存储器地址映射的模块，挂载在蜂鸟E203 BIU上，专门用来管理<strong>外部中断源</strong>，并将它们统一分发到处理器。</p>
+<h3 id="异常处理实现">异常处理实现</h3>
+<p>蜂鸟E203交付模块对中断和异常的处理：</p>
+<ul>
+<li>优先级：长指令造成的异步异常 &gt; 中断造成的异步异常 &gt; ALU造成的同步异常</li>
+<li>异常一旦发生，便会<strong>冲刷流水线</strong>，重新从新的PC地址开始取指令</li>
+<li><code>mret</code>指令会触发处理器退出异常模式，被<strong>当作一种跳转指令</strong>来执行，跳转PC为<code>mepc</code>寄存器值</li>
+<li>对于同步异常，<code>mepc</code>寄存器更新为当前<strong>正在交付指令</strong>的PC值</li>
+<li>对于精确异步异常（中断），<code>mepc</code>寄存器更新为<strong>下一条待交付指令</strong>的PC值</li>
+<li>对于非精确异步异常（长指令），<code>mepc</code>寄存器更新为<strong>发生异常指令</strong>的PC值</li>
+</ul>
+<h2 id="蜂鸟E203的调试机制">蜂鸟E203的调试机制</h2>
+<p>处理器对于运行于其上的软件程序提供调试能力是至关重要的。调试机制是个非常复杂的软硬件协作机制，软硬件的实现难度很大。对于处理器的调试功能而言，常用的两种是“交互式调试”和“追踪调试”：</p>
+<ul>
+<li>交互式调试（Interactive Debug）是最常见的调试功能。调试器软件（如GDB）能够直接对处理器取得控制权，进而对其以一种交互方式进行调试，缺点是对处理器的运行具有打扰性。</li>
+<li>追踪调试（Trace Debug）只跟踪记录处理器核执行过的所有程序指令，而不会打断干扰处理器的执行过程。相比交互式调试，实现难度更大，硬件开销也更大。</li>
+</ul>
+<h3 id="调试资源">调试资源</h3>
+<p>E203中已有 DTM（Debug Transport Module）将JTAG标准接口转换成为内部的调试总线（Debug Bus），主要是使用状态机对JTAG协议进行解析。由于DTM模块处于JTAG时钟域，与调试总线要访问的调试模块不属于同一个时钟域，因此需要被同步。</p>
+<p>此外，还有调试模块（Debug Module），实现了RISC-V调试文档“0.11版本”中定义的若干寄存器、Debug-ROM和Debug-RAM。这些资源既可以被调试总线访问到，也可以被系统存储总线访问到：</p>
+<ul>
+<li>Debug-ROM包含了处理器进入调试模式下需要执行的异常处理程序；</li>
+<li>Debug-RAM主要在运行Debug-ROM中固定异常处理程序时作为数据段使用，用于存放一些临时数据和中间数据。</li>
+</ul>
+<h3 id="调试流程">调试流程</h3>
+<p>调试机制指令的实现：</p>
+<ul>
+<li>ebreak：触发处理器进入异常模式（调试模式）
+<ul>
+<li>调试中断一旦被接收，便会冲刷流水线，处理器PC跳转到<code>0x800</code>地址</li>
+<li>CSR寄存器dpc的值更新为当前正在执行的指令PC</li>
+<li>CSR寄存器dcsr的<code>cause</code>域值更新为引发进入调试模式的触发原因</li>
+</ul>
+</li>
+<li>dret：触发处理器退出异常模式（调试模式）
+<ul>
+<li>被当作一种跳转指令来执行，跳转PC为CSR寄存器dpc的值</li>
+<li>将dcsr寄存器中的<code>cause</code>域清除</li>
+</ul>
+</li>
+</ul>
+<h2 id="未来：超越摩尔定律">未来：超越摩尔定律</h2>
+<p>DSA（Domain-Specific Architecture，领域专用架构）方面：</p>
+<ul>
+<li>使用专用内存以最大限度地减少数据移动</li>
+<li>将资源投入到更多的运算单元或更大的内存中</li>
+<li>使用与域匹配的最简单的并行形式</li>
+<li>将数据大小和类型减少到域所需的最简单程度</li>
+<li>使用域特定的编程语言</li>
+</ul>
+<div class="note primary flat"><p>什么是“域特定的编程语言”？即DSL（Domain-Specific Language，领域专用语言）。比如前两年的<a target="_blank" rel="noopener" href="https://www.modular.com/mojo">Mojo</a>和<a target="_blank" rel="noopener" href="https://www.taichi-lang.org/">Taichi</a>都算是Python细化的DSL。</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://blog.esing.dev">Esing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.esing.dev/2025/10/29/vd-p5/">https://blog.esing.dev/2025/10/29/vd-p5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.esing.dev" target="_blank">Esing的小站</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="post-meta__tags" href="/tags/%E5%A4%8D%E4%B9%A0/">复习</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E5%AD%97%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">数字系统设计</a><a class="post-meta__tags" href="/tags/Verilog/">Verilog</a><a class="post-meta__tags" href="/tags/VLSI/">VLSI</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/10/23/latex-ligature/" title="LaTeX代码开启连字等特性"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2020/7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">LaTeX代码开启连字等特性</div></div></a></div><div class="next-post pull-right"><a href="/2025/10/31/onelastkiss-image/" title="One Last Kiss 风格图片生成"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://opic.esing.dev/img/louvre_251031_1910_J7A1.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">One Last Kiss 风格图片生成</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2025/09/16/vd-intro/" title="超大规模集成电路设计笔记：序篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/134402712_p0_250916_1347_7WSL.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-16</div><div class="title">超大规模集成电路设计笔记：序篇</div></div></a></div><div><a href="/2025/09/17/vd-p2/" title="超大规模集成电路设计笔记：第二篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/134402712_p0_250916_1347_7WSL.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-17</div><div class="title">超大规模集成电路设计笔记：第二篇</div></div></a></div><div><a href="/2025/09/16/vd-p1/" title="超大规模集成电路设计笔记：第一篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/134402712_p0_250916_1347_7WSL.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-16</div><div class="title">超大规模集成电路设计笔记：第一篇</div></div></a></div><div><a href="/2025/09/28/vd-p3/" title="超大规模集成电路设计笔记：第三篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/134402712_p0_250916_1347_7WSL.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-28</div><div class="title">超大规模集成电路设计笔记：第三篇</div></div></a></div><div><a href="/2025/10/21/vd-p4/" title="超大规模集成电路设计笔记：第四篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/134402712_p0_250916_1347_7WSL.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-21</div><div class="title">超大规模集成电路设计笔记：第四篇</div></div></a></div><div><a href="/2025/11/08/vd-p6/" title="超大规模集成电路设计笔记：第六篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/134402712_p0_250916_1347_7WSL.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-08</div><div class="title">超大规模集成电路设计笔记：第六篇</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Waline</span><span class="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Esing</div><div class="author-info__description">咱也不知道写点啥 (＠_＠;)</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">184</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">178</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Zxis233"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Zxis233" target="_blank" title="Github"><i class="fab fa-github" style="color: #ff80ac;"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss" style="color: #ff80ac;"></i></a><a class="social-icon" href="mailto:esing@mail.esing.dev" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #ff80ac;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline" style="font-weight: bold;"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p><b>测试性开启 <u>Zstd</u> 压缩以提升网页加载速度！</b><br>将所有随机图片API换为<b> <u>自建API</u> </b>！<br>将全局代码字体更换为中文友好的 <u>Maple Mono CN</u> ，并修正 Verilog 代码块中的 <u>阻塞赋值</u> 显示效果！<br></p></div></div><div class="card-widget colo-info" id="colo-info"><div class="item-headline"><i class="fas fa-satellite-dish"></i><span>Cloudflare 节点信息</span></div><div class="item-content"><script>!(function (){ function s(id, text){ var el=document.getElementById(id); if (el){ el.textContent=text || "未知"; if (id==="cf-ip"){ var ipItem=el.closest(".webinfo-item"); if (ipItem){ if ((text || "未知").length >15){ ipItem.classList.add("ip-wrap");} else{ ipItem.classList.remove("ip-wrap");}}}}} var coloMap={ HKG: "Hong Kong", NRT: "Tokyo, JP", KIX: "Osaka, JP", ICN: "Seoul, KR", SIN: "Singapore", SJC: "San Jose, US", SFO: "San Francisco, US", LAX: "Los Angeles, US", SEA: "Seattle, US", FRA: "Frankfurt, DE", LHR: "London, GB", AMS: "Amsterdam, NL", CDG: "Paris, FR", MAD: "Madrid, ES", SYD: "Sydney, AU", MEL: "Melbourne, AU",}; fetch("/cdn-cgi/trace",{ cache: "no-store"}) .then(function (r){ return r.text();}) .then(function (t){ var data={}, lines=t.split("\n"); for (var i=0; i < lines.length; i++){ var line=lines[i].trim(); if (!line) continue; var p=line.split("="); if (p.length < 2) continue; var key=p[0].trim(); var value=p.slice(1).join("=").trim(); data[key]=value;} s("cf-ip", data.ip); s("cf-loc", data.loc); var colo=data.colo; var coloText; if (colo){ var city=coloMap[colo]; coloText=city ? colo + " (" + city + ")" : colo;} else{ coloText="未知";} s("cf-colo", coloText); s("cf-tls", data.tls); var w=data.warp; var wd=w==="on" ? "启用" : w==="off" ? "关闭" : w || "未知"; s("cf-warp", wd);}) .catch(function (){ s("cf-ip", "加载失败"); s("cf-loc", "加载失败"); s("cf-colo", "加载失败"); s("cf-tls", "加载失败"); s("cf-warp", "加载失败");});})();</script><style>.webinfo{ display: flex; flex-direction: column;} .webinfo-item{ display: flex; align-items: center;} .webinfo-item:first-child{ justify-content: space-between;} .webinfo-item:first-child.ip-wrap{ flex-direction: column; align-items: flex-start;} .webinfo-item:not(:first-child){ justify-content: space-between;} .webinfo-item:first-child .item-name{ text-align: left;} .webinfo-item:first-child.ip-wrap .item-count{ width: 100%; text-align: right;}</style><div class="webinfo"><div class="webinfo-item"><div class="item-name">访问 IP :</div><div class="item-count" id="cf-ip"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">访问地区 :</div><div class="item-count" id="cf-loc"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">CDN 节点 :</div><div class="item-count" id="cf-colo"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">TLS 协议 :</div><div class="item-count" id="cf-tls"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">WARP :</div><div class="item-count" id="cf-warp"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SoC%E6%80%BB%E7%BA%BF"><span class="toc-number">1.</span> <span class="toc-text">SoC总线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AMBA"><span class="toc-number">1.1.</span> <span class="toc-text">AMBA</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81IP"><span class="toc-number">2.</span> <span class="toc-text">常见IP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-number">2.1.</span> <span class="toc-text">中断控制器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%97%B6%E6%97%B6%E9%92%9F-RTC"><span class="toc-number">2.2.</span> <span class="toc-text">实时时钟 RTC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SPI"><span class="toc-number">2.3.</span> <span class="toc-text">SPI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%8E%E7%9C%8B%E9%97%A8%E7%8B%97"><span class="toc-number">2.4.</span> <span class="toc-text">定时器与看门狗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PMC"><span class="toc-number">2.5.</span> <span class="toc-text">PMC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DMAC"><span class="toc-number">2.6.</span> <span class="toc-text">DMAC</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E4%B8%8E%E5%BC%82%E5%B8%B8"><span class="toc-number">3.</span> <span class="toc-text">中断与异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%9C%82%E9%B8%9FE203%E7%9A%84%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">蜂鸟E203的中断处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CLINT"><span class="toc-number">4.1.</span> <span class="toc-text">CLINT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PLIC"><span class="toc-number">4.2.</span> <span class="toc-text">PLIC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.3.</span> <span class="toc-text">异常处理实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%9C%82%E9%B8%9FE203%E7%9A%84%E8%B0%83%E8%AF%95%E6%9C%BA%E5%88%B6"><span class="toc-number">5.</span> <span class="toc-text">蜂鸟E203的调试机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E8%AF%95%E8%B5%84%E6%BA%90"><span class="toc-number">5.1.</span> <span class="toc-text">调试资源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E8%AF%95%E6%B5%81%E7%A8%8B"><span class="toc-number">5.2.</span> <span class="toc-text">调试流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5%EF%BC%9A%E8%B6%85%E8%B6%8A%E6%91%A9%E5%B0%94%E5%AE%9A%E5%BE%8B"><span class="toc-number">6.</span> <span class="toc-text">未来：超越摩尔定律</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline" style="font-weight: bold;"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/10/28/playedgalgamelist/" title="我推的Gal"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://opic.esing.dev/img/galgame-photo_251119_1849_LONP.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="我推的Gal"/></a><div class="content"><a class="title" href="/2024/10/28/playedgalgamelist/" title="我推的Gal">我推的Gal</a><time datetime="2025-12-01T16:14:13.080Z" title="更新于 2025-12-02 00:14:13">2025-12-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/24/todos-in-my-university-life/" title="我在大学里都学了啥？"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/8" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="我在大学里都学了啥？"/></a><div class="content"><a class="title" href="/2024/07/24/todos-in-my-university-life/" title="我在大学里都学了啥？">我在大学里都学了啥？</a><time datetime="2025-11-25T04:00:39.590Z" title="更新于 2025-11-25 12:00:39">2025-11-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/06/index-for-study/" title="为学习而生の魔法传送门"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://opic.esing.dev/img/125283400_p0_251119_1909_5JYv.avif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="为学习而生の魔法传送门"/></a><div class="content"><a class="title" href="/2024/10/06/index-for-study/" title="为学习而生の魔法传送门">为学习而生の魔法传送门</a><time datetime="2025-11-19T11:10:04.702Z" title="更新于 2025-11-19 19:10:04">2025-11-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/18/cloudflare-offline-oneday/" title="Cloudflare、睡覺——大规模宕机后的随想"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2020/3" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Cloudflare、睡覺——大规模宕机后的随想"/></a><div class="content"><a class="title" href="/2025/11/18/cloudflare-offline-oneday/" title="Cloudflare、睡覺——大规模宕机后的随想">Cloudflare、睡覺——大规模宕机后的随想</a><time datetime="2025-11-19T02:56:36.593Z" title="更新于 2025-11-19 10:56:36">2025-11-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/17/powershell-ln/" title="更适合Powershell体质的ln"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/top_2_2023-4-23_1835_ve2mzpmu1v.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="更适合Powershell体质的ln"/></a><div class="content"><a class="title" href="/2025/11/17/powershell-ln/" title="更适合Powershell体质的ln">更适合Powershell体质的ln</a><time datetime="2025-11-17T06:22:14.360Z" title="更新于 2025-11-17 14:22:14">2025-11-17</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://pic.esing.dev/img/87257672_p0_2023-4-16_1808_qmfhwf6v6g.avif')"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By Esing</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Deployed On <a href="https://pages.cloudflare.com/" target="_blank">Cloudflare Pages</a><a href="https://icp.gov.moe/?keyword=20237860" target="_blank"><br /><br /> 萌 ICP 备 20237860 号 </a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left" style="color: var(--blockquote-color);"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right" style="color: var(--blockquote-color);"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh" style="color: var(--blockquote-color);"></i></a><a class="rightMenu-item" href="javascript:rmf.scrollToTop();"><i class="fa fa-arrow-up" style="color: var(--blockquote-color);"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy" style="color: var(--blockquote-color);"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="iconfont icon-baidu" style="color: var(--blockquote-color);"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link" style="color: var(--blockquote-color);"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"><i class="fa fa-link" style="color: var(--blockquote-color);"></i><span>复制本文地址</span></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore" style="color: var(--blockquote-color);"></i><span>新标签页打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy" style="color: var(--blockquote-color);"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore" style="color: var(--blockquote-color);"></i><span>在新标签页打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy" style="color: var(--blockquote-color);"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="javascript:toRandomPost()"><i class="fa fa-paper-plane" style="color: var(--blockquote-color);"></i><span>随便逛逛</span></a><a class="rightMenu-item" href="javascript:rmf.switchDarkMode();"><i class="fa fa-moon" style="color: var(--blockquote-color);"></i><span>昼夜切换</span></a><a class="rightMenu-item" href="javascript:rmf.switchReadMode();"><i class="fa fa-book" style="color: var(--blockquote-color);"></i><span>阅读模式</span></a><a class="rightMenu-item" href="javascript:fullScreen();"><i class="fas fa-expand" style="color: var(--blockquote-color);"></i><span>进入全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script><!-- 这里只输出一个内联脚本，不直接引 src--><script>window.addEventListener('load', function () {
+  // 页面上没有 mermaid 图表就不加载脚本
+  if (!document.querySelector('.mermaid, .language-mermaid')) return;
+
+  var s = document.createElement('script');
+  var ver = '11.12.1'; // 从主题配置拿版本号
+  s.src = 'https://unpkg.com/mermaid@' + ver + '/dist/mermaid.min.js';
+  s.defer = true;
+  s.onload = function () {
+    if (window.mermaid) {
+      // 直接把主题里的 options 内联成 JS 对象，避免属性 + JSON.parse
+      var options = {"theme":"base","themeVariables":{"background":"transparent","primaryColor":"hsl(339, 100%, 90%)","primaryTextColor":"#000000","primaryBorderColor":"#999999","secondaryColor":"hsl(159, 66%, 76%)","secondaryBorderColor":"#666666","lineColor":"#333333","noteBorderColor":"#666666","fontFamily":"Noto Sans SC","fontSize":"0.9em"}};
+      mermaid.initialize(options);
+    }
+  };
+  document.body.appendChild(s);
+});</script><script>function loadWaline () {
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://comment.esing.dev/',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  const walineCSSLoad = document.getElementById('waline-css')
+
+  if (typeof Waline === 'object') {
+    walineCSSLoad ? initWaline() : getCSS('https://unpkg.com/@waline/client@v2/dist/waline.css','waline-css').then(initWaline)
+  }
+  else {
+    getCSS('https://unpkg.com/@waline/client@v2/dist/waline.css','waline-css').then(() => {
+      getScript('https://unpkg.com/@waline/client@v2/dist/waline.js').then(initWaline)
+    })
+  }
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script><script>function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: 'ad3070e381dc19ea10a3',
+      clientSecret: '70adf2f0332c581dfc5055033151ca3989b89ebd',
+      repo: 'BlogComment',
+      owner: 'Zxis233',
+      admin: ['Zxis233'],
+      id: '674ffa2df72462e1e3b5e6856bd26897',
+      updateCountCallback: commentCount
+    },{"language":"zh-CN","perPage":7}))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+    getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Waline' === 'Gitalk' || !true) {
+  if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script type="text/javascript" src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script type="text/javascript" src="/js/rightmenu.js"></script><script src="/js/random.js"></script><script type="text/javascript" src="/js/title.js"></script><script type="text/javascript" src="/js/titlelight.js"></script><script id="canvas_nest" defer="defer" color="255,128,172" opacity="0.8" zIndex="-1" count="80" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

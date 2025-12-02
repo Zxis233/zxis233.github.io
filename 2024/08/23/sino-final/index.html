@@ -1,0 +1,464 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>集创赛『信诺达杯』决赛经验分享 | Esing的小站</title><meta name="author" content="Esing"><meta name="copyright" content="Esing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="过程比结果更重要，但不在乎结果的过程毫无意义。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="集创赛『信诺达杯』决赛经验分享">
+<meta property="og:url" content="https://blog.esing.dev/2024/08/23/sino-final/index.html">
+<meta property="og:site_name" content="Esing的小站">
+<meta property="og:description" content="过程比结果更重要，但不在乎结果的过程毫无意义。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.esing.dev/img/105906982_p0_2024-5-29_2203_huvs6fbpit.png">
+<meta property="article:published_time" content="2024-08-23T01:00:11.000Z">
+<meta property="article:modified_time" content="2024-11-21T03:26:20.241Z">
+<meta property="article:author" content="Esing">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="ATE">
+<meta property="article:tag" content="信诺达">
+<meta property="article:tag" content="集创赛">
+<meta property="article:tag" content="封装测试">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="ST3020">
+<meta property="article:tag" content="XD8255">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.esing.dev/img/105906982_p0_2024-5-29_2203_huvs6fbpit.png"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://blog.esing.dev/2024/08/23/sino-final/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;1aabda1500704262b993096aaa3b5c27&quot;}"></script><link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto+Sans+SC" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":1000,"position":"top","messagePrev":"本文最后更新于","messageNext":"天前，部分内容可能已过时。"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":380},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":100,"languages":{"author":"作者: Esing","link":"链接: ","source":"来源: Esing的小站","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '集创赛『信诺达杯』决赛经验分享',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-11-21 11:26:20'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 8 || hour >= 24
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css"><link rel="stylesheet" href="/css/iconfont.css"><link rel="preload" as="style" crossorigin href="https://fontsapi.zeoseven.com/442/main/result.css" onload="this.rel='stylesheet'" onerror="this.href='https://fontsapi-storage.zeoseven.com/442/main/result.css'" /><link rel="preload" as="style" crossorigin href="https://fontsapi.zeoseven.com/442/main/result.css" onload="this.rel='stylesheet'" onerror="this.href='https://fontsapi-storage.zeoseven.com/442/main/result.css'" /><link rel="stylesheet" href="/css/maple.css"><link rel="stylesheet" href="/css/mycustom.css"><script src="/js/autoload.js"></script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Esing的小站" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="/css/load.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">184</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">178</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-lightbulb"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://pic.esing.dev/img/105906982_p0_2024-5-29_2203_huvs6fbpit.png')"><nav id="nav"><span id="blog-info"><a class="site-name" id="site-name" href="/" title="Esing的小站">Esing的小站</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-lightbulb"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><center id="name-container"></center><a id="page-name" href="javascript:scrollToTop()"></a><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">集创赛『信诺达杯』决赛经验分享</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-23T01:00:11.000Z" title="发表于 2024-08-23 09:00:11">2024-08-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-11-21T03:26:20.241Z" title="更新于 2024-11-21 11:26:20">2024-11-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="集创赛『信诺达杯』决赛经验分享"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>上午去报道，结果得知下午比赛。还好提前一天把《黑神话：悟空》下好了。10点10分开始解压，到编译完着色器正常进入游戏已经是10点45了。就看了个过场动画，然后收拾行李准备去比赛。</p>
+<p>然而回来也没能爽玩。一是手柄没带，键鼠操作依托；二是显卡还是带不动，虽然之前性能测试可以确保全高无光追60帧，但是实际进了游戏才发现是真的卡。只能拉低DLSS的渲染分辨率，但是画面及其模糊，看着跟老花眼一样，遂罢。等后面换了好一点的电脑再来罢。</p>
+</blockquote>
+
+    <div id="aplayer-pUFKCRKq" class="aplayer aplayer-tag-marker meting-tag-marker"
+         data-id="32098354" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ff80ac" data-volume="0.3" data-loop="none"
+    ></div>
+<h2 id="前言">前言</h2>
+<p>信诺达杯杯赛的总决赛是现场测试芯片。现场开题，现场测试。可以说，这是对临场发挥能力、自学能力和团队协作能力的一次完整的考验。</p>
+<p>虽然是现场开题，但是在赛前可以通过阅读各类未见过的芯片技术手册来锻炼自己的分析能力。</p>
+<h2 id="赛题">赛题</h2>
+<p>本次决赛考察的是<code>XD8255</code>芯片。<a target="_blank" rel="noopener" href="https://item.szlcsc.com/586612.html">XD8255-2_XINLUDA(信路达)-XD8255-2中文资料</a></p>
+<blockquote>
+<p>8255芯片是Intel公司生产的可编程并行I/O接口芯片，有3个8位并行I/O口。具有3个通道3种工作方式的可编程并行接口芯片（40引脚）。 其各口功能可由软件选择，使用灵活，通用性强。8255可作为单片机与多种外设连接时的中间接口电路。</p>
+</blockquote>
+<p>这是一颗组合逻辑芯片，引脚<strong>非常</strong>多。比赛时看到信路达22页的全英文手册头都大了<s>而且还有很多抽象的应用示例图</s>。</p>
+<h2 id="时间安排">时间安排</h2>
+<p><strong>我对自己是很不满意的，因为我感觉我并没能发挥出全力。</strong></p>
+<p>小队一共花了30分钟的时间读技术手册。之后花了10分钟的时间来排查板子和芯片的通道是否连接上。因为我们没有见过原理版，我们只能现场对着引脚一个一个进行测量。</p>
+<p>在确认芯片通道设置正确后，我们花了整整<strong>30分钟</strong>的时间来尝试对芯片的总线进行读写。但是这本应该是在前面就已经完成的。随后，我花了30分钟使用Python自动生成了测试代码并进行测试。做完这一切后，只剩下20分钟了。</p>
+<p>队友还在写静态参数测试的代码和图形文件，最后还要拼合在一起。而且，在将图形文件拼合后，发生了编译不过的情况。查看报错发现是IO设置错误，以及标号重复。</p>
+<p>最终，我们也只测试出来一部分静态参数和mode0的功能测试。</p>
+<h2 id="驱动板分析">驱动板分析</h2>
+<p>官方并未给出信诺达的数字通用驱动板的原理图。当时板子拿到手后，分析+调试还用了20min。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/DIP48%20%E5%8E%9F%E7%90%86%E5%9B%BE_2024-8-23_2015_xiyzcvh0m9.jpg" alt="驱动板原理图" style="zoom:50%;" />
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/DIP48%20PCB%E5%9B%BE_2024-8-23_2015_lx2jjpx32d.jpg" alt="驱动板PCB图" style="zoom:67%;" />
+<p>测量数字芯片仅需要用到两侧的数字引脚。板子上有16组12位的拨码开关。左边四列右边四列，上下两行，覆盖了24个引脚。</p>
+<p>三列中，有两列分别用于设置DPS和GND，只要将芯片对应电源引脚的拨码开关拨下，即可和ST3020的DPS或GND通道进行连接。</p>
+<p>此外，在最上面还有一个二位拨码开关，用于将一个电容和DPS进行连接，可能是用于测量一些直流参数或者滤波吧。</p>
+<div class="note primary flat"><p>后面有时间可能会试着去画一下驱动板吧。先鸽了</p>
+</div>
+<h2 id="芯片分析">芯片分析</h2>
+<p>两个小时的时间还是非常紧张的。不过，现在想想，要是再给一个小时，应该就没问题了。因为，最难的部分——芯片读写的逻辑已经弄清楚了。</p>
+<h3 id="引脚定义">引脚定义</h3>
+<p>阅读技术手册可知：芯片的引脚分为四类：</p>
+<ol>
+<li>供电引脚<code>VDD</code>、<code>GND</code></li>
+<li>数据IO引脚<code>PA/PB/PC</code>，均为八位。其中<code>PC</code>较特殊，为4+4的形式。</li>
+<li>总线IO引脚<code>D</code>，为八位。同时，它还可作为控制信号输入。</li>
+<li>控制引脚<code>A1/10</code>、<code>nCS/nRD/nWR</code>、<code>Reset</code>。</li>
+</ol>
+<div class="note warning flat"><p>当时非常<strong>傻逼</strong>，没有看清楚<code>Reset</code>引脚是低有效还是高有效，因此浪费了10分钟进行调试。</p>
+<p><strong>Reset是高有效！</strong></p>
+</div>
+<h3 id="静态参数">静态参数</h3>
+<p>要测的基础静态参数当然有Pc、Icc、II、Io等。</p>
+<h3 id="功能分析">功能分析</h3>
+<p>这颗芯片没有时钟，所有的输出输入完全依赖控制引脚和IO接口。因此，图形文件相对来说比较简单。</p>
+<p>阅读技术手册可知，芯片的工作模式有三种：</p>
+<ol>
+<li><strong>Basic Input/Output</strong> 基础输入输出</li>
+<li><strong>Strobed Input/Output</strong> 闪烁输入输出（实际上是带有握手协议的输入输出）</li>
+<li><strong>Bidirectional Bus</strong> 双向总线</li>
+</ol>
+<p>依旧是从易到难，先看最简单的mode0。</p>
+<h4 id="mode0-基础输入输出">mode0 基础输入输出</h4>
+<p>顾名思义：简单的输入输出，无需任何准备即可。</p>
+<div class="note warning flat"><p>芯片内部的总线有寄存器，用于保存数据。当时就是卡在这一步，在<code>Data</code>端输入后直接去读写<code>PA</code>总线，结果自然是什么也没有。</p>
+<p>正确的顺序应当是：先从<code>A/B</code>两组输入中选择一组进行数据输入，将数据写入<code>Databus</code>，随后再从<code>Databus</code>中读取到<code>A/B</code>端口。</p>
+</div>
+<p>本来应该是测试<code>4x4=16</code>种的，即<code>ABCD</code>四个端口之间的写入读出。鉴于时间有限，比赛中只写了A写A读、B写B读、C写C读的图形文件，而且最后一种还未能正常通过测试。</p>
+<blockquote>
+<p>之后想想，可能是因为D作为控制位时未能正确设置C的4+4两组数据的传输方式。</p>
+</blockquote>
+<p>为了更高效地生成图形文件，我使用了Python。为什么不用C？真不熟。我可不想搞一堆复杂的字符串操作。<strong>论简易程度还得是Python这种弱类型语言。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">io_width = <span class="number">8</span></span><br><span class="line"></span><br><span class="line">pa = <span class="number">0</span></span><br><span class="line">pb = <span class="number">2</span> ** io_width - <span class="number">1</span></span><br><span class="line">pc = <span class="number">0</span></span><br><span class="line">data = <span class="number">0b10101001</span></span><br><span class="line"></span><br><span class="line">data_num = <span class="built_in">str</span>(<span class="built_in">bin</span>(data)[<span class="number">2</span>:]).zfill(<span class="number">8</span>)</span><br><span class="line">output_data = <span class="built_in">str</span>(<span class="built_in">bin</span>(data))[<span class="number">2</span>:].zfill(<span class="number">8</span>).replace(<span class="string">&quot;0&quot;</span>, <span class="string">&quot;L&quot;</span>).replace(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;H&quot;</span>)</span><br><span class="line"></span><br><span class="line">pb_num = <span class="built_in">str</span>(<span class="built_in">bin</span>(pb)[<span class="number">2</span>:]).zfill(<span class="number">8</span>)</span><br><span class="line">pc_num = <span class="built_in">str</span>(<span class="built_in">bin</span>(pc)[<span class="number">2</span>:]).zfill(<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>((<span class="string">&quot;      &#123;AAAAAAAA BBBBBBBB CCCCCCCC DDDDDDDD AA R C R W&#125;&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot; INC  (XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXXX XX X X X X)&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot; INC  (XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXXX XX 1 X X X)&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> pa <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span> ** io_width):</span><br><span class="line">    pa_num = <span class="built_in">str</span>(<span class="built_in">bin</span>(pa)[<span class="number">2</span>:]).zfill(<span class="number">8</span>)</span><br><span class="line">    output_data = pa_num.replace(<span class="string">&quot;0&quot;</span>, <span class="string">&quot;L&quot;</span>).replace(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;H&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot; INC  (<span class="subst">&#123;pa_num&#125;</span> XXXXXXXX XXXXXXXX XXXXXXXX 00 0 0 0 1)&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot; INC  (<span class="subst">&#123;output_data&#125;</span> XXXXXXXX XXXXXXXX XXXXXXXX 00 0 0 1 0)&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot; HALT (HHHHHHHH XXXXXXXX XXXXXXXX XXXXXXXX 00 0 0 1 0)&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot; &#123;PA Finished&#125;\n\n&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> pb <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span> ** io_width):</span><br><span class="line">    pb_num = <span class="built_in">str</span>(<span class="built_in">bin</span>(pb)[<span class="number">2</span>:]).zfill(<span class="number">8</span>)</span><br><span class="line">    output_data = pb_num.replace(<span class="string">&quot;0&quot;</span>, <span class="string">&quot;L&quot;</span>).replace(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;H&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot; INC  (XXXXXXXX <span class="subst">&#123;pb_num&#125;</span> XXXXXXXX XXXXXXXX 01 0 0 0 1)&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot; INC  (XXXXXXXX <span class="subst">&#123;output_data&#125;</span> XXXXXXXX XXXXXXXX 01 0 0 1 0)&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot; HALT (XXXXXXXX HHHHHHHH XXXXXXXX XXXXXXXX 01 0 0 1 0)&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot; &#123;PB Finished&#125;\n\n&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> pc <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span> ** io_width):</span><br><span class="line">    pc_num = <span class="built_in">str</span>(<span class="built_in">bin</span>(pc)[<span class="number">2</span>:]).zfill(<span class="number">8</span>)</span><br><span class="line">    output_data = pc_num.replace(<span class="string">&quot;0&quot;</span>, <span class="string">&quot;L&quot;</span>).replace(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;H&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot; INC  (XXXXXXXX XXXXXXXX <span class="subst">&#123;pc_num&#125;</span> XXXXXXXX 10 0 0 0 1)&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot; INC  (XXXXXXXX XXXXXXXX <span class="subst">&#123;output_data&#125;</span> XXXXXXXX 10 0 0 1 0)&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot; HALT (XXXXXXXX XXXXXXXX HHHHHHHH XXXXXXXX 10 0 0 1 0)&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot; &#123;PC Finished&#125;\n\n&quot;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// CON-TEST</span></span><br><span class="line">SET_DPS(<span class="number">2</span>, <span class="number">0</span>, V, <span class="number">20</span>, MA);</span><br><span class="line">PMU_CONDITIONS(FIMV, <span class="number">-0.1</span>, MA, <span class="number">2</span>, V);</span><br><span class="line"><span class="keyword">if</span> (!PMU_MEASURE(<span class="string">&quot;1-6,8-20,29-33,35-48&quot;</span>, <span class="number">20</span>, <span class="string">&quot;CON_&quot;</span>, V, <span class="number">-0.1</span>, <span class="number">-1.9</span>))</span><br><span class="line">    BIN(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// VDD</span></span><br><span class="line">SET_DPS(<span class="number">2</span>, <span class="number">5</span>, V, <span class="number">50</span>, MA);</span><br><span class="line"></span><br><span class="line"><span class="comment">// VIH/VIL/VOH/VOL</span></span><br><span class="line">SET_INPUT_LEVEL(<span class="number">5</span>, <span class="number">0</span>);</span><br><span class="line">SET_OUTPUT_LEVEL(<span class="number">3</span>, <span class="number">0.4</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// WAVE FORMAT</span></span><br><span class="line">SET_PERIOD(<span class="number">500</span>);</span><br><span class="line">SET_TIMING(<span class="number">100</span>, <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">FORMAT(NRZ0, <span class="string">&quot;1-6,8-20,29-33,35-48&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// mode 0, abc to bus</span></span><br><span class="line"><span class="keyword">if</span> (!RUN_PATTERN(<span class="string">&quot;A2Bus&quot;</span>, <span class="number">21</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>))</span><br><span class="line">    BIN(<span class="number">2</span>);</span><br><span class="line"><span class="keyword">if</span> (!RUN_PATTERN(<span class="string">&quot;B2Bus&quot;</span>, <span class="number">22</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>))</span><br><span class="line">    BIN(<span class="number">2</span>);</span><br><span class="line"><span class="keyword">if</span> (!RUN_PATTERN(<span class="string">&quot;C2Bus&quot;</span>, <span class="number">23</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>))</span><br><span class="line">    BIN(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="mode1-带有握手协议的输入输出">mode1 带有握手协议的输入输出</h4>
+<p>mode1是带有握手协议的输入输出。在这种模式下，<code>PC</code>的八位被用作控制信号的输入输出。在手册第13页的汇总表里有详细的说明。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20240823090232754_2024-8-23_0902_wd9evjapsd.png" alt="不同模式下的端口定义" style="zoom: 50%;" />
+<div class="note danger flat"><p>以下代码与方案未经过实机验证，仅供参考。</p>
+</div>
+<h2 id="后记">后记</h2>
+<blockquote>
+<p>2024.08.17</p>
+<blockquote>
+<p>提前把键盘洗干净了，准备带上。更换Tab键的轴体为凯华Box白，清脆悦耳。自动补全的时候很爽。青轴虽然也碎响脆，但是手感不如Box白舒服，而且有点晃。</p>
+</blockquote>
+<p>2024.08.21</p>
+<blockquote>
+<p>轻松拿下保底，只能说意料之中吧。总共拿了60分<s>居然还能拿60分</s>。最高的那一队测出来的得分是160分，应该是几乎所有的静态参数+功能测试都测试出来了。这也没啥办法，毕竟学校没这门课程，我们又算半路出家的。能走到这里，我觉得比以往强太多了。<strong>至少，在这个杯赛，我们队是学校历史上的第一。</strong></p>
+<p>和拿到国一的国防科大队伍聊了一下，原来他们大一微机课学过这颗芯片。<strong>真题都做过了，你不拿奖谁拿奖？只能说运气不如人，认了。</strong></p>
+</blockquote>
+<p>2024.08.22</p>
+<blockquote>
+<p>猿神，启动！</p>
+<p>回去拿室友的<code>3070 AD OC</code>爽玩。直接串流到本地电脑，2K+全高+低光追稳60帧。不过GPU拉到93%，VRAM拉到88%，物尽其用了。话说Steam那个局域网文件传输确实方便，WIFI6内网互拷能跑到500M。要是有线的话应该轻松能跑满网口吧。</p>
+</blockquote>
+</blockquote>
+<h2 id="参考资料">参考资料</h2>
+<p>《微机原理与接口技术（第3版）》，<em>周明德、张晓霞、兰方鹏著</em></p>
+<div class="note info flat"><p>第八章已经讲的很详细了。</p>
+</div>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://blog.esing.dev">Esing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.esing.dev/2024/08/23/sino-final/">https://blog.esing.dev/2024/08/23/sino-final/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.esing.dev" target="_blank">Esing的小站</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/ATE/">ATE</a><a class="post-meta__tags" href="/tags/%E4%BF%A1%E8%AF%BA%E8%BE%BE/">信诺达</a><a class="post-meta__tags" href="/tags/%E9%9B%86%E5%88%9B%E8%B5%9B/">集创赛</a><a class="post-meta__tags" href="/tags/%E5%B0%81%E8%A3%85%E6%B5%8B%E8%AF%95/">封装测试</a><a class="post-meta__tags" href="/tags/C/">C++</a><a class="post-meta__tags" href="/tags/ST3020/">ST3020</a><a class="post-meta__tags" href="/tags/XD8255/">XD8255</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/08/16/dcmos-intro/" title="数字CMOS集成电路复习笔记：序篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/121506380_p0_20241213_1656.avif" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">数字CMOS集成电路复习笔记：序篇</div></div></a></div><div class="next-post pull-right"><a href="/2024/08/24/dcmos-p1/" title="数字CMOS集成电路复习笔记：第一篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/121506380_p0_20241213_1656.avif" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">数字CMOS集成电路复习笔记：第一篇</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/07/19/sino/" title="集创赛『信诺达杯』初赛经验分享"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/105906982_p0_2024-5-29_2203_huvs6fbpit.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-19</div><div class="title">集创赛『信诺达杯』初赛经验分享</div></div></a></div><div><a href="/2024/11/21/hifini-autosignin/" title="记一次简单的网站逆向自动签到"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/4" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-21</div><div class="title">记一次简单的网站逆向自动签到</div></div></a></div><div><a href="/2024/04/25/playwright-load-chrome-extension/" title="Playwright加载Chrome扩展"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/5" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-25</div><div class="title">Playwright加载Chrome扩展</div></div></a></div><div><a href="/2025/01/02/rpi-yolo5/" title="树莓派与YOLOv5-Lite的那些事：配置、踩坑与部署"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/2" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-02</div><div class="title">树莓派与YOLOv5-Lite的那些事：配置、踩坑与部署</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Waline</span><span class="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Esing</div><div class="author-info__description">咱也不知道写点啥 (＠_＠;)</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">184</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">178</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Zxis233"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Zxis233" target="_blank" title="Github"><i class="fab fa-github" style="color: #ff80ac;"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss" style="color: #ff80ac;"></i></a><a class="social-icon" href="mailto:esing@mail.esing.dev" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #ff80ac;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline" style="font-weight: bold;"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p><b>测试性开启 <u>Zstd</u> 压缩以提升网页加载速度！</b><br>将所有随机图片API换为<b> <u>自建API</u> </b>！<br>将全局代码字体更换为中文友好的 <u>Maple Mono CN</u> ，并修正 Verilog 代码块中的 <u>阻塞赋值</u> 显示效果！<br></p></div></div><div class="card-widget colo-info" id="colo-info"><div class="item-headline"><i class="fas fa-satellite-dish"></i><span>Cloudflare 节点信息</span></div><div class="item-content"><script>!(function (){ function s(id, text){ var el=document.getElementById(id); if (el){ el.textContent=text || "未知"; if (id==="cf-ip"){ var ipItem=el.closest(".webinfo-item"); if (ipItem){ if ((text || "未知").length >15){ ipItem.classList.add("ip-wrap");} else{ ipItem.classList.remove("ip-wrap");}}}}} var coloMap={ HKG: "Hong Kong", NRT: "Tokyo, JP", KIX: "Osaka, JP", ICN: "Seoul, KR", SIN: "Singapore", SJC: "San Jose, US", SFO: "San Francisco, US", LAX: "Los Angeles, US", SEA: "Seattle, US", FRA: "Frankfurt, DE", LHR: "London, GB", AMS: "Amsterdam, NL", CDG: "Paris, FR", MAD: "Madrid, ES", SYD: "Sydney, AU", MEL: "Melbourne, AU",}; fetch("/cdn-cgi/trace",{ cache: "no-store"}) .then(function (r){ return r.text();}) .then(function (t){ var data={}, lines=t.split("\n"); for (var i=0; i < lines.length; i++){ var line=lines[i].trim(); if (!line) continue; var p=line.split("="); if (p.length < 2) continue; var key=p[0].trim(); var value=p.slice(1).join("=").trim(); data[key]=value;} s("cf-ip", data.ip); s("cf-loc", data.loc); var colo=data.colo; var coloText; if (colo){ var city=coloMap[colo]; coloText=city ? colo + " (" + city + ")" : colo;} else{ coloText="未知";} s("cf-colo", coloText); s("cf-tls", data.tls); var w=data.warp; var wd=w==="on" ? "启用" : w==="off" ? "关闭" : w || "未知"; s("cf-warp", wd);}) .catch(function (){ s("cf-ip", "加载失败"); s("cf-loc", "加载失败"); s("cf-colo", "加载失败"); s("cf-tls", "加载失败"); s("cf-warp", "加载失败");});})();</script><style>.webinfo{ display: flex; flex-direction: column;} .webinfo-item{ display: flex; align-items: center;} .webinfo-item:first-child{ justify-content: space-between;} .webinfo-item:first-child.ip-wrap{ flex-direction: column; align-items: flex-start;} .webinfo-item:not(:first-child){ justify-content: space-between;} .webinfo-item:first-child .item-name{ text-align: left;} .webinfo-item:first-child.ip-wrap .item-count{ width: 100%; text-align: right;}</style><div class="webinfo"><div class="webinfo-item"><div class="item-name">访问 IP :</div><div class="item-count" id="cf-ip"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">访问地区 :</div><div class="item-count" id="cf-loc"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">CDN 节点 :</div><div class="item-count" id="cf-colo"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">TLS 协议 :</div><div class="item-count" id="cf-tls"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">WARP :</div><div class="item-count" id="cf-warp"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%9B%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">赛题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%AE%89%E6%8E%92"><span class="toc-number">3.</span> <span class="toc-text">时间安排</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A9%B1%E5%8A%A8%E6%9D%BF%E5%88%86%E6%9E%90"><span class="toc-number">4.</span> <span class="toc-text">驱动板分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8A%AF%E7%89%87%E5%88%86%E6%9E%90"><span class="toc-number">5.</span> <span class="toc-text">芯片分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E8%84%9A%E5%AE%9A%E4%B9%89"><span class="toc-number">5.1.</span> <span class="toc-text">引脚定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%8F%82%E6%95%B0"><span class="toc-number">5.2.</span> <span class="toc-text">静态参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-number">5.3.</span> <span class="toc-text">功能分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mode0-%E5%9F%BA%E7%A1%80%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="toc-number">5.3.1.</span> <span class="toc-text">mode0 基础输入输出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mode1-%E5%B8%A6%E6%9C%89%E6%8F%A1%E6%89%8B%E5%8D%8F%E8%AE%AE%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="toc-number">5.3.2.</span> <span class="toc-text">mode1 带有握手协议的输入输出</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E8%AE%B0"><span class="toc-number">6.</span> <span class="toc-text">后记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">7.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline" style="font-weight: bold;"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/10/28/playedgalgamelist/" title="我推的Gal"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://opic.esing.dev/img/galgame-photo_251119_1849_LONP.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="我推的Gal"/></a><div class="content"><a class="title" href="/2024/10/28/playedgalgamelist/" title="我推的Gal">我推的Gal</a><time datetime="2025-12-01T16:14:13.080Z" title="更新于 2025-12-02 00:14:13">2025-12-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/24/todos-in-my-university-life/" title="我在大学里都学了啥？"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/8" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="我在大学里都学了啥？"/></a><div class="content"><a class="title" href="/2024/07/24/todos-in-my-university-life/" title="我在大学里都学了啥？">我在大学里都学了啥？</a><time datetime="2025-11-25T04:00:39.590Z" title="更新于 2025-11-25 12:00:39">2025-11-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/06/index-for-study/" title="为学习而生の魔法传送门"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://opic.esing.dev/img/125283400_p0_251119_1909_5JYv.avif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="为学习而生の魔法传送门"/></a><div class="content"><a class="title" href="/2024/10/06/index-for-study/" title="为学习而生の魔法传送门">为学习而生の魔法传送门</a><time datetime="2025-11-19T11:10:04.702Z" title="更新于 2025-11-19 19:10:04">2025-11-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/18/cloudflare-offline-oneday/" title="Cloudflare、睡覺——大规模宕机后的随想"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2020/3" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Cloudflare、睡覺——大规模宕机后的随想"/></a><div class="content"><a class="title" href="/2025/11/18/cloudflare-offline-oneday/" title="Cloudflare、睡覺——大规模宕机后的随想">Cloudflare、睡覺——大规模宕机后的随想</a><time datetime="2025-11-19T02:56:36.593Z" title="更新于 2025-11-19 10:56:36">2025-11-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/17/powershell-ln/" title="更适合Powershell体质的ln"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/top_2_2023-4-23_1835_ve2mzpmu1v.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="更适合Powershell体质的ln"/></a><div class="content"><a class="title" href="/2025/11/17/powershell-ln/" title="更适合Powershell体质的ln">更适合Powershell体质的ln</a><time datetime="2025-11-17T06:22:14.360Z" title="更新于 2025-11-17 14:22:14">2025-11-17</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://pic.esing.dev/img/87257672_p0_2023-4-16_1808_qmfhwf6v6g.avif')"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By Esing</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Deployed On <a href="https://pages.cloudflare.com/" target="_blank">Cloudflare Pages</a><a href="https://icp.gov.moe/?keyword=20237860" target="_blank"><br /><br /> 萌 ICP 备 20237860 号 </a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left" style="color: var(--blockquote-color);"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right" style="color: var(--blockquote-color);"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh" style="color: var(--blockquote-color);"></i></a><a class="rightMenu-item" href="javascript:rmf.scrollToTop();"><i class="fa fa-arrow-up" style="color: var(--blockquote-color);"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy" style="color: var(--blockquote-color);"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="iconfont icon-baidu" style="color: var(--blockquote-color);"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link" style="color: var(--blockquote-color);"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"><i class="fa fa-link" style="color: var(--blockquote-color);"></i><span>复制本文地址</span></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore" style="color: var(--blockquote-color);"></i><span>新标签页打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy" style="color: var(--blockquote-color);"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore" style="color: var(--blockquote-color);"></i><span>在新标签页打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy" style="color: var(--blockquote-color);"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="javascript:toRandomPost()"><i class="fa fa-paper-plane" style="color: var(--blockquote-color);"></i><span>随便逛逛</span></a><a class="rightMenu-item" href="javascript:rmf.switchDarkMode();"><i class="fa fa-moon" style="color: var(--blockquote-color);"></i><span>昼夜切换</span></a><a class="rightMenu-item" href="javascript:rmf.switchReadMode();"><i class="fa fa-book" style="color: var(--blockquote-color);"></i><span>阅读模式</span></a><a class="rightMenu-item" href="javascript:fullScreen();"><i class="fas fa-expand" style="color: var(--blockquote-color);"></i><span>进入全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script><!-- 这里只输出一个内联脚本，不直接引 src--><script>window.addEventListener('load', function () {
+  // 页面上没有 mermaid 图表就不加载脚本
+  if (!document.querySelector('.mermaid, .language-mermaid')) return;
+
+  var s = document.createElement('script');
+  var ver = '11.12.1'; // 从主题配置拿版本号
+  s.src = 'https://unpkg.com/mermaid@' + ver + '/dist/mermaid.min.js';
+  s.defer = true;
+  s.onload = function () {
+    if (window.mermaid) {
+      // 直接把主题里的 options 内联成 JS 对象，避免属性 + JSON.parse
+      var options = {"theme":"base","themeVariables":{"background":"transparent","primaryColor":"hsl(339, 100%, 90%)","primaryTextColor":"#000000","primaryBorderColor":"#999999","secondaryColor":"hsl(159, 66%, 76%)","secondaryBorderColor":"#666666","lineColor":"#333333","noteBorderColor":"#666666","fontFamily":"Noto Sans SC","fontSize":"0.9em"}};
+      mermaid.initialize(options);
+    }
+  };
+  document.body.appendChild(s);
+});</script><script>function loadWaline () {
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://comment.esing.dev/',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  const walineCSSLoad = document.getElementById('waline-css')
+
+  if (typeof Waline === 'object') {
+    walineCSSLoad ? initWaline() : getCSS('https://unpkg.com/@waline/client@v2/dist/waline.css','waline-css').then(initWaline)
+  }
+  else {
+    getCSS('https://unpkg.com/@waline/client@v2/dist/waline.css','waline-css').then(() => {
+      getScript('https://unpkg.com/@waline/client@v2/dist/waline.js').then(initWaline)
+    })
+  }
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script><script>function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: 'ad3070e381dc19ea10a3',
+      clientSecret: '70adf2f0332c581dfc5055033151ca3989b89ebd',
+      repo: 'BlogComment',
+      owner: 'Zxis233',
+      admin: ['Zxis233'],
+      id: '314bacfa257b62d03e6e04399801e876',
+      updateCountCallback: commentCount
+    },{"language":"zh-CN","perPage":7}))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+    getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Waline' === 'Gitalk' || !true) {
+  if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script type="text/javascript" src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script type="text/javascript" src="/js/rightmenu.js"></script><script src="/js/random.js"></script><script type="text/javascript" src="/js/title.js"></script><script type="text/javascript" src="/js/titlelight.js"></script><script id="canvas_nest" defer="defer" color="255,128,172" opacity="0.8" zIndex="-1" count="80" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

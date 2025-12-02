@@ -1,0 +1,507 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>计算机原理与嵌入式系统笔记：第八篇 | Esing的小站</title><meta name="author" content="Esing"><meta name="copyright" content="Esing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="输入&#x2F;输出设备 输入输出设备（I&#x2F;O Devices）通常有一些模拟元件或非电子元件（比如磁盘驱动器），但与CPU的接口通常是数字逻辑——一组寄存器。 对于IO编程支持，有两种办法：IO指令和内存映射IO：  I&#x2F;O指令为I&#x2F;O设备提供了单独的地址空间。 内存映射I&#x2F;O是最普遍的方法，即使是提供I&#x2F;O指令的CPU也不排除使用内存映射I&#x2F;O。  内存映射I&#x2F;O是为每个I&#x2F;O设备的寄存器提供一个地址。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机原理与嵌入式系统笔记：第八篇">
+<meta property="og:url" content="https://blog.esing.dev/2024/06/13/coae-p8/index.html">
+<meta property="og:site_name" content="Esing的小站">
+<meta property="og:description" content="输入&#x2F;输出设备 输入输出设备（I&#x2F;O Devices）通常有一些模拟元件或非电子元件（比如磁盘驱动器），但与CPU的接口通常是数字逻辑——一组寄存器。 对于IO编程支持，有两种办法：IO指令和内存映射IO：  I&#x2F;O指令为I&#x2F;O设备提供了单独的地址空间。 内存映射I&#x2F;O是最普遍的方法，即使是提供I&#x2F;O指令的CPU也不排除使用内存映射I&#x2F;O。  内存映射I&#x2F;O是为每个I&#x2F;O设备的寄存器提供一个地址。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png">
+<meta property="article:published_time" content="2024-06-13T11:06:50.000Z">
+<meta property="article:modified_time" content="2025-04-07T09:17:39.885Z">
+<meta property="article:author" content="Esing">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="复习">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="ARM">
+<meta property="article:tag" content="汇编">
+<meta property="article:tag" content="计算机原理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://blog.esing.dev/2024/06/13/coae-p8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;1aabda1500704262b993096aaa3b5c27&quot;}"></script><link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto+Sans+SC" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":1000,"position":"top","messagePrev":"本文最后更新于","messageNext":"天前，部分内容可能已过时。"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":380},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":100,"languages":{"author":"作者: Esing","link":"链接: ","source":"来源: Esing的小站","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '计算机原理与嵌入式系统笔记：第八篇',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-04-07 17:17:39'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 8 || hour >= 24
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css"><link rel="stylesheet" href="/css/iconfont.css"><link rel="preload" as="style" crossorigin href="https://fontsapi.zeoseven.com/442/main/result.css" onload="this.rel='stylesheet'" onerror="this.href='https://fontsapi-storage.zeoseven.com/442/main/result.css'" /><link rel="preload" as="style" crossorigin href="https://fontsapi.zeoseven.com/442/main/result.css" onload="this.rel='stylesheet'" onerror="this.href='https://fontsapi-storage.zeoseven.com/442/main/result.css'" /><link rel="stylesheet" href="/css/maple.css"><link rel="stylesheet" href="/css/mycustom.css"><script src="/js/autoload.js"></script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Esing的小站" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="/css/load.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">184</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">178</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-lightbulb"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png')"><nav id="nav"><span id="blog-info"><a class="site-name" id="site-name" href="/" title="Esing的小站">Esing的小站</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-lightbulb"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><center id="name-container"></center><a id="page-name" href="javascript:scrollToTop()"></a><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">计算机原理与嵌入式系统笔记：第八篇</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-13T11:06:50.000Z" title="发表于 2024-06-13 19:06:50">2024-06-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-04-07T09:17:39.885Z" title="更新于 2025-04-07 17:17:39">2025-04-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="计算机原理与嵌入式系统笔记：第八篇"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="输入-输出设备">输入/输出设备</h2>
+<p>输入输出设备（I/O Devices）通常有一些模拟元件或非电子元件（比如磁盘驱动器），但与CPU的接口通常是数字逻辑——一组寄存器。</p>
+<p>对于IO编程支持，有两种办法：IO指令和内存映射IO：</p>
+<ul>
+<li>I/O指令为I/O设备提供了<strong>单独的地址空间</strong>。</li>
+<li><strong>内存映射I/O是最普遍的方法</strong>，即使是提供I/O指令的CPU也不排除使用内存映射I/O。
+<ul>
+<li>内存映射I/O是为每个I/O设备的寄存器提供一个地址。</li>
+<li>程序使用普通的CPU读写内存命令来与设备通信。</li>
+</ul>
+</li>
+</ul>
+<p>如： 在C语言中定义和使用一个变量时，编译器隐藏了变量地址，可以使用指针来操纵I/O设备的地址。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 读取任意存储单元的函数peek</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">peek</span><span class="params">(<span class="type">char</span> *location)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> *location; </span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DEV1 0x1000</span></span><br><span class="line">dev_status = peek(DEV1); <span class="comment">/*读取设备寄存器*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 写入任意存储单元的函数poke</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">poke</span><span class="params">(<span class="type">char</span> *location, <span class="type">char</span> newval)</span> &#123;</span><br><span class="line">    (*location) = newval; </span><br><span class="line">&#125;</span><br><span class="line">poke(DEV1, <span class="number">8</span>); <span class="comment">/*写入设备寄存器*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="数据传送方式">数据传送方式</h2>
+<p>CPU与IO设备间的数据传送方式</p>
+<ul>
+<li>程序传送方式
+<ul>
+<li>无条件传送</li>
+<li><strong>程序查询传送（忙等I/O）</strong></li>
+</ul>
+</li>
+<li><strong>中断传送方式</strong></li>
+<li>DMA传送方式</li>
+</ul>
+<h3 id="忙等I-O">忙等I/O</h3>
+<p>忙等I/O是程序中访问I/O设备的<strong>最基本方法</strong>。I/O设备一般比CPU慢，需要多个时钟周期来完成一项操作，<strong>通过读取I/O设备的状态寄存器来询问I/O设备是否空闲，这样的操作通常被称为轮询（polling）。</strong></p>
+<p>然而，忙等I/O的效率非常低：</p>
+<ul>
+<li>I/O事务未完成时，CPU除测试设备状态什么都不能做。</li>
+<li>无法将其他操作与I/O事务并行执行。</li>
+</ul>
+<p>因此，我们使用中断机制来提高效率。</p>
+<h3 id="中断I-O">中断I/O</h3>
+<p>中断最初是作为处理器与外部设备交换信息的一种控制方式提出的。由此，最初的中断全部是对外部设备而言的，称为外部中断或硬件中断。随着计算机技术的发展，中断的范围也随之扩大，出现了内部软件中断的概念，它是为解决处理器内部运行时出现的异常以及为编程方便而提出的。</p>
+<p><strong>外部中断或硬件中断通常称为中断（Interrupt），软件中断或异常中断通常称为异常（Exception）。</strong></p>
+<p>中断机制允许I/O设备发送信号到CPU，并强制执行一段特定代码。它使得CPU能够在不同的上下文之间切换（例如多个I/O设备之间）。</p>
+<p>中断发生时，PC指向I/O设备中一个管理设备的中断处理子程序（中断服务程序或设备驱动程序）。中断机制保留了系统被中断时的PC值，以便CPU能够返回到被中断的程序。</p>
+<h4 id="中断处理过程">中断处理过程</h4>
+<p>不论哪种中断都遵循同样的中断处理过程。收到中断请求之后，处理器暂停执行当前程序，转而执行中断服务程序，处理完毕后再返回到程序断点处，继续执行原来的程序。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输入输出处理程序</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">input_handler</span><span class="params">()</span> &#123;</span><br><span class="line">    achar = peek(IN_DATA);</span><br><span class="line">    gotchar = TRUE;</span><br><span class="line">    poke(IN_STATUS,<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">output_handler</span><span class="params">()</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 主程序</span></span><br><span class="line">    main() &#123;</span><br><span class="line">    <span class="keyword">while</span> (TRUE) &#123;</span><br><span class="line">        <span class="keyword">if</span> (gotchar) &#123;</span><br><span class="line">            poke(OUT_DATA,achar);</span><br><span class="line">            poke(OUT_STATUS,<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">while</span>(</span><br><span class="line">                peek(OUT_STATUS)!=<span class="number">0</span>);</span><br><span class="line">            gotchar = FALSE;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="缓冲区">缓冲区</h4>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20240613200135315_2024-6-13_2001_ozikxri5ze.png" alt="缓冲区示意图" style="zoom:50%;" />
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 弹性缓冲区</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> BUF_SIZE 8</span></span><br><span class="line"><span class="type">char</span> io_buf[BUF_SIZE];</span><br><span class="line"><span class="type">int</span> buf_head = <span class="number">0</span>, buf_tail = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> error = <span class="number">0</span>;</span><br><span class="line"><span class="type">bool</span> <span class="title function_">empty_buffer</span><span class="params">()</span> &#123;retun buf_head == buf_tail;&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">full_buffer</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (buf_tail+<span class="number">1</span>)%BUF_SIZE == buf_head;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">nchars</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(buf_tail&gt;=buf_head) <span class="keyword">return</span> buf_tail-buf_head;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> BUF_SIZE + buf_tail – buf_head;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">add_char</span><span class="params">(<span class="type">char</span> achar)</span> &#123;</span><br><span class="line">    io_buf[buf_tail++] = achar;</span><br><span class="line">    <span class="keyword">if</span>(buf_tail == BUF_SIZE)</span><br><span class="line">        buf_tail = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> <span class="title function_">remove_char</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> achar;</span><br><span class="line">    achar = io_buf[buf_head++];</span><br><span class="line">    <span class="keyword">if</span>(buf_head == BUF_SIZE)</span><br><span class="line">        buf_head = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输入处理程序的代码</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IN_DATA 0x1000</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IN_STATUS 0x1001</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">input_handler</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> achar;</span><br><span class="line">    <span class="keyword">if</span> (full_buffer())&#123;</span><br><span class="line">        error = <span class="number">1</span>; <span class="comment">//出错</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123; </span><br><span class="line">        achar = peek(IN_DATA);</span><br><span class="line">        add_char(achar);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    poke(IN_STATUS,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (nchars()== <span class="number">1</span>) &#123; </span><br><span class="line">        poke(OUT_DATA,remove_char());</span><br><span class="line">        poke(OUT_STATUS,<span class="number">1</span>); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出处理程序的代码</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OUT_DATA 0x1100</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OUT_STATUS 0x1101</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">output_handler</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(!empty_buffer())</span><br><span class="line">        poke(OUT_DATA, remove_char());</span><br><span class="line">    poke(OUT_STATUS, <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note primary flat"><ol>
+<li><code>BUF_SIZE</code> 是缓冲区的大小，<code>io_buf</code> 是缓冲区本身，<code>buf_head</code> 和 <code>buf_tail</code> 分别是缓冲区的头部和尾部指针。</li>
+<li><code>empty_buffer()</code> 函数检查缓冲区是否为空，即头部和尾部指针是否相等。</li>
+<li><code>full_buffer()</code> 函数检查缓冲区是否已满，即尾部指针的下一个位置是否是头部指针。</li>
+<li><code>nchars()</code> 函数返回缓冲区中的字符数量。</li>
+<li><code>add_char(char achar)</code> 函数将一个字符添加到缓冲区的尾部，然后更新尾部指针。</li>
+<li><code>remove_char()</code> 函数从缓冲区的头部移除一个字符，然后更新头部指针。</li>
+<li><code>input_handler()</code> 是输入中断处理程序。当缓冲区未满时，它从输入设备读取一个字符并添加到缓冲区。如果缓冲区已满，它将设置错误标志。如果这是缓冲区中的第一个字符，它将触发输出设备。</li>
+<li><code>output_handler()</code> 是输出中断处理程序。当缓冲区不为空时，它从缓冲区移除一个字符并发送到输出设备。</li>
+</ol>
+</div>
+<h4 id="中断与调试">中断与调试</h4>
+<div class="note warning flat"><p>在中断处理程序中，任何一个寄存器在被改写前必须保存原来的值，并且在中断处理程序结束前恢复其原来的值。由中断处理程序造成的前台程序出错很难调试，因为错误的形式取决于中断发生的时间，不具有重复性。</p>
+<p>因此，在调试程序时，我们可以选择使用忙等驱动I/O而非中断驱动I/O。</p>
+</div>
+<h4 id="中断的优先级">中断的优先级</h4>
+<p>中断之间，亦有差距。如何让电脑正确区分这些中断呢？有两种解决方法：</p>
+<ul>
+<li>中断优先级（interrupt priority）：能让CPU辨认出比其他中断更加重要的一些中断。</li>
+<li>中断向量（interrupt vector）：允许中断设备指定其中断处理程序。</li>
+</ul>
+<p><strong>屏蔽（masking）</strong>：优先级机制必须确保处理高优先级中断时，不发生低优先级中断。换句话说，低优先级的中断会被<em>屏蔽</em>掉。</p>
+<p><strong>不可屏蔽中断（non-maskable interrupt, NMI）</strong>：NMI不能断开，具有<strong>最高</strong>的优先级。它通常是为由<strong>电源故障引发的中断</strong>准备的，是一个可以监测危险低电压的简单电路。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20240613201104034_2024-6-13_2011_b6629kvaz7.png" alt="中断优先级队列" style="zoom:50%;" />
+<h4 id="中断向量">中断向量</h4>
+<p>有时候我们会更在乎中断的处理方法而非其本身的重要性。因此，我们引入了中断向量的概念：</p>
+<p>在设备的请求或应答之后，通过中断向量线将中断向量发送到CPU，CPU将向量号作为存储在内存中的中断向量表的索引，设备端存储自己的向量号，提供灵活性。</p>
+<blockquote>
+<p>说白了就是用不同的向量代表不同的处理方法。<strong>中断向量可以提供中断程序服务的入口地址。</strong></p>
+</blockquote>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20240613201339951_2024-6-13_2013_yvkkcz7ix9.png" alt="中断机制处理流程，注意中断优先级处理先于中断向量" style="zoom:50%;" />
+<p>小练习：下面关于中断的叙述，哪个是不正确的？</p>
+<ul>
+<li>A、一旦有中断请求出现，CPU立即停止当前指令的执行转而去受理中断请求。</li>
+<li>B、CPU响应中断时暂停运行当前程序，自动转移到中断服务程序。</li>
+<li>C、中断方式一般适用于随机事务的出现。</li>
+<li>D、为了保证中断服务程序执行完毕后，能正确返回到被中断的断点继续执行程序，必须进行现场保存操作。</li>
+</ul>
+<details class="toggle" ><summary class="toggle-button" style="">答案</summary><div class="toggle-content"><p>A。显然只能选A吧？因为有优先级的存在。</p>
+</div></details>
+<h3 id="管态与陷阱">管态与陷阱</h3>
+<p>特权模式又称作管态。 复杂的系统经常由几个相互通信的程序来实现。我们希望能够提供硬件检查来确保程序之间没有互相干扰。可以使用CPU提供的管态来避免内存误操作，<strong>MMU控制通常只留给管态使用。</strong> 但很多DSP都没有管态，通常也没有MMU。</p>
+<p><strong>陷阱（trap），也称为软件中断（software interrupt）</strong>，是一种<strong>显式产生异常状态</strong>的指令。</p>
+<ul>
+<li>陷阱最通常的用法是进入管态。</li>
+<li>ARM为软件中断提供了SWI指令：<code>SWI CODE_1</code>，这个指令将使CPU进入管态。</li>
+<li>一个能被处理程序读取的操作码<code>CODE_1</code>嵌入到这条指令中。</li>
+</ul>
+<h3 id="异常与中断">异常与中断</h3>
+<p><strong>异常（exception）</strong> 是一种内部可以检测到的错误。<strong>通常可以将异常当做中断的一种变体。</strong></p>
+<p><strong>异常必须有优先级</strong>，因为一个操作可能产生不只一个异常。异常的优先级一般由CPU体系结构决定。</p>
+<div class="note warning flat"><p>中断是异步事件，异常是同步事件！</p>
+</div>
+<ul>
+<li>中断是异步事件
+<ul>
+<li>可能随时发生，与处理器正在执行的内容无关。</li>
+<li>中断主要由I/O设备产生，可以被启用或禁止。</li>
+</ul>
+</li>
+<li>异常是同步事件
+<ul>
+<li>它是某一特定指令执行的结果，在相同条件下，异常可以重现。</li>
+<li>内存访问错误、被零除等是典型的异常。</li>
+</ul>
+</li>
+</ul>
+<h2 id="功耗">功耗</h2>
+<p>CMOS VLSI功耗的计算公式：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>P</mi><mrow><mi>t</mi><mi>o</mi><mi>t</mi><mi>a</mi><mi>l</mi></mrow></msub><mo>=</mo><msub><mi>P</mi><mrow><mi>d</mi><mi>y</mi><mi>n</mi><mi>a</mi><mi>m</mi><mi>i</mi><mi>c</mi></mrow></msub><mo>+</mo><msub><mi>P</mi><mrow><mi>s</mi><mi>t</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>c</mi></mrow></msub><mspace linebreak="newline"></mspace><msub><mi>P</mi><mrow><mi>d</mi><mi>y</mi><mi>n</mi><mi>a</mi><mi>m</mi><mi>i</mi><mi>c</mi></mrow></msub><mo>=</mo><mi>λ</mi><mi>C</mi><msup><msub><mi>V</mi><mrow><mi>D</mi><mi>D</mi></mrow></msub><mn>2</mn></msup><mi>f</mi></mrow><annotation encoding="application/x-tex">P_{total}=P_{dynamic}+P_{static}\\
+P_{dynamic}=\lambda C{V_{DD}}^2f
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span><span class="mord mathnormal mtight">nami</span><span class="mord mathnormal mtight">c</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">c</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span><span class="mord mathnormal mtight">nami</span><span class="mord mathnormal mtight">c</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0818em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">λ</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord"><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">DD</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8873em;"><span style="top:-3.1362em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span></span></span></span></span></p>
+<p>其中λ为电平翻转比率。</p>
+<h3 id="节省功耗的办法">节省功耗的办法</h3>
+<ul>
+<li>降低供电电压</li>
+<li>以较低的时钟频率运行
+<ul>
+<li>降低功率消耗而不是能量消耗</li>
+</ul>
+</li>
+<li>通过控制线关闭某些当前执行不需要的功能单元
+<ul>
+<li>时钟门控技术（clock gating）</li>
+</ul>
+</li>
+<li>允许部分CPU完全与电源断开以消除泄漏电流
+<ul>
+<li>电源门控技术（power gating）</li>
+</ul>
+</li>
+</ul>
+<p>下一章就该进入MIPS的学习了……好难啊……</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://blog.esing.dev">Esing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.esing.dev/2024/06/13/coae-p8/">https://blog.esing.dev/2024/06/13/coae-p8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.esing.dev" target="_blank">Esing的小站</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="post-meta__tags" href="/tags/%E5%A4%8D%E4%B9%A0/">复习</a><a class="post-meta__tags" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a><a class="post-meta__tags" href="/tags/ARM/">ARM</a><a class="post-meta__tags" href="/tags/%E6%B1%87%E7%BC%96/">汇编</a><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/">计算机原理</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/06/13/coae-p7/" title="计算机原理与嵌入式系统笔记：第七篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">计算机原理与嵌入式系统笔记：第七篇</div></div></a></div><div class="next-post pull-right"><a href="/2024/06/13/coae-p9/" title="计算机原理与嵌入式系统笔记：第九篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">计算机原理与嵌入式系统笔记：第九篇</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/04/21/coae-intro/" title="计算机原理与嵌入式系统笔记：序篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-21</div><div class="title">计算机原理与嵌入式系统笔记：序篇</div></div></a></div><div><a href="/2024/06/16/coae-p10/" title="计算机原理与嵌入式系统笔记：第十篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-16</div><div class="title">计算机原理与嵌入式系统笔记：第十篇</div></div></a></div><div><a href="/2024/04/22/coae-p1/" title="计算机原理与嵌入式系统笔记：第一篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-22</div><div class="title">计算机原理与嵌入式系统笔记：第一篇</div></div></a></div><div><a href="/2024/06/17/coae-p11/" title="计算机原理与嵌入式系统笔记：第十一篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-17</div><div class="title">计算机原理与嵌入式系统笔记：第十一篇</div></div></a></div><div><a href="/2024/06/18/coae-p12/" title="计算机原理与嵌入式系统笔记：第十二篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-18</div><div class="title">计算机原理与嵌入式系统笔记：第十二篇</div></div></a></div><div><a href="/2024/06/18/coae-p13/" title="计算机原理与嵌入式系统笔记：第十三篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-18</div><div class="title">计算机原理与嵌入式系统笔记：第十三篇</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Waline</span><span class="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Esing</div><div class="author-info__description">咱也不知道写点啥 (＠_＠;)</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">184</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">178</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Zxis233"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Zxis233" target="_blank" title="Github"><i class="fab fa-github" style="color: #ff80ac;"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss" style="color: #ff80ac;"></i></a><a class="social-icon" href="mailto:esing@mail.esing.dev" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #ff80ac;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline" style="font-weight: bold;"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p><b>测试性开启 <u>Zstd</u> 压缩以提升网页加载速度！</b><br>将所有随机图片API换为<b> <u>自建API</u> </b>！<br>将全局代码字体更换为中文友好的 <u>Maple Mono CN</u> ，并修正 Verilog 代码块中的 <u>阻塞赋值</u> 显示效果！<br></p></div></div><div class="card-widget colo-info" id="colo-info"><div class="item-headline"><i class="fas fa-satellite-dish"></i><span>Cloudflare 节点信息</span></div><div class="item-content"><script>!(function (){ function s(id, text){ var el=document.getElementById(id); if (el){ el.textContent=text || "未知"; if (id==="cf-ip"){ var ipItem=el.closest(".webinfo-item"); if (ipItem){ if ((text || "未知").length >15){ ipItem.classList.add("ip-wrap");} else{ ipItem.classList.remove("ip-wrap");}}}}} var coloMap={ HKG: "Hong Kong", NRT: "Tokyo, JP", KIX: "Osaka, JP", ICN: "Seoul, KR", SIN: "Singapore", SJC: "San Jose, US", SFO: "San Francisco, US", LAX: "Los Angeles, US", SEA: "Seattle, US", FRA: "Frankfurt, DE", LHR: "London, GB", AMS: "Amsterdam, NL", CDG: "Paris, FR", MAD: "Madrid, ES", SYD: "Sydney, AU", MEL: "Melbourne, AU",}; fetch("/cdn-cgi/trace",{ cache: "no-store"}) .then(function (r){ return r.text();}) .then(function (t){ var data={}, lines=t.split("\n"); for (var i=0; i < lines.length; i++){ var line=lines[i].trim(); if (!line) continue; var p=line.split("="); if (p.length < 2) continue; var key=p[0].trim(); var value=p.slice(1).join("=").trim(); data[key]=value;} s("cf-ip", data.ip); s("cf-loc", data.loc); var colo=data.colo; var coloText; if (colo){ var city=coloMap[colo]; coloText=city ? colo + " (" + city + ")" : colo;} else{ coloText="未知";} s("cf-colo", coloText); s("cf-tls", data.tls); var w=data.warp; var wd=w==="on" ? "启用" : w==="off" ? "关闭" : w || "未知"; s("cf-warp", wd);}) .catch(function (){ s("cf-ip", "加载失败"); s("cf-loc", "加载失败"); s("cf-colo", "加载失败"); s("cf-tls", "加载失败"); s("cf-warp", "加载失败");});})();</script><style>.webinfo{ display: flex; flex-direction: column;} .webinfo-item{ display: flex; align-items: center;} .webinfo-item:first-child{ justify-content: space-between;} .webinfo-item:first-child.ip-wrap{ flex-direction: column; align-items: flex-start;} .webinfo-item:not(:first-child){ justify-content: space-between;} .webinfo-item:first-child .item-name{ text-align: left;} .webinfo-item:first-child.ip-wrap .item-count{ width: 100%; text-align: right;}</style><div class="webinfo"><div class="webinfo-item"><div class="item-name">访问 IP :</div><div class="item-count" id="cf-ip"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">访问地区 :</div><div class="item-count" id="cf-loc"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">CDN 节点 :</div><div class="item-count" id="cf-colo"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">TLS 协议 :</div><div class="item-count" id="cf-tls"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">WARP :</div><div class="item-count" id="cf-warp"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5-%E8%BE%93%E5%87%BA%E8%AE%BE%E5%A4%87"><span class="toc-number">1.</span> <span class="toc-text">输入&#x2F;输出设备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81%E6%96%B9%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">数据传送方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%99%E7%AD%89I-O"><span class="toc-number">2.1.</span> <span class="toc-text">忙等I&#x2F;O</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E6%96%ADI-O"><span class="toc-number">2.2.</span> <span class="toc-text">中断I&#x2F;O</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B"><span class="toc-number">2.2.1.</span> <span class="toc-text">中断处理过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%93%E5%86%B2%E5%8C%BA"><span class="toc-number">2.2.2.</span> <span class="toc-text">缓冲区</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E4%B8%8E%E8%B0%83%E8%AF%95"><span class="toc-number">2.2.3.</span> <span class="toc-text">中断与调试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">2.2.4.</span> <span class="toc-text">中断的优先级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F"><span class="toc-number">2.2.5.</span> <span class="toc-text">中断向量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%A1%E6%80%81%E4%B8%8E%E9%99%B7%E9%98%B1"><span class="toc-number">2.3.</span> <span class="toc-text">管态与陷阱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E4%B8%8E%E4%B8%AD%E6%96%AD"><span class="toc-number">2.4.</span> <span class="toc-text">异常与中断</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%9F%E8%80%97"><span class="toc-number">3.</span> <span class="toc-text">功耗</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8A%82%E7%9C%81%E5%8A%9F%E8%80%97%E7%9A%84%E5%8A%9E%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">节省功耗的办法</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline" style="font-weight: bold;"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/10/28/playedgalgamelist/" title="我推的Gal"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://opic.esing.dev/img/galgame-photo_251119_1849_LONP.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="我推的Gal"/></a><div class="content"><a class="title" href="/2024/10/28/playedgalgamelist/" title="我推的Gal">我推的Gal</a><time datetime="2025-12-01T16:14:13.080Z" title="更新于 2025-12-02 00:14:13">2025-12-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/24/todos-in-my-university-life/" title="我在大学里都学了啥？"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/8" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="我在大学里都学了啥？"/></a><div class="content"><a class="title" href="/2024/07/24/todos-in-my-university-life/" title="我在大学里都学了啥？">我在大学里都学了啥？</a><time datetime="2025-11-25T04:00:39.590Z" title="更新于 2025-11-25 12:00:39">2025-11-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/06/index-for-study/" title="为学习而生の魔法传送门"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://opic.esing.dev/img/125283400_p0_251119_1909_5JYv.avif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="为学习而生の魔法传送门"/></a><div class="content"><a class="title" href="/2024/10/06/index-for-study/" title="为学习而生の魔法传送门">为学习而生の魔法传送门</a><time datetime="2025-11-19T11:10:04.702Z" title="更新于 2025-11-19 19:10:04">2025-11-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/18/cloudflare-offline-oneday/" title="Cloudflare、睡覺——大规模宕机后的随想"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2020/3" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Cloudflare、睡覺——大规模宕机后的随想"/></a><div class="content"><a class="title" href="/2025/11/18/cloudflare-offline-oneday/" title="Cloudflare、睡覺——大规模宕机后的随想">Cloudflare、睡覺——大规模宕机后的随想</a><time datetime="2025-11-19T02:56:36.593Z" title="更新于 2025-11-19 10:56:36">2025-11-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/17/powershell-ln/" title="更适合Powershell体质的ln"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/top_2_2023-4-23_1835_ve2mzpmu1v.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="更适合Powershell体质的ln"/></a><div class="content"><a class="title" href="/2025/11/17/powershell-ln/" title="更适合Powershell体质的ln">更适合Powershell体质的ln</a><time datetime="2025-11-17T06:22:14.360Z" title="更新于 2025-11-17 14:22:14">2025-11-17</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://pic.esing.dev/img/87257672_p0_2023-4-16_1808_qmfhwf6v6g.avif')"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By Esing</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Deployed On <a href="https://pages.cloudflare.com/" target="_blank">Cloudflare Pages</a><a href="https://icp.gov.moe/?keyword=20237860" target="_blank"><br /><br /> 萌 ICP 备 20237860 号 </a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left" style="color: var(--blockquote-color);"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right" style="color: var(--blockquote-color);"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh" style="color: var(--blockquote-color);"></i></a><a class="rightMenu-item" href="javascript:rmf.scrollToTop();"><i class="fa fa-arrow-up" style="color: var(--blockquote-color);"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy" style="color: var(--blockquote-color);"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="iconfont icon-baidu" style="color: var(--blockquote-color);"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link" style="color: var(--blockquote-color);"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"><i class="fa fa-link" style="color: var(--blockquote-color);"></i><span>复制本文地址</span></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore" style="color: var(--blockquote-color);"></i><span>新标签页打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy" style="color: var(--blockquote-color);"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore" style="color: var(--blockquote-color);"></i><span>在新标签页打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy" style="color: var(--blockquote-color);"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="javascript:toRandomPost()"><i class="fa fa-paper-plane" style="color: var(--blockquote-color);"></i><span>随便逛逛</span></a><a class="rightMenu-item" href="javascript:rmf.switchDarkMode();"><i class="fa fa-moon" style="color: var(--blockquote-color);"></i><span>昼夜切换</span></a><a class="rightMenu-item" href="javascript:rmf.switchReadMode();"><i class="fa fa-book" style="color: var(--blockquote-color);"></i><span>阅读模式</span></a><a class="rightMenu-item" href="javascript:fullScreen();"><i class="fas fa-expand" style="color: var(--blockquote-color);"></i><span>进入全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script><!-- 这里只输出一个内联脚本，不直接引 src--><script>window.addEventListener('load', function () {
+  // 页面上没有 mermaid 图表就不加载脚本
+  if (!document.querySelector('.mermaid, .language-mermaid')) return;
+
+  var s = document.createElement('script');
+  var ver = '11.12.1'; // 从主题配置拿版本号
+  s.src = 'https://unpkg.com/mermaid@' + ver + '/dist/mermaid.min.js';
+  s.defer = true;
+  s.onload = function () {
+    if (window.mermaid) {
+      // 直接把主题里的 options 内联成 JS 对象，避免属性 + JSON.parse
+      var options = {"theme":"base","themeVariables":{"background":"transparent","primaryColor":"hsl(339, 100%, 90%)","primaryTextColor":"#000000","primaryBorderColor":"#999999","secondaryColor":"hsl(159, 66%, 76%)","secondaryBorderColor":"#666666","lineColor":"#333333","noteBorderColor":"#666666","fontFamily":"Noto Sans SC","fontSize":"0.9em"}};
+      mermaid.initialize(options);
+    }
+  };
+  document.body.appendChild(s);
+});</script><script>function loadWaline () {
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://comment.esing.dev/',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  const walineCSSLoad = document.getElementById('waline-css')
+
+  if (typeof Waline === 'object') {
+    walineCSSLoad ? initWaline() : getCSS('https://unpkg.com/@waline/client@v2/dist/waline.css','waline-css').then(initWaline)
+  }
+  else {
+    getCSS('https://unpkg.com/@waline/client@v2/dist/waline.css','waline-css').then(() => {
+      getScript('https://unpkg.com/@waline/client@v2/dist/waline.js').then(initWaline)
+    })
+  }
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script><script>function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: 'ad3070e381dc19ea10a3',
+      clientSecret: '70adf2f0332c581dfc5055033151ca3989b89ebd',
+      repo: 'BlogComment',
+      owner: 'Zxis233',
+      admin: ['Zxis233'],
+      id: 'ba01e648674225a1a9051a95e5c54ee7',
+      updateCountCallback: commentCount
+    },{"language":"zh-CN","perPage":7}))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+    getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Waline' === 'Gitalk' || !true) {
+  if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script type="text/javascript" src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script type="text/javascript" src="/js/rightmenu.js"></script><script src="/js/random.js"></script><script type="text/javascript" src="/js/title.js"></script><script type="text/javascript" src="/js/titlelight.js"></script><script id="canvas_nest" defer="defer" color="255,128,172" opacity="0.8" zIndex="-1" count="80" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
