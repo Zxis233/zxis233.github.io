@@ -3026,6 +3026,9 @@ h1.page-title + .tag-cloud-list {
 #aside-content .card-recent-post .item-headline i {
   color: #28c28c;
 }
+#aside-content .colo-info .item-headline i {
+  color: #ff8c00;
+}
 .avatar-img {
   overflow: hidden;
   margin: 0 auto;
