@@ -1,3 +1,5 @@
+https://blog.esing.dev/2025/12/05/riscvcod-p4/
+https://blog.esing.dev/2025/07/30/riscvcod-p3/
 https://blog.esing.dev/2024/10/28/playedgalgamelist/
 https://blog.esing.dev/2024/07/24/todos-in-my-university-life/
 https://blog.esing.dev/2024/10/06/index-for-study/
@@ -28,7 +30,6 @@ https://blog.esing.dev/2025/10/07/hdlbits-lemmings4/
 https://blog.esing.dev/2025/10/05/hdlbits-conwaylife/
 https://blog.esing.dev/2025/04/07/riscvcod-p2/
 https://blog.esing.dev/2025/04/07/riscvcod-intro/
-https://blog.esing.dev/2025/07/30/riscvcod-p3/
 https://blog.esing.dev/2025/08/12/travel-in-shanghai/
 https://blog.esing.dev/2025/07/25/mpv-lazy-conf/
 https://blog.esing.dev/2025/01/28/travel-in-harbin/
