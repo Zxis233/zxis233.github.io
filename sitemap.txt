@@ -1,3 +1,7 @@
+https://blog.esing.dev/2025/12/11/riscvcod-p9/
+https://blog.esing.dev/2025/12/11/riscvcod-p8/
+https://blog.esing.dev/2025/12/10/riscvcod-p7/
+https://blog.esing.dev/2025/04/07/riscvcod-intro/
 https://blog.esing.dev/2025/12/09/riscvcod-p6/
 https://blog.esing.dev/2025/12/08/riscvcod-p5/
 https://blog.esing.dev/2025/12/05/riscvcod-p4/
@@ -31,7 +35,6 @@ https://blog.esing.dev/2024/11/19/latex-code-highlight/
 https://blog.esing.dev/2025/10/07/hdlbits-lemmings4/
 https://blog.esing.dev/2025/10/05/hdlbits-conwaylife/
 https://blog.esing.dev/2025/04/07/riscvcod-p2/
-https://blog.esing.dev/2025/04/07/riscvcod-intro/
 https://blog.esing.dev/2025/08/12/travel-in-shanghai/
 https://blog.esing.dev/2025/07/25/mpv-lazy-conf/
 https://blog.esing.dev/2025/01/28/travel-in-harbin/
