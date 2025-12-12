@@ -1,0 +1,396 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>从零开始学RISC：第十篇 | Esing的小站</title><meta name="author" content="Esing"><meta name="copyright" content="Esing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="让我访问！ 对于L-Type和S-Type，我们只支持了lw&#x2F;sw，它们的兄弟姐妹lb&#x2F;lbu&#x2F;lh&#x2F;lhu&#x2F;sb&#x2F;sh还没支持。 我们需要准备一个模块专门用来处理这些非字节存取。在前面ID级传出的sl_type信号终于能派上用场了。 这里有个小技巧：定义存取类型时，用高位来分辨是读还是写，剩下的读写类型一定程度上可以合并。 存取控制模块 LoadStoreUnit.sv 考虑到数据的存取都在ME">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从零开始学RISC：第十篇">
+<meta property="og:url" content="https://blog.esing.dev/2025/12/12/riscvcod-p10/index.html">
+<meta property="og:site_name" content="Esing的小站">
+<meta property="og:description" content="让我访问！ 对于L-Type和S-Type，我们只支持了lw&#x2F;sw，它们的兄弟姐妹lb&#x2F;lbu&#x2F;lh&#x2F;lhu&#x2F;sb&#x2F;sh还没支持。 我们需要准备一个模块专门用来处理这些非字节存取。在前面ID级传出的sl_type信号终于能派上用场了。 这里有个小技巧：定义存取类型时，用高位来分辨是读还是写，剩下的读写类型一定程度上可以合并。 存取控制模块 LoadStoreUnit.sv 考虑到数据的存取都在ME">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.esing.dev/img/128470225_p0_250408_0130_fLZB.avif">
+<meta property="article:published_time" content="2025-12-12T02:50:50.000Z">
+<meta property="article:modified_time" content="2025-12-12T06:55:52.315Z">
+<meta property="article:author" content="Esing">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="计算机原理">
+<meta property="article:tag" content="Verilog">
+<meta property="article:tag" content="RISC-V">
+<meta property="article:tag" content="SystemVerilog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.esing.dev/img/128470225_p0_250408_0130_fLZB.avif"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://blog.esing.dev/2025/12/12/riscvcod-p10/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;1aabda1500704262b993096aaa3b5c27&quot;}"></script><link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto+Sans+SC" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":1000,"position":"top","messagePrev":"本文最后更新于","messageNext":"天前，部分内容可能已过时。"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":380},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":100,"languages":{"author":"作者: Esing","link":"链接: ","source":"来源: Esing的小站","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '从零开始学RISC：第十篇',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2025-12-12 14:55:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 8 || hour >= 24
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/rightmenu.css"><link rel="stylesheet" href="/css/iconfont.css"><link rel="preload" as="style" crossorigin href="https://fontsapi.zeoseven.com/442/main/result.css" onload="this.rel='stylesheet'" onerror="this.href='https://fontsapi-storage.zeoseven.com/442/main/result.css'" /><link rel="preload" as="style" crossorigin href="https://fontsapi.zeoseven.com/442/main/result.css" onload="this.rel='stylesheet'" onerror="this.href='https://fontsapi-storage.zeoseven.com/442/main/result.css'" /><link rel="stylesheet" href="/css/maple.css"><link rel="stylesheet" href="/css/mycustom.css"><script src="/js/autoload.js"></script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Esing的小站" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="/css/load.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">191</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">179</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-lightbulb"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://pic.esing.dev/img/128470225_p0_250408_0130_fLZB.avif')"><nav id="nav"><span id="blog-info"><a class="site-name" id="site-name" href="/" title="Esing的小站">Esing的小站</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-lightbulb"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><center id="name-container"></center><a id="page-name" href="javascript:scrollToTop()"></a><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">从零开始学RISC：第十篇</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-12-12T02:50:50.000Z" title="发表于 2025-12-12 10:50:50">2025-12-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-12-12T06:55:52.315Z" title="更新于 2025-12-12 14:55:52">2025-12-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="从零开始学RISC：第十篇"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="让我访问！">让我访问！</h2>
+<p>对于L-Type和S-Type，我们只支持了<code>lw/sw</code>，它们的兄弟姐妹<code>lb/lbu/lh/lhu/<b>sb</b>/sh</code>还没支持。</p>
+<p>我们需要准备一个模块专门用来处理这些非字节存取。在前面ID级传出的<code>sl_type</code>信号终于能派上用场了。</p>
+<p>这里有个小技巧：定义存取类型时，用高位来分辨是读还是写，剩下的读写类型一定程度上可以合并。</p>
+<h3 id="存取控制模块-LoadStoreUnit-sv">存取控制模块 LoadStoreUnit.sv</h3>
+<p>考虑到数据的存取都在MEM级完成，我们需要将模块放置在MEM级。我们要传入来自EX级的待存数据，对其进行适当移位，好将数据存放到合适位置，并根据<code>dram_we</code>和<code>sl_type</code>来将1位写使能<code>dram_we</code>转换为4位的按位写使能<code>dram_we_strbe</code>。</p>
+<p>对于读出的数据，还要判断是有符号还是无符号读取。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> LoadStoreUnit (</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">logic</span> [ <span class="number">3</span>:<span class="number">0</span>] sl_type,</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>] addr,</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>] load_data_i,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>] load_data_o,</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>] store_data_i,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>] store_data_o,</span><br><span class="line">    <span class="keyword">input</span>  <span class="keyword">logic</span>        dram_we,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">logic</span> [ <span class="number">3</span>:<span class="number">0</span>] wstrb          <span class="comment">// 按位写使能</span></span><br><span class="line">);</span><br><span class="line">    <span class="comment">// [TODO] 不同的访存类型处理</span></span><br><span class="line">    <span class="keyword">logic</span> is_load, is_load_unsigned;</span><br><span class="line">    <span class="keyword">always_comb</span> <span class="keyword">begin</span></span><br><span class="line">        is_load          = (sl_type[<span class="number">3</span>] == <span class="number">1&#x27;b0</span>);</span><br><span class="line">        is_load_unsigned = (sl_type[<span class="number">2</span>] == <span class="number">1&#x27;b1</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">always_comb</span> <span class="keyword">begin</span></span><br><span class="line">        <span class="comment">// 默认值，保证所有组合输出都有驱动，避免锁存</span></span><br><span class="line">        wstrb        = <span class="number">4&#x27;b0000</span>;</span><br><span class="line">        load_data_o  = <span class="number">32&#x27;b0</span>;</span><br><span class="line">        store_data_o = <span class="number">32&#x27;b0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (is_load) <span class="keyword">begin</span></span><br><span class="line">            <span class="comment">// 临时变量（也可以放在模块层）</span></span><br><span class="line">            <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>] raw;</span><br><span class="line">            raw = <span class="number">32&#x27;b0</span>;</span><br><span class="line">            <span class="comment">// 提取 raw，根据 sl_type 和 addr 偏移</span></span><br><span class="line">            <span class="keyword">case</span> (sl_type[<span class="number">1</span>:<span class="number">0</span>])</span><br><span class="line">                <span class="number">2&#x27;b01</span>: <span class="keyword">begin</span>  <span class="comment">// byte</span></span><br><span class="line">                    <span class="comment">// 右移到最低位再掩码</span></span><br><span class="line">                    raw = (load_data_i &gt;&gt; (addr[<span class="number">1</span>:<span class="number">0</span>] * <span class="number">8</span>)) &amp; <span class="number">32&#x27;h000000FF</span>;</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">                <span class="number">2&#x27;b10</span>: <span class="keyword">begin</span>  <span class="comment">// half</span></span><br><span class="line">                    raw = (load_data_i &gt;&gt; (addr[<span class="number">1</span>] * <span class="number">16</span>)) &amp; <span class="number">32&#x27;h0000FFFF</span>;</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">                <span class="number">2&#x27;b11</span>: <span class="keyword">begin</span>  <span class="comment">// word</span></span><br><span class="line">                    raw = load_data_i;</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">                <span class="keyword">default</span>: raw = <span class="number">32&#x27;b0</span>;</span><br><span class="line">            <span class="keyword">endcase</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 扩展</span></span><br><span class="line">            <span class="keyword">if</span> (is_load_unsigned) <span class="keyword">begin</span></span><br><span class="line">                load_data_o = raw;  <span class="comment">// 零扩展</span></span><br><span class="line">            <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">                <span class="keyword">case</span> (sl_type[<span class="number">1</span>:<span class="number">0</span>])</span><br><span class="line">                    <span class="number">2&#x27;b01</span>:   load_data_o = &#123;&#123;<span class="number">24</span>&#123;raw[<span class="number">7</span>]&#125;&#125;, raw[<span class="number">7</span>:<span class="number">0</span>]&#125;;  <span class="comment">// LB</span></span><br><span class="line">                    <span class="number">2&#x27;b10</span>:   load_data_o = &#123;&#123;<span class="number">16</span>&#123;raw[<span class="number">15</span>]&#125;&#125;, raw[<span class="number">15</span>:<span class="number">0</span>]&#125;;  <span class="comment">// LH</span></span><br><span class="line">                    <span class="number">2&#x27;b11</span>:   load_data_o = raw;  <span class="comment">// LW</span></span><br><span class="line">                    <span class="keyword">default</span>: load_data_o = <span class="number">32&#x27;b0</span>;</span><br><span class="line">                <span class="keyword">endcase</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">if</span> (dram_we) <span class="keyword">begin</span></span><br><span class="line">            <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>] half_byte;</span><br><span class="line">            <span class="keyword">logic</span> [ <span class="number">4</span>:<span class="number">0</span>] shift;  <span class="comment">// 移位量 0, 8, 16, 24</span></span><br><span class="line">            shift = <span class="number">4&#x27;b0</span>;</span><br><span class="line">            <span class="keyword">unique</span> <span class="keyword">case</span> (sl_type[<span class="number">1</span>:<span class="number">0</span>])</span><br><span class="line">                <span class="number">2&#x27;b01</span>: <span class="keyword">begin</span>  <span class="comment">// SB</span></span><br><span class="line">                    <span class="keyword">logic</span> [<span class="number">7</span>:<span class="number">0</span>] byte_val;</span><br><span class="line"></span><br><span class="line">                    half_byte = store_data_i[<span class="number">7</span>:<span class="number">0</span>];  <span class="comment">// 只关心最低 8 位</span></span><br><span class="line">                    shift     = &#123;addr[<span class="number">1</span>:<span class="number">0</span>], <span class="number">3&#x27;b000</span>&#125;;  <span class="comment">// addr[1:0] * 8</span></span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 写使能</span></span><br><span class="line">                    <span class="keyword">unique</span> <span class="keyword">case</span> (addr[<span class="number">1</span>:<span class="number">0</span>])</span><br><span class="line">                        <span class="number">2&#x27;b00</span>:   wstrb = <span class="number">4&#x27;b0001</span>;</span><br><span class="line">                        <span class="number">2&#x27;b01</span>:   wstrb = <span class="number">4&#x27;b0010</span>;</span><br><span class="line">                        <span class="number">2&#x27;b10</span>:   wstrb = <span class="number">4&#x27;b0100</span>;</span><br><span class="line">                        <span class="number">2&#x27;b11</span>:   wstrb = <span class="number">4&#x27;b1000</span>;</span><br><span class="line">                        <span class="keyword">default</span>: wstrb = <span class="number">4&#x27;b0000</span>;</span><br><span class="line">                    <span class="keyword">endcase</span></span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 把 byte_val 放到对应 byte lane</span></span><br><span class="line">                    store_data_o = (&#123;<span class="number">24&#x27;b0</span>, half_byte[<span class="number">7</span>:<span class="number">0</span>]&#125; &lt;&lt; shift);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">                <span class="number">2&#x27;b10</span>: <span class="keyword">begin</span>  <span class="comment">// SH</span></span><br><span class="line">                    <span class="keyword">logic</span> [<span class="number">15</span>:<span class="number">0</span>] half_val;</span><br><span class="line"></span><br><span class="line">                    half_byte = store_data_i[<span class="number">15</span>:<span class="number">0</span>];  <span class="comment">// 只关心最低 16 位</span></span><br><span class="line">                    shift     = &#123;addr[<span class="number">1</span>], <span class="number">4&#x27;b0000</span>&#125;;  <span class="comment">// addr[1] ? 16 : 0</span></span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 写使能</span></span><br><span class="line">                    <span class="keyword">unique</span> <span class="keyword">case</span> (addr[<span class="number">1</span>])</span><br><span class="line">                        <span class="number">1&#x27;b0</span>:    wstrb = <span class="number">4&#x27;b0011</span>;</span><br><span class="line">                        <span class="number">1&#x27;b1</span>:    wstrb = <span class="number">4&#x27;b1100</span>;</span><br><span class="line">                        <span class="keyword">default</span>: wstrb = <span class="number">4&#x27;b0000</span>;</span><br><span class="line">                    <span class="keyword">endcase</span></span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 把 half_val 放到低/高 halfword</span></span><br><span class="line">                    store_data_o = (&#123;<span class="number">16&#x27;b0</span>, half_byte&#125; &lt;&lt; shift);</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">                <span class="number">2&#x27;b11</span>: <span class="keyword">begin</span>  <span class="comment">// SW</span></span><br><span class="line">                    wstrb        = <span class="number">4&#x27;b1111</span>;</span><br><span class="line">                    store_data_o = store_data_i;  <span class="comment">// 直接写整个 word</span></span><br><span class="line">                    half_byte    = <span class="number">16&#x27;b0</span>;</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">default</span>: <span class="keyword">begin</span></span><br><span class="line">                    wstrb        = <span class="number">4&#x27;b0000</span>;</span><br><span class="line">                    store_data_o = <span class="number">32&#x27;b0</span>;</span><br><span class="line">                    half_byte    = <span class="number">16&#x27;b0</span>;</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">endcase</span></span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">else</span> <span class="keyword">begin</span></span><br><span class="line">            <span class="comment">// 非 load/非 store：保持默认 wstrb=0, store_data_o 已初始化为 0</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="meta">`<span class="keyword">ifdef</span> DEBUG</span></span><br><span class="line">    <span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>] sl_type_ascii;</span><br><span class="line">    <span class="keyword">logic</span> [ <span class="number">1</span>:<span class="number">0</span>] select_bits;</span><br><span class="line">    <span class="keyword">assign</span> select_bits = addr[<span class="number">1</span>:<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">always_comb</span> <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">case</span> (sl_type)</span><br><span class="line">            `MEM_LB:  sl_type_ascii = <span class="string">&quot;LB  &quot;</span>;</span><br><span class="line">            `MEM_LH:  sl_type_ascii = <span class="string">&quot;LH  &quot;</span>;</span><br><span class="line">            `MEM_LW:  sl_type_ascii = <span class="string">&quot;LW  &quot;</span>;</span><br><span class="line">            `MEM_LBU: sl_type_ascii = <span class="string">&quot;LBU &quot;</span>;</span><br><span class="line">            `MEM_LHU: sl_type_ascii = <span class="string">&quot;LHU &quot;</span>;</span><br><span class="line">            `MEM_SB:  sl_type_ascii = <span class="string">&quot;SB  &quot;</span>;</span><br><span class="line">            `MEM_SH:  sl_type_ascii = <span class="string">&quot;SH  &quot;</span>;</span><br><span class="line">            `MEM_SW:  sl_type_ascii = <span class="string">&quot;SW  &quot;</span>;</span><br><span class="line">            <span class="keyword">default</span>:  sl_type_ascii = <span class="string">&quot;UNKN&quot;</span>;</span><br><span class="line">        <span class="keyword">endcase</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="meta">`<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>之后更新顶层模块，远方的MUX也不要放过：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// DRAM模块</span></span><br><span class="line"><span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>] DRAM_output_data,DRAM_input_data;</span><br><span class="line"><span class="keyword">logic</span> [<span class="number">3</span>:<span class="number">0</span>] dram_we_MEM_strbe;</span><br><span class="line"><span class="keyword">logic</span> [<span class="number">3</span>:<span class="number">0</span>] wstrb;</span><br><span class="line">DRAM u_DRAM (</span><br><span class="line">    <span class="variable">.clk</span>(clk),</span><br><span class="line">    <span class="variable">.a</span>  (alu_result_MEM[<span class="number">17</span>:<span class="number">2</span>]),  <span class="comment">// 字节地址转换为字地址 (除以4)</span></span><br><span class="line">    <span class="variable">.spo</span>(DRAM_output_data),</span><br><span class="line">    <span class="variable">.we</span> (wstrb),</span><br><span class="line">    <span class="variable">.din</span>(DRAM_input_data)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对于同步DRAM，数据将在下一个时钟周期可用</span></span><br><span class="line"><span class="comment">// 将数据传递到WB级，在WB级进行选择</span></span><br><span class="line"><span class="keyword">assign</span> rf_wd_MEM = rf_wd_MEM_PR2MUX;</span><br><span class="line"></span><br><span class="line"><span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>] load_data_o; <span class="comment">// LSU输出的最终加载数据</span></span><br><span class="line">LoadStoreUnit u_LoadStoreUnit(</span><br><span class="line">    <span class="variable">.sl_type</span>          (sl_type_MEM),</span><br><span class="line">    <span class="variable">.addr</span>             (alu_result_MEM),</span><br><span class="line">    <span class="variable">.load_data_i</span>      (DRAM_output_data),</span><br><span class="line">    <span class="variable">.load_data_o</span>      (load_data_o),</span><br><span class="line">    <span class="variable">.store_data_i</span>     (rf_rd2_MEM),</span><br><span class="line">    <span class="variable">.store_data_o</span>     (DRAM_input_data),</span><br><span class="line">    <span class="variable">.dram_we</span>          (dram_we_MEM),</span><br><span class="line">    <span class="variable">.wstrb</span>            (wstrb)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> rf_wd_WB = (wd_sel_WB == `WD_SEL_FROM_DRAM) ? load_data_o : rf_wd_WB_from_PR;</span><br></pre></td></tr></table></figure>
+<p>我们的<code>LoadStoreUnit</code>是<strong>组合逻辑模块</strong>，因此，不会打乱同步读写的DRAM时序。让我们测试一下看看：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">li  x1,0x12345678</span><br><span class="line"></span><br><span class="line">sw  x1,0(x0)</span><br><span class="line">lw  x2,0(x0)</span><br><span class="line">lw  x3,0(x0)</span><br><span class="line">lh  x4,4(x0)</span><br><span class="line">lhu x5,4(x0)</span><br><span class="line">lb  x6,0(x0)</span><br><span class="line">lhu x7,2(x0)</span><br></pre></td></tr></table></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20251212115844253_251212_1158_qMTV.png" alt="lw指令读出错误"></p>
+<p>可以看到，本应该执行<code>lw</code>的指令却错误地读出了下一条的<code>lh</code>指令，而最后一条<code>lhu</code>直接消失了！这是为什么？</p>
+<p>看上面的波形可以知道，用于控制存入数据的<code>sl_type</code>提早了一拍到达。<strong>组合逻辑不会影响时序，因此，应当根据时序来设计组合逻辑。<strong>我们是在MEM级读取出数据并进行处理的，但是写回阶段是在WB级——这导致我们写回时使用的仍然是MEM级的控制信号。<code>DRAM_output_data</code>在 WB 级可用时，应当使用和 DRAM 读取请求相对应的<code>sl_type</code>进行处理，但当前代码中<code>LoadStoreUnit</code>使用的是<code>sl_type_MEM</code>，而此时MEM级可能已经是下一条指令了。换句话说，</strong>“存”与“取”所在的流水级不同，导致“存”正常，“取”异常</strong>。</p>
+<p>我们的<code>LoadStoreUnit</code>模块也成了第二个跨流水级的模块。如何修改呢？最简单的方法，就是直接实例化两个一模一样的模块：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [INFO] LoadStoreUnit模块 - MEM级只处理Store操作</span></span><br><span class="line"><span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>] DRAM_input_data;  <span class="comment">// LSU处理后数据</span></span><br><span class="line"><span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>] DRAM_output_data; <span class="comment">// LSU从DRAM得到的数据</span></span><br><span class="line"><span class="keyword">logic</span> [<span class="number">3</span>:<span class="number">0</span>] dram_we_MEM_strbe;</span><br><span class="line"><span class="comment">// MEM级LSU仅用于Store处理，Load在WB级处理</span></span><br><span class="line">LoadStoreUnit u_LoadStoreUnit_MEM(</span><br><span class="line">    <span class="variable">.sl_type</span>       (sl_type_MEM),</span><br><span class="line">    <span class="variable">.addr</span>          (alu_result_MEM),</span><br><span class="line">    <span class="variable">.load_data_i</span>   (<span class="number">32&#x27;b0</span>),        <span class="comment">// MEM级不使用load处理</span></span><br><span class="line">    <span class="variable">.load_data_o</span>   (),             <span class="comment">// MEM级不使用load输出</span></span><br><span class="line">    <span class="variable">.store_data_i</span>  (rf_rd2_MEM),</span><br><span class="line">    <span class="variable">.store_data_o</span>  (DRAM_input_data),</span><br><span class="line">    <span class="variable">.dram_we</span>       (dram_we_MEM),</span><br><span class="line">    <span class="variable">.wstrb</span>         (dram_we_MEM_strbe)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// DRAM模块</span></span><br><span class="line">DRAM #(</span><br><span class="line">    <span class="variable">.ADDR_WIDTH</span>(<span class="number">15</span>)</span><br><span class="line">) u_DRAM (</span><br><span class="line">    <span class="variable">.clk</span>(clk),</span><br><span class="line">    <span class="variable">.a</span>  (alu_result_MEM[<span class="number">17</span>:<span class="number">2</span>]),  <span class="comment">// 字节地址转换为字地址</span></span><br><span class="line">    <span class="variable">.spo</span>(DRAM_output_data),</span><br><span class="line">    <span class="comment">// .we (&#123;4&#123;dram_we_MEM&#125;&#125;),</span></span><br><span class="line">    <span class="variable">.we</span> (dram_we_MEM_strbe),</span><br><span class="line">    <span class="variable">.din</span>(DRAM_input_data)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// [INFO] WB级LoadStoreUnit - 专门处理Load操作</span></span><br><span class="line"><span class="comment">// 使用WB级的sl_type和地址来正确处理DRAM读取的数据</span></span><br><span class="line"><span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>] load_data_WB;</span><br><span class="line">LoadStoreUnit u_LoadStoreUnit_WB(</span><br><span class="line">    <span class="variable">.sl_type</span>       (sl_type_WB),</span><br><span class="line">    <span class="variable">.addr</span>          (alu_result_WB),</span><br><span class="line">    <span class="variable">.load_data_i</span>   (DRAM_output_data),  <span class="comment">// DRAM的spo在WB级稳定可用</span></span><br><span class="line">    <span class="variable">.load_data_o</span>   (load_data_WB),</span><br><span class="line">    <span class="variable">.store_data_i</span>  (<span class="number">32&#x27;b0</span>),             <span class="comment">// WB级不使用store处理</span></span><br><span class="line">    <span class="variable">.store_data_o</span>  (),</span><br><span class="line">    <span class="variable">.dram_we</span>       (<span class="number">1&#x27;b0</span>),              <span class="comment">// WB级不写DRAM</span></span><br><span class="line">    <span class="variable">.wstrb</span>         ()</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>我们再次进行测试：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20251212135329430_251212_1353_cKJ6.png" alt="修改后的LSU正常工作"></p>
+<h2 id="全自动化测试：解放双手">全自动化测试：解放双手</h2>
+<p>到这里，我们的RV32I CPU 算是彻底完成了。但即使有前面的测试，我们仍不能确保我们的CPU<strong>万无一失</strong>。有什么办法可以证明它一定是符合RV32I标准的CPU呢？最好的办法，自然是使用形式化验证，但那个太烦了，<strong>而且我不会</strong>。使用官方的测试样例进行测试算是最容易的方法了。riscv-software-src设置了一个测试库，专门用于测试各种架构的RV32 CPU是否符合标准，在<a target="_blank" rel="noopener" href="https://github.com/riscv-software-src/riscv-tests">riscv-software-src/riscv-tests</a>下。使用官方工具链编译时，必须带上<code>_Zicsr</code>扩展，这是因为其测试指令和初始化指令中用到了<code>CSR</code>寄存器，不过即使不支持也没关系。</p>
+<p>在测试前，还需要修改一下DRAM。<code>lw</code>测试子集会直接从DRAM中读取值，而我们默认是将DRAM全部初始化为<code>32'h00000000</code>。考虑到之前已在IROM模块中指定了内存读取范围<code>$readmemh(testcase, rom_data, 0, (1 &lt;&lt; ADDR_WIDTH) - 1)</code>，这里在DRAM中可不指定。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">logic</span> [<span class="number">31</span>:<span class="number">0</span>] ram_data[<span class="number">1</span> &lt;&lt; ADDR_WIDTH];</span><br><span class="line"><span class="comment">// 初始化</span></span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">integer</span> i;</span><br><span class="line">    <span class="keyword">string</span>  testcase;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化所有内存为0</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">1</span> &lt;&lt; ADDR_WIDTH; i = i + <span class="number">1</span>) <span class="keyword">begin</span></span><br><span class="line">        ram_data[i] = <span class="number">32&#x27;h00000000</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果有testcase参数，从hex文件加载数据段</span></span><br><span class="line">    <span class="comment">// hex文件是完整的内存镜像，按字地址索引</span></span><br><span class="line">    <span class="comment">// 数据段从0x2000开始，即hex文件的第0x800行(2048)</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">$value$plusargs</span>(<span class="string">&quot;TESTCASE=%s&quot;</span>, testcase)) <span class="keyword">begin</span></span><br><span class="line">        <span class="comment">// 读取整个hex文件到DRAM</span></span><br><span class="line">        <span class="comment">// SystemVerilog的$readmemh会自动处理地址映射</span></span><br><span class="line">        <span class="comment">// 但是最好还是手动指定范围以防万一</span></span><br><span class="line">        <span class="built_in">$readmemh</span>(testcase, ram_data);</span><br><span class="line">        <span class="built_in">$display</span>(<span class="string">&quot;DRAM: Loaded memory image from %s&quot;</span>, testcase);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>写个简单的Makefile进行测试，结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20251212144050887_251212_1440_pe1l.png" alt="完美的测试结果!"></p>
+<h2 id="后记">后记</h2>
+<p>我们做完了吗？做完了99%。</p>
+<p>后面，可能会首先完成<code>Zicsr</code>扩展与<code>M</code>扩展，再之后会往自己的项目上靠，研究一下最新的控制流加密扩展<code>Zicfilp</code>和<code>Zicfiss</code>。<code>A</code>、<code>C</code>和<code>F</code>扩展暂不考虑。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://blog.esing.dev">Esing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.esing.dev/2025/12/12/riscvcod-p10/">https://blog.esing.dev/2025/12/12/riscvcod-p10/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.esing.dev" target="_blank">Esing的小站</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="post-meta__tags" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/">计算机原理</a><a class="post-meta__tags" href="/tags/Verilog/">Verilog</a><a class="post-meta__tags" href="/tags/RISC-V/">RISC-V</a><a class="post-meta__tags" href="/tags/SystemVerilog/">SystemVerilog</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2025/12/11/riscvcod-p9/" title="从零开始学RISC：第九篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/128470225_p0_250408_0130_fLZB.avif" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">从零开始学RISC：第九篇</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2025/12/05/riscvcod-p4/" title="从零开始学RISC：第四篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/128470225_p0_250408_0130_fLZB.avif" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-05</div><div class="title">从零开始学RISC：第四篇</div></div></a></div><div><a href="/2025/12/08/riscvcod-p5/" title="从零开始学RISC：第五篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/128470225_p0_250408_0130_fLZB.avif" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-08</div><div class="title">从零开始学RISC：第五篇</div></div></a></div><div><a href="/2025/12/09/riscvcod-p6/" title="从零开始学RISC：第六篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/128470225_p0_250408_0130_fLZB.avif" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-09</div><div class="title">从零开始学RISC：第六篇</div></div></a></div><div><a href="/2025/12/10/riscvcod-p7/" title="从零开始学RISC：第七篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/128470225_p0_250408_0130_fLZB.avif" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-10</div><div class="title">从零开始学RISC：第七篇</div></div></a></div><div><a href="/2025/12/11/riscvcod-p8/" title="从零开始学RISC：第八篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/128470225_p0_250408_0130_fLZB.avif" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-11</div><div class="title">从零开始学RISC：第八篇</div></div></a></div><div><a href="/2025/12/11/riscvcod-p9/" title="从零开始学RISC：第九篇"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/128470225_p0_250408_0130_fLZB.avif" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-11</div><div class="title">从零开始学RISC：第九篇</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Waline</span><span class="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Esing</div><div class="author-info__description">咱也不知道写点啥 (＠_＠;)</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">191</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">179</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Zxis233"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Zxis233" target="_blank" title="Github"><i class="fab fa-github" style="color: #ff80ac;"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss" style="color: #ff80ac;"></i></a><a class="social-icon" href="mailto:esing@mail.esing.dev" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #ff80ac;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline" style="font-weight: bold;"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p><b>测试性开启 <u>Zstd</u> 压缩以提升网页加载速度！</b><br>将所有随机图片API换为<b> <u>自建API</u> </b>！<br>将全局代码字体更换为中文友好的 <u>Maple Mono CN</u> ，并修正 Verilog 代码块中的 <u>阻塞赋值</u> 显示效果！<br></p></div></div><div class="card-widget colo-info" id="colo-info"><div class="item-headline"><i class="fas fa-satellite-dish fa-flip"></i><span>Cloudflare 节点信息</span></div><div class="item-content"><script>!(function (){ function s(id, text){ var el=document.getElementById(id); if (el){ el.textContent=text || "未知"; if (id==="cf-ip"){ var ipItem=el.closest(".webinfo-item"); if (ipItem){ if ((text || "未知").length >15){ ipItem.classList.add("ip-wrap");} else{ ipItem.classList.remove("ip-wrap");}}}}} var coloMap={ HKG: "Hong Kong", NRT: "Tokyo, JP", KIX: "Osaka, JP", ICN: "Seoul, KR", SIN: "Singapore", SJC: "San Jose, US", SFO: "San Francisco, US", LAX: "Los Angeles, US", SEA: "Seattle, US", FRA: "Frankfurt, DE", LHR: "London, GB", AMS: "Amsterdam, NL", CDG: "Paris, FR", MAD: "Madrid, ES", SYD: "Sydney, AU", MEL: "Melbourne, AU",}; fetch("/cdn-cgi/trace",{ cache: "no-store"}) .then(function (r){ return r.text();}) .then(function (t){ var data={}, lines=t.split("\n"); for (var i=0; i < lines.length; i++){ var line=lines[i].trim(); if (!line) continue; var p=line.split("="); if (p.length < 2) continue; var key=p[0].trim(); var value=p.slice(1).join("=").trim(); data[key]=value;} s("cf-ip", data.ip); s("cf-loc", data.loc); var colo=data.colo; var coloText; if (colo){ var city=coloMap[colo]; coloText=city ? colo + " (" + city + ")" : colo;} else{ coloText="未知";} s("cf-colo", coloText); s("cf-tls", data.tls); var w=data.warp; var wd=w==="on" ? "启用" : w==="off" ? "关闭" : w || "未知"; s("cf-warp", wd);}) .catch(function (){ s("cf-ip", "加载失败"); s("cf-loc", "加载失败"); s("cf-colo", "加载失败"); s("cf-tls", "加载失败"); s("cf-warp", "加载失败");});})();</script><style>.webinfo{ display: flex; flex-direction: column;} .webinfo-item{ display: flex; align-items: center;} .webinfo-item:first-child{ justify-content: space-between;} .webinfo-item:first-child.ip-wrap{ flex-direction: column; align-items: flex-start;} .webinfo-item:not(:first-child){ justify-content: space-between;} .webinfo-item:first-child .item-name{ text-align: left;} .webinfo-item:first-child.ip-wrap .item-count{ width: 100%; text-align: right;}</style><div class="webinfo"><div class="webinfo-item"><div class="item-name">访问 IP :</div><div class="item-count" id="cf-ip"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">访问地区 :</div><div class="item-count" id="cf-loc"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">CDN 节点 :</div><div class="item-count" id="cf-colo"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">TLS 协议 :</div><div class="item-count" id="cf-tls"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">WARP :</div><div class="item-count" id="cf-warp"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A9%E6%88%91%E8%AE%BF%E9%97%AE%EF%BC%81"><span class="toc-number">1.</span> <span class="toc-text">让我访问！</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%8F%96%E6%8E%A7%E5%88%B6%E6%A8%A1%E5%9D%97-LoadStoreUnit-sv"><span class="toc-number">1.1.</span> <span class="toc-text">存取控制模块 LoadStoreUnit.sv</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%EF%BC%9A%E8%A7%A3%E6%94%BE%E5%8F%8C%E6%89%8B"><span class="toc-number">2.</span> <span class="toc-text">全自动化测试：解放双手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E8%AE%B0"><span class="toc-number">3.</span> <span class="toc-text">后记</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline" style="font-weight: bold;"><i class="fas fa-history fa-spin fa-spin-reverse"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/12/11/riscvcod-p9/" title="从零开始学RISC：第九篇"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/128470225_p0_250408_0130_fLZB.avif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="从零开始学RISC：第九篇"/></a><div class="content"><a class="title" href="/2025/12/11/riscvcod-p9/" title="从零开始学RISC：第九篇">从零开始学RISC：第九篇</a><time datetime="2025-12-12T07:10:58.517Z" title="更新于 2025-12-12 15:10:58">2025-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/04/07/riscvcod-intro/" title="从零开始学RISCV：序篇"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/128470225_p0_250408_0130_fLZB.avif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="从零开始学RISCV：序篇"/></a><div class="content"><a class="title" href="/2025/04/07/riscvcod-intro/" title="从零开始学RISCV：序篇">从零开始学RISCV：序篇</a><time datetime="2025-12-12T06:56:32.379Z" title="更新于 2025-12-12 14:56:32">2025-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/12/riscvcod-p10/" title="从零开始学RISC：第十篇"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/128470225_p0_250408_0130_fLZB.avif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="从零开始学RISC：第十篇"/></a><div class="content"><a class="title" href="/2025/12/12/riscvcod-p10/" title="从零开始学RISC：第十篇">从零开始学RISC：第十篇</a><time datetime="2025-12-12T06:55:52.315Z" title="更新于 2025-12-12 14:55:52">2025-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/11/riscvcod-p8/" title="从零开始学RISC：第八篇"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/128470225_p0_250408_0130_fLZB.avif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="从零开始学RISC：第八篇"/></a><div class="content"><a class="title" href="/2025/12/11/riscvcod-p8/" title="从零开始学RISC：第八篇">从零开始学RISC：第八篇</a><time datetime="2025-12-11T10:41:42.148Z" title="更新于 2025-12-11 18:41:42">2025-12-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/10/riscvcod-p7/" title="从零开始学RISC：第七篇"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/128470225_p0_250408_0130_fLZB.avif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="从零开始学RISC：第七篇"/></a><div class="content"><a class="title" href="/2025/12/10/riscvcod-p7/" title="从零开始学RISC：第七篇">从零开始学RISC：第七篇</a><time datetime="2025-12-11T10:37:58.994Z" title="更新于 2025-12-11 18:37:58">2025-12-11</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://pic.esing.dev/img/87257672_p0_2023-4-16_1808_qmfhwf6v6g.avif')"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By Esing</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Deployed On <a href="https://pages.cloudflare.com/" target="_blank">Cloudflare Pages</a><a href="https://icp.gov.moe/?keyword=20237860" target="_blank"><br /><br /> 萌 ICP 备 20237860 号 </a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left" style="color: var(--blockquote-color);"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right" style="color: var(--blockquote-color);"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh" style="color: var(--blockquote-color);"></i></a><a class="rightMenu-item" href="javascript:rmf.scrollToTop();"><i class="fa fa-arrow-up" style="color: var(--blockquote-color);"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy" style="color: var(--blockquote-color);"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="iconfont icon-baidu" style="color: var(--blockquote-color);"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link" style="color: var(--blockquote-color);"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"><i class="fa fa-link" style="color: var(--blockquote-color);"></i><span>复制本文地址</span></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore" style="color: var(--blockquote-color);"></i><span>新标签页打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy" style="color: var(--blockquote-color);"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore" style="color: var(--blockquote-color);"></i><span>在新标签页打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy" style="color: var(--blockquote-color);"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="javascript:toRandomPost()"><i class="fa fa-paper-plane" style="color: var(--blockquote-color);"></i><span>随便逛逛</span></a><a class="rightMenu-item" href="javascript:rmf.switchDarkMode();"><i class="fa fa-moon" style="color: var(--blockquote-color);"></i><span>昼夜切换</span></a><a class="rightMenu-item" href="javascript:rmf.switchReadMode();"><i class="fa fa-book" style="color: var(--blockquote-color);"></i><span>阅读模式</span></a><a class="rightMenu-item" href="javascript:fullScreen();"><i class="fas fa-expand" style="color: var(--blockquote-color);"></i><span>进入全屏</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script><!-- 这里只输出一个内联脚本，不直接引 src--><script>window.addEventListener('load', function () {
+  // 页面上没有 mermaid 图表就不加载脚本
+  if (!document.querySelector('.mermaid, .language-mermaid')) return;
+
+  var s = document.createElement('script');
+  var ver = '11.12.1'; // 从主题配置拿版本号
+  s.src = 'https://unpkg.com/mermaid@' + ver + '/dist/mermaid.min.js';
+  s.defer = true;
+  s.onload = function () {
+    if (window.mermaid) {
+      // 直接把主题里的 options 内联成 JS 对象，避免属性 + JSON.parse
+      var options = {"theme":"base","themeVariables":{"background":"transparent","primaryColor":"hsl(339, 100%, 90%)","primaryTextColor":"#000000","primaryBorderColor":"#999999","secondaryColor":"hsl(159, 66%, 76%)","secondaryBorderColor":"#666666","lineColor":"#333333","noteBorderColor":"#666666","fontFamily":"Noto Sans SC","fontSize":"0.9em"}};
+      mermaid.initialize(options);
+    }
+  };
+  document.body.appendChild(s);
+});</script><script>function loadWaline () {
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://comment.esing.dev/',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  const walineCSSLoad = document.getElementById('waline-css')
+
+  if (typeof Waline === 'object') {
+    walineCSSLoad ? initWaline() : getCSS('https://unpkg.com/@waline/client@v2/dist/waline.css','waline-css').then(initWaline)
+  }
+  else {
+    getCSS('https://unpkg.com/@waline/client@v2/dist/waline.css','waline-css').then(() => {
+      getScript('https://unpkg.com/@waline/client@v2/dist/waline.js').then(initWaline)
+    })
+  }
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script><script>function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: 'ad3070e381dc19ea10a3',
+      clientSecret: '70adf2f0332c581dfc5055033151ca3989b89ebd',
+      repo: 'BlogComment',
+      owner: 'Zxis233',
+      admin: ['Zxis233'],
+      id: '9d437a36d06f8c86f09b2e893a31767f',
+      updateCountCallback: commentCount
+    },{"language":"zh-CN","perPage":7}))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+    getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Waline' === 'Gitalk' || !true) {
+  if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script type="text/javascript" src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script type="text/javascript" src="/js/rightmenu.js"></script><script src="/js/random.js"></script><script type="text/javascript" src="/js/title.js"></script><script type="text/javascript" src="/js/titlelight.js"></script><script id="canvas_nest" defer="defer" color="255,128,172" opacity="0.8" zIndex="-1" count="80" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
