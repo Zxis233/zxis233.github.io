@@ -165,7 +165,6 @@ https://blog.esing.dev/2024/07/16/gamelife-prologue/
 https://blog.esing.dev/2024/08/27/chromeext-suggestion-elmochat/
 https://blog.esing.dev/2024/09/02/hello-new-pic-codecs/
 https://blog.esing.dev/2023/04/24/ba-talk1/
-https://blog.esing.dev/2024/11/21/hello-world/
 https://blog.esing.dev/2023/04/24/magisk-1/
 https://blog.esing.dev/2023/04/24/wtf/
 https://blog.esing.dev/2023/04/23/blog-right-menu/
