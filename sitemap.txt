@@ -1,3 +1,4 @@
+https://blog.esing.dev/2025/12/31/review-2025/
 https://blog.esing.dev/2025/12/28/corecat-drawer/
 https://blog.esing.dev/2024/01/13/digital-chip-design-1/
 https://blog.esing.dev/2024/10/28/playedgalgamelist/
@@ -332,6 +333,7 @@ https://blog.esing.dev/tags/%E5%8D%8A%E5%AF%BC%E4%BD%93%E7%89%A9%E7%90%86/
 https://blog.esing.dev/tags/Powershell/
 https://blog.esing.dev/tags/Photoshop/
 https://blog.esing.dev/tags/After-Effects/
+https://blog.esing.dev/tags/%E5%9B%9E%E9%A1%BE/
 https://blog.esing.dev/tags/RISC-V/
 https://blog.esing.dev/tags/YOLOv5-Lite/
 https://blog.esing.dev/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/
