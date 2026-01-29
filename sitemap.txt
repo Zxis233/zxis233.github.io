@@ -1,3 +1,6 @@
+https://blog.esing.dev/2026/01/29/waline-migration-to-mongodb/
+https://blog.esing.dev/2024/04/18/eink-app-suggestion/
+https://blog.esing.dev/2025/11/17/powershell-ln/
 https://blog.esing.dev/2026/01/15/qqnt-disable-autoupdate/
 https://blog.esing.dev/2026/01/14/200th-post-commemoration/
 https://blog.esing.dev/2026/01/11/riscvcod-p13/
@@ -14,7 +17,6 @@ https://blog.esing.dev/2024/10/06/index-for-study/
 https://blog.esing.dev/2024/04/21/webpage-variable-title/
 https://blog.esing.dev/2025/12/13/vcd-viewer-surfer/
 https://blog.esing.dev/2023/06/12/chrome-multi-thread-downloading/
-https://blog.esing.dev/2024/04/18/eink-app-suggestion/
 https://blog.esing.dev/2025/12/11/riscvcod-p8/
 https://blog.esing.dev/2025/12/11/riscvcod-p9/
 https://blog.esing.dev/2025/12/09/riscvcod-p6/
@@ -27,7 +29,6 @@ https://blog.esing.dev/2025/12/12/riscvcod-p10/
 https://blog.esing.dev/2025/04/07/riscvcod-p1/
 https://blog.esing.dev/2024/07/24/todos-in-my-university-life/
 https://blog.esing.dev/2025/11/18/cloudflare-offline-oneday/
-https://blog.esing.dev/2025/11/17/powershell-ln/
 https://blog.esing.dev/2025/10/20/powershell-grep/
 https://blog.esing.dev/2025/11/15/fuckoff-aceguard/
 https://blog.esing.dev/2025/11/12/fuckoff-xueyinonline/
@@ -390,6 +391,7 @@ https://blog.esing.dev/tags/%E5%A4%A7%E5%AD%A6%E7%94%9F/
 https://blog.esing.dev/tags/%E9%BC%A0%E6%A0%87/
 https://blog.esing.dev/tags/200th%E7%BA%AA%E5%BF%B5/
 https://blog.esing.dev/tags/QQ/
+https://blog.esing.dev/tags/MongoDB/
 https://blog.esing.dev/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/
 https://blog.esing.dev/categories/%E9%9A%8F%E7%AC%94/
 https://blog.esing.dev/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/
