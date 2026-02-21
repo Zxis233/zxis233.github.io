@@ -6,7 +6,7 @@
   <link href="https://blog.esing.dev/atom.xml" rel="self"/>
   
   <link href="https://blog.esing.dev/"/>
-  <updated>2026-01-29T08:35:04.078Z</updated>
+  <updated>2026-02-21T16:55:53.475Z</updated>
   <id>https://blog.esing.dev/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>酒桌文化，是中华文化中最『精髓』的『糟粕』。</title>
+    <link href="https://blog.esing.dev/2026/02/20/drunked-chinese/"/>
+    <id>https://blog.esing.dev/2026/02/20/drunked-chinese/</id>
+    <published>2026-02-20T14:17:45.000Z</published>
+    <updated>2026-02-21T16:55:53.475Z</updated>
+    
+    <content type="html"><![CDATA[<p>2026的大年初一，是我这辈子印象最深刻的大年初一。</p><p>这一天，我亲眼见到了，被“喝”进医院的人，以及将别人“喝”进医院的人。</p><hr><p>仍记得那是小学四年级的一个中午，我爸用筷子沾了点白酒让我舔了一下——随后，我便昏睡了12小时，直到晚上才醒来。</p><p>那便是我与酒精的第一次邂逅。得益于此，我从小就很讨厌酒水。尤其是看到醉醺醺的大人，心中更是产生了一丝恐惧：将来，我是否也会变成这样子，喝的面红耳赤不能自已？</p><hr><p>我们常常自豪于中华文化的博大精深，却鲜有人愿意承认：酒桌文化，或许正是我们文化中最“精髓”的“糟粕”。说其“精髓”，因其确实在人情社会中起到了至关重要的作用。中国的酒桌宛如修罗场，从来都不只是吃饭的地方。推杯换盏间，敬酒的次序暗示着等级的高低；觥筹交错中，酒量的比拼变成忠诚度的考验。一个眼神的接触，就能让下属不寒而栗；一个谦卑的动作，便能让上司会心一笑……酒桌上的暗语，俨然成为了一种社会能力的检验标准。</p><p>然而，它的“精髓”恰恰在于其“糟粕”的本质。</p><p><strong>当“不喝就是瞧不起我”成为道德绑架的工具，当“酒品即人品”成为逼迫他人的借口，当“喝倒为止”成为衡量诚意的标准，这哪里是文化？分明是一种披着传统外衣的社交暴力。</strong></p><p>我们习惯将这种暴力美化为“热情好客”，实则是对个体边界的肆意侵犯。我们美其名曰“酒桌礼仪”，实则是集体无意识的野蛮狂欢。我们用“活跃气氛”掩盖言语骚扰，用“开玩笑”掩饰行为失当，用“这是传统”为一切不合理的劝酒行为辩护。</p><p>酒桌文化最可怕之处，在于它形成了一个自我强化的怪圈：曾经被迫喝酒的人，一旦获得话语权，往往会变本加厉地要求新人“补上这一课”。就像遭受霸凌的人最终成为霸凌者，这种创伤的代际传递，让糟粕得以薪火相传。</p><hr><p>从小到大，今日我是第一次见到，有人跪下来劝人喝酒。酒品之差，可见一斑。</p><p>饮酒不过分，过分的是酒品差还饮酒。更过分的，是企图将他人拉下水、变得和自己一样。</p><p>学历的提升，不一定能让这种现象远离自己，但至少能给人一个逃离的理由，和这种沉重而又落后的习俗切割。</p><hr><p>中华文化的精髓，从来不在于你能喝多少酒，而在于你能在觥筹交错间，依然保持清醒的头脑和独立的灵魂。那些真正值得珍视的文化传统，是“己所不欲，勿施于人”的仁爱，是“君子之交淡如水”的淡泊，是“和而不同”的包容。至于那些披着文化外衣的糟粕，是时候让它们退出历史舞台了。</p><p><strong>希望酒桌文化，能在00后这一代彻底灭绝。</strong></p><p><strong>下一次，当有人举起酒杯对你说“不喝不是朋友”“不敬不算孝顺”时，请记住：真正的朋友，不会用你的健康来证明友谊；真正的孝顺，也绝不在酒杯深浅而在心意真纯。</strong></p>]]></content>
+    
+    
+    <summary type="html">湎酒更宜戒、平地有深堑。</summary>
+    
+    
+    
+    <category term="随笔" scheme="https://blog.esing.dev/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+    <category term="杂谈" scheme="https://blog.esing.dev/tags/%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
   
   <entry>
     <title>Waline迁移LeanCloud数据库到MongoDB Atlas</title>
@@ -618,31 +639,6 @@
     <category term="SystemVerilog" scheme="https://blog.esing.dev/tags/SystemVerilog/"/>
     
     <category term="RISC-V" scheme="https://blog.esing.dev/tags/RISC-V/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Cloudflare、睡覺——大规模宕机后的随想</title>
-    <link href="https://blog.esing.dev/2025/11/18/cloudflare-offline-oneday/"/>
-    <id>https://blog.esing.dev/2025/11/18/cloudflare-offline-oneday/</id>
-    <published>2025-11-18T14:45:37.000Z</published>
-    <updated>2025-11-19T02:56:36.593Z</updated>
-    
-    <content type="html"><![CDATA[<div class="note orange icon-padding flat"><i class="note-icon fab fa-cloudflare"></i><p>写于2025.11.18，纪念 Cloudflare 发生的大规模故障。</p></div><p>今年真是个多事之年啊。</p><p>开着组会呢，网站突然就打不开了，接着就是熟悉的小黄云500。还以为是源站挂了，随即关了浏览器再开。好家伙，GPT也卡在前面的Cloudflare Challenge 认证界面。这才意识到：Cloudflare，大抵是又<strong>炸</strong>了。而这，已经是今年的第三次了。</p><p><strong>网络菩萨、赛博义父，终究要顶不住这泼天的“流量”了吗。</strong></p><hr><p>翻了下Telegram，几乎所有群组都炸锅了：“Cloudflare” “宕机” “攻击” 的字样层出不穷。谁也不知道，究竟是一个员工的无心之举，还是一个部门的一次部署失误，亦或是什么组织的大规模网络攻击，导致了这一场灾难。微信群里同样炸了锅：同学嚷嚷着自己看文献的网站打不开、ChatGPT进不去……就连我的博客和一系列Cloudflare Workers服务也没能幸免于难，只剩下了前几天新搭建的 <a href="/2025/10/31/onelastkiss-image/" title="One Last Kiss 风格图片生成">OneLastKiss生成器</a> 还活着 TuT</p><p>看着<a href="https://www.cloudflarestatus.com/">Cloudflare Status</a>那色彩缤纷的<span style="color:#DA304C;">三</span><span style="color:#FBAE40;">色</span><span style="color:#2C7CB0;">条</span>，我不由得希望，今年结束之前不要再见到它。</p><img src="https://webp.esing.dev/img/-6116001428162677917_119_251118_2311_fD5D.jpg" alt="MJJ最不想看见的颜色（笑）" style="zoom:25%;" /><p>过了几分钟，就连监控Cloudflare状态的<a href="https://www.cloudflarestatus.com/">Cloudflare Status</a>也炸了。</p><img src="https://webp.esing.dev/img/-6116318431108861140_119_251118_2307_bqC2.jpg" alt="彻底爆炸的Cloudflare Status" style="zoom:25%;" /><p>不过还有一部分企业网站幸免于难，比如<a href="https://csgo.com/">CSGO国际官网</a>，可能是Enterprise有着不同线路？毕竟ChatGPT挂掉的也只是人机验证部分。这么算来，粗略估算的话，世界上有<strong>五分之一</strong>的网站应该都受到了影响——从DNS到静态页面托管，再到反向代理。不愧是你，Cloudflare。</p><hr><p>在两个小时后，22:50，官方终于发消息称修复完毕。<a href="https://t.me/vps_xhq/766">VPS信号旗播报</a>也给到了<span style="color:#FBAE40;">Level B</span>的重要等级。只能说小老弟还得多练，想达到你谷哥<a href="https://t.me/vps_xhq/161">以前</a>的<span style="color:#DA304C;">Level A</span>还有很长的路呢。</p><hr><p>我想到了《球状闪电》。</p><p><em><strong>“摧毁芯片的宏聚变可以使地球这块大硬盘被格式化，越先进的国家受到的打击就越大。而在向信息时代的恢复过程中，将出现一个不确定的全新的世界格局。”</strong></em></p><p>倘若真有一日，互联网全部瘫痪——或是更严重，如同《全频段阻塞干扰》那样——人类的生活会怎么样？<strong>是于废墟中携手重建往日的信息时代，还是借混乱之时重建各自渴望的世界格局？</strong></p><hr><p>一觉醒来，Cloudflare也发了<a href="https://blog.cloudflare.com/18-november-2025-outage/">官方声明</a>，解释本次故障原因：</p><blockquote><p>故障是由于工程师更改了一个数据库系统的权限所引发的。该设置会导致数据库向 Bot 管理系统所使用的“特征文件（feature file）”中输出多重条目，进而导致该特征文件的大小翻了一番。随后，有问题的特征文件被分发到了网络中的所有机器上。</p><p>网络中的设备软件对特征文件的大小设定了上限，而翻倍后的文件超过了这一限制，导致软件崩溃。</p></blockquote><p>Cloudflare 一度怀疑这是由超大规模 DDoS 攻击引起的，但很快锁定了核心问题，成功阻止了体积异常的特征文件进一步传播。将其替换为该文件的早期版本后核心流量基本恢复正常流转。但随着流量重新涌入，Cloudflare 最终耗费了数小时来缓解网络各部分增加的负载。</p><p>果然是工程师的误操作导致的，唉草台班子 ^__^。不知道工程师是不是被拉去祭天了？这每秒损失可不是挖断国防光缆能比的。</p>]]></content>
-    
-    
-    <summary type="html">写于2025.11.18，纪念 Cloudflare 发生的大规模故障。</summary>
-    
-    
-    
-    <category term="随笔" scheme="https://blog.esing.dev/categories/%E9%9A%8F%E7%AC%94/"/>
-    
-    
-    <category term="Cloudflare" scheme="https://blog.esing.dev/tags/Cloudflare/"/>
-    
-    <category term="代理" scheme="https://blog.esing.dev/tags/%E4%BB%A3%E7%90%86/"/>
-    
-    <category term="Workers" scheme="https://blog.esing.dev/tags/Workers/"/>
     
   </entry>
   
