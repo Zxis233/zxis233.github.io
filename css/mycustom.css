@@ -63,3 +63,36 @@
     width: 100%;
     margin: auto
 }
+
+.mermaid {
+    text-align: center !important;
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.mermaid svg {
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+#article-container pre.mermaid {
+    background: transparent !important;
+}
+
+#article-container h2 {
+    font-size: 1.6em !important;
+}
+
+#article-container h3 {
+    font-size: 1.25em !important;
+}
+
+#article-container h4 {
+    font-size: 1.1em !important;
+}
+
+#article-container h5 {
+    font-size: 1em !important;
+    font-weight: normal !important;
+    font-style: italic !important;
+}
