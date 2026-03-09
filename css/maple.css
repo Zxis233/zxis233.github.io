@@ -1,3 +1,5 @@
+@import url("https://fontsapi.zeoseven.com/442/main/result.css");
+
 /* maple-mono-latin-400-normal */
 @font-face {
     font-family: 'Maple Mono';
@@ -37,7 +39,7 @@
 #article-container pre,
 #article-container code {
     /* font-family: "Maple Mono NF", "Maple Mono NF CN", monospace !important; */
-    font-family: "Maple Mono", "Maple Mono NF CN", monospace !important;
+    font-family: "Maple Mono", "Maple Mono CN", monospace !important;
     font-feature-settings: "calt" 1, "cv01" 1, "cv02" 1, "cv61" 1, "cv62" 1, "cv66" 1, "ss03" 1;
     font-weight: normal;
 }

@@ -1,0 +1,16 @@
+@import url("https://cdn.jsdelivr.net/npm/maplemono-normal-nf-cn@1.0.0/regular.css");
+@import url("https://cdn.jsdelivr.net/npm/maplemono-normal-nf-cn@1.0.0/italic.css");
+@import url("https://cdn.jsdelivr.net/npm/maplemono-normal-nf-cn@1.0.0/bold.css");
+@import url("https://cdn.jsdelivr.net/npm/maplemono-normal-nf-cn@1.0.0/bolditalic.css");
+
+#article-container pre,
+#article-container code {
+    /* font-family: "Maple Mono NF", "Maple Mono NF CN", monospace !important; */
+    font-family: "Maple Mono Normal NF CN", monospace !important;
+    font-feature-settings: "calt" 1, "cv01" 1, "cv02" 1, "cv61" 1, "cv62" 1, "cv66" 1, "ss03" 1;
+    font-weight: normal;
+}
+
+#article-container figure.highlight.verilog td.code pre {
+    font-feature-settings: "cv63" 1, "calt" 1, "cv01" 1, "cv02" 1, "cv61" 1, "cv62" 1, "cv66" 1, "ss03" 1 !important;
+}
