@@ -1570,14 +1570,14 @@ blockquote > :last-child {
   margin-bottom: 0 !important;
 }
 :root {
-  --hl-color: #90a4ae;
-  --hl-bg: #f6f8fa;
-  --hltools-bg: #e6ebf1;
-  --hltools-color: #90a4ae;
-  --hlnumber-bg: #f6f8fa;
-  --hlnumber-color: rgba(144,164,174,0.5);
-  --hlscrollbar-bg: #dce4eb;
-  --hlexpand-bg: linear-gradient(180deg, rgba(246,248,250,0.6), rgba(246,248,250,0.9));
+  --hl-color: #788990;
+  --hl-bg: #f8fafc;
+  --hltools-bg: #e6edf4;
+  --hltools-color: #788990;
+  --hlnumber-bg: #f8fafc;
+  --hlnumber-color: rgba(120,137,144,0.5);
+  --hlscrollbar-bg: #dbe6f0;
+  --hlexpand-bg: linear-gradient(180deg, rgba(248,250,252,0.6), rgba(248,250,252,0.9));
 }
 figure.highlight table {
   scrollbar-color: var(--hlscrollbar-bg) transparent;

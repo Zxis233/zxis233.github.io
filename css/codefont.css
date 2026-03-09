@@ -1,3 +1,35 @@
+/* maple-mono-latin-400-normal */
+@font-face {
+  font-family: 'Maple Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@latest/latin-400-normal.woff2) format('woff2');
+}
+
+/* maple-mono-latin-700-normal */
+@font-face {
+  font-family: 'Maple Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@latest/latin-700-normal.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: "Maple Mono Combined";
+    src: local("Maple Mono");
+    unicode-range: U+0000-00FF, U+0100-024F;
+    /* 拉丁字符 */
+}
+
+@font-face {
+    font-family: "Maple Mono Combined";
+    src: local("Maple Mono NF CN");
+    unicode-range: U+4E00-9FFF, U+3400-4DBF;
+    /* 中文字符 */
+}
+
 @font-face {
     font-family: 'JetBrains Mono';
     src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Bold-Italic.woff2') format('woff2'),
