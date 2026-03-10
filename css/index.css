@@ -1570,14 +1570,14 @@ blockquote > :last-child {
   margin-bottom: 0 !important;
 }
 :root {
-  --hl-color: #788990;
-  --hl-bg: #f8fafc;
-  --hltools-bg: #e6edf4;
-  --hltools-color: #788990;
-  --hlnumber-bg: #f8fafc;
-  --hlnumber-color: rgba(120,137,144,0.5);
-  --hlscrollbar-bg: #dbe6f0;
-  --hlexpand-bg: linear-gradient(180deg, rgba(248,250,252,0.6), rgba(248,250,252,0.9));
+  --hl-color: #677889;
+  --hl-bg: #fafcfe;
+  --hltools-bg: #e5effa;
+  --hltools-color: #677889;
+  --hlnumber-bg: #f1f7fc;
+  --hlnumber-color: rgba(103,120,137,0.8);
+  --hlscrollbar-bg: #d8e8f7;
+  --hlexpand-bg: linear-gradient(180deg, rgba(250,252,254,0.6), rgba(250,252,254,0.9));
 }
 figure.highlight table {
   scrollbar-color: var(--hlscrollbar-bg) transparent;
@@ -1595,7 +1595,7 @@ figure.highlight pre .meta {
   color: #7c4dff;
 }
 figure.highlight pre .comment {
-  color: rgba(149,165,166,0.8);
+  color: rgba(103,120,137,0.6);
 }
 figure.highlight pre .variable,
 figure.highlight pre .attribute,
@@ -1609,7 +1609,7 @@ figure.highlight pre .css .id,
 figure.highlight pre .tag .name,
 figure.highlight pre .css .class,
 figure.highlight pre .css .pseudo {
-  color: #e53935;
+  color: #ce110d;
 }
 figure.highlight pre .tag {
   color: #39adb5;
@@ -1620,10 +1620,10 @@ figure.highlight pre .literal,
 figure.highlight pre .params,
 figure.highlight pre .constant,
 figure.highlight pre .command {
-  color: #f76d47;
+  color: #fa5b2f;
 }
 figure.highlight pre .built_in {
-  color: #ffb62c;
+  color: #f0ab2a;
 }
 figure.highlight pre .ruby .class .title,
 figure.highlight pre .css .rules .attribute,
