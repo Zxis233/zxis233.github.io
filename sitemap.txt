@@ -1,3 +1,6 @@
+https://blog.esing.dev/2025/04/07/riscvcod-intro/
+https://blog.esing.dev/2026/03/19/riscvcod-p16/
+https://blog.esing.dev/2026/03/18/riscvcod-p15/
 https://blog.esing.dev/2025/12/13/vcd-viewer-surfer/
 https://blog.esing.dev/2026/03/17/cloudflare-workers-voiceroom/
 https://blog.esing.dev/2025/12/28/corecat-drawer/
@@ -41,7 +44,6 @@ https://blog.esing.dev/2023/06/12/chrome-multi-thread-downloading/
 https://blog.esing.dev/2025/12/09/riscvcod-p6/
 https://blog.esing.dev/2025/12/05/riscvcod-p4/
 https://blog.esing.dev/2025/07/30/riscvcod-p3/
-https://blog.esing.dev/2025/04/07/riscvcod-intro/
 https://blog.esing.dev/2025/04/07/riscvcod-p1/
 https://blog.esing.dev/2024/07/24/todos-in-my-university-life/
 https://blog.esing.dev/2025/11/18/cloudflare-offline-oneday/
