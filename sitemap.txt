@@ -1,3 +1,4 @@
+https://blog.esing.dev/2026/04/04/windows-git-symlink/
 https://blog.esing.dev/2025/04/07/riscvcod-intro/
 https://blog.esing.dev/2026/04/02/riscvcod-p18/
 https://blog.esing.dev/2026/03/21/riscv-cfi/
@@ -408,6 +409,8 @@ https://blog.esing.dev/tags/MongoDB/
 https://blog.esing.dev/tags/HTML/
 https://blog.esing.dev/tags/Win11/
 https://blog.esing.dev/tags/Samba/
+https://blog.esing.dev/tags/Git/
+https://blog.esing.dev/tags/ln/
 https://blog.esing.dev/tags/WSL/
 https://blog.esing.dev/tags/%E5%AD%90%E7%B3%BB%E7%BB%9F/
 https://blog.esing.dev/tags/%E5%A5%B6%E9%BE%99/

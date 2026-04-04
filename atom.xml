@@ -6,7 +6,7 @@
   <link href="https://blog.esing.dev/atom.xml" rel="self"/>
   
   <link href="https://blog.esing.dev/"/>
-  <updated>2026-04-02T17:10:58.393Z</updated>
+  <updated>2026-04-04T11:52:52.469Z</updated>
   <id>https://blog.esing.dev/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Windows下Git正确提交链接文件的姿势</title>
+    <link href="https://blog.esing.dev/2026/04/04/windows-git-symlink/"/>
+    <id>https://blog.esing.dev/2026/04/04/windows-git-symlink/</id>
+    <published>2026-04-04T10:28:35.000Z</published>
+    <updated>2026-04-04T11:52:52.469Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言">前言</h2><p>项目需要用到<code>symlink</code>。不像Linux可以直接<code>ln</code>，Windows下创建这玩意不太容易，Powershell里创建个软链接要输一长串，虽然可以用 <a href="/2025/11/17/powershell-ln/" title="更适合Powershell体质的ln">之前</a> 的脚本，但还是不太容易。</p><p>在用Git提交软链接文件，克隆时出了问题：所有的链接都失效了，内容变成了指向目标文件的路径，很奇怪。</p><h2 id="解决">解决</h2><h3 id="重新安装一遍Git">重新安装一遍Git</h3><p>没错，首先得重新安装，因为 <a href="https://git-scm.com/install/windows">Git for Windows</a> 的默认安装配置中<strong>没有开启对Symlink的支持</strong>，绷。</p><p>重新安装时记得先把最下面的<strong>Only show new options</strong>关了。</p><img src="https://webp.esing.dev/img/image-20260404183715303_260404_1837_EWfW.png" alt="勾上Enable symbolic links" style="zoom:50%;" /><h3 id="开启配置">开启配置</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看是否开启Symlink功能</span></span><br><span class="line">git config <span class="literal">--get</span> core.symlinks</span><br><span class="line"></span><br><span class="line">git config <span class="literal">--global</span> core.symlinks true</span><br><span class="line"></span><br><span class="line"><span class="comment"># 也可以只在目标库内开启</span></span><br><span class="line">git config <span class="literal">--local</span> core.symlinks true</span><br></pre></td></tr></table></figure><h3 id="正确的Clone方式">正确的Clone方式</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone <span class="literal">-c</span> core.symlinks=true https://github.com/Zxis233/EsCute<span class="literal">-RV</span></span><br></pre></td></tr></table></figure><p>但是克隆时可能会提示：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error: unable to create symlink link_file/CIS_alpha_grp.csv: Permission denied</span><br></pre></td></tr></table></figure><p>这是因为傻逼Windows的Symlink默认只能以<strong>管理员身份</strong>来创建。你是说我拉个库还得提权？</p><h4 id="方案1：给予Windows下的普通用户创建Symlink权限">方案1：给予Windows下的普通用户创建Symlink权限</h4><p>进组策略编辑器，找到：计算机配置-Windows设置-安全设置-本地策略-用户权限分配-<strong>创建符号链接</strong>，双击编辑，添加你自己的用户账户，随后重启终端环境。</p><h4 id="方案2：sudo">方案2：sudo</h4><p>提权就完事了。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+&lt;p&gt;项目需要用到&lt;code&gt;symlink&lt;/code&gt;。不像Linux可以直接&lt;code&gt;ln&lt;/code&gt;，Windows下创建这玩意不太容易，Power</summary>
+      
+    
+    
+    
+    <category term="技术分享" scheme="https://blog.esing.dev/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
+    
+    
+    <category term="Powershell" scheme="https://blog.esing.dev/tags/Powershell/"/>
+    
+    <category term="Windows" scheme="https://blog.esing.dev/tags/Windows/"/>
+    
+    <category term="Git" scheme="https://blog.esing.dev/tags/Git/"/>
+    
+    <category term="ln" scheme="https://blog.esing.dev/tags/ln/"/>
+    
+  </entry>
   
   <entry>
     <title>从零开始学RISC：第十八篇</title>
@@ -629,36 +660,6 @@
     <category term="SystemVerilog" scheme="https://blog.esing.dev/tags/SystemVerilog/"/>
     
     <category term="RISC-V" scheme="https://blog.esing.dev/tags/RISC-V/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2025年度回顾</title>
-    <link href="https://blog.esing.dev/2025/12/31/review-2025/"/>
-    <id>https://blog.esing.dev/2025/12/31/review-2025/</id>
-    <published>2025-12-31T12:00:00.000Z</published>
-    <updated>2025-12-31T16:01:24.120Z</updated>
-    
-    <content type="html"><![CDATA[<p>2025年的最后一天，回顾一下这一年吧。</p>    <div id="aplayer-cpzRmCde" class="aplayer aplayer-tag-marker meting-tag-marker"         data-id="30051452" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ff80ac" data-volume="0.3" data-loop="none"    ></div><div class="timeline undefined"><div class='timeline-item headline'><div class='timeline-item-title'><div class='item-circle'><p>目录</p></div></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>1月</p></div></div><div class='timeline-item-content'><p>终于考完研了！好好放松一下！岩神启动~</p><p>毕设先研究一下吧。当然，玩好才是最重要的！(^_−)☆</p><p>和好朋友们<strong>过生日</strong>、打麻将、鹅鸭杀</p><p>光速推完《<strong>星之少女与六华的姐妹</strong>》。艺术风格不错，奈何剧情实在不太行。</p></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>2月</p></div></div><div class='timeline-item-content'><p>出发去哈尔滨！南方大土豆的雪国之旅。志愿者很不容易啊。</p><p>推完《<strong>星之终途</strong>》，Key的小短篇很精致。</p></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>3月</p></div></div><div class='timeline-item-content'><p><strong>初试顺利通过了</strong>！全力冲刺复试。半导体物理好难啊 &gt;_&lt;</p><p>推完《<strong>近月少女的礼仪</strong>》，露娜Sama带我走吧</p><p>《<strong>闰跃之年</strong>》也很有意思，设计独特的跳跳乐。</p><p>来吧，高潮一战就在眼前！</p></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>4月</p></div></div><div class='timeline-item-content'><p>考完试了可就要让我休息休息了。</p><p>推完《<strong>少女理论及其周边</strong>》，梅丽尔可爱捏~</p><p>推完《<strong>月影魅像—解放之羽</strong>》，抛开立绘不谈，妹药的作品还是一如既往的对味。</p><p>推完《<strong>9-nine-</strong>》系列，超赞的剧本与系统设计。META元素很有特色，后劲 很 大。妹妹是天！</p><p>还和好基友一起打通了《<strong>双影奇境</strong>》。我玩过的最棒的双人合作游戏。</p><p>结果给室友的拯救者清灰时把电脑搞坏了，开不了机 TuT 还好我买了新电脑，可以给他用新的。</p><p>毕设自然也没落下，把Klipper移植完了。现在至少打印机能动了。</p></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>5月</p></div></div><div class='timeline-item-content'><p>五一去哪玩？</p><p>哪都不去。西安人太多了。</p><p>推完《<strong>青鸟</strong>》，玩的第一部紫社的作品，后劲很大，彻底折服。</p><p>推完《<strong>爱因斯坦携爱敬上</strong>》，新岛夕的剧本也有股异味儿我看。</p><p>第二天出发去<strong>荷兰洛阳</strong>，去看看“三大石窟”的<strong>龙门石窟</strong>。洛阳博物馆的藏品也非常棒，感觉不在陕历博之下。</p><p>回来全力做毕设！之前还奇怪为啥打印出问题，原来是进料管内径太细了。一起更换后正常了，甚至还能多色打（手动换色）</p><p>然后去吃西安<strong>和牛自助</strong>，爽啊，就好这一口大肥油</p><p>买了新的电子文玩——充电宝，越来越像中年男人了 笑</p><p>结果把手环屏幕摔碎了，含泪趁着国补买一个新的</p><p>又去中行陕西省分行办了<strong>莫奈万事达卡</strong>，卡面太好看了</p><p>好朋友要出国了，从他那里<strong>收下5折的拓竹A1</strong>，从此开始折腾3D打印！</p><p>毕设也完工90%了。自己制作出来、能正常工作的毕设，那就是比被课题组带着做的强一百倍啊。</p><p>再玩玩《SHENZHEN I/O》，同学说我疯了，在Steam上还要内卷。</p><p>推完《<strong>绽放★青春全力向前冲</strong>》，青春真好啊 县中出来的根本无法想象</p></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>6月</p></div></div><div class='timeline-item-content'><p>终于要给这四年时光画上休止符了吗，哈基毕，你这家伙……</p><p>给毕设指导老师做了100%自行设计的<strong>电路板灯</strong>，老师超开心！</p><p>然后就是给身边人打印各种各样的小玩意。尽管每天都要忙到1点才能回去睡觉，还是很开心。</p><p>在学校二手市场收到了<strong>破琵琶的10th演唱会无料</strong>！四角尖尖超赞。</p><p>又来吃和牛了？这次是两个宿舍一起。</p><p>接着闪击<strong>甘肃兰州</strong>，两天玩完甘肃省博物馆+麦积山石窟+品味兰州拉面</p><p>拍毕业照时，才会觉得自己真的毕业了。</p><p>因为7月在西安还有比赛，先在同学家里住了几天。感谢好兄弟</p></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>7月</p></div></div><div class='timeline-item-content'><p>顺利录取！以后也要在西安度过三年了。</p><p>想了想，还是润回家了。之后的路费就自己掏吧。两个学弟太猛了，自己啥都没咋做，很惭愧。</p><p>去看了<strong>苏超</strong>，人太多了。确实火爆。即使是像我一样对体育不感兴趣的人，坐在人声鼎沸的场馆中，也会不由自主地心潮澎湃起来吧。</p><p>四个月前定的<strong>苍彼原画集</strong>终于到了嘿嘿 明日香可爱捏</p><p><strong>成功挺进全国总决赛</strong>！上海，来了。</p><p>在家里搞了点<strong>云面大壳</strong>，这玩意劲确实大。太香了。</p><p>好基友送了《<strong>Dome Keeper</strong>》，也是肉鸽挖挖，好玩的。</p><p>推完《<strong>爱因斯坦携爱敬上 APOLLOCRISIS</strong>》。两部放在一起看的话，剧本还是不错的。不过新岛夕笔下的男主还是有股异味。这是干什么？就不能给我们看一点正常的男主吗？</p><p>在出发的前一天推完《<strong>永不枯萎的世界与终结之花</strong>》。画风很不错，莲也很可爱</p></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>8月</p></div></div><div class='timeline-item-content'><p>出发去上海学习！</p><p>第一天就逛了各大<strong>二次元商场</strong>。不愧是上海，好多旮旯谷。接着又是<strong>米哈游园区</strong>、游戏博物馆……好了，该工作了。</p><p>学习了<strong>存算一体芯片</strong>的工作原理、误差来源与调优方式。好难</p><p>集创赛拿下<strong>全国三等奖</strong>。这次只发470，有点垃圾。</p><p>和同学在洛圣都对资本主义重拳出击，又推完了褒贬不一的《<strong>创作少女的恋爱公式</strong>》。身为创作者，应该是能共情的。</p></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>9月</p></div></div><div class='timeline-item-content'><p>入学啦！</p><p><strong>单人宿舍</strong>确实爽——除了学校地方偏一点没啥缺点。</p><p>配好平板支架，往床上一趟，您猜怎么着，这不就爽起来了吗？</p><p>买了<strong>新显示器</strong>，长时间在宿舍办公就得配显示器啊。</p><p>推完《<strong>女仆咖啡巧克拉</strong>》和《<strong>女仆咖啡帕露菲</strong>》，纯爱战神版的丸户史明还是有操作的，不过总有胃疼的线。</p></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>10月</p></div></div><div class='timeline-item-content'><p>十一去哪玩？</p><p>哪都不去。西安人太多了。</p><p>所以我选择去<strong>夜之城</strong>。补票了《<strong>赛博朋克2077</strong>》，体验了没玩过的两个开局+各类流派+往日之影DLC，往日之影还是太权威了，凭借一己之力拉高评分。</p><p>去看了看二战的室友，一起吃了顿<strong>郭楠</strong>。愿他成功上岸。</p><p>导师也布置任务了，不过DDL很久。希望能做完。</p><p>推完《<strong>青空下的约定</strong>》，老戏画三部曲的含金量很足，不论是音乐、剧本还是人物塑造都非常棒。我说老版画风比重置版看着顺眼有没有懂的</p><p>推完十二神器之一的《<strong>沙耶之歌</strong>》，很震撼的小短篇。</p></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>11月</p></div></div><div class='timeline-item-content'><p>O7 开始宣扬<strong>管理式民主</strong>！绝地潜兵2啥都不好，可惜就是好玩。</p><p>&gt;&gt;&gt;阅读本文章3秒视为自愿加入绝地潜兵&lt;&lt;&lt;</p><p><strong>鸭科夫</strong>来了！最好玩的搜打撤游戏！三角洲别联系我了，我怕鸭鸭误会</p><p>推完《<strong>天津罪</strong>》，御影的剧本真神了吧</p><p>还写了一篇人文社科类的论文，文科太难了。</p><p>做了一张没什么用的Galgame照片墙。</p></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>12月</p></div></div><div class='timeline-item-content'><p>继续在洛圣都打击资本主义、购买大豪斯</p><p>在课上做<strong>演讲汇报</strong>，老师非常满意。大成功！</p><p>推完《<strong>星辰恋曲的白色永恒</strong>》与后日谈。F社的作品质量一向都很高。其实，我早就是一个F批了。</p><p>Typst和Visio不好用，所以写了一个画图的前端网页<strong>CoreCat</strong>并开源了。</p><p>开始推《<strong>仰望夜空的星辰</strong>》，对夜空变得感兴趣了。</p><p>最后，写下本文，做一个总结。</p><p>又维护了整整一年的<strong>博客</strong>呢。今晚，我要卡点拿下萌备的20260721号备案！</p></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>1月</p></div></div><div class='timeline-item-content'><p>？？？</p></div></div></div>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;2025年的最后一天，回顾一下这一年吧。&lt;/p&gt;
-
-    &lt;div id=&quot;aplayer-cpzRmCde&quot; class=&quot;aplayer aplayer-tag-marker meting</summary>
-      
-    
-    
-    
-    <category term="随笔" scheme="https://blog.esing.dev/categories/%E9%9A%8F%E7%AC%94/"/>
-    
-    
-    <category term="Galgame" scheme="https://blog.esing.dev/tags/Galgame/"/>
-    
-    <category term="杂谈" scheme="https://blog.esing.dev/tags/%E6%9D%82%E8%B0%88/"/>
-    
-    <category term="回顾" scheme="https://blog.esing.dev/tags/%E5%9B%9E%E9%A1%BE/"/>
     
   </entry>
   
