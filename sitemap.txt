@@ -1,3 +1,4 @@
+https://blog.esing.dev/2026/04/08/cloudflare-workers-meting/
 https://blog.esing.dev/2026/04/02/riscvcod-p18/
 https://blog.esing.dev/2026/04/04/windows-git-symlink/
 https://blog.esing.dev/2025/04/07/riscvcod-intro/
@@ -271,6 +272,8 @@ https://blog.esing.dev/tags/Workers/
 https://blog.esing.dev/tags/%E5%9B%BE%E5%BA%8A/
 https://blog.esing.dev/tags/CORS/
 https://blog.esing.dev/tags/%E5%BC%95%E7%94%A8%E7%AB%99%E7%82%B9%E7%AD%96%E7%95%A5/
+https://blog.esing.dev/tags/Meting-js/
+https://blog.esing.dev/tags/%E9%9F%B3%E4%B9%90/
 https://blog.esing.dev/tags/WebRTC/
 https://blog.esing.dev/tags/R2/
 https://blog.esing.dev/tags/%E8%AF%AD%E9%9F%B3/

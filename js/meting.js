@@ -32,7 +32,7 @@ var aplayers = []
                 aplayers.push(new APlayer(r))
             }
         }
-        var t = "https://api.baka.plus/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r";
+        var t = "https://meting.esing.dev/?server=:server&type=:type&id=:id&r=:r";
         "undefined" != typeof meting_api && (t = meting_api);
         for (var e = 0; e < aplayers.length; e++)
             if (!aplayers[e].container.classList.contains("no-destroy"))
