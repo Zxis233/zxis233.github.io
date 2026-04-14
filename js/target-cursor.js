@@ -178,6 +178,22 @@
     }
 
     function tickerFn() {
+      if (activeTarget) {
+        var rect = activeTarget.getBoundingClientRect();
+        var cornerSize = constants.cornerSize;
+        var targetGap = Number(config.targetGap) || 0;
+
+        targetCornerPositions = [
+          { x: rect.left - targetGap, y: rect.top - targetGap },
+          { x: rect.right + targetGap - cornerSize, y: rect.top - targetGap },
+          {
+            x: rect.right + targetGap - cornerSize,
+            y: rect.bottom + targetGap - cornerSize
+          },
+          { x: rect.left - targetGap, y: rect.bottom + targetGap - cornerSize }
+        ];
+      }
+
       if (!targetCornerPositions) {
         return;
       }
@@ -221,23 +237,11 @@
         resumeTimeout = null;
       }
 
-      var rect = target.getBoundingClientRect();
-      var cornerSize = constants.cornerSize;
-      var targetGap = Number(config.targetGap) || 0;
       var cursorX = Number(gsap.getProperty(cursor, 'x'));
       var cursorY = Number(gsap.getProperty(cursor, 'y'));
 
-      targetCornerPositions = [
-        { x: rect.left - targetGap, y: rect.top - targetGap },
-        { x: rect.right + targetGap - cornerSize, y: rect.top - targetGap },
-        {
-          x: rect.right + targetGap - cornerSize,
-          y: rect.bottom + targetGap - cornerSize
-        },
-        { x: rect.left - targetGap, y: rect.bottom + targetGap - cornerSize }
-      ];
-
       activeTarget = target;
+      tickerFn();
 
       gsap.killTweensOf(rotor, 'rotation');
       gsap.killTweensOf(corners);

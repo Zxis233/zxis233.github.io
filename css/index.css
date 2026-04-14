@@ -2841,7 +2841,8 @@ h1.page-title + .tag-cloud-list {
 #aside-content .card-archives ul.card-archive-list > .card-archive-list-item a:hover,
 #aside-content .card-categories ul.card-category-list > .card-category-list-item a:hover {
   padding: 3px 17px;
-  background-color: var(--text-bg-hover);
+  color: #fff;
+  background-color: #1cb480;
 }
 #aside-content .card-archives ul.card-archive-list > .card-archive-list-item a span:first-child,
 #aside-content .card-categories ul.card-category-list > .card-category-list-item a span:first-child {

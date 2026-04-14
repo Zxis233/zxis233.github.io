@@ -2884,6 +2884,13 @@
   </url>
   
   <url>
+    <loc>https://blog.esing.dev/tags/%E5%B0%8F%E7%B1%B3/</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.esing.dev/tags/MPV/</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -2899,13 +2906,6 @@
   
   <url>
     <loc>https://blog.esing.dev/tags/MIUI/</loc>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.esing.dev/tags/%E5%B0%8F%E7%B1%B3/</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
