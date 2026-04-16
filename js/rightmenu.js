@@ -14,9 +14,9 @@ function setMask() {
     mask.style.position = "fixed";
     mask.style.top = "0";
     mask.style.left = "0";
-    mask.style.zIndex = 998;
+    mask.style.zIndex = 9999;
     document.body.appendChild(mask);
-    document.getElementById("rightMenu").style.zIndex = 19198;
+    // document.getElementById("rightMenu").style.zIndex = 19198;
     return mask;
 }
 

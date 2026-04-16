@@ -2,7 +2,7 @@
   /* --target-cursor-dot-color: #28c28c; */
   --target-cursor-dot-color: #ff80ac;
   --target-cursor-corner-color: #ff80ac;
-  --target-cursor-z-index: 9999;
+  --target-cursor-z-index: 100000;
 }
 
 .target-cursor-wrapper {

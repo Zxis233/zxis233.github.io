@@ -1,3 +1,4 @@
+https://blog.esing.dev/2026/04/16/steamxbox-bluescreen/
 https://blog.esing.dev/2026/04/14/blog-target-cursor/
 https://blog.esing.dev/2024/10/28/playedgalgamelist/
 https://blog.esing.dev/2024/07/24/todos-in-my-university-life/
@@ -388,6 +389,7 @@ https://blog.esing.dev/tags/XD8255/
 https://blog.esing.dev/tags/C/
 https://blog.esing.dev/tags/ST3020/
 https://blog.esing.dev/tags/MT8880/
+https://blog.esing.dev/tags/Steam/
 https://blog.esing.dev/tags/TCP/
 https://blog.esing.dev/tags/UDP/
 https://blog.esing.dev/tags/BBR/
