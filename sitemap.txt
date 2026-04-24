@@ -1,3 +1,4 @@
+https://blog.esing.dev/2026/04/25/latex-code-highlight-minted/
 https://blog.esing.dev/2026/04/17/azure100-freevm-list/
 https://blog.esing.dev/2024/10/28/playedgalgamelist/
 https://blog.esing.dev/2026/04/16/steamxbox-bluescreen/
@@ -246,6 +247,9 @@ https://blog.esing.dev/tags/%E7%AE%80%E7%AD%94/
 https://blog.esing.dev/tags/DIY/
 https://blog.esing.dev/tags/%E5%90%88%E5%BD%B1%E5%8D%A1/
 https://blog.esing.dev/tags/%E6%A8%A1%E6%8B%9F%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1/
+https://blog.esing.dev/tags/Azure/
+https://blog.esing.dev/tags/VPS/
+https://blog.esing.dev/tags/%E4%BB%A3%E7%90%86/
 https://blog.esing.dev/tags/%E7%A2%A7%E8%93%9D%E6%A1%A3%E6%A1%88/
 https://blog.esing.dev/tags/Blue-Archive/
 https://blog.esing.dev/tags/%E6%B8%B8%E6%88%8F/
@@ -270,7 +274,6 @@ https://blog.esing.dev/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/
 https://blog.esing.dev/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%A9%E5%B1%95/
 https://blog.esing.dev/tags/APP%E6%8E%A8%E8%8D%90/
 https://blog.esing.dev/tags/Cloudflare/
-https://blog.esing.dev/tags/%E4%BB%A3%E7%90%86/
 https://blog.esing.dev/tags/Workers/
 https://blog.esing.dev/tags/%E5%9B%BE%E5%BA%8A/
 https://blog.esing.dev/tags/CORS/
@@ -339,6 +342,8 @@ https://blog.esing.dev/tags/%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E5%88%B6%E9%80%
 https://blog.esing.dev/tags/Unicode/
 https://blog.esing.dev/tags/GBK/
 https://blog.esing.dev/tags/LaTeX/
+https://blog.esing.dev/tags/%E9%9B%86%E5%88%9B%E8%B5%9B/
+https://blog.esing.dev/tags/C/
 https://blog.esing.dev/tags/PlatformIO/
 https://blog.esing.dev/tags/%E4%B8%B2%E5%8F%A3/
 https://blog.esing.dev/tags/Magisk/
@@ -384,10 +389,8 @@ https://blog.esing.dev/tags/Silvaco-TCAD/
 https://blog.esing.dev/tags/%E5%8D%8A%E5%AF%BC%E4%BD%93/
 https://blog.esing.dev/tags/ATE/
 https://blog.esing.dev/tags/%E4%BF%A1%E8%AF%BA%E8%BE%BE/
-https://blog.esing.dev/tags/%E9%9B%86%E5%88%9B%E8%B5%9B/
 https://blog.esing.dev/tags/%E5%B0%81%E8%A3%85%E6%B5%8B%E8%AF%95/
 https://blog.esing.dev/tags/XD8255/
-https://blog.esing.dev/tags/C/
 https://blog.esing.dev/tags/ST3020/
 https://blog.esing.dev/tags/MT8880/
 https://blog.esing.dev/tags/Steam/
@@ -424,11 +427,9 @@ https://blog.esing.dev/tags/%E5%A5%B6%E9%BE%99/
 https://blog.esing.dev/tags/%E5%BD%BB%E5%BA%95%E7%96%AF%E7%8B%82/
 https://blog.esing.dev/tags/%E5%A4%A7%E5%AD%A6%E7%94%9F/
 https://blog.esing.dev/tags/%E9%BC%A0%E6%A0%87/
-https://blog.esing.dev/tags/Azure/
-https://blog.esing.dev/tags/VPS/
 https://blog.esing.dev/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/
 https://blog.esing.dev/categories/%E9%9A%8F%E7%AC%94/
 https://blog.esing.dev/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/
 https://blog.esing.dev/categories/%E5%AD%A6%E4%B9%A0/
-https://blog.esing.dev/categories/Emo/
 https://blog.esing.dev/categories/%E6%8A%80%E6%9C%AF%E6%96%B9%E5%90%91/
+https://blog.esing.dev/categories/Emo/
