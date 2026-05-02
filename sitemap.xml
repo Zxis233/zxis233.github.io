@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.esing.dev/2026/05/03/gamelife-re4re/</loc>
+    
+    <lastmod>2026-05-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.esing.dev/2026/05/02/cuktech-exoskeleton/</loc>
     
     <lastmod>2026-05-02</lastmod>
@@ -3499,6 +3508,27 @@
   
   <url>
     <loc>https://blog.esing.dev/tags/OpenAI/</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.esing.dev/tags/%E5%8D%A1%E6%99%AE%E7%A9%BA/</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.esing.dev/tags/%E7%94%9F%E5%8C%96%E5%8D%B1%E6%9C%BA/</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.esing.dev/tags/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/</loc>
     <lastmod>2026-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
