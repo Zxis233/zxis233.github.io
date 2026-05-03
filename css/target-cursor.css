@@ -2,7 +2,7 @@
   /* --target-cursor-dot-color: #28c28c; */
   --target-cursor-dot-color: #ff80ac;
   --target-cursor-corner-color: #ff80ac;
-  --target-cursor-z-index: 100000;
+  --target-cursor-z-index: 2147483647;
 }
 
 .target-cursor-wrapper {
@@ -12,7 +12,7 @@
   width: 0;
   height: 0;
   pointer-events: none;
-  z-index: var(--target-cursor-z-index);
+  z-index: var(--target-cursor-z-index) !important;
   transform: translate(-50%, -50%);
 }
 

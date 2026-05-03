@@ -109,6 +109,8 @@
     var targetCornerPositions = null;
     var activeStrength = { current: 0 };
     var resumeTimeout = null;
+    var layerObserver = null;
+    var layerRaf = null;
     var originalCursor = document.body.style.cursor;
 
     var constants = {
@@ -122,6 +124,54 @@
 
       activeTarget = null;
       leaveHandler = null;
+    }
+
+    function isUsableLayerHost(element) {
+      if (!element || !document.body.contains(element)) {
+        return false;
+      }
+
+      if (element.tagName === 'DIALOG' && !element.open) {
+        return false;
+      }
+
+      var style = window.getComputedStyle(element);
+      return style.display !== 'none' && style.visibility !== 'hidden';
+    }
+
+    function findCursorLayerHost() {
+      var dialogs = document.querySelectorAll('.fancybox__dialog');
+
+      for (var i = dialogs.length - 1; i >= 0; i--) {
+        if (isUsableLayerHost(dialogs[i])) {
+          return dialogs[i];
+        }
+      }
+
+      return document.body;
+    }
+
+    function placeCursorOnTop() {
+      var host = findCursorLayerHost();
+
+      if (!host) {
+        return;
+      }
+
+      if (cursor.parentNode !== host || host.lastElementChild !== cursor) {
+        host.appendChild(cursor);
+      }
+    }
+
+    function scheduleCursorLayerUpdate() {
+      if (layerRaf) {
+        return;
+      }
+
+      layerRaf = window.requestAnimationFrame(function () {
+        layerRaf = null;
+        placeCursorOnTop();
+      });
     }
 
     function resetCorners() {
@@ -350,9 +400,7 @@
     }
 
     function pjaxCompleteHandler() {
-      if (!document.body.contains(cursor)) {
-        document.body.appendChild(cursor);
-      }
+      placeCursorOnTop();
     }
 
     if (config.hideDefaultCursor) {
@@ -368,6 +416,17 @@
 
     createSpinTimeline();
     resetCorners();
+    placeCursorOnTop();
+
+    if (window.MutationObserver) {
+      layerObserver = new MutationObserver(scheduleCursorLayerUpdate);
+      layerObserver.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class', 'open']
+      });
+    }
 
     window.addEventListener('mousemove', mouseMoveHandler);
     window.addEventListener('mouseover', mouseOverHandler, { passive: true });
@@ -380,6 +439,14 @@
     window.__targetCursorHexoDestroy = function () {
       if (resumeTimeout) {
         clearTimeout(resumeTimeout);
+      }
+
+      if (layerRaf) {
+        window.cancelAnimationFrame(layerRaf);
+      }
+
+      if (layerObserver) {
+        layerObserver.disconnect();
       }
 
       gsap.ticker.remove(tickerFn);
