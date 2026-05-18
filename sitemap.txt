@@ -1,4 +1,6 @@
+https://blog.esing.dev/2026/05/18/cpa-server-setup/
 https://blog.esing.dev/2026/05/11/cpa-setup/
+https://blog.esing.dev/2024/01/18/vscode-verilog-setup/
 https://blog.esing.dev/2026/05/07/chatgpt-50off-aff/
 https://blog.esing.dev/2024/11/25/eng-application-writing/
 https://blog.esing.dev/2026/04/17/azure100-freevm-list/
@@ -97,7 +99,6 @@ https://blog.esing.dev/2025/09/21/hiddenprobe-adb/
 https://blog.esing.dev/2024/08/16/dcmos-intro/
 https://blog.esing.dev/2025/09/17/nonblocking-display/
 https://blog.esing.dev/2024/04/20/dsd-p9/
-https://blog.esing.dev/2024/01/18/vscode-verilog-setup/
 https://blog.esing.dev/2024/04/19/dsd-p6/
 https://blog.esing.dev/2023/04/22/vivado-problem/
 https://blog.esing.dev/2023/04/20/link-to-windows/
@@ -301,9 +302,13 @@ https://blog.esing.dev/tags/Linux/
 https://blog.esing.dev/tags/Verilog/
 https://blog.esing.dev/tags/SystemVerilog/
 https://blog.esing.dev/tags/%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/
+https://blog.esing.dev/tags/CPA/
 https://blog.esing.dev/tags/Codex/
-https://blog.esing.dev/tags/Windows/
 https://blog.esing.dev/tags/Claude-Code/
+https://blog.esing.dev/tags/NGINX/
+https://blog.esing.dev/tags/SSL/
+https://blog.esing.dev/tags/Copilot/
+https://blog.esing.dev/tags/Windows/
 https://blog.esing.dev/tags/%E9%85%B7%E6%80%81%E7%A7%91/
 https://blog.esing.dev/tags/CVE/
 https://blog.esing.dev/tags/PoC/
@@ -341,7 +346,6 @@ https://blog.esing.dev/tags/%E7%94%9F%E5%8C%96%E5%8D%B1%E6%9C%BA/
 https://blog.esing.dev/tags/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/
 https://blog.esing.dev/tags/%E6%98%9F%E4%B9%8B%E7%BB%88%E9%80%94/
 https://blog.esing.dev/tags/GFW/
-https://blog.esing.dev/tags/SSL/
 https://blog.esing.dev/tags/%E6%B5%81%E9%87%8F/
 https://blog.esing.dev/tags/FRP/
 https://blog.esing.dev/tags/Klipper/
