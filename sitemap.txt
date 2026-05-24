@@ -1,3 +1,4 @@
+https://blog.esing.dev/2026/05/24/dpll-sim/
 https://blog.esing.dev/2026/05/21/eza-tree/
 https://blog.esing.dev/2026/05/18/cpa-server-setup/
 https://blog.esing.dev/2026/05/11/cpa-setup/
@@ -324,6 +325,8 @@ https://blog.esing.dev/tags/%E6%95%B0%E7%94%B5/
 https://blog.esing.dev/tags/Cadence/
 https://blog.esing.dev/tags/%E7%89%88%E5%9B%BE/
 https://blog.esing.dev/tags/SN74LVC112A/
+https://blog.esing.dev/tags/Verilog-A/
+https://blog.esing.dev/tags/%E9%94%81%E7%9B%B8%E7%8E%AF/
 https://blog.esing.dev/tags/MCP/
 https://blog.esing.dev/tags/OpenAI/
 https://blog.esing.dev/tags/%E6%9D%82%E8%B0%88/
