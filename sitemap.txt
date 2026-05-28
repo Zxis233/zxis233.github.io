@@ -1,6 +1,8 @@
+https://blog.esing.dev/2026/05/28/paper-tau/
+https://blog.esing.dev/2026/05/18/cpa-server-setup/
+https://blog.esing.dev/2026/03/20/paper-arxiv-2508-10904/
 https://blog.esing.dev/2026/05/24/dpll-sim/
 https://blog.esing.dev/2026/05/21/eza-tree/
-https://blog.esing.dev/2026/05/18/cpa-server-setup/
 https://blog.esing.dev/2026/05/11/cpa-setup/
 https://blog.esing.dev/2024/01/18/vscode-verilog-setup/
 https://blog.esing.dev/2026/05/07/chatgpt-50off-aff/
@@ -27,7 +29,6 @@ https://blog.esing.dev/2026/03/21/riscv-cfi/
 https://blog.esing.dev/2026/03/27/riscvcod-p17/
 https://blog.esing.dev/2026/03/09/riscvcod-p14/
 https://blog.esing.dev/2026/03/19/riscvcod-p16/
-https://blog.esing.dev/2026/03/20/paper-arxiv-2508-10904/
 https://blog.esing.dev/2026/03/18/riscvcod-p15/
 https://blog.esing.dev/2025/12/13/vcd-viewer-surfer/
 https://blog.esing.dev/2026/03/17/cloudflare-workers-voiceroom/
