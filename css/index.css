@@ -56,7 +56,7 @@ small {
 
 sub,
 sup {
-  font-size: 75%;
+  font-size: 80%;
   line-height: 0;
   position: relative;
   vertical-align: baseline
@@ -67,7 +67,7 @@ sub {
 }
 
 sup {
-  top: -.5em
+  top: -.4em
 }
 
 img {
@@ -3971,7 +3971,7 @@ h1.page-title + .tag-cloud-list {
   overflow-wrap: break-word;
 }
 #article-container a {
-  color: #28c28c;
+  color: #1e9269;
 }
 #article-container a:hover {
   text-decoration: underline;
