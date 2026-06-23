@@ -1,4 +1,4 @@
-https://blog.esing.dev/2026/06/21/starport-p2/
+https://blog.esing.dev/2026/06/23/starport-p2/
 https://blog.esing.dev/2026/06/17/starport-intro/
 https://blog.esing.dev/2026/06/22/starport-p1/
 https://blog.esing.dev/2026/04/08/cloudflare-workers-meting/
