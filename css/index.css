@@ -1382,7 +1382,7 @@ body {
   background: var(--global-bg);
   color: var(--font-color);
   font-size: var(--global-font-size);
-  font-family: -apple-system, BlinkMacSystemFont, "Noto Sans SC", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "MiSans VF", "Noto Sans SC", sans-serif;
   line-height: 1.8;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   text-shadow: 0 0 0.6px currentcolor;
@@ -1511,7 +1511,7 @@ a:hover {
 .site-name,
 #aside-content .author-info__name,
 #aside-content .author-info__description {
-  font-family: Noto Sans SC;
+  font-family: MiSans VF;
 }
 .is-center {
   text-align: center;
@@ -2043,7 +2043,7 @@ figure.highlight pre .javascript .function {
   height: 100%;
   vertical-align: top;
   text-align: center;
-  font-family: Noto Sans SC;
+  font-family: MiSans VF;
 }
 @media screen and (max-width: 768px) {
   .error404 #error-wrap .error-content .error-info {
@@ -2054,6 +2054,7 @@ figure.highlight pre .javascript .function {
 .error404 #error-wrap .error-content .error-info .error_title {
   margin-top: -0.6em;
   font-size: 9em;
+  font-weight: bold;
 }
 @media screen and (max-width: 768px) {
   .error404 #error-wrap .error-content .error-info .error_title {
@@ -2065,7 +2066,8 @@ figure.highlight pre .javascript .function {
   word-break: break-word;
   font-size: 1.6em;
   -webkit-line-clamp: 2;
-  font-family: 'Jetbrains Mono', 'Noto Sans SC' !important;
+  font-family: 'MiSans VF', 'Noto Sans SC' !important;
+  font-weight: bold;
 }
 .error404 + #rightside {
   display: none;
