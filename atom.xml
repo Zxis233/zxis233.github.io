@@ -6,7 +6,7 @@
   <link href="https://blog.esing.dev/atom.xml" rel="self"/>
   
   <link href="https://blog.esing.dev/"/>
-  <updated>2026-08-16T06:06:03.019Z</updated>
+  <updated>2026-09-20T05:58:56.185Z</updated>
   <id>https://blog.esing.dev/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>记一次宿舍路由器安装问题排查</title>
+    <link href="https://blog.esing.dev/2026/09/20/dom-router-problem/"/>
+    <id>https://blog.esing.dev/2026/09/20/dom-router-problem/</id>
+    <published>2026-09-20T05:33:18.000Z</published>
+    <updated>2026-09-20T05:58:56.185Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言">前言</h2><p>开学了，宿舍也搬进来了新学弟，很快就打成一片了（笑）</p><p>问我怎么在宿舍用网的，我说自备路由器，毕竟这三个设备的限制根本不够用。工位电脑一个，宿舍电脑一个，再加个手机就满了，更不用说什么平板之类的。</p><p>结果，插路由器就封交换机端口，一连三次。百思不得其解。使用的是腾达路由器。</p><h2 id="排查">排查</h2><h3 id="固定WAN网口">固定WAN网口</h3><p>首先是查看路由器的网口设置。有些老路由器是没有自动识别网口的功能的，反而不会出问题，因为不会向网口发送DHCP。</p><p>新路由器就不一样了，可能每个口都发送DHCP，导致交换机检测到不一致播报而封锁端口。</p><p>修改为固定网口后再次尝试，无果。</p><h3 id="WireShark抓包">WireShark抓包</h3><p><s>论有一个懂技术的学弟有多爽</s></p><p>保修单+打电话解封之后重新进行测试。他直接插电脑上抓包，抓到第三个包的时候被封。看了下里面信息，还满详细，列举了 <strong>“使用虚拟网卡会导致封禁”</strong> 。</p><p>这是为什么？</p><p>推测是虚拟网卡作为一个可以独立进行拨号工作的设备，可能会导致交换机上看到某个有线端口传入不同的MAC请求。难道封禁原因是多MAC？</p><h2 id="测试">测试</h2><p>再次解封。</p><p>先在笔记本电脑上测试，确认网络正常连接；随后手动退出账户，确保网口和MAC解除绑定；最后插到路由器上的固定WAN上，进行登录。成功。</p><h2 id="后记">后记</h2><p>这个检测其实还是比较简单的，没有做更严格的TTL一类检测。</p><p>教学区（工位）反而没有这个限制，很神秘。</p><p>可能是限制了之后换电脑就锁端口，被搞烦了吧。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+&lt;p&gt;开学了，宿舍也搬进来了新学弟，很快就打成一片了（笑）&lt;/p&gt;
+&lt;p&gt;问我怎么在宿舍用网的，我说自备路由器，毕竟这三个设备的限制根本不够用。工位电脑一个，宿</summary>
+      
+    
+    
+    
+    <category term="技术分享" scheme="https://blog.esing.dev/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
+    
+    
+    <category term="路由器" scheme="https://blog.esing.dev/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/"/>
+    
+    <category term="踩坑" scheme="https://blog.esing.dev/tags/%E8%B8%A9%E5%9D%91/"/>
+    
+    <category term="DHCP" scheme="https://blog.esing.dev/tags/DHCP/"/>
+    
+  </entry>
   
   <entry>
     <title>[星港游记] 金星大距：二分相</title>
@@ -473,34 +503,6 @@
     <category term="Verilog-A" scheme="https://blog.esing.dev/tags/Verilog-A/"/>
     
     <category term="锁相环" scheme="https://blog.esing.dev/tags/%E9%94%81%E7%9B%B8%E7%8E%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用Eza优雅地生成目录树</title>
-    <link href="https://blog.esing.dev/2026/05/21/eza-tree/"/>
-    <id>https://blog.esing.dev/2026/05/21/eza-tree/</id>
-    <published>2026-05-21T11:34:58.000Z</published>
-    <updated>2026-05-21T13:36:47.299Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言">前言</h2><p>最近需要写AI的SKILL和AGENTS，需要严格指定目录结构。</p><p>之前试过<a href="https://github.com/structure-codes/cli">structure-codes/cli</a>，但是这是NPM包，安装还要Node环境，且用起来也一般。自带的tree又不好看。有什么比较好的办法呢？</p><p>这就要用到现代化的Eza了。</p><h2 id="现代化的ls替代工具：Eza">现代化的ls替代工具：Eza</h2><p><a href="https://github.com/eza-community/eza">eza-community/eza</a>是一个现代化的 <code>ls</code> 命令替代工具，用 Rust 编写，目标是让终端里的文件列表更清晰、更美观、更适合开发者日常使用。相比传统的 <code>ls</code>，Eza 提供了更好的默认展示效果，并支持颜色高亮、文件图标、符号链接识别、扩展属性、Git 状态显示以及树形目录展示等功能。</p><p>比如，普通的<code>ls</code>命令，换为<code>eza</code>是这样的：</p><img src="https://webp.esing.dev/img/image-20260521201620567_260521_2016_YqYd.png" alt="image-20260521201620567" style="zoom:50%;" /><p>这里是配合<a href="https://github.com/subframe7536/maple-font">Maple Mono</a>的NerdFont版本，可以显示出特殊图标，很好看。</p><h3 id="安装与配置">安装与配置</h3><p>Windows下直接下载可执行文件放到Path就行了。</p><p>为了更换Powershell默认的<code>ls</code>为<code>eza</code>，需要创建一个别名。修改Powershell的默认配置文件，运行<code>code $PROFILE</code>即可打开。加上下面的内容：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Invoke-Eza</span></span> &#123;</span><br><span class="line">    eza <span class="literal">--icons</span>=auto <span class="literal">--group-directories-first</span> @args</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ll</span></span> &#123;</span><br><span class="line">    eza <span class="literal">-l</span> <span class="literal">--icons</span>=auto <span class="literal">--group-directories-first</span> @args</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">la</span></span> &#123;</span><br><span class="line">    eza <span class="literal">-la</span> <span class="literal">--icons</span>=auto <span class="literal">--group-directories-first</span> @args</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">lt</span></span> &#123;</span><br><span class="line">    eza <span class="literal">--tree</span> <span class="literal">--level</span>=<span class="number">3</span> <span class="literal">--icons</span>=auto <span class="literal">--group-directories-first</span> @args</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Set-Alias</span> <span class="literal">-Name</span> <span class="built_in">ls</span> <span class="literal">-Value</span> <span class="built_in">Invoke-Eza</span> <span class="literal">-Force</span></span><br></pre></td></tr></table></figure><p>随后重启Powershell，就可以用很多快捷命令了。</p><h3 id="目录树绘制">目录树绘制</h3><p>最简单的指令就是：<code>eza --tree</code>或者<code>eza -T</code>，这样子会递归整个目录的输出。</p><p>实际生产中不建议直接递归整个目录，会输出大量无用内容。因此，更推荐配合层级限制使用：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eza -T -L 3</span><br></pre></td></tr></table></figure><p>其中：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-T, --tree      以树状结构递归显示目录</span><br><span class="line">-L, --level=N   限制递归深度</span><br></pre></td></tr></table></figure><p>比如，快速查看当前项目三层目录：</p><figure class="highlight tree"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">╭<span class="meta">─</span>zxis@LittleBox ~/blog ‹main●›</span><br><span class="line">╰<span class="meta">─</span>$ <span class="variable">eza</span> <span class="variable">-T</span> <span class="variable">-L</span> <span class="variable">3</span> <span class="variable">--git-ignore</span> --icons=auto</span><br><span class="line"> <span class="variable">.</span></span><br><span class="line"><span class="meta">├──</span>  <span class="string">_config.landscape</span>.yml</span><br><span class="line"><span class="meta">├──</span>  <span class="string">_config.yml</span></span><br><span class="line"><span class="meta">├──</span>  <span class="string">db.json</span>.bak</span><br><span class="line"><span class="meta">├──</span>  <span class="string">hexo-offline.config</span>.cjs</span><br><span class="line"><span class="meta">├──</span>  <span class="string">package-lock.json</span></span><br><span class="line"><span class="meta">├──</span>  <span class="string">package.json</span></span><br><span class="line"><span class="meta">├──</span>  <span class="variable">scaffolds</span></span><br><span class="line"><span class="meta">│</span>   <span class="meta">├──</span>  <span class="string">draft.md</span></span><br><span class="line"><span class="meta">│</span>   <span class="meta">├──</span>  <span class="string">draft.md</span>.bak</span><br><span class="line"><span class="meta">│</span>   <span class="meta">├──</span>  <span class="string">page.md</span></span><br><span class="line"><span class="meta">│</span>   <span class="meta">└──</span>  <span class="string">post.md</span></span><br><span class="line"><span class="meta">├──</span>  <span class="variable">source</span></span><br><span class="line"><span class="meta">│</span>   <span class="meta">├──</span>  <span class="variable">_data</span></span><br><span class="line"><span class="meta">│</span>   <span class="meta">│</span>   <span class="meta">├──</span>  <span class="string">link.yml</span></span><br><span class="line"><span class="meta">│</span>   <span class="meta">│</span>   <span class="meta">└──</span>  <span class="string">widget.yml</span></span><br><span class="line"><span class="meta">│</span>   <span class="meta">├──</span>  <span class="variable">_posts</span></span><br><span class="line"><span class="meta">│</span>   <span class="meta">│</span>   <span class="meta">├──</span>  <span class="string">eza-tree.md</span></span><br><span class="line"><span class="meta">│</span>   <span class="meta">│</span>   <span class="meta">├──</span> <span class="variable">...</span></span><br><span class="line"><span class="meta">│</span>   <span class="meta">│</span>   <span class="meta">└──</span>  <span class="string">xmousebuttoncontrol.md</span></span><br><span class="line"><span class="meta">│</span>   <span class="meta">├──</span>  <span class="variable">about</span></span><br><span class="line"><span class="meta">│</span>   <span class="meta">│</span>   <span class="meta">└──</span>  <span class="string">index.md</span></span><br><span class="line"><span class="meta">│</span>   <span class="meta">├──</span>  <span class="variable">categories</span></span><br><span class="line"><span class="meta">│</span>   <span class="meta">│</span>   <span class="meta">└──</span>  <span class="string">index.md</span></span><br><span class="line"><span class="meta">│</span>   <span class="meta">├──</span>  <span class="variable">link</span></span><br><span class="line"><span class="meta">│</span>   <span class="meta">│</span>   <span class="meta">└──</span>  <span class="string">index.md</span></span><br><span class="line"><span class="meta">│</span>   <span class="meta">└──</span>  <span class="variable">tags</span></span><br><span class="line"><span class="meta">│</span>       <span class="meta">└──</span>  <span class="string">index.md</span></span><br><span class="line"><span class="meta">├──</span>  <span class="variable">themes</span></span><br><span class="line"><span class="meta">│</span>   <span class="meta">└──</span>  <span class="variable">butterfly</span></span><br><span class="line"><span class="meta">│</span>       <span class="meta">├──</span>  <span class="string">_config.yml</span></span><br><span class="line"><span class="meta">│</span>       <span class="meta">├──</span>  <span class="variable">languages</span></span><br><span class="line"><span class="meta">│</span>       <span class="meta">├──</span>  <span class="variable">layout</span></span><br><span class="line"><span class="meta">│</span>       <span class="meta">├──</span>  <span class="variable">LICENSE</span></span><br><span class="line"><span class="meta">│</span>       <span class="meta">├──</span>  <span class="string">package.json</span></span><br><span class="line"><span class="meta">│</span>       <span class="meta">├──</span>  <span class="string">plugins.yml</span></span><br><span class="line"><span class="meta">│</span>       <span class="meta">├──</span> 󰂺 <span class="string">README.md</span></span><br><span class="line"><span class="meta">│</span>       <span class="meta">├──</span>  <span class="string">README_CN.md</span></span><br><span class="line"><span class="meta">│</span>       <span class="meta">├──</span>  <span class="variable">scripts</span></span><br><span class="line"><span class="meta">│</span>       <span class="meta">└──</span>  <span class="variable">source</span></span><br><span class="line"><span class="meta">│</span></span><br><span class="line"><span class="meta">└──</span>  <span class="string">yarn.lock</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
-&lt;p&gt;最近需要写AI的SKILL和AGENTS，需要严格指定目录结构。&lt;/p&gt;
-&lt;p&gt;之前试过&lt;a href=&quot;https://github.com/struc</summary>
-      
-    
-    
-    
-    <category term="技术分享" scheme="https://blog.esing.dev/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
-    
-    
-    <category term="Linux" scheme="https://blog.esing.dev/tags/Linux/"/>
-    
-    <category term="Windows" scheme="https://blog.esing.dev/tags/Windows/"/>
     
   </entry>
   
