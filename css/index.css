@@ -223,7 +223,7 @@ hr:before,
 .note:not(.no-icon)::before {
   display: inline-block;
   font-weight: 600;
-  font-family: 'Font Awesome 6 Free';
+  font-family: var(--fa-family-classic);
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
 }
