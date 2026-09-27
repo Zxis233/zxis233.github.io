@@ -1,0 +1,79 @@
+@font-face {
+  font-family: rightmenu-icons;
+  src: url('rightmenu-icons/iconfont.woff2') format('woff2');
+  font-display: block;
+}
+
+#rightMenu {
+  --rightmenu-bg: rgba(255, 255, 255, 0.8);
+  --right-menu-select-color: rgba(255, 128, 172, 0.5);
+  position: fixed;
+  width: 150px;
+  max-width: calc(100vw - 16px);
+  max-height: calc(100vh - 16px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--rightmenu-bg);
+  color: var(--font-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+  z-index: 10000;
+  font-size: 14px;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  text-shadow: none;
+  outline: none;
+}
+
+[data-theme='dark'] #rightMenu {
+  --rightmenu-bg: rgba(18, 18, 18, 0.75);
+}
+
+#rightMenu[hidden], #rightMenu [hidden] { display: none !important; }
+#rightMenu .rightMenu-group { padding: 3px 6px 6px; }
+#rightMenu .rightMenu-group:not(:last-child) { padding: 7px 7px 0; }
+#rightMenu .rightMenu-small { display: flex; justify-content: space-between; }
+#rightMenu .rightMenu-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 35px;
+  padding: 0 4px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: 35px;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+#rightMenu .rightMenu-item:hover,
+#rightMenu .rightMenu-item:focus-visible { background: var(--right-menu-select-color); }
+#rightMenu .rightMenu-item:focus-visible { outline: 2px solid #ff80ac; outline-offset: -2px; }
+#rightMenu .rightMenu-item i {
+  flex: 0 0 26px;
+  text-align: center;
+  color: var(--blockquote-color, #28c28c);
+}
+#rightMenu .rightmenu-baidu { font-family: rightmenu-icons; font-style: normal; }
+#rightMenu .rightmenu-baidu::before { content: '\e60a'; }
+#rightMenu .rightMenu-small .rightMenu-item { width: 30px; height: 30px; padding: 0; justify-content: center; }
+#rightMenu .rightMenu-small span { display: none; }
+#rightmenu-status {
+  position: fixed;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  z-index: 10001;
+  max-width: calc(100vw - 32px);
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: var(--card-bg, #fff);
+  color: var(--font-color, #423f3e);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+}
+#rightmenu-status:empty { display: none; }

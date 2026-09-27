@@ -1,0 +1,111 @@
+/* Active colors and typography from the old site; keep upstream Butterfly intact. */
+/* Homepage hero mask: match the old site's light/dark overlay strength. */
+#page-header.full_page {
+  --mark-bg: rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] #page-header.full_page {
+  --mark-bg: rgba(0, 0, 0, 0.7);
+}
+
+:root:not([data-theme="dark"]) {
+  --font-color: #423f3e;
+  --search-input-color: #423f3e;
+  --search-a-color: #423f3e;
+  /* Stylus darken(#28c28c, 35%). */
+  --blockquote-color: #1a7e5b;
+  --blockquote-bg: rgba(40, 194, 140, 0.06);
+}
+
+[data-theme="dark"] {
+  /* Stylus lighten(#28c28c, 2). */
+  --blockquote-color: #2aca92;
+  --blockquote-bg: rgba(40, 194, 140, 0.06);
+  --scrollbar-color: rgba(255, 128, 172, 0.6);
+}
+
+/* Preserve Butterfly's scrollbar treatment while the lightbox is open. */
+html.with-fancybox {
+  --scrollbar-color: transparent;
+}
+
+body {
+  line-height: 1.8;
+  text-shadow: 0 0 0.6px currentColor;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    text-shadow: 0 0 0.3px currentColor;
+  }
+}
+
+.container pre,
+.container figure.highlight,
+.container pre[class*="language-"].line-numbers,
+.container pre[class*="language-"].line-numbers > code {
+  line-height: 1.4;
+}
+
+#article-container h2 { font-size: 1.6em !important; }
+#article-container h3 { font-size: 1.25em !important; }
+#article-container h4 { font-size: 1.1em !important; }
+#article-container h5 {
+  font-size: 1em !important;
+  font-weight: normal !important;
+  font-style: italic !important;
+}
+
+/* Old author-card gradient: one complete back-and-forth cycle every 15s. */
+#aside-content > .card-widget.card-info {
+  background: linear-gradient(-45deg, #e8d8b960, #eccec560, #a3e9eb60, #bdbdf060, #eec1ea60);
+  background-size: 400% 400%;
+  background-position: 0 50%;
+  animation: author-card-gradient 15s ease infinite !important;
+}
+
+@keyframes author-card-gradient {
+  0%, 100% { background-position: 0 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+[data-theme="dark"] #aside-content > .card-widget.card-info {
+  background-image: linear-gradient(-45deg, hsla(41, 52%, 20%, 0.3), hsla(14, 51%, 20%, 0.3), hsla(182, 64%, 12%, 0.3), hsla(240, 63%, 25%, 0.3), hsla(305, 58%, 20%, 0.3));
+}
+
+table thead {
+  background: rgba(40, 194, 140, 0.1);
+}
+
+.toggle {
+  border-color: rgba(40, 194, 140, 0.12);
+}
+
+.toggle > .toggle-button {
+  background: rgba(40, 194, 140, 0.12);
+}
+
+#recent-posts > .recent-post-item > .recent-post-info > .article-title .sticky {
+  color: #ff80ac;
+}
+
+#post-comment .comment-switch .first-comment {
+  color: #28c28c;
+}
+
+#post-comment:not(.move) .comment-switch #switch-btn {
+  background-color: #28c28c;
+}
+
+.type-404 .error-content .error-img img {
+  background-color: #40bbb9;
+}
+
+.type-404 .error-content .error-info .error_title {
+  font-weight: bold;
+}
+
+.type-404 .error-content .error-info .error_subtitle {
+  font-family: "MiSans VF", "Noto Sans SC", sans-serif !important;
+  font-weight: bold;
+}

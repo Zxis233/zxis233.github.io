@@ -1,0 +1,793 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>友链 | Esing的小站</title><meta name="author" content="Esing"><meta name="copyright" content="Esing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="咱也不知道写点啥 (＠_＠;)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="友链">
+<meta property="og:url" content="https://blog.esing.dev/link/">
+<meta property="og:site_name" content="Esing的小站">
+<meta property="og:description" content="咱也不知道写点啥 (＠_＠;)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.esing.dev/img/avatar.avif">
+<meta property="article:published_time" content="2024-04-27T02:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-01T01:13:15.026Z">
+<meta property="article:author" content="Esing">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.esing.dev/img/avatar.avif"><script type="application/ld+json"></script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://blog.esing.dev/link/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const start = 8
+              const end = 24
+              const isNight =
+                start < end
+                    ? hour < start || hour >= end
+                    : hour >= start || hour < end
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;1aabda1500704262b993096aaa3b5c27&quot;}"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/misans@5.0.0/lib/Normal/MiSansVF.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":380,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":100,"languages":{"author":"作者: Esing","link":"链接: ","source":"来源: Esing的小站","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '友链',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'link'
+}</script><link rel="stylesheet" href="/css/maple_new.css"><link rel="stylesheet" href="/css/target-cursor.css"><link rel="stylesheet" href="/css/legacy-appearance.css"><link rel="stylesheet" href="/vendor/aplayer/APlayer.min.css"><link rel="stylesheet" href="/css/aplayer-theme.css"><link rel="stylesheet" href="/css/rightmenu.css"><link rel="stylesheet" href="/css/cloudflare-info.css"><script src="/vendor/aplayer/APlayer.min.js"></script><meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="Esing的小站" type="application/atom+xml">
+</head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="/css/load.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">249</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">219</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E6%98%9F%E6%B8%AF%E6%B8%B8%E8%AE%B0/"><i class="fa-fw fa-solid fa-star-half-stroke"></i><span> 星港游记</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-code"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page type-link" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url(/img/default_top.avif);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Esing的小站</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E6%98%9F%E6%B8%AF%E6%B8%B8%E8%AE%B0/"><i class="fa-fw fa-solid fa-star-half-stroke"></i><span> 星港游记</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-code"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title">友链</h1></div></header><main class="layout" id="content-inner"><div id="page"><div class="container" id="article-container"><div class="flink"><h2 id="AboutMe">AboutMe</h2>
+<div class="flink-desc">我的一切</div> <div class="flink-list">
+  <div class="flink-list-item">
+    <a href="https://github.com/Zxis233" title="GitHub" target="_blank">
+      <div class="flink-item-icon">
+        <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="undefined" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="GitHub" />
+      </div>
+      <div class="flink-item-name">GitHub</div>
+      <div class="flink-item-desc" title="Github">Github</div>
+    </a>
+  </div></div><h2 id="友情链接">友情链接</h2>
+ <div class="flink-list">
+  <div class="flink-list-item">
+    <a href="https://steamart.esing.dev/" title="Steam字符画生成器" target="_blank">
+      <div class="flink-item-icon">
+        <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="undefined" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="Steam字符画生成器" />
+      </div>
+      <div class="flink-item-name">Steam字符画生成器</div>
+      <div class="flink-item-desc" title="请合理使用哦">请合理使用哦</div>
+    </a>
+  </div>
+  <div class="flink-list-item">
+    <a href="https://www.esing.dev/" title="Esing' Mikutap!" target="_blank">
+      <div class="flink-item-icon">
+        <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://aidn.jp/daniwell/shared/img/jacket/nyancat_arrangements.png" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="Esing' Mikutap!" />
+      </div>
+      <div class="flink-item-name">Esing' Mikutap!</div>
+      <div class="flink-item-desc" title="Mikutap!">Mikutap!</div>
+    </a>
+  </div>
+  <div class="flink-list-item">
+    <a href="https://louvre.esing.dev/" title="「One Last Image」" target="_blank">
+      <div class="flink-item-icon">
+        <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="null" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="「One Last Image」" />
+      </div>
+      <div class="flink-item-name">「One Last Image」</div>
+      <div class="flink-item-desc" title="Esing改版，生成卢浮宫风格图片">Esing改版，生成卢浮宫风格图片</div>
+    </a>
+  </div>
+  <div class="flink-list-item">
+    <a href="https://hexo.io/zh-tw/" title="Hexo" target="_blank">
+      <div class="flink-item-icon">
+        <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="Hexo" />
+      </div>
+      <div class="flink-item-name">Hexo</div>
+      <div class="flink-item-desc" title="快速、简单且强大的<br>博客框架">快速、简单且强大的<br>博客框架</div>
+    </a>
+  </div>
+  <div class="flink-list-item">
+    <a href="https://blog.naivetomcat.cn/" title="NaiveTomcat's Blog" target="_blank">
+      <div class="flink-item-icon">
+        <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://blog.naivetomcat.cn/img/neko_avatar_blue.png" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="NaiveTomcat's Blog" />
+      </div>
+      <div class="flink-item-name">NaiveTomcat's Blog</div>
+      <div class="flink-item-desc" title="我们可爱的猫猫😼">我们可爱的猫猫😼</div>
+    </a>
+  </div>
+  <div class="flink-list-item">
+    <a href="https://www.bocheng.me/" title="Bocheng Zou" target="_blank">
+      <div class="flink-item-icon">
+        <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homepage-pic.bocheng.me/2fde1144071ceed5997348ef0d2b4954.png" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="Bocheng Zou" />
+      </div>
+      <div class="flink-item-name">Bocheng Zou</div>
+      <div class="flink-item-desc" title="是CS巨佬ZBC，<br>大家快退口牙！">是CS巨佬ZBC，<br>大家快退口牙！</div>
+    </a>
+  </div>
+  <div class="flink-list-item">
+    <a href="http://remote.stei.club/" title="电信科协官网" target="_blank">
+      <div class="flink-item-icon">
+        <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://remote.stei.club/favicon.ico" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="电信科协官网" />
+      </div>
+      <div class="flink-item-name">电信科协官网</div>
+      <div class="flink-item-desc" title="欢迎加入电信科协！">欢迎加入电信科协！</div>
+    </a>
+  </div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Esing</div><div class="author-info-description">咱也不知道写点啥 (＠_＠;)</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">249</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">219</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Zxis233"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Zxis233" target="_blank" title="Github"><i class="fab fa-github" style="color: #ff80ac;"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss" style="color: #ff80ac;"></i></a><a class="social-icon" href="mailto:esing@mail.esing.dev" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #ff80ac;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p><b>将音乐解析 API 修改为自建版！</b><br><b>测试性开启 <u>Zstd</u> 压缩以提升网页加载速度 ！</b></p></div></div><div class="card-widget colo-info" id="colo-info"><div class="item-headline"><i class="fas fa-satellite-dish fa-flip-360"></i><span>Cloudflare 节点信息</span></div><div class="item-content"><div class="webinfo" data-cf-fields data-pangu-ignore>
+  <div class="webinfo-item"><div class="item-name">访问 IP :</div><div class="item-count" id="cf-ip">—</div></div>
+  <div class="webinfo-item"><div class="item-name">访问地区 :</div><div class="item-count" id="cf-loc">—</div></div>
+  <div class="webinfo-item"><div class="item-name">CDN 节点 :</div><div class="item-count" id="cf-colo">—</div></div>
+  <div class="webinfo-item"><div class="item-name">TLS 协议 :</div><div class="item-count" id="cf-tls">—</div></div>
+  <div class="webinfo-item"><div class="item-name">WARP :</div><div class="item-count" id="cf-warp">—</div></div>
+</div>
+<p data-cf-status role="status" aria-live="polite">节点信息需要 JavaScript 才能加载</p>
+<button type="button" data-cf-retry hidden>重试</button>
+</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/09/23/wechat-lsposed-astrbot/" title="记一次用 LSPosed 把手机微信接入 AstrBot 的过程"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/3" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="记一次用 LSPosed 把手机微信接入 AstrBot 的过程"/></a><div class="content"><a class="title" href="/2026/09/23/wechat-lsposed-astrbot/" title="记一次用 LSPosed 把手机微信接入 AstrBot 的过程">记一次用 LSPosed 把手机微信接入 AstrBot 的过程</a><time datetime="2026-09-22T18:10:24.030Z" title="更新于 2026-09-23 02:10:24">2026-09-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/09/20/dom-router-problem/" title="记一次宿舍路由器安装问题排查"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/11" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="记一次宿舍路由器安装问题排查"/></a><div class="content"><a class="title" href="/2026/09/20/dom-router-problem/" title="记一次宿舍路由器安装问题排查">记一次宿舍路由器安装问题排查</a><time datetime="2026-09-20T05:58:56.185Z" title="更新于 2026-09-20 13:58:56">2026-09-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/16/starport-p13/" title="[星港游记] 金星大距：二分相"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/starport.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[星港游记] 金星大距：二分相"/></a><div class="content"><a class="title" href="/2026/08/16/starport-p13/" title="[星港游记] 金星大距：二分相">[星港游记] 金星大距：二分相</a><time datetime="2026-08-16T06:06:03.019Z" title="更新于 2026-08-16 14:06:03">2026-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/13/starport-p12/" title="[星港游记] 0813 英仙座流星雨"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/starport.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[星港游记] 0813 英仙座流星雨"/></a><div class="content"><a class="title" href="/2026/08/13/starport-p12/" title="[星港游记] 0813 英仙座流星雨">[星港游记] 0813 英仙座流星雨</a><time datetime="2026-08-16T05:07:00.070Z" title="更新于 2026-08-16 13:07:00">2026-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/08/cloudflare-workers-meting/" title="Cloudflare 搭建自托管 Meting.js 后端"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/57892762_p0_waifu2x_2x_jpg_2024-4-19_2216_y4dgn1bu98.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Cloudflare 搭建自托管 Meting.js 后端"/></a><div class="content"><a class="title" href="/2026/04/08/cloudflare-workers-meting/" title="Cloudflare 搭建自托管 Meting.js 后端">Cloudflare 搭建自托管 Meting.js 后端</a><time datetime="2026-08-13T09:03:58.156Z" title="更新于 2026-08-13 17:03:58">2026-08-13</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/200th%E7%BA%AA%E5%BF%B5/" style="font-size: 1.15em; color: rgb(74, 50, 76);">200th纪念</a><a href="/tags/Arduino/" style="font-size: 1.25em; color: rgb(156, 50, 50);">Arduino</a><a href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/" style="font-size: 1.25em; color: rgb(142, 57, 185);">单片机</a><a href="/tags/C/" style="font-size: 1.15em; color: rgb(186, 147, 50);">C</a><a href="/tags/%E5%A2%A8%E6%B0%B4%E5%B1%8F/" style="font-size: 1.32em; color: rgb(122, 183, 74);">墨水屏</a><a href="/tags/ESP/" style="font-size: 1.25em; color: rgb(166, 86, 51);">ESP</a><a href="/tags/%E8%80%B3%E6%9C%BA/" style="font-size: 1.22em; color: rgb(50, 91, 87);">耳机</a><a href="/tags/%E9%9C%9C%E5%8D%8E/" style="font-size: 1.15em; color: rgb(50, 162, 132);">霜华</a><a href="/tags/%E7%AB%B9%E6%9E%97%E9%B8%9F/" style="font-size: 1.15em; color: rgb(115, 163, 146);">竹林鸟</a><a href="/tags/Viper4Android/" style="font-size: 1.15em; color: rgb(96, 113, 55);">Viper4Android</a><a href="/tags/DDC/" style="font-size: 1.15em; color: rgb(50, 58, 114);">DDC</a><a href="/tags/HiFi/" style="font-size: 1.28em; color: rgb(50, 61, 83);">HiFi</a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 1.45em; color: rgb(50, 50, 182);">学习</a><a href="/tags/%E5%A4%8D%E4%B9%A0/" style="font-size: 1.42em; color: rgb(50, 50, 188);">复习</a><a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 1.38em; color: rgb(180, 130, 61);">考研</a><a href="/tags/%E6%A8%A1%E6%8B%9FCMOS/" style="font-size: 1.18em; color: rgb(50, 171, 172);">模拟CMOS</a><a href="/tags/%E7%AE%80%E7%AD%94/" style="font-size: 1.18em; color: rgb(74, 55, 114);">简答</a><a href="/tags/DIY/" style="font-size: 1.35em; color: rgb(199, 50, 64);">DIY</a><a href="/tags/%E5%90%88%E5%BD%B1%E5%8D%A1/" style="font-size: 1.18em; color: rgb(85, 65, 50);">合影卡</a><a href="/tags/Galgame/" style="font-size: 1.32em; color: rgb(102, 50, 159);">Galgame</a><a href="/tags/%E6%A8%A1%E6%8B%9F%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1/" style="font-size: 1.15em; color: rgb(50, 161, 52);">模拟集成电路设计</a><a href="/tags/Azure/" style="font-size: 1.15em; color: rgb(50, 65, 90);">Azure</a><a href="/tags/VPS/" style="font-size: 1.18em; color: rgb(122, 111, 83);">VPS</a><a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 1.25em; color: rgb(50, 50, 50);">代理</a><a href="/tags/%E7%BE%8A%E6%AF%9B/" style="font-size: 1.22em; color: rgb(114, 144, 140);">羊毛</a><a href="/tags/%E7%A2%A7%E8%93%9D%E6%A1%A3%E6%A1%88/" style="font-size: 1.15em; color: rgb(72, 50, 184);">碧蓝档案</a><a href="/tags/Blue-Archive/" style="font-size: 1.15em; color: rgb(50, 50, 81);">Blue Archive</a><a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 1.18em; color: rgb(141, 50, 143);">游戏</a><a href="/tags/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98/" style="font-size: 1.18em; color: rgb(94, 73, 67);">百度网盘</a><a href="/tags/%E5%A4%96%E9%93%BE/" style="font-size: 1.15em; color: rgb(114, 99, 53);">外链</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/"
+            title="查看更多">
+            <i class="fas fa-angle-right"></i>
+          </a></div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/09/">
+            <span class="card-archive-list-date">
+              2026.09
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/08/">
+            <span class="card-archive-list-date">
+              2026.08
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/07/">
+            <span class="card-archive-list-date">
+              2026.07
+            </span>
+            <span class="card-archive-list-count">8</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/06/">
+            <span class="card-archive-list-date">
+              2026.06
+            </span>
+            <span class="card-archive-list-count">6</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/05/">
+            <span class="card-archive-list-date">
+              2026.05
+            </span>
+            <span class="card-archive-list-count">10</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/04/">
+            <span class="card-archive-list-date">
+              2026.04
+            </span>
+            <span class="card-archive-list-count">8</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">249</div></div><div class="webinfo-item"><div class="item-name">运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2023-04-14T15:33:33.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-09-27T14:41:29.735Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(https://pic.esing.dev/img/87257672_p0_2023-4-16_1808_qmfhwf6v6g.avif);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2023 - 2026 By Esing</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.7.0</a></span></div><div class="footer_custom_text">Deployed On <a href="https://pages.cloudflare.com/" target="_blank">Cloudflare Pages</a><a href="https://icp.gov.moe/?keyword=20237860" target="_blank"><br /><br /> 萌 ICP 备 20237860 号 </a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="rightMenu" role="menu" aria-label="页面操作" hidden data-min-width="0" data-random-url="/js/random-posts.json"><div class="rightMenu-group rightMenu-small" role="group" aria-label="页面导航"><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="back" aria-label="返回" title="返回"><i class="fas fa-arrow-left" aria-hidden="true"></i><span>返回</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="forward" aria-label="前进" title="前进"><i class="fas fa-arrow-right" aria-hidden="true"></i><span>前进</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="reload" aria-label="刷新" title="刷新"><i class="fas fa-rotate-right" aria-hidden="true"></i><span>刷新</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="top" aria-label="回到顶部" title="回到顶部"><i class="fas fa-arrow-up" aria-hidden="true"></i><span>回到顶部</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="选中文字" data-group="selection" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-selection" aria-label="复制选中文字" title="复制选中文字"><i class="fas fa-copy" aria-hidden="true"></i><span>复制选中文字</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="search" aria-label="百度搜索" title="百度搜索"><i class="rightmenu-baidu" aria-hidden="true"></i><span>百度搜索</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="选中的网址" data-group="selected-url" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="open-selection" aria-label="转到选中网址" title="转到选中网址"><i class="fas fa-link" aria-hidden="true"></i><span>转到选中网址</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="链接操作" data-group="link" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="open-link" aria-label="新标签打开链接" title="新标签打开链接"><i class="fas fa-up-right-from-square" aria-hidden="true"></i><span>新标签打开链接</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-link" aria-label="复制链接" title="复制链接"><i class="fas fa-copy" aria-hidden="true"></i><span>复制链接</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="图片操作" data-group="image" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="open-image" aria-label="新标签打开图片" title="新标签打开图片"><i class="fas fa-image" aria-hidden="true"></i><span>新标签打开图片</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-image" aria-label="复制图片链接" title="复制图片链接"><i class="fas fa-copy" aria-hidden="true"></i><span>复制图片链接</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="页面功能"><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-page" aria-label="复制本文地址" title="复制本文地址"><i class="fas fa-link" aria-hidden="true"></i><span>复制本文地址</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="random" aria-label="随便逛逛" title="随便逛逛"><i class="fas fa-paper-plane" aria-hidden="true"></i><span>随便逛逛</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="dark" aria-label="昼夜切换" title="昼夜切换"><i class="fas fa-moon" aria-hidden="true"></i><span>昼夜切换</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="read" aria-label="阅读模式" title="阅读模式"><i class="fas fa-book" aria-hidden="true"></i><span>阅读模式</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="fullscreen" aria-label="进入全屏" title="进入全屏"><i class="fas fa-expand" aria-hidden="true"></i><span>进入全屏</span></button></div></div><div id="rightmenu-status" role="status" aria-live="polite" aria-atomic="true"></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><script src="/vendor/pangu/pangu.umd.js?v=10.4.1" defer></script><script src="/js/pangu-spacing.js?v=10.4.1" defer data-field="post"></script><div class="js-pjax"><script>(() => {
+  const parseViewBox = viewBox => {
+    if (!viewBox) return null
+    const parts = viewBox.trim().split(/[\s,]+/).map(n => Number(n))
+    if (parts.length !== 4 || parts.some(n => Number.isNaN(n))) return null
+    return parts
+  }
+
+  const getSvgViewBox = svg => {
+    const attr = parseViewBox(svg.getAttribute('viewBox'))
+    if (attr) return attr
+
+    // Fallback: use bbox to build a viewBox
+    try {
+      const bbox = svg.getBBox()
+      if (bbox && bbox.width && bbox.height) return [bbox.x, bbox.y, bbox.width, bbox.height]
+    } catch (e) {
+      // getBBox may fail on some edge cases; ignore
+    }
+
+    const w = Number(svg.getAttribute('width')) || 0
+    const h = Number(svg.getAttribute('height')) || 0
+    if (w > 0 && h > 0) return [0, 0, w, h]
+    return [0, 0, 100, 100]
+  }
+
+  const setSvgViewBox = (svg, vb) => {
+    svg.setAttribute('viewBox', `${vb[0]} ${vb[1]} ${vb[2]} ${vb[3]}`)
+  }
+
+  const clamp = (v, min, max) => Math.max(min, Math.min(max, v))
+
+  const openSvgInNewTab = ({ source, initViewBox }) => {
+    const getClonedSvg = () => {
+      if (typeof source === 'string') {
+        const template = document.createElement('template')
+        template.innerHTML = source.trim()
+        const svg = template.content.querySelector('svg')
+        return svg ? svg.cloneNode(true) : null
+      }
+      if (source && typeof source.cloneNode === 'function') {
+        return source.cloneNode(true)
+      }
+      return null
+    }
+
+    const clone = getClonedSvg()
+    if (!clone) return
+    if (initViewBox && initViewBox.length === 4) {
+      clone.setAttribute('viewBox', initViewBox.join(' '))
+    }
+    if (!clone.getAttribute('xmlns')) clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+    if (!clone.getAttribute('xmlns:xlink') && clone.innerHTML.includes('xlink:')) {
+      clone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink')
+    }
+    // inject background to match current theme
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
+    const bg = getComputedStyle(document.body).backgroundColor || (isDark ? '#1e1e1e' : '#ffffff')
+    if (!clone.style.background) clone.style.background = bg
+
+    const serializer = new XMLSerializer()
+    const svgSource = serializer.serializeToString(clone)
+    const htmlSource = `<!doctype html><html><head><meta charset="utf-8" />
+      <style>
+        html, body { width: 100%; height: 100%; margin: 0; display: flex; align-items: center; justify-content: center; background: ${bg}; }
+        svg { max-width: 100%; max-height: 100%; height: auto; width: auto; }
+      </style>
+      </head><body>${svgSource}</body></html>`
+    const blob = new Blob([htmlSource], { type: 'text/html;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    window.open(url, '_blank', 'noopener')
+
+    setTimeout(() => URL.revokeObjectURL(url), 5000)
+  }
+
+  const attachMermaidViewerButton = wrap => {
+    let btn = wrap.querySelector('.mermaid-open-btn')
+    if (!btn) {
+      btn = document.createElement('button')
+      btn.type = 'button'
+      btn.className = 'mermaid-open-btn'
+      wrap.appendChild(btn)
+    }
+
+    btn.innerHTML = '<i class="fa fa-search fa-fw" aria-hidden="true"></i>'
+
+    if (!btn.__mermaidViewerBound) {
+      btn.addEventListener('click', e => {
+        e.preventDefault()
+        e.stopPropagation()
+        const svg = wrap.__mermaidOriginalSvg || wrap.querySelector('svg')
+        if (!svg) return
+        const initViewBox = wrap.__mermaidInitViewBox
+        openSvgInNewTab({ source: svg, initViewBox })
+      })
+      btn.__mermaidViewerBound = true
+    }
+  }
+
+  // Zoom around a point (px, py) in the SVG viewport (in viewBox coordinates)
+  const zoomAtPoint = (vb, factor, px, py) => {
+    const w = vb[2] * factor
+    const h = vb[3] * factor
+    const nx = px - (px - vb[0]) * factor
+    const ny = py - (py - vb[1]) * factor
+    return [nx, ny, w, h]
+  }
+
+  const initMermaidGestures = wrap => {
+    // Clean up previous event listeners and pending frames
+    if (wrap.__mermaidAbortController) {
+      wrap.__mermaidAbortController.abort()
+      if (wrap.__mermaidRafId) cancelAnimationFrame(wrap.__mermaidRafId)
+    }
+    const ac = new AbortController()
+    wrap.__mermaidAbortController = ac
+    const svg = wrap.querySelector('svg')
+    if (!svg) return
+
+    // Ensure viewBox exists so gestures always work
+    const initVb = getSvgViewBox(svg)
+    wrap.__mermaidInitViewBox = initVb
+    wrap.__mermaidCurViewBox = initVb.slice()
+    setSvgViewBox(svg, initVb)
+    // Disable default gestures to prevent scroll chaining and pinch-zoom penetration in Chrome
+    svg.style.touchAction = 'none'
+
+    // Cache BoundingClientRect, throttled on scroll to reduce reflow
+    let cachedRect = svg.getBoundingClientRect()
+    let rectDirty = false
+    const markRectDirty = () => { rectDirty = true }
+    window.addEventListener('resize', markRectDirty, { signal: ac.signal })
+    window.addEventListener('scroll', markRectDirty, { signal: ac.signal, capture: true })
+    const getRect = () => {
+      if (rectDirty) {
+        cachedRect = svg.getBoundingClientRect()
+        rectDirty = false
+      }
+      return cachedRect
+    }
+
+    // Precompute clamp bounds from initial viewBox
+    const minW = initVb[2] * 0.1
+    const maxW = initVb[2] * 10
+    const minH = initVb[3] * 0.1
+    const maxH = initVb[3] * 10
+    const clampVb = vb => {
+      const out = vb.slice()
+      out[2] = clamp(out[2], minW, maxW)
+      out[3] = clamp(out[3], minH, maxH)
+      return out
+    }
+
+    // Throttle DOM updates using requestAnimationFrame
+    let pendingVb = null
+    let rafId = null
+    const applyVb = () => {
+      if (pendingVb) {
+        wrap.__mermaidCurViewBox = pendingVb
+        setSvgViewBox(svg, pendingVb)
+        pendingVb = null
+      }
+      rafId = null
+      wrap.__mermaidRafId = null
+    }
+    const setCurVb = vb => {
+      pendingVb = clampVb(vb)
+      if (!rafId) {
+        rafId = requestAnimationFrame(applyVb)
+        wrap.__mermaidRafId = rafId
+      }
+    }
+
+    const state = {
+      pointers: new Map(),
+      startVb: null,
+      startDist: 0,
+      lastPointerX: 0,
+      lastPointerY: 0
+    }
+
+    const onPointerDown = e => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return
+      svg.setPointerCapture(e.pointerId)
+      const curVb = wrap.__mermaidCurViewBox
+      state.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+      if (state.pointers.size === 1) {
+        state.startVb = curVb.slice()
+        state.lastPointerX = e.clientX
+        state.lastPointerY = e.clientY
+      } else if (state.pointers.size === 2) {
+        const pts = [...state.pointers.values()]
+        const dx = pts[0].x - pts[1].x
+        const dy = pts[0].y - pts[1].y
+        state.startDist = Math.hypot(dx, dy)
+        state.startVb = curVb.slice()
+      }
+    }
+
+    const onPointerMove = e => {
+      if (!state.pointers.has(e.pointerId)) return
+      state.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+      const curVb = wrap.__mermaidCurViewBox
+      const rect = getRect()
+      if (state.pointers.size === 1 && state.startVb) {
+        const p = state.pointers.values().next().value
+        const dxClient = p.x - state.lastPointerX
+        const dyClient = p.y - state.lastPointerY
+        state.lastPointerX = p.x
+        state.lastPointerY = p.y
+        const dx = dxClient * (curVb[2] / rect.width)
+        const dy = dyClient * (curVb[3] / rect.height)
+        setCurVb([curVb[0] - dx, curVb[1] - dy, curVb[2], curVb[3]])
+        return
+      }
+      if (state.pointers.size === 2 && state.startVb && state.startDist > 0) {
+        const pts = [...state.pointers.values()]
+        const dx = pts[0].x - pts[1].x
+        const dy = pts[0].y - pts[1].y
+        const dist = Math.hypot(dx, dy)
+        if (!dist) return
+        const factor = state.startDist / dist
+        const cx = (pts[0].x + pts[1].x) / 2
+        const cy = (pts[0].y + pts[1].y) / 2
+        const px = curVb[0] + (cx - rect.left) * (curVb[2] / rect.width)
+        const py = curVb[1] + (cy - rect.top) * (curVb[3] / rect.height)
+        setCurVb(zoomAtPoint(state.startVb, factor, px, py))
+      }
+    }
+
+    const onPointerUpOrCancel = e => {
+      // Release PointerCapture to avoid event capture anomalies
+      if (svg.hasPointerCapture && svg.hasPointerCapture(e.pointerId)) {
+        svg.releasePointerCapture(e.pointerId)
+      }
+      state.pointers.delete(e.pointerId)
+      if (state.pointers.size === 0) {
+        state.startVb = null
+        state.startDist = 0
+      } else if (state.pointers.size === 1) {
+        const p = state.pointers.values().next().value
+        state.lastPointerX = p.x
+        state.lastPointerY = p.y
+      }
+    }
+
+    const onWheel = e => {
+      // Prevent event bubbling from triggering external scroll
+      e.preventDefault()
+      e.stopPropagation()
+      // Normalize deltaY across deltaMode (Chrome uses pixels, Safari uses lines)
+      let delta = e.deltaY
+      if (e.deltaMode === 1) delta *= 16
+      else if (e.deltaMode === 2) delta *= 400
+
+      // Continuous zoom factor: smoother than fixed 1.1/0.9 steps
+      const zoomFactor = Math.pow(1.001, delta)
+
+      const curVb = wrap.__mermaidCurViewBox
+      const rect = getRect()
+      const px = curVb[0] + (e.clientX - rect.left) * (curVb[2] / rect.width)
+      const py = curVb[1] + (e.clientY - rect.top) * (curVb[3] / rect.height)
+      setCurVb(zoomAtPoint(curVb, zoomFactor, px, py))
+    }
+
+    const onDblClick = () => {
+      const init = wrap.__mermaidInitViewBox
+      if (init) setCurVb(init)
+    }
+
+    svg.addEventListener('pointerdown', onPointerDown, { signal: ac.signal })
+    svg.addEventListener('pointermove', onPointerMove, { signal: ac.signal })
+    svg.addEventListener('pointerup', onPointerUpOrCancel, { signal: ac.signal })
+    svg.addEventListener('pointercancel', onPointerUpOrCancel, { signal: ac.signal })
+    svg.addEventListener('wheel', onWheel, { passive: false, signal: ac.signal })
+    svg.addEventListener('dblclick', onDblClick, { signal: ac.signal })
+  }
+
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const mode = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'
+    const themes = {"light":"base","dark":"base"}
+    const palettes = {"light":{"darkMode":false,"background":"#ffffff","textColor":"#2b3037","primaryColor":"#fff5f8","primaryTextColor":"#29313a","primaryBorderColor":"#d96a91","secondaryColor":"#ecfbf5","secondaryTextColor":"#213c34","secondaryBorderColor":"#269c78","tertiaryColor":"#f7f9fb","tertiaryTextColor":"#2b3037","tertiaryBorderColor":"#cfd8e3","lineColor":"#64717d","defaultLinkColor":"#64717d","titleColor":"#26323a","edgeLabelBackground":"#ffffff","clusterBkg":"#fbfcfd","clusterBorder":"#dbe3ea","noteBkgColor":"#fff8df","noteTextColor":"#3a3428","noteBorderColor":"#d6b25a","actorBkg":"#fff5f8","actorBorder":"#d96a91","actorTextColor":"#29313a","actorLineColor":"#8b96a3","signalColor":"#64717d","signalTextColor":"#2b3037","labelBoxBkgColor":"#f7f9fb","labelBoxBorderColor":"#dbe3ea","labelTextColor":"#2b3037","loopTextColor":"#2b3037","activationBkgColor":"#ecfbf5","activationBorderColor":"#269c78"},"dark":{"darkMode":true,"background":"#171a1f","textColor":"#e6edf3","primaryColor":"#33242c","primaryTextColor":"#f7eaf0","primaryBorderColor":"#f08cab","secondaryColor":"#1c332d","secondaryTextColor":"#e5f8f1","secondaryBorderColor":"#5bcaa0","tertiaryColor":"#20262e","tertiaryTextColor":"#e6edf3","tertiaryBorderColor":"#3b4652","lineColor":"#a7b1bc","defaultLinkColor":"#a7b1bc","titleColor":"#f0f4f8","edgeLabelBackground":"#171a1f","clusterBkg":"#1b2027","clusterBorder":"#323d48","noteBkgColor":"#352d1e","noteTextColor":"#f4e9c8","noteBorderColor":"#c8a856","actorBkg":"#33242c","actorBorder":"#f08cab","actorTextColor":"#f7eaf0","actorLineColor":"#687482","signalColor":"#c7d0d9","signalTextColor":"#e6edf3","labelBoxBkgColor":"#20262e","labelBoxBorderColor":"#3b4652","labelTextColor":"#e6edf3","loopTextColor":"#e6edf3","activationBkgColor":"#1c332d","activationBorderColor":"#5bcaa0"}}
+    const theme = themes[mode]
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      // Clean up event listeners before removing old SVG
+      if (item.__mermaidAbortController) {
+        item.__mermaidAbortController.abort()
+      }
+      const oldSvg = item.querySelector('svg')
+      if (oldSvg) oldSvg.remove()
+      let config = {}
+      try {
+        config = mermaidSrc.dataset.config ? JSON.parse(mermaidSrc.dataset.config) : {}
+      } catch (e) {
+        console.warn('[mermaid] failed to parse dataset.config:', e)
+      }
+      if (!config.theme) {
+        config.theme = theme
+      }
+      // Keep per-diagram overrides; do not tint an explicitly different theme.
+      if (config.theme === theme && palettes[mode]) {
+        config.themeVariables = { ...palettes[mode], ...config.themeVariables }
+      }
+      const mermaidThemeConfig = `%%{init: ${JSON.stringify(config)}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+        if (true) initMermaidGestures(item)
+        item.__mermaidOriginalSvg = svg
+        if (true) attachMermaidViewerButton(item)
+      }
+
+      const handleError = err => {
+        console.error(`[mermaid] render failed for block #${index}:`, err)
+        const errorEl = document.createElement('div')
+        errorEl.className = 'mermaid-error'
+        errorEl.textContent = `Mermaid render error: ${err.message || err}`
+        mermaidSrc.insertAdjacentElement('afterend', errorEl)
+      }
+
+      try {
+        const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+        // mermaid v9 and v10 compatibility
+        if (typeof renderFn === 'string') {
+          renderMermaid(renderFn)
+        } else {
+          renderFn.then(({ svg }) => renderMermaid(svg)).catch(handleError)
+        }
+      } catch (err) {
+        handleError(err)
+      }
+    })
+  }
+
+  const codeToMermaid = $article => {
+    const codeMermaidEle = $article.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    const $article = document.getElementById('article-container')
+    if (!$article) return
+
+    if (true) codeToMermaid($article)
+    const $mermaid = $article.querySelectorAll('.mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script src="/js/meting.js" defer></script><script src="/js/music-pjax.js" defer></script><script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script><script src="/js/target-cursor.js" defer></script><script src="/js/cursor-toggle.js" defer></script><script src="/js/title.js" defer></script><script src="/js/titlelight.js" defer></script><script src="/js/autoload.js" defer></script><script src="/js/rightmenu.js" defer></script><script src="/js/cloudflare-info.js" defer></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"]):not([data-fancybox])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      if (!item.parentNode) return
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || ''
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    const responseURL = e.request && e.request.responseURL
+    if (e.request && e.request.status === 404) {
+      true
+        ? pjax.loadUrl('/404')
+        : responseURL && (window.location.href = responseURL)
+    } else if (responseURL) {
+      window.location.href = responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.7.0"></script></div></div></body></html>

@@ -1,0 +1,906 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>半导体物理复习笔记：第三篇 | Esing的小站</title><meta name="author" content="Esing"><meta name="copyright" content="Esing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="半导体中杂质和缺陷能级 在实际应用的半导体材料晶格中，总是存在着偏离理想情况的各种复杂现象。首先，原子并不是静止在具有严格周期性的晶格的格点位置上，而是在其平衡位置附近振动；其次，半导体材料并不是纯净的，而是含有若干杂质，即在半导体晶格中存在着与组成半导体材料的元素不同的其他化学元素的原子；再次，实际的半导体晶格结构并不是完整无缺的，而是存在着各种形式的缺陷。这就是说，在半导体中的某些区域，晶格中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="半导体物理复习笔记：第三篇">
+<meta property="og:url" content="https://blog.esing.dev/2025/01/09/pos-p3/">
+<meta property="og:site_name" content="Esing的小站">
+<meta property="og:description" content="半导体中杂质和缺陷能级 在实际应用的半导体材料晶格中，总是存在着偏离理想情况的各种复杂现象。首先，原子并不是静止在具有严格周期性的晶格的格点位置上，而是在其平衡位置附近振动；其次，半导体材料并不是纯净的，而是含有若干杂质，即在半导体晶格中存在着与组成半导体材料的元素不同的其他化学元素的原子；再次，实际的半导体晶格结构并不是完整无缺的，而是存在着各种形式的缺陷。这就是说，在半导体中的某些区域，晶格中">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.esing.dev/img/86447654_p0_250101_1225_mvuD.avif">
+<meta property="article:published_time" content="2025-01-09T09:47:49.000Z">
+<meta property="article:modified_time" content="2025-03-28T14:40:23.691Z">
+<meta property="article:author" content="Esing">
+<meta property="article:tag" content="半导体物理">
+<meta property="article:tag" content="复习">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="考研">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.esing.dev/img/86447654_p0_250101_1225_mvuD.avif"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "半导体物理复习笔记：第三篇",
+  "url": "https://blog.esing.dev/2025/01/09/pos-p3/",
+  "image": "https://pic.esing.dev/img/86447654_p0_250101_1225_mvuD.avif",
+  "datePublished": "2025-01-09T09:47:49.000Z",
+  "dateModified": "2025-03-28T14:40:23.691Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Esing",
+      "url": "https://blog.esing.dev"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://blog.esing.dev/2025/01/09/pos-p3/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const start = 8
+              const end = 24
+              const isNight =
+                start < end
+                    ? hour < start || hour >= end
+                    : hour >= start || hour < end
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;1aabda1500704262b993096aaa3b5c27&quot;}"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/misans@5.0.0/lib/Normal/MiSansVF.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":380,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":100,"languages":{"author":"作者: Esing","link":"链接: ","source":"来源: Esing的小站","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '半导体物理复习笔记：第三篇',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/maple_new.css"><link rel="stylesheet" href="/css/target-cursor.css"><link rel="stylesheet" href="/css/legacy-appearance.css"><link rel="stylesheet" href="/vendor/aplayer/APlayer.min.css"><link rel="stylesheet" href="/css/aplayer-theme.css"><link rel="stylesheet" href="/css/rightmenu.css"><link rel="stylesheet" href="/css/cloudflare-info.css"><script src="/vendor/aplayer/APlayer.min.js"></script><meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="Esing的小站" type="application/atom+xml">
+</head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="/css/load.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">249</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">219</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E6%98%9F%E6%B8%AF%E6%B8%B8%E8%AE%B0/"><i class="fa-fw fa-solid fa-star-half-stroke"></i><span> 星港游记</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-code"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://pic.esing.dev/img/86447654_p0_250101_1225_mvuD.avif);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Esing的小站</span></a><a class="nav-page-title" href="/"><span class="site-name">半导体物理复习笔记：第三篇</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E6%98%9F%E6%B8%AF%E6%B8%B8%E8%AE%B0/"><i class="fa-fw fa-solid fa-star-half-stroke"></i><span> 星港游记</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-code"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">半导体物理复习笔记：第三篇</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-01-09T09:47:49.000Z" title="发表于 2025-01-09 17:47:49">2025-01-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-03-28T14:40:23.691Z" title="更新于 2025-03-28 22:40:23">2025-03-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:1000,&quot;messagePrev&quot;:&quot;本文最后更新于&quot;,&quot;messageNext&quot;:&quot;天前，部分内容可能已过时。&quot;,&quot;postUpdate&quot;:&quot;2025-03-28 22:40:23&quot;}" hidden></div><h2 id="半导体中杂质和缺陷能级">半导体中杂质和缺陷能级</h2>
+<p>在实际应用的半导体材料晶格中，总是存在着偏离理想情况的各种复杂现象。首先，原子并不是静止在具有严格周期性的晶格的格点位置上，而是在其平衡位置附近<strong>振动</strong>；其次，半导体材料并不是纯净的，而是含有若干<strong>杂质</strong>，即在半导体晶格中存在着与组成半导体材料的元素不同的其他化学元素的原子；再次，实际的半导体晶格结构并不是完整无缺的，而是存在着各种形式的<strong>缺陷</strong>。这就是说，在半导体中的某些区域，晶格中的原子周期性排列被破坏，形成了各种缺陷。</p>
+<p>一般将缺陷分为三类：①点缺陷，如空位、间隙原子；②线缺陷，如位错；③面缺陷，如层错、多晶体中的晶粒间界等。我们称这三种缺陷为<strong>本征缺陷</strong>。</p>
+<p>微量杂质对半导体性质起决定性的影响，如在硅中掺入百万分之一的硼，电导率会提高百万倍。</p>
+<p>由于杂质和缺陷的存在，会使严格按周期性排列的原子所产生的周期性势场受到破坏，有可能在禁带中引入允许电子具有的能量状态（即能级）。正是由于<strong>杂质和缺陷能够在禁带中引入能级</strong>，才使它们对半导体的性质产生决定性的影响。</p>
+<div class="note info flat"><p>理想半导体假设晶格原子严格<strong>按周期性排列并静止</strong>在格点位置上，而实际半导体中原子不是静止的，而是<strong>在其平衡位置附近振动</strong>。</p>
+<p>理想半导体是<strong>纯净不含杂质</strong>的，实际半导体<strong>含有若干杂质</strong>。</p>
+<p>理想半导体的<strong>晶格结构是完整的</strong>，实际半导体中存在<strong>本征缺陷</strong>与<strong>杂质缺陷</strong>。</p>
+</div>
+<h2 id="硅、锗晶体中的杂质能级">硅、锗晶体中的杂质能级</h2>
+<h3 id="间隙式杂质与替位式杂质">间隙式杂质与替位式杂质</h3>
+<p>在金刚石型晶体中，一个晶胞内的8个原子只占有晶胞体积的34%，还有66%是空隙。</p>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20250109175859740_250109_1758_qxTo.png" alt="金刚石型晶体结构中的两种间隙位置" style="zoom:80%;" />
+<p>杂质原子进入半导体硅以后，只可能以两种方式存在。一种方式是杂质原子位于晶格原子间的间隙位置，常称为间隙式杂质；另一种方式是杂质原子取代晶格原子而位于晶格点处，常称为替位式杂质。事实上，杂质进入其他半导体材料中，也是以这两种方式存在的。</p>
+<p>间隙式杂质的杂质原子通常较小，比如Li+，半径0.068nm。</p>
+<p>替位式杂质的杂质原子与晶格原子大小相近，且原子的价电子壳层结构相近 ，如如硅、锗是IV族元素，与III、V族元素的情况比较相近，所以III、V族元素在硅、锗晶体中都是替位式杂质。</p>
+<h3 id="施主杂质与施主能级">施主杂质与施主能级</h3>
+<p>对于硅中掺杂磷，讨论V族元素。磷原子有5个价电子，其中4个价电子与周围的4个硅原子形成共价键，还剩余1个价电子，同时磷原子所在处也多余一个正电荷，称这个正电荷为正电中心磷离子(P+)。所以磷原子替代硅原子后，其效果是形成一个正电中心P+，和一个多余的价电子，价电子被束缚在正电中心的周围。但是，这种束缚作用力很弱，只要很少的能量就可以使电子挣脱束缚，这种电子脱离杂质原子的束缚成为导电电子的过程称为<strong>杂质电离</strong>。</p>
+<p>V族杂质在硅、锗中电离时，能够释放电子而产生导电电子并形成正电中心，称它们为<strong>施主杂质</strong>或n型杂质，它释放电子的过程叫做<strong>施主电离</strong>。施主杂质未电离时是中性的，称为束缚态或中性态，电离后成为正电中心，称为离化态。</p>
+<p>如下图所示，当电子得到能量后，就从施主的束缚态跃迁到导带成为导电电子，将被施主杂质束缚的电子的能量状态称为施主能级，记为E<sub>D</sub>。因为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><msub><mi>E</mi><mi>D</mi></msub><mo>≪</mo><msub><mi>E</mi><mi>g</mi></msub></mrow><annotation encoding="application/x-tex">\Delta E_D \ll E_g</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord">Δ</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">D</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≪</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">g</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span>，所以<strong>施主能级位于离导带底很近的禁带中</strong>。</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20250109210828184_250109_2108_H4k1.png" alt="施主能级和施主电离"></p>
+<p>一般情况下，施主杂质是比较少的，杂质原子间的相互作用可以忽略。因此，某一种杂质的施主能级是一些具有相同能量的孤立能级，在能带图中，施主能级用离导带底E<sub>c</sub>为∆E<sub>D</sub>处的短线段表示，每一条短线段对应一个施主杂质原子。在施主能级E<sub>D</sub>上画个小黑点，表示被施主杂质束缚的电子，这时施主杂质处于束缚态。图中的箭头表示被束缚的电子得到能量后，从施主能级跃迁到导带成为导电电子的电离过程。</p>
+<p>在纯净半导体中掺入施主杂质，杂质电离以后，导带中的导电电子增多，增强了半导体的导电能力。通常把<strong>主要依靠导带电子导电</strong>的半导体称为电子型或<strong>n型半导体</strong>。</p>
+<h3 id="受主杂质与受主能级">受主杂质与受主能级</h3>
+<p>对于硅中掺杂硼，讨论III族元素。硼原子有3个价电子，若与周围的4个硅原子形成共价键的话，还缺少1个价电子，必须从别的地方夺取一个价电子，于是在硅晶体的共价键中产生了一个空穴。硼原子接受一个电子后，成为带负电的硼离子(B-)，称为负电中心。带负电的硼离子和带正电的空穴间有静电引力作用，所以这个空穴受到硼离子的束缚，在硼离子附近运动。但是，这种束缚作用力很弱，只要很少的能量就可以使空穴挣脱束缚，成为在晶体的共价键中自由运动的导电空穴。这种空穴挣脱受主杂质束缚的过程称为<strong>受主电离</strong>。</p>
+<p>III族杂质在硅、锗中能够接受电子而产生导电空穴，并形成负电中心，所以称它们为<strong>受主杂质</strong>或p型杂质。空穴挣脱受主杂质束缚的过程称为<strong>受主电离</strong>。受主杂质未电离时是中性的，称为束缚态或中性态。电离后成为负电中心，称为受主离化态。</p>
+<p>如下图所示，当空穴得到能量∆E<sub>A</sub>后，就从受主的束缚态跃迁到价带成为导电空穴。将被受主杂质束缚的空穴的能量状态称为受主能级，记为E<sub>A</sub>。因为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><msub><mi>E</mi><mi>A</mi></msub><mo>≪</mo><msub><mi>E</mi><mi>g</mi></msub></mrow><annotation encoding="application/x-tex">\Delta E_A \ll E_g</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord">Δ</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">A</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≪</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">g</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span>，所以<strong>受主能级位于离价带顶很近的禁带中</strong>。</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20250109213540860_250109_2135_rKWn.png" alt="受主能级和受主电离"></p>
+<p>一般情况下，受主能级也是孤立能级。在能带图中，受主能级用离价带顶E<sub>v</sub>为∆E<sub>A</sub>处的短线段表示，每一条短线段对应一个受主杂质原子。在受主能级E<sub>A</sub>上画个小圆圈，表示被受主杂质束缚的空穴，这时施主杂质处于束缚态。图中的箭头表示受主杂质的电离过程，在价带中画的小圆圈表示进入价带的空穴，受主能级处画的带横线的圆圈表示受主杂质电离以后带负电荷。</p>
+<div class="note info flat"><p>受主电离过程实际上是电子的运动，是价带中的电子得到能量后跃迁到受主能级上，再与束缚在受主能级上的空穴复合，并在价带中产生了一个可以自由运动的导电空穴。</p>
+</div>
+<p>在纯净半导体中掺入受主杂质，杂质电离以后，价带中的导电空穴增多，增强了半导体的导电能力。通常把<strong>主要依靠价带空穴导电</strong>的半导体称为空穴型或<strong>p型半导体</strong>。</p>
+<div class="note warning flat"><p>正电中心和负电中心都不能移动！</p>
+<p>施主能级被电子占据不带电，不被电子占据带正电。</p>
+<p>受主能级被空穴占据=不被电子占据，不带电；受主能级不被空穴占据=被电子占据，带负电。</p>
+</div>
+<h3 id="浅能级杂质电离能与轨道半径">浅能级杂质电离能与轨道半径</h3>
+<div class="note danger flat"><p>背公式！</p>
+</div>
+<p>在硅和锗中的Ⅲ族和Ⅴ族杂质，它们作为受主和施主的电离能和禁带宽度相比是非常小的。这些杂质形成的能级，<strong>在禁带中很靠近价带顶或导带底</strong>，称这样的杂质能级为<strong>浅能级</strong>。</p>
+<p>我们使用“类氢模型”进行近似，如硅、锗中掺入V族杂质时，在施主杂质处于束缚态的情况下，这个磷原子将比周围的硅原子多一个电子电荷的正电中心和一个束缚着的价电子。这种情况好像在硅、锗晶体中附加了一个“氢原子”，于是可以用氢原子模型估计∆E<sub>D</sub>的数值。</p>
+<p>氢原子中电子的能量为：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>E</mi><mi>n</mi></msub><mo>=</mo><mo>−</mo><mfrac><mrow><msub><mi>m</mi><mn>0</mn></msub><msup><mi>q</mi><mn>4</mn></msup></mrow><mrow><mn>8</mn><msubsup><mi>ε</mi><mn>0</mn><mn>2</mn></msubsup><msup><mi>h</mi><mn>2</mn></msup><msup><mi>n</mi><mn>2</mn></msup></mrow></mfrac><mo separator="true">,</mo><mtext>  </mtext><mi>n</mi><mo>=</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mn>3</mn><mo>…</mo></mrow><annotation encoding="application/x-tex">E_n = -\frac{m_0 q^4}{8 \varepsilon_0^2 h^2 n^2}, \; n = 1, 2, 3 \dots
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.4434em;vertical-align:-0.9523em;"></span><span class="mord">−</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">8</span><span class="mord"><span class="mord mathnormal">ε</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7959em;"><span style="top:-2.4337em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span><span style="top:-3.0448em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2663em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">h</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9523em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span></span></span></span></span></p>
+<p>对于氢原子的基态电离能：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>E</mi><mo>=</mo><msub><mi>E</mi><mi mathvariant="normal">∞</mi></msub><mo>−</mo><msub><mi>E</mi><mn>1</mn></msub><mo>=</mo><mfrac><mrow><msub><mi>m</mi><mn>0</mn></msub><msup><mi>q</mi><mn>4</mn></msup></mrow><mrow><mn>8</mn><msubsup><mi>ε</mi><mn>0</mn><mn>2</mn></msubsup><msup><mi>h</mi><mn>2</mn></msup></mrow></mfrac><mo>=</mo><mn>13.6</mn><mtext> </mtext><mo stretchy="false">(</mo><mi>e</mi><mi>V</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Delta E = E_{\infty} - E_1 = \frac{m_0 q^4}{8 \varepsilon_0^2 h^2} = 13.6\, (eV)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">Δ</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∞</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.4434em;vertical-align:-0.9523em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">8</span><span class="mord"><span class="mord mathnormal">ε</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7959em;"><span style="top:-2.4337em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span><span style="top:-3.0448em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2663em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">h</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9523em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">13.6</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mopen">(</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mclose">)</span></span></span></span></span></p>
+<p>计算杂质电离能时需要作如下修正：</p>
+<ol>
+<li>与氢原子中的电子运动不同，半导体中电子在周期性势场中运动，所以<strong>电子的惯性质量用有效质量代替</strong>。</li>
+<li>在半导体中，由于介质被极化的影响，使得电荷之间的库仑作用<strong>减弱</strong>为它们在<strong>真空中</strong>库仑作用的<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi mathvariant="normal">/</mi><msub><mi>ε</mi><mi>r</mi></msub></mrow><annotation encoding="application/x-tex">1/\varepsilon_r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1/</span><span class="mord"><span class="mord mathnormal">ε</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>倍，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ε</mi><mi>r</mi></msub></mrow><annotation encoding="application/x-tex">\varepsilon_r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">ε</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>为半导体的<strong>相对介电常数</strong>，<strong>真空介电常数用晶体的介电常数代替</strong>。</li>
+</ol>
+<p>修正后可得：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">Δ</mi><msub><mi>E</mi><mrow><mi>A</mi><mi mathvariant="normal">/</mi><mi>D</mi></mrow></msub><mo>=</mo><mfrac><mrow><msup><mi>m</mi><mo>∗</mo></msup><msup><mi>q</mi><mn>4</mn></msup></mrow><mrow><mn>8</mn><msubsup><mi>ε</mi><mi>r</mi><mn>2</mn></msubsup><msubsup><mi>ε</mi><mn>0</mn><mn>2</mn></msubsup><msup><mi mathvariant="normal">ℏ</mi><mn>2</mn></msup></mrow></mfrac><mo>=</mo><mfrac><msup><mi>m</mi><mo>∗</mo></msup><msub><mi>m</mi><mn>0</mn></msub></mfrac><mfrac><mrow><mi mathvariant="normal">Δ</mi><mi>E</mi></mrow><msubsup><mi>ε</mi><mi>r</mi><mn>2</mn></msubsup></mfrac><mspace linebreak="newline"></mspace><mi mathvariant="normal">Δ</mi><mi>E</mi><mo>=</mo><mfrac><mrow><msub><mi>m</mi><mn>0</mn></msub><msup><mi>q</mi><mn>4</mn></msup></mrow><mrow><mn>8</mn><msubsup><mi>ε</mi><mn>0</mn><mn>2</mn></msubsup><msup><mi mathvariant="normal">ℏ</mi><mn>2</mn></msup></mrow></mfrac></mrow><annotation encoding="application/x-tex">\Delta E_{A/D} = \frac{m^* q^4}{8 \varepsilon_r^2 \varepsilon_0^2 \hbar^2} = \frac{m^*}{m_0} \frac{\Delta E}{\varepsilon_r^2}\\
+\Delta E = \frac{m_0 q^4}{8 \varepsilon_0^2 \hbar^2}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0385em;vertical-align:-0.3552em;"></span><span class="mord">Δ</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.5198em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">A</span><span class="mord mtight">/</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">D</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3552em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.4434em;vertical-align:-0.9523em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">8</span><span class="mord"><span class="mord mathnormal">ε</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.453em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span></span></span><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">ε</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7959em;"><span style="top:-2.4337em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span><span style="top:-3.0448em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2663em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord">ℏ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6887em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9523em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2987em;vertical-align:-0.933em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3657em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6887em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.836em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">ε</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.453em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span></span></span><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">Δ</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.933em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">Δ</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.4434em;vertical-align:-0.9523em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">8</span><span class="mord"><span class="mord mathnormal">ε</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7959em;"><span style="top:-2.4337em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span><span style="top:-3.0448em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2663em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord">ℏ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9523em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>类似的，也可以计算杂质的基态轨道半径：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>a</mi><mn>0</mn></msub><mo>=</mo><mfrac><mrow><msub><mi>ε</mi><mn>0</mn></msub><msup><mi mathvariant="normal">ℏ</mi><mn>2</mn></msup></mrow><mrow><mi>π</mi><msubsup><mi>m</mi><mi>n</mi><mo>∗</mo></msubsup><msup><mi>e</mi><mn>2</mn></msup></mrow></mfrac><mspace linebreak="newline"></mspace><mi>a</mi><mo>=</mo><mfrac><mrow><msub><mi>ε</mi><mn>0</mn></msub><msub><mi>ε</mi><mi>r</mi></msub><msup><mi mathvariant="normal">ℏ</mi><mn>2</mn></msup></mrow><mrow><mi>π</mi><msubsup><mi>m</mi><mi>n</mi><mo>∗</mo></msubsup><msup><mi>e</mi><mn>2</mn></msup></mrow></mfrac><mo>=</mo><msub><mi>ε</mi><mi>r</mi></msub><mfrac><mi>m</mi><msubsup><mi>m</mi><mi>n</mi><mo>∗</mo></msubsup></mfrac><msub><mi>a</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">a_0 = \dfrac{\varepsilon_0\hbar^2}{\pi m_n^*e^2}\\
+a=\frac{\varepsilon_0\varepsilon_r\hbar^2}{\pi m_n^*e^2}=\varepsilon_r\frac{m}{m_n^*}a_0
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.4241em;vertical-align:-0.933em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6147em;"><span style="top:-2.453em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">ε</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord">ℏ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.933em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.4241em;vertical-align:-0.933em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6147em;"><span style="top:-2.453em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">ε</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">ε</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord">ℏ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.933em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0406em;vertical-align:-0.933em;"></span><span class="mord"><span class="mord mathnormal">ε</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1076em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6147em;"><span style="top:-2.453em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.933em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<h3 id="杂质补偿">杂质补偿</h3>
+<p>假如在半导体中，同时存在着施主和受主杂质，对于半导体载流子贡献，两者有相互的抵消的作用，称之为<strong>杂质补偿作用</strong>。</p>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20250111165045046_250111_1650_Y50H.png" alt="杂质补偿作用示意图" style="zoom: 67%;" />
+<p>如上图，施主杂质的电子首先跃迁到受主能级，剩余的向导带跃迁；受主杂质上的空位首先接受来自施主杂质的电子，剩余的向价带释放空穴。虽然掺入的杂质多，但是提供的导电的载流子少。</p>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20250111165210308_250111_1652_yRJZ.png" alt="杂质全部电离且忽略本征激发，载流子浓度的计算" style="zoom:67%;" />
+<h4 id="杂质高度补偿">杂质高度补偿</h4>
+<p>当<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>N</mi><mi>D</mi></msub><mo>≈</mo><msub><mi>N</mi><mi>A</mi></msub></mrow><annotation encoding="application/x-tex">N_D\approx N_A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">D</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">A</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>时，由于施主电子刚好填充受主能级，<strong>几乎不向导带和价带提供电子和空穴</strong>。这种情况称为杂质的<strong>高度补偿</strong>。</p>
+<p>高度补偿的半导体材料的载流子浓度非常接近高纯半导体，但实际晶格中包含有大量的电离了的杂质离子，一般不能用来制造器件。<strong>载流子浓度小，质量不好，不是纯净半导体。</strong></p>
+<div class="note info flat"><p>补偿作用可以用于扩散及离子注入改变半导体某一区域的导电类型，比如平面工艺pnp晶体管的制作。</p>
+</div>
+<h3 id="深能级杂质">深能级杂质</h3>
+<p>III、V族杂质在硅、锗禁带中产生浅能级，其他各族元素掺入也会产生能级。非III、V族元素在Si中产生能级时，施主能级距离导带底较远，受主能级距离价带顶较远，这种能级称为深能级，相应的杂质称为深能级杂质。</p>
+<p>深能级杂质能<strong>多次电离</strong>，每次电离相应有一个能级，所以这种杂质往往在禁带中引入多个能级，且同一杂质既能引入施主能级，又能引入受主能级。例如，金在锗中有3个受主能级，1个施主能级，而银引入3个受主能级。</p>
+<p>相对浅能级而言，<strong>深能级对载流子的贡献较小</strong>，但是<strong>对非平衡载流子的复合作用影响很强</strong>。例如，金是一种典型的复合中心，在制造高速开关时，掺入金可以<strong>提高速度</strong>。</p>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20250111172141149_250111_1721_X7pG.png" alt="金在锗中的杂质能级" style="zoom:67%;" />
+<div class="note info flat"><p>深能级杂质 vs 浅能级杂质 你们知道吗？</p>
+<p>深能级杂质主要起复合作用。深能级杂质可以电离，产生导电的载流子，但是数量少；浅能级杂质的主要作用是提供导电的载流子。</p>
+</div>
+<h2 id="III-Ⅴ族化合物半导体中的杂质能级">III-Ⅴ族化合物半导体中的杂质能级</h2>
+<p>以砷化镓为例：</p>
+<ul>
+<li>Ⅱ 族元素可代替III族元素镓成为受主杂质，Ⅵ 族元素可代替Ⅴ族元素砷成为施主杂质。</li>
+<li>Ⅳ 族元素如硅、锗，既可以代替镓成为施主杂质，也可以代替砷成为受主杂质。这种杂质称为<strong>双性杂质</strong>。</li>
+<li>III 族杂质（如硼、铝）和Ⅴ族杂质（如磷、锑）掺入砷化镓时，它们将<strong>取代同族原子</strong>而形成既非施主也非受主的中性杂质，在禁带中<strong>不引入能级</strong>。</li>
+</ul>
+<h2 id="缺陷及其能级">缺陷及其能级</h2>
+<p>实际的半导体晶格不是完整无缺的，存在各种形式的缺陷半导体晶体中某些区域，晶格中原子周期性排列被破坏，形成缺陷。</p>
+<p>缺陷种类有：</p>
+<ul>
+<li>点缺陷：空位，间隙原子</li>
+<li>线缺陷：位错</li>
+<li>面缺陷：层错</li>
+</ul>
+<a href="/2023/05/17/ict-c1/" title="集成电路制造技术复习笔记：第一章">集成电路制造技术复习笔记：第一章</a>
+<h3 id="点缺陷">点缺陷</h3>
+<p>一定温度下，晶格原子在平衡位置附近作振动，部分原子获得能量挤入晶格原子间的间隙，形成<strong>间隙原子</strong>，留下的位置叫做<strong>空位</strong>。</p>
+<p>点缺陷分为弗仑克耳缺陷和肖特基缺陷。弗仑克耳缺陷中，间隙原子和空位<strong>成对</strong>出现；肖特基缺陷中，只有空位，无间隙原子。间隙原子和空位一方面不断地产生着，同时两者又不断地复合，最后确立一平衡浓度值。以上两种由温度决定的点缺陷又称为<strong>热缺陷</strong>，它们总是<strong>同时存在</strong>的。</p>
+<p>原子需要较大的能量才能进入间隙位置，所以晶体中空位比间隙原子多得多，因而<strong>空位</strong>是常见的点缺陷。</p>
+<p>在III-V族化合物中，除了热振动因素形成空位和间隙原子外，由于<strong>成分偏离正常的化学比</strong>，也会形成点缺陷。</p>
+<h3 id="面缺陷">面缺陷</h3>
+<p>面缺陷即位错，沿某一方向错开，对半导体材料和器件的性能影响显著。</p>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20250111181249155_250111_1812_9Rmt.png" alt="位错实例" style="zoom:67%;" />
+<p>在位错所在处，原子E只与周围三个原子形成共价键，还有一个不成对的电子成为不饱和的共价键，这时原子E是中性的。当这一不饱和键俘获一个电子后,原子E多一个电子成为负电中心，起了受主作用，因此对整个位错来说，相当于一串受主。当原子E失去不成对的价电子后成为正电中心，起了施主作用，于是位错相当于一串施主。</p>
+<div class="note info flat"><p>位错会改变能带位置！晶格伸张区E<sub>g</sub>减小，压缩区E<sub>g</sub>增加。</p>
+</div>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.esing.dev">Esing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.esing.dev/2025/01/09/pos-p3/">https://blog.esing.dev/2025/01/09/pos-p3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://blog.esing.dev" target="_blank">Esing的小站</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="post-meta__tags" href="/tags/%E5%A4%8D%E4%B9%A0/">复习</a><a class="post-meta__tags" href="/tags/%E8%80%83%E7%A0%94/">考研</a><a class="post-meta__tags" href="/tags/%E5%8D%8A%E5%AF%BC%E4%BD%93%E7%89%A9%E7%90%86/">半导体物理</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/01/02/rpi-yolo5/" title="树莓派与YOLOv5-Lite的那些事：配置、踩坑与部署"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/122019708_p0_20240919_2352.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">树莓派与YOLOv5-Lite的那些事：配置、踩坑与部署</div></div><div class="info-2"><div class="info-item-1">前言 项目设计想选个简单的，于是找了个 基于硬件的目标检测 。就YOLO嗯套呗，反正网上的例子一大把，下下来改改代码就行了吧。这不，百度搜搜就有：基于树莓派4B的YOLOv5-Lite目标检测的移植与部署（含训练教程）。稳辣！ 我是这么想的。 结果发现，最新版的RaspiOS的教程很少，许多的配置界面都不一样，还遇到了各种各样的申必问题，只能自己摸索踩坑了。 环境配置 我喜欢找最新的镜像，自己配置环境。 老规矩开启三件套：WIFI、SSH、VNC。过程略。 之后安装各种依赖。需要注意的是，树莓派上面的Python包是固定死的，为了避免依赖冲突。安装包需要使用sudo apt install python3-opencv的命令。 但是有些包没有，比如python3-onnxruntime。在树莓派5 问题汇总 - 知乎找到了解决方法： 1sudo mv /usr/lib/python3.x/EXTERNALLY-MANAGED /usr/lib/python3.x/EXTERNALLY-MANAGED.bk 其中python3.x是你树莓派上的实际Python版本。 摄像头 我喜欢...</div></div></div></a><a class="pagination-related" href="/2025/01/10/headphone-power-calculator/" title="耳机功率计算器"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/1" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">耳机功率计算器</div></div><div class="info-2"><div class="info-item-1">最近又准备升级前端了，看好水月雨的破晓再买水月雨我是傻逼 不知道买多大推力的小尾巴，在贴吧看到了这个耳机功率计算器：Headphones Power Calculator 比如，对于水月雨竹II：MOONDROP CHU2  可以看到，要推动这耳机需要的功率不小。好在手上的海贝FC1力大砖飞。 再比如天使吉米的兔几：TANCHJIM BUNNY  需要的推力就小了很多，CX31993都能轻松拿下。  2025.01.19  水月雨『破晓』开箱与试听 感谢 @RainaYoung 和我的好友送出的生日礼物！  2025.06.20  按键居然坏了，被按进耳放里面去了。水月雨的品控确实不敢恭维。、  2025.09.28   换了4.4mm平衡头，推力确实大，低频更浑厚。    </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/01/11/pos-p4/" title="半导体物理复习笔记：第四篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/86447654_p0_250101_1225_mvuD.avif" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-11</div><div class="info-item-2">半导体物理复习笔记：第四篇</div></div><div class="info-2"><div class="info-item-1">怎么能有不分hhh和ℏ\hbarℏ的老师，真的要被气晕了  状态密度 在半导体的导带和价带中，有很多能级存在，但相邻能级间隔很小，可以近似认为能级是连续的，因而可将能带分为一个一个能量很小的间隔来处理。 假定在能带中能量E~(E+dE)之间无限小的能量间隔内有dZ个量子态，则状态密度g(E)为g(E)=dZdEg(E) = \dfrac{dZ}{dE}g(E)=dEdZ​。也就是说，状态密度就是在能带中能量E附近每单位能量间隔内的量子态数。 k空间量子态分布与能量状态密度  所以k空间中量子态密度（单位体积）为V＝L3。考虑电子自旋，则量子态密度为2V （单位体积）。k空间量子态是均匀分布的。  k空间等能面及解决问题思路 g(E)=dZdE=2VdΩdEg(E) = \dfrac{dZ}{dE}=\dfrac{2Vd\Omega}{dE}g(E)=dEdZ​=dE2VdΩ​，其中dΩd\OmegadΩ是对应的体积微元。 球形等能面 若能带极值在k＝0且等能面为球形，则微元dΩ=4πk2dkd\Omega=4\pi k^2 dkdΩ=4πk2dk。k空间中，电子的允许量子态密度为...</div></div></div></a><a class="pagination-related" href="/2025/03/18/pos-p11/" title="半导体物理复习笔记：第十一篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/86447654_p0_250101_1225_mvuD.avif" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-18</div><div class="info-item-2">半导体物理复习笔记：第十一篇</div></div><div class="info-2"><div class="info-item-1">名词解释考的不少，会有很多概念解释。参考刘恩科的《半导体物理学》的习题详解。  第一章 半导体中的电子状态   单电子近似 答案假设每个电子在周期性排列且固定不动的原子核势场及其他电子的平均势场中运动，该势场是具有与晶格同周期的周期性势场。    金刚石结构 答案金刚石结构具有立方对称晶胞，由两个同类原子各自组成的面心立方晶胞沿体对角线互相位移 1/4 的空间对角线长度套构而成的，它们之间具有相同的夹角109°28' ，通过 4 个共价键组成正四面体结构。    极性半导体 答案极性半导体是结合的性质具有不同程度的离子性的共价性化合物半导体。    简约布里渊区 答案对于给定的晶体，利用倒格矢的定义，求出所对应的倒格子基矢，作所有倒格子基矢的垂直平分面，这些垂直平分面所围成完整的最小体积就是第一布里渊区，也为晶体倒格子点阵的魏格纳——塞兹原胞，又称简约布里渊区。    电子共有化运动 答案原子组成晶体后，由于电子壳层的交叠，电子不再完全局限在某一个原子上，可以由一个原子转移到相邻的原子上去，因而，电子将可以在整个晶体中运动。这种运动称为电子的共有化运动。 电子在晶体各个元胞对应点...</div></div></div></a><a class="pagination-related" href="/2025/01/18/pos-p6/" title="半导体物理复习笔记：第六篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/86447654_p0_250101_1225_mvuD.avif" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-18</div><div class="info-item-2">半导体物理复习笔记：第六篇</div></div><div class="info-2"><div class="info-item-1">非平衡载流子的产生和复合 平衡载流子和非平衡载流子的关系 对半导体施加外部作用（光照、电注入等），可以破坏热平衡，使其成为非平衡态。载流子浓度比平衡时的多些，多余的那部分用Δn/Δp表示，称其为非平衡载流子或过剩载流子，用n或p表示总的载流子浓度，因此得到： n=n0+Δnp=p0+Δp\begin{aligned} n &amp;= n_0+\Delta n \\ p &amp;= p_0+\Delta p \end{aligned} np​=n0​+Δn=p0​+Δp​ n0p0=ni2⇒np=(n0+Δn)(p0+Δp)≠ni2\begin{aligned} n_0p_0 &amp;= n_i^2 \\ &amp; \Rightarrow \\ np &amp;= (n_0+\Delta n)(p_0+\Delta p) \\ &amp;\neq n_i^2 \end{aligned} n0​p0​np​=ni2​⇒=(n0​+Δn)(p0​+Δp)=ni2​​  平衡少数载流子通常非常少，非平衡载流子浓度往往比平衡少数载流子大得多；多数载流子受非平衡载流子影响很小，而非...</div></div></div></a><a class="pagination-related" href="/2025/03/12/pos-p9/" title="半导体物理复习笔记：第九篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/86447654_p0_250101_1225_mvuD.avif" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-12</div><div class="info-item-2">半导体物理复习笔记：第九篇</div></div><div class="info-2"><div class="info-item-1">居然还要考pn结？！人麻了。 应当是第六章的内容，现加在后面。由于当时上课没学，自然也没有课件。使用复旦微蒋玉龙的半导体物理课件替代，并参考《半导体器件》的课件进行补充。  回顾 让我们想一想 半导体物理复习笔记：第四篇 和 半导体物理复习笔记：第五篇 中的内容：    结 以恋结缘 结是两种材料（至少有一种是半导体）之间的界面。不论是pn结还是异质结，都是结。金半接触也是一种结——肖特基结。  pn结的形成 在一块n型（或p型）半导体单晶上，用适当的工艺方法（如合金法、扩散法、生长法、离子注入法等）把p型（或n型）杂质掺入其中，使这块单晶的不同区域分别具有n型和p型的导电类型，在两者的交界面处就形成了pn结。常见的方法有合金法与扩散法。 合金法 把一小粒铝放在一块n型单晶硅片上，加热到一定的温度，形成铝硅的熔融体，然后降低温度，熔融体开始凝固，在n型硅片上形成一含有高浓度铝的p型硅薄层，它与n型硅衬底的交界面处即为pn结（这时称为铝硅合金结）。合金结也称为冶金结，其杂质分布突变，也称作单边突变结。对于上面的例子而言，是n型硅片上形成高浓度铝的p型硅薄层，记作p+n结。 扩散法 ...</div></div></div></a><a class="pagination-related" href="/2025/01/15/pos-p5/" title="半导体物理复习笔记：第五篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/86447654_p0_250101_1225_mvuD.avif" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-15</div><div class="info-item-2">半导体物理复习笔记：第五篇</div></div><div class="info-2"><div class="info-item-1">载流子的漂移运动与迁移率 导体的欧姆定律 I=VR,J=ΔIΔs,R=ρlSI = \dfrac{V}{R},\quad J = \dfrac{\Delta I}{\Delta s},\quad R = \rho \dfrac{l}{S} I=RV​,J=ΔsΔI​,R=ρSl​ 其中：电阻率单位为Ω·cm，电导率单位为s/cm，可求得欧姆定律的微分形式： I=VR=ElρlS=SρE=SσE⇒J=σ∣E∣I = \dfrac{V}{R} = \dfrac {El}{\rho \dfrac{l}{S}} = \dfrac{S}{\rho}E = S\sigma E \quad \Rightarrow \quad J = \sigma \big|E \big| I=RV​=ρSl​El​=ρS​E=SσE⇒J=σ​E​ 漂移速度和迁移率 漂移运动是导体外加电压，内部电子受到电场力的作用，沿电场力反方向作定向运动形成电流的现象。漂移速度是定向运动的速度，平均漂移速度用vd‾\overline{v_d}vd​​表示。因此： J=−nqvd‾J = -nq \overline{v_d} ...</div></div></div></a><a class="pagination-related" href="/2025/02/16/pos-p7/" title="半导体物理复习笔记：第七篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/86447654_p0_250101_1225_mvuD.avif" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-16</div><div class="info-item-2">半导体物理复习笔记：第七篇</div></div><div class="info-2"><div class="info-item-1">金半接触及其能带图 金半接触，即金属半导体接触，也是半导体器件中重要的界面。由于半导体自身材料导电类型及掺杂浓度等具体情况不同，可以形成整流接触及欧姆接触。整流接触一般用于肖特基势垒二极管、高速电路及微波技术领域，而欧姆接触则用于半导体电极与集成电路电极制作。 金属、半导体功函数    真空中静止电子的能级 E0：真空中静止电子所具有的能量，即真空能级   金属功函数 Wm：金属中的电子从金属逸出成为真空自由电子所需要的最低能量，即真空能级与金属材料的费米能级之差 Wm=E0−(EF)mW_m = E_0 - (E_F)_m Wm​=E0​−(EF​)m​   半导体的功函数 Ws：真空能级与半导体的费米能级之差 Ws=E0−(EF)sW_s = E_0 - (E_F)_s Ws​=E0​−(EF​)s​   电子亲合能 χ：导带底到真空能级的能量间隔 χ=E0−Ec\chi = E_0 - E_c χ=E0​−Ec​   因此，我们又可以将半导体的功函数表示为： Ws=χ+[E0−(EF)s]=χ+EnEn=Ec−(EF)s\begin{aligned} W_s &amp;= ...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Waline</span><span id="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Esing</div><div class="author-info-description">咱也不知道写点啥 (＠_＠;)</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">249</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">219</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Zxis233"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Zxis233" target="_blank" title="Github"><i class="fab fa-github" style="color: #ff80ac;"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss" style="color: #ff80ac;"></i></a><a class="social-icon" href="mailto:esing@mail.esing.dev" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #ff80ac;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p><b>将音乐解析 API 修改为自建版！</b><br><b>测试性开启 <u>Zstd</u> 压缩以提升网页加载速度 ！</b></p></div></div><div class="card-widget colo-info" id="colo-info"><div class="item-headline"><i class="fas fa-satellite-dish fa-flip-360"></i><span>Cloudflare 节点信息</span></div><div class="item-content"><div class="webinfo" data-cf-fields data-pangu-ignore>
+  <div class="webinfo-item"><div class="item-name">访问 IP :</div><div class="item-count" id="cf-ip">—</div></div>
+  <div class="webinfo-item"><div class="item-name">访问地区 :</div><div class="item-count" id="cf-loc">—</div></div>
+  <div class="webinfo-item"><div class="item-name">CDN 节点 :</div><div class="item-count" id="cf-colo">—</div></div>
+  <div class="webinfo-item"><div class="item-name">TLS 协议 :</div><div class="item-count" id="cf-tls">—</div></div>
+  <div class="webinfo-item"><div class="item-name">WARP :</div><div class="item-count" id="cf-warp">—</div></div>
+</div>
+<p data-cf-status role="status" aria-live="polite">节点信息需要 JavaScript 才能加载</p>
+<button type="button" data-cf-retry hidden>重试</button>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%8A%E5%AF%BC%E4%BD%93%E4%B8%AD%E6%9D%82%E8%B4%A8%E5%92%8C%E7%BC%BA%E9%99%B7%E8%83%BD%E7%BA%A7"><span class="toc-number">1.</span> <span class="toc-text">半导体中杂质和缺陷能级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%85%E3%80%81%E9%94%97%E6%99%B6%E4%BD%93%E4%B8%AD%E7%9A%84%E6%9D%82%E8%B4%A8%E8%83%BD%E7%BA%A7"><span class="toc-number">2.</span> <span class="toc-text">硅、锗晶体中的杂质能级</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%B4%E9%9A%99%E5%BC%8F%E6%9D%82%E8%B4%A8%E4%B8%8E%E6%9B%BF%E4%BD%8D%E5%BC%8F%E6%9D%82%E8%B4%A8"><span class="toc-number">2.1.</span> <span class="toc-text">间隙式杂质与替位式杂质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%BD%E4%B8%BB%E6%9D%82%E8%B4%A8%E4%B8%8E%E6%96%BD%E4%B8%BB%E8%83%BD%E7%BA%A7"><span class="toc-number">2.2.</span> <span class="toc-text">施主杂质与施主能级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%97%E4%B8%BB%E6%9D%82%E8%B4%A8%E4%B8%8E%E5%8F%97%E4%B8%BB%E8%83%BD%E7%BA%A7"><span class="toc-number">2.3.</span> <span class="toc-text">受主杂质与受主能级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%85%E8%83%BD%E7%BA%A7%E6%9D%82%E8%B4%A8%E7%94%B5%E7%A6%BB%E8%83%BD%E4%B8%8E%E8%BD%A8%E9%81%93%E5%8D%8A%E5%BE%84"><span class="toc-number">2.4.</span> <span class="toc-text">浅能级杂质电离能与轨道半径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%82%E8%B4%A8%E8%A1%A5%E5%81%BF"><span class="toc-number">2.5.</span> <span class="toc-text">杂质补偿</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9D%82%E8%B4%A8%E9%AB%98%E5%BA%A6%E8%A1%A5%E5%81%BF"><span class="toc-number">2.5.1.</span> <span class="toc-text">杂质高度补偿</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B1%E8%83%BD%E7%BA%A7%E6%9D%82%E8%B4%A8"><span class="toc-number">2.6.</span> <span class="toc-text">深能级杂质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#III-%E2%85%A4%E6%97%8F%E5%8C%96%E5%90%88%E7%89%A9%E5%8D%8A%E5%AF%BC%E4%BD%93%E4%B8%AD%E7%9A%84%E6%9D%82%E8%B4%A8%E8%83%BD%E7%BA%A7"><span class="toc-number">3.</span> <span class="toc-text">III-Ⅴ族化合物半导体中的杂质能级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%BA%E9%99%B7%E5%8F%8A%E5%85%B6%E8%83%BD%E7%BA%A7"><span class="toc-number">4.</span> <span class="toc-text">缺陷及其能级</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%B9%E7%BC%BA%E9%99%B7"><span class="toc-number">4.1.</span> <span class="toc-text">点缺陷</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%A2%E7%BC%BA%E9%99%B7"><span class="toc-number">4.2.</span> <span class="toc-text">面缺陷</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/09/23/wechat-lsposed-astrbot/" title="记一次用 LSPosed 把手机微信接入 AstrBot 的过程"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/3" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="记一次用 LSPosed 把手机微信接入 AstrBot 的过程"/></a><div class="content"><a class="title" href="/2026/09/23/wechat-lsposed-astrbot/" title="记一次用 LSPosed 把手机微信接入 AstrBot 的过程">记一次用 LSPosed 把手机微信接入 AstrBot 的过程</a><time datetime="2026-09-22T18:10:24.030Z" title="更新于 2026-09-23 02:10:24">2026-09-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/09/20/dom-router-problem/" title="记一次宿舍路由器安装问题排查"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/11" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="记一次宿舍路由器安装问题排查"/></a><div class="content"><a class="title" href="/2026/09/20/dom-router-problem/" title="记一次宿舍路由器安装问题排查">记一次宿舍路由器安装问题排查</a><time datetime="2026-09-20T05:58:56.185Z" title="更新于 2026-09-20 13:58:56">2026-09-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/16/starport-p13/" title="[星港游记] 金星大距：二分相"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/starport.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[星港游记] 金星大距：二分相"/></a><div class="content"><a class="title" href="/2026/08/16/starport-p13/" title="[星港游记] 金星大距：二分相">[星港游记] 金星大距：二分相</a><time datetime="2026-08-16T06:06:03.019Z" title="更新于 2026-08-16 14:06:03">2026-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/13/starport-p12/" title="[星港游记] 0813 英仙座流星雨"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/starport.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[星港游记] 0813 英仙座流星雨"/></a><div class="content"><a class="title" href="/2026/08/13/starport-p12/" title="[星港游记] 0813 英仙座流星雨">[星港游记] 0813 英仙座流星雨</a><time datetime="2026-08-16T05:07:00.070Z" title="更新于 2026-08-16 13:07:00">2026-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/08/cloudflare-workers-meting/" title="Cloudflare 搭建自托管 Meting.js 后端"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/57892762_p0_waifu2x_2x_jpg_2024-4-19_2216_y4dgn1bu98.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Cloudflare 搭建自托管 Meting.js 后端"/></a><div class="content"><a class="title" href="/2026/04/08/cloudflare-workers-meting/" title="Cloudflare 搭建自托管 Meting.js 后端">Cloudflare 搭建自托管 Meting.js 后端</a><time datetime="2026-08-13T09:03:58.156Z" title="更新于 2026-08-13 17:03:58">2026-08-13</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(https://pic.esing.dev/img/87257672_p0_2023-4-16_1808_qmfhwf6v6g.avif);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2023 - 2026 By Esing</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.7.0</a></span></div><div class="footer_custom_text">Deployed On <a href="https://pages.cloudflare.com/" target="_blank">Cloudflare Pages</a><a href="https://icp.gov.moe/?keyword=20237860" target="_blank"><br /><br /> 萌 ICP 备 20237860 号 </a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="rightMenu" role="menu" aria-label="页面操作" hidden data-min-width="0" data-random-url="/js/random-posts.json"><div class="rightMenu-group rightMenu-small" role="group" aria-label="页面导航"><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="back" aria-label="返回" title="返回"><i class="fas fa-arrow-left" aria-hidden="true"></i><span>返回</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="forward" aria-label="前进" title="前进"><i class="fas fa-arrow-right" aria-hidden="true"></i><span>前进</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="reload" aria-label="刷新" title="刷新"><i class="fas fa-rotate-right" aria-hidden="true"></i><span>刷新</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="top" aria-label="回到顶部" title="回到顶部"><i class="fas fa-arrow-up" aria-hidden="true"></i><span>回到顶部</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="选中文字" data-group="selection" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-selection" aria-label="复制选中文字" title="复制选中文字"><i class="fas fa-copy" aria-hidden="true"></i><span>复制选中文字</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="search" aria-label="百度搜索" title="百度搜索"><i class="rightmenu-baidu" aria-hidden="true"></i><span>百度搜索</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="选中的网址" data-group="selected-url" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="open-selection" aria-label="转到选中网址" title="转到选中网址"><i class="fas fa-link" aria-hidden="true"></i><span>转到选中网址</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="链接操作" data-group="link" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="open-link" aria-label="新标签打开链接" title="新标签打开链接"><i class="fas fa-up-right-from-square" aria-hidden="true"></i><span>新标签打开链接</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-link" aria-label="复制链接" title="复制链接"><i class="fas fa-copy" aria-hidden="true"></i><span>复制链接</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="图片操作" data-group="image" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="open-image" aria-label="新标签打开图片" title="新标签打开图片"><i class="fas fa-image" aria-hidden="true"></i><span>新标签打开图片</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-image" aria-label="复制图片链接" title="复制图片链接"><i class="fas fa-copy" aria-hidden="true"></i><span>复制图片链接</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="页面功能"><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-page" aria-label="复制本文地址" title="复制本文地址"><i class="fas fa-link" aria-hidden="true"></i><span>复制本文地址</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="random" aria-label="随便逛逛" title="随便逛逛"><i class="fas fa-paper-plane" aria-hidden="true"></i><span>随便逛逛</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="dark" aria-label="昼夜切换" title="昼夜切换"><i class="fas fa-moon" aria-hidden="true"></i><span>昼夜切换</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="read" aria-label="阅读模式" title="阅读模式"><i class="fas fa-book" aria-hidden="true"></i><span>阅读模式</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="fullscreen" aria-label="进入全屏" title="进入全屏"><i class="fas fa-expand" aria-hidden="true"></i><span>进入全屏</span></button></div></div><div id="rightmenu-status" role="status" aria-live="polite" aria-atomic="true"></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><script src="/vendor/pangu/pangu.umd.js?v=10.4.1" defer></script><script src="/js/pangu-spacing.js?v=10.4.1" defer data-field="post"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.18.1/dist/katex.min.css')
+    if (false) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.18.1/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const parseViewBox = viewBox => {
+    if (!viewBox) return null
+    const parts = viewBox.trim().split(/[\s,]+/).map(n => Number(n))
+    if (parts.length !== 4 || parts.some(n => Number.isNaN(n))) return null
+    return parts
+  }
+
+  const getSvgViewBox = svg => {
+    const attr = parseViewBox(svg.getAttribute('viewBox'))
+    if (attr) return attr
+
+    // Fallback: use bbox to build a viewBox
+    try {
+      const bbox = svg.getBBox()
+      if (bbox && bbox.width && bbox.height) return [bbox.x, bbox.y, bbox.width, bbox.height]
+    } catch (e) {
+      // getBBox may fail on some edge cases; ignore
+    }
+
+    const w = Number(svg.getAttribute('width')) || 0
+    const h = Number(svg.getAttribute('height')) || 0
+    if (w > 0 && h > 0) return [0, 0, w, h]
+    return [0, 0, 100, 100]
+  }
+
+  const setSvgViewBox = (svg, vb) => {
+    svg.setAttribute('viewBox', `${vb[0]} ${vb[1]} ${vb[2]} ${vb[3]}`)
+  }
+
+  const clamp = (v, min, max) => Math.max(min, Math.min(max, v))
+
+  const openSvgInNewTab = ({ source, initViewBox }) => {
+    const getClonedSvg = () => {
+      if (typeof source === 'string') {
+        const template = document.createElement('template')
+        template.innerHTML = source.trim()
+        const svg = template.content.querySelector('svg')
+        return svg ? svg.cloneNode(true) : null
+      }
+      if (source && typeof source.cloneNode === 'function') {
+        return source.cloneNode(true)
+      }
+      return null
+    }
+
+    const clone = getClonedSvg()
+    if (!clone) return
+    if (initViewBox && initViewBox.length === 4) {
+      clone.setAttribute('viewBox', initViewBox.join(' '))
+    }
+    if (!clone.getAttribute('xmlns')) clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+    if (!clone.getAttribute('xmlns:xlink') && clone.innerHTML.includes('xlink:')) {
+      clone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink')
+    }
+    // inject background to match current theme
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
+    const bg = getComputedStyle(document.body).backgroundColor || (isDark ? '#1e1e1e' : '#ffffff')
+    if (!clone.style.background) clone.style.background = bg
+
+    const serializer = new XMLSerializer()
+    const svgSource = serializer.serializeToString(clone)
+    const htmlSource = `<!doctype html><html><head><meta charset="utf-8" />
+      <style>
+        html, body { width: 100%; height: 100%; margin: 0; display: flex; align-items: center; justify-content: center; background: ${bg}; }
+        svg { max-width: 100%; max-height: 100%; height: auto; width: auto; }
+      </style>
+      </head><body>${svgSource}</body></html>`
+    const blob = new Blob([htmlSource], { type: 'text/html;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    window.open(url, '_blank', 'noopener')
+
+    setTimeout(() => URL.revokeObjectURL(url), 5000)
+  }
+
+  const attachMermaidViewerButton = wrap => {
+    let btn = wrap.querySelector('.mermaid-open-btn')
+    if (!btn) {
+      btn = document.createElement('button')
+      btn.type = 'button'
+      btn.className = 'mermaid-open-btn'
+      wrap.appendChild(btn)
+    }
+
+    btn.innerHTML = '<i class="fa fa-search fa-fw" aria-hidden="true"></i>'
+
+    if (!btn.__mermaidViewerBound) {
+      btn.addEventListener('click', e => {
+        e.preventDefault()
+        e.stopPropagation()
+        const svg = wrap.__mermaidOriginalSvg || wrap.querySelector('svg')
+        if (!svg) return
+        const initViewBox = wrap.__mermaidInitViewBox
+        openSvgInNewTab({ source: svg, initViewBox })
+      })
+      btn.__mermaidViewerBound = true
+    }
+  }
+
+  // Zoom around a point (px, py) in the SVG viewport (in viewBox coordinates)
+  const zoomAtPoint = (vb, factor, px, py) => {
+    const w = vb[2] * factor
+    const h = vb[3] * factor
+    const nx = px - (px - vb[0]) * factor
+    const ny = py - (py - vb[1]) * factor
+    return [nx, ny, w, h]
+  }
+
+  const initMermaidGestures = wrap => {
+    // Clean up previous event listeners and pending frames
+    if (wrap.__mermaidAbortController) {
+      wrap.__mermaidAbortController.abort()
+      if (wrap.__mermaidRafId) cancelAnimationFrame(wrap.__mermaidRafId)
+    }
+    const ac = new AbortController()
+    wrap.__mermaidAbortController = ac
+    const svg = wrap.querySelector('svg')
+    if (!svg) return
+
+    // Ensure viewBox exists so gestures always work
+    const initVb = getSvgViewBox(svg)
+    wrap.__mermaidInitViewBox = initVb
+    wrap.__mermaidCurViewBox = initVb.slice()
+    setSvgViewBox(svg, initVb)
+    // Disable default gestures to prevent scroll chaining and pinch-zoom penetration in Chrome
+    svg.style.touchAction = 'none'
+
+    // Cache BoundingClientRect, throttled on scroll to reduce reflow
+    let cachedRect = svg.getBoundingClientRect()
+    let rectDirty = false
+    const markRectDirty = () => { rectDirty = true }
+    window.addEventListener('resize', markRectDirty, { signal: ac.signal })
+    window.addEventListener('scroll', markRectDirty, { signal: ac.signal, capture: true })
+    const getRect = () => {
+      if (rectDirty) {
+        cachedRect = svg.getBoundingClientRect()
+        rectDirty = false
+      }
+      return cachedRect
+    }
+
+    // Precompute clamp bounds from initial viewBox
+    const minW = initVb[2] * 0.1
+    const maxW = initVb[2] * 10
+    const minH = initVb[3] * 0.1
+    const maxH = initVb[3] * 10
+    const clampVb = vb => {
+      const out = vb.slice()
+      out[2] = clamp(out[2], minW, maxW)
+      out[3] = clamp(out[3], minH, maxH)
+      return out
+    }
+
+    // Throttle DOM updates using requestAnimationFrame
+    let pendingVb = null
+    let rafId = null
+    const applyVb = () => {
+      if (pendingVb) {
+        wrap.__mermaidCurViewBox = pendingVb
+        setSvgViewBox(svg, pendingVb)
+        pendingVb = null
+      }
+      rafId = null
+      wrap.__mermaidRafId = null
+    }
+    const setCurVb = vb => {
+      pendingVb = clampVb(vb)
+      if (!rafId) {
+        rafId = requestAnimationFrame(applyVb)
+        wrap.__mermaidRafId = rafId
+      }
+    }
+
+    const state = {
+      pointers: new Map(),
+      startVb: null,
+      startDist: 0,
+      lastPointerX: 0,
+      lastPointerY: 0
+    }
+
+    const onPointerDown = e => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return
+      svg.setPointerCapture(e.pointerId)
+      const curVb = wrap.__mermaidCurViewBox
+      state.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+      if (state.pointers.size === 1) {
+        state.startVb = curVb.slice()
+        state.lastPointerX = e.clientX
+        state.lastPointerY = e.clientY
+      } else if (state.pointers.size === 2) {
+        const pts = [...state.pointers.values()]
+        const dx = pts[0].x - pts[1].x
+        const dy = pts[0].y - pts[1].y
+        state.startDist = Math.hypot(dx, dy)
+        state.startVb = curVb.slice()
+      }
+    }
+
+    const onPointerMove = e => {
+      if (!state.pointers.has(e.pointerId)) return
+      state.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+      const curVb = wrap.__mermaidCurViewBox
+      const rect = getRect()
+      if (state.pointers.size === 1 && state.startVb) {
+        const p = state.pointers.values().next().value
+        const dxClient = p.x - state.lastPointerX
+        const dyClient = p.y - state.lastPointerY
+        state.lastPointerX = p.x
+        state.lastPointerY = p.y
+        const dx = dxClient * (curVb[2] / rect.width)
+        const dy = dyClient * (curVb[3] / rect.height)
+        setCurVb([curVb[0] - dx, curVb[1] - dy, curVb[2], curVb[3]])
+        return
+      }
+      if (state.pointers.size === 2 && state.startVb && state.startDist > 0) {
+        const pts = [...state.pointers.values()]
+        const dx = pts[0].x - pts[1].x
+        const dy = pts[0].y - pts[1].y
+        const dist = Math.hypot(dx, dy)
+        if (!dist) return
+        const factor = state.startDist / dist
+        const cx = (pts[0].x + pts[1].x) / 2
+        const cy = (pts[0].y + pts[1].y) / 2
+        const px = curVb[0] + (cx - rect.left) * (curVb[2] / rect.width)
+        const py = curVb[1] + (cy - rect.top) * (curVb[3] / rect.height)
+        setCurVb(zoomAtPoint(state.startVb, factor, px, py))
+      }
+    }
+
+    const onPointerUpOrCancel = e => {
+      // Release PointerCapture to avoid event capture anomalies
+      if (svg.hasPointerCapture && svg.hasPointerCapture(e.pointerId)) {
+        svg.releasePointerCapture(e.pointerId)
+      }
+      state.pointers.delete(e.pointerId)
+      if (state.pointers.size === 0) {
+        state.startVb = null
+        state.startDist = 0
+      } else if (state.pointers.size === 1) {
+        const p = state.pointers.values().next().value
+        state.lastPointerX = p.x
+        state.lastPointerY = p.y
+      }
+    }
+
+    const onWheel = e => {
+      // Prevent event bubbling from triggering external scroll
+      e.preventDefault()
+      e.stopPropagation()
+      // Normalize deltaY across deltaMode (Chrome uses pixels, Safari uses lines)
+      let delta = e.deltaY
+      if (e.deltaMode === 1) delta *= 16
+      else if (e.deltaMode === 2) delta *= 400
+
+      // Continuous zoom factor: smoother than fixed 1.1/0.9 steps
+      const zoomFactor = Math.pow(1.001, delta)
+
+      const curVb = wrap.__mermaidCurViewBox
+      const rect = getRect()
+      const px = curVb[0] + (e.clientX - rect.left) * (curVb[2] / rect.width)
+      const py = curVb[1] + (e.clientY - rect.top) * (curVb[3] / rect.height)
+      setCurVb(zoomAtPoint(curVb, zoomFactor, px, py))
+    }
+
+    const onDblClick = () => {
+      const init = wrap.__mermaidInitViewBox
+      if (init) setCurVb(init)
+    }
+
+    svg.addEventListener('pointerdown', onPointerDown, { signal: ac.signal })
+    svg.addEventListener('pointermove', onPointerMove, { signal: ac.signal })
+    svg.addEventListener('pointerup', onPointerUpOrCancel, { signal: ac.signal })
+    svg.addEventListener('pointercancel', onPointerUpOrCancel, { signal: ac.signal })
+    svg.addEventListener('wheel', onWheel, { passive: false, signal: ac.signal })
+    svg.addEventListener('dblclick', onDblClick, { signal: ac.signal })
+  }
+
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const mode = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'
+    const themes = {"light":"base","dark":"base"}
+    const palettes = {"light":{"darkMode":false,"background":"#ffffff","textColor":"#2b3037","primaryColor":"#fff5f8","primaryTextColor":"#29313a","primaryBorderColor":"#d96a91","secondaryColor":"#ecfbf5","secondaryTextColor":"#213c34","secondaryBorderColor":"#269c78","tertiaryColor":"#f7f9fb","tertiaryTextColor":"#2b3037","tertiaryBorderColor":"#cfd8e3","lineColor":"#64717d","defaultLinkColor":"#64717d","titleColor":"#26323a","edgeLabelBackground":"#ffffff","clusterBkg":"#fbfcfd","clusterBorder":"#dbe3ea","noteBkgColor":"#fff8df","noteTextColor":"#3a3428","noteBorderColor":"#d6b25a","actorBkg":"#fff5f8","actorBorder":"#d96a91","actorTextColor":"#29313a","actorLineColor":"#8b96a3","signalColor":"#64717d","signalTextColor":"#2b3037","labelBoxBkgColor":"#f7f9fb","labelBoxBorderColor":"#dbe3ea","labelTextColor":"#2b3037","loopTextColor":"#2b3037","activationBkgColor":"#ecfbf5","activationBorderColor":"#269c78"},"dark":{"darkMode":true,"background":"#171a1f","textColor":"#e6edf3","primaryColor":"#33242c","primaryTextColor":"#f7eaf0","primaryBorderColor":"#f08cab","secondaryColor":"#1c332d","secondaryTextColor":"#e5f8f1","secondaryBorderColor":"#5bcaa0","tertiaryColor":"#20262e","tertiaryTextColor":"#e6edf3","tertiaryBorderColor":"#3b4652","lineColor":"#a7b1bc","defaultLinkColor":"#a7b1bc","titleColor":"#f0f4f8","edgeLabelBackground":"#171a1f","clusterBkg":"#1b2027","clusterBorder":"#323d48","noteBkgColor":"#352d1e","noteTextColor":"#f4e9c8","noteBorderColor":"#c8a856","actorBkg":"#33242c","actorBorder":"#f08cab","actorTextColor":"#f7eaf0","actorLineColor":"#687482","signalColor":"#c7d0d9","signalTextColor":"#e6edf3","labelBoxBkgColor":"#20262e","labelBoxBorderColor":"#3b4652","labelTextColor":"#e6edf3","loopTextColor":"#e6edf3","activationBkgColor":"#1c332d","activationBorderColor":"#5bcaa0"}}
+    const theme = themes[mode]
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      // Clean up event listeners before removing old SVG
+      if (item.__mermaidAbortController) {
+        item.__mermaidAbortController.abort()
+      }
+      const oldSvg = item.querySelector('svg')
+      if (oldSvg) oldSvg.remove()
+      let config = {}
+      try {
+        config = mermaidSrc.dataset.config ? JSON.parse(mermaidSrc.dataset.config) : {}
+      } catch (e) {
+        console.warn('[mermaid] failed to parse dataset.config:', e)
+      }
+      if (!config.theme) {
+        config.theme = theme
+      }
+      // Keep per-diagram overrides; do not tint an explicitly different theme.
+      if (config.theme === theme && palettes[mode]) {
+        config.themeVariables = { ...palettes[mode], ...config.themeVariables }
+      }
+      const mermaidThemeConfig = `%%{init: ${JSON.stringify(config)}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+        if (true) initMermaidGestures(item)
+        item.__mermaidOriginalSvg = svg
+        if (true) attachMermaidViewerButton(item)
+      }
+
+      const handleError = err => {
+        console.error(`[mermaid] render failed for block #${index}:`, err)
+        const errorEl = document.createElement('div')
+        errorEl.className = 'mermaid-error'
+        errorEl.textContent = `Mermaid render error: ${err.message || err}`
+        mermaidSrc.insertAdjacentElement('afterend', errorEl)
+      }
+
+      try {
+        const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+        // mermaid v9 and v10 compatibility
+        if (typeof renderFn === 'string') {
+          renderMermaid(renderFn)
+        } else {
+          renderFn.then(({ svg }) => renderMermaid(svg)).catch(handleError)
+        }
+      } catch (err) {
+        handleError(err)
+      }
+    })
+  }
+
+  const codeToMermaid = $article => {
+    const codeMermaidEle = $article.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    const $article = document.getElementById('article-container')
+    if (!$article) return
+
+    if (true) codeToMermaid($article)
+    const $mermaid = $article.querySelectorAll('.mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = {"search":false}
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://comment.esing.dev/',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.15.2/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client@3.15.2/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !true) {
+    if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = {"language":"zh-CN","perPage":7}
+
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  const initGitalk = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGitalk = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const gitalk = new Gitalk({
+      clientID: 'ad3070e381dc19ea10a3',
+      clientSecret: '70adf2f0332c581dfc5055033151ca3989b89ebd',
+      repo: 'BlogComment',
+      owner: 'Zxis233',
+      admin: ['Zxis233'],
+      updateCountCallback: commentCount,
+      ...option,
+      id: isShuoshuo ? path : (option && option.id) || 'ab86d2be175d03eb49d63e53afd18ee2'
+    })
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async(el, path) => {
+    if (typeof Gitalk === 'function') initGitalk(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js')
+      initGitalk(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Gitalk'
+      ? window.shuoshuoComment = { loadComment: loadGitalk }
+      : window.loadOtherComment = loadGitalk
+    return
+  }
+
+  if ('Waline' === 'Gitalk' || !true) {
+    if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><script src="/js/meting.js" defer></script><script src="/js/music-pjax.js" defer></script><script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script><script src="/js/target-cursor.js" defer></script><script src="/js/cursor-toggle.js" defer></script><script src="/js/title.js" defer></script><script src="/js/titlelight.js" defer></script><script src="/js/autoload.js" defer></script><script src="/js/rightmenu.js" defer></script><script src="/js/cloudflare-info.js" defer></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"]):not([data-fancybox])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      if (!item.parentNode) return
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || ''
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    const responseURL = e.request && e.request.responseURL
+    if (e.request && e.request.status === 404) {
+      true
+        ? pjax.loadUrl('/404')
+        : responseURL && (window.location.href = responseURL)
+    } else if (responseURL) {
+      window.location.href = responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.7.0"></script></div></div></body></html>

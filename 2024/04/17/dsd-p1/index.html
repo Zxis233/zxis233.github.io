@@ -1,0 +1,1002 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>数字系统设计复习笔记：第一篇 | Esing的小站</title><meta name="author" content="Esing"><meta name="copyright" content="Esing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="常用缩写 我猜必考，你觉得呢？   VHDL: VHSIC Hardware Description Language VHSIC: Very High-Speed Integrated Circuit HDL: Hardware Description Language CAD: Computer-Aided Design EDA: Electronic Design Automation LS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数字系统设计复习笔记：第一篇">
+<meta property="og:url" content="https://blog.esing.dev/2024/04/17/dsd-p1/">
+<meta property="og:site_name" content="Esing的小站">
+<meta property="og:description" content="常用缩写 我猜必考，你觉得呢？   VHDL: VHSIC Hardware Description Language VHSIC: Very High-Speed Integrated Circuit HDL: Hardware Description Language CAD: Computer-Aided Design EDA: Electronic Design Automation LS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.esing.dev/img/57419950_p0_20241213_1659.avif">
+<meta property="article:published_time" content="2024-04-17T14:20:32.000Z">
+<meta property="article:modified_time" content="2025-09-10T01:32:19.449Z">
+<meta property="article:author" content="Esing">
+<meta property="article:tag" content="Verilog">
+<meta property="article:tag" content="复习">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="数字系统设计">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.esing.dev/img/57419950_p0_20241213_1659.avif"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "数字系统设计复习笔记：第一篇",
+  "url": "https://blog.esing.dev/2024/04/17/dsd-p1/",
+  "image": "https://pic.esing.dev/img/57419950_p0_20241213_1659.avif",
+  "datePublished": "2024-04-17T14:20:32.000Z",
+  "dateModified": "2025-09-10T01:32:19.449Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Esing",
+      "url": "https://blog.esing.dev"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://blog.esing.dev/2024/04/17/dsd-p1/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const start = 8
+              const end = 24
+              const isNight =
+                start < end
+                    ? hour < start || hour >= end
+                    : hour >= start || hour < end
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;1aabda1500704262b993096aaa3b5c27&quot;}"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/misans@5.0.0/lib/Normal/MiSansVF.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":380,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":100,"languages":{"author":"作者: Esing","link":"链接: ","source":"来源: Esing的小站","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '数字系统设计复习笔记：第一篇',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/maple_new.css"><link rel="stylesheet" href="/css/target-cursor.css"><link rel="stylesheet" href="/css/legacy-appearance.css"><link rel="stylesheet" href="/vendor/aplayer/APlayer.min.css"><link rel="stylesheet" href="/css/aplayer-theme.css"><link rel="stylesheet" href="/css/rightmenu.css"><link rel="stylesheet" href="/css/cloudflare-info.css"><script src="/vendor/aplayer/APlayer.min.js"></script><meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="Esing的小站" type="application/atom+xml">
+</head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="/css/load.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">249</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">219</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E6%98%9F%E6%B8%AF%E6%B8%B8%E8%AE%B0/"><i class="fa-fw fa-solid fa-star-half-stroke"></i><span> 星港游记</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-code"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://pic.esing.dev/img/57419950_p0_20241213_1659.avif);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Esing的小站</span></a><a class="nav-page-title" href="/"><span class="site-name">数字系统设计复习笔记：第一篇</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E6%98%9F%E6%B8%AF%E6%B8%B8%E8%AE%B0/"><i class="fa-fw fa-solid fa-star-half-stroke"></i><span> 星港游记</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-code"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">数字系统设计复习笔记：第一篇</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-04-17T14:20:32.000Z" title="发表于 2024-04-17 22:20:32">2024-04-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-10T01:32:19.449Z" title="更新于 2025-09-10 09:32:19">2025-09-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:1000,&quot;messagePrev&quot;:&quot;本文最后更新于&quot;,&quot;messageNext&quot;:&quot;天前，部分内容可能已过时。&quot;,&quot;postUpdate&quot;:&quot;2025-09-10 09:32:19&quot;}" hidden></div><h2 id="常用缩写">常用缩写</h2>
+<div class="note danger flat"><p>我猜必考，你觉得呢？</p>
+</div>
+<ul>
+<li><strong>VHDL</strong>: VHSIC Hardware Description Language</li>
+<li><strong>VHSIC</strong>: Very High-Speed Integrated Circuit</li>
+<li><strong>HDL</strong>: Hardware Description Language</li>
+<li><strong>CAD</strong>: Computer-Aided Design</li>
+<li><strong>EDA</strong>: Electronic Design Automation</li>
+<li><strong>LSI</strong>: Large Scale Integration</li>
+<li><strong>ULSI</strong>: Ultra-Large Scale Integration</li>
+<li><strong>ASCII</strong>: American Standard Code for Information</li>
+<li><strong>ISO</strong>: International Standards Organization</li>
+<li><strong>ASIC</strong>: Application-Specific Integrated Circuit</li>
+<li><strong>FPGA</strong>: Field-Programmable Gate Array</li>
+<li><strong>PLA</strong>: Programmable Logic Array</li>
+<li><strong>PAL</strong>: Programmable Array Logic</li>
+<li><strong>PLD</strong>: Programmable Logic Device</li>
+<li><strong>CPLD</strong>: Complex Programmable Logic Device</li>
+<li><strong>STA</strong>: Static Timing Analysis</li>
+</ul>
+<details class="toggle" ><summary class="toggle-button" style="">题外话</summary><div class="toggle-content"><p>去年考数字CMOS，考了个<strong>STA</strong>，结果没写出来。这下忘不掉了。</p>
+</div></details>
+<h2 id="现代设计方法">现代设计方法</h2>
+<ul>
+<li>选用合适的 EDA仿真工具</li>
+<li>选用合适电路图输入和HDL编辑工具</li>
+<li>逐个编写可综合HDL模块</li>
+<li>逐个编写HDL测试模块</li>
+<li>逐个做Verilog HDL 电路逻辑访真</li>
+<li>编写Verilog HDL总测试模块</li>
+<li>做系统电路逻辑总仿真</li>
+<li>选用合适的基本逻辑元件库和宏库</li>
+<li>租用或购买必要的IP核</li>
+<li>选用合适的综合器</li>
+<li>进行综合得到门级电路结构</li>
+<li>布局布线，得到时延文件</li>
+<li>后仿真</li>
+<li>定型，FPGA编码或ASIC投片。</li>
+</ul>
+<h2 id="HDL设计vs原理图设计-Pros-Cons">HDL设计vs原理图设计 Pros&amp;Cons</h2>
+<table>
+<thead>
+<tr>
+<th>原理图Schematic</th>
+<th>代码HDL Coding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自下而上</td>
+<td>自上而下</td>
+</tr>
+<tr>
+<td>搭建原理电路较复杂</td>
+<td>代码编写较简单</td>
+</tr>
+<tr>
+<td>耗时长</td>
+<td>较节约时间</td>
+</tr>
+<tr>
+<td>特殊化定制</td>
+<td>规范化设计</td>
+</tr>
+<tr>
+<td>较难理解分析</td>
+<td>易于理解分析</td>
+</tr>
+</tbody>
+</table>
+<div class="note primary flat"><p>Verilog HDL设计的最大优点就是其<strong>工艺无关性</strong>。</p>
+<p>这使得工程师在功能设计及逻辑验证阶段可以不必过多考虑门级及工艺实现的具体细节，只需根据系统设计的要求施加不同的约束条件，即可设计出实际电路。</p>
+</div>
+<h2 id="抽象等级">抽象等级</h2>
+<p>什么是Verilog电路设计的抽象级别？可以理解成地壳的结构，由外而内。</p>
+<p>层次从高到低：</p>
+<ul>
+<li>
+<p><strong>系统级(System Level)</strong>: 使用高级语言结构来实现设计模块的外部性能模型。</p>
+</li>
+<li>
+<p><strong>算法级(Algorithm Level)</strong>: 用高级语言结构来实现设计的算法部分。</p>
+</li>
+<li>
+<p><strong>寄存器传输级(RTL)</strong>: 用Verilog HDL/VHDL/SystemVerilog/SystemC语言描述，是实现具体逻辑电路的常用级别。</p>
+<div class="note info flat"><p>以上三种都属于行为描述，只有RTL级才与逻辑电路有明确的对应关系。</p>
+</div>
+</li>
+<li>
+<p><strong>门级(Gate Level)</strong>: 描述电路的逻辑门和连接，更接近硬件实现。</p>
+<div class="note info flat"><p>与逻辑电路有确定的连接关系，以上4种数字系统设计工程师必须掌握。</p>
+</div>
+</li>
+<li>
+<p><strong>开关级(Switch Level）</strong></p>
+<div class="note info flat"><p>门级其实就是晶体管级，因为晶体管表现为开关</p>
+</div>
+</li>
+</ul>
+<h2 id="Verilog语法最重要的三个概念：">Verilog语法最重要的三个概念：</h2>
+<ul>
+<li><strong>并行性</strong></li>
+<li><strong>层次结构性</strong></li>
+<li><strong>可综合性</strong></li>
+</ul>
+<h2 id="综合是什么？">综合是什么？</h2>
+<p><strong>综合(Synthesis)，就是将HDL代码转为电路并进行优化。</strong></p>
+<p>对于EDA工具来说，这只是一个映射的过程，系统设计人员就不必过于关心其逻辑构成的细节，而把主要精力集中在系统结构的考虑上，从而大大提 高了设计效率。</p>
+<blockquote>
+<p>“什么叫综合？综合是由什么工具来完成的？通过综合产生的是什么？ 产生的结果有什么用处？”</p>
+</blockquote>
+<details class="toggle" ><summary class="toggle-button" style="">答案</summary><div class="toggle-content"><p>通过综合工具把行为级描述的模块通过逻辑网表自动转化为门级形式的模块叫综合。由EDA工具来完成综合。通过综合产生的是由与门，或门和非门组成的加法器，比较器等组合逻辑。产生的模块很容易与某种工艺的基本元件逐一对应起来,再通过布局布线工具自动地转变为某种工具工艺的电路布线结构。</p>
+</div></details>
+<h2 id="测试平台是什么？">测试平台是什么？</h2>
+<p><strong>测试平台(Testbench)，是用来描述测试信号的变化和测试过程的模块。</strong></p>
+<p>它可以对上面介绍的电路模块（无论是行为的或结构的）进行动态的全面测试。</p>
+<h2 id="仿真是什么？">仿真是什么？</h2>
+<blockquote>
+<p>“仿真是什么？ 为什么要进行仿真？仿真可以在几个层面上进行？ 每个层面的仿真有什么意义？”</p>
+</blockquote>
+<details class="toggle" ><summary class="toggle-button" style="">答案</summary><div class="toggle-content"><p>仿真是对电路模块进行动态的全面测试。通过观测被测试模块的输出信号是否符合要求可以调试和验证逻辑系统的设计和结构准确与否，并发现问题及时修改。仿真分为：前仿真，逻辑网表仿真，门级仿真和布线后仿真。前仿真，逻辑网表仿真，门级仿真，可以调试和验证逻辑系统的设计和结构准确与否，并发现问题及时修改。布线后仿真:可分析设计的电路模块的运行是否正常。</p>
+</div></details>
+<div class="note warning flat"><p>我猜会考，但老师说：“为什么要用这种形式考概念？又不是思政课。”</p>
+</div>
+<h2 id="Verilog的基本设计单元">Verilog的基本设计单元</h2>
+<p>基本设计单元就是<strong>模块(Module)</strong>。模块与模块之间通过端口进行通讯，在模块中实例化另一个模块，可以构成一个复杂的层次化系统。</p>
+<p>一个模块是由两部分组成的，一部分描述接口， 另一部分描述逻辑功能。</p>
+<p>一个<strong>模块</strong>表示一个设计，其描述方式包括：</p>
+<ul>
+<li><strong>数据流方式</strong>——连续赋值语句<code>assign</code></li>
+<li><strong>行为方式</strong>——过程语句<code>always/fork</code></li>
+<li><strong>结构方式</strong>——其他模块和门级原语</li>
+<li><strong>混合方式</strong>——行为＋结构＋数据流等</li>
+</ul>
+<p>模块的基本构成要素：端口信息，输入/输出说明，逻辑功能描述。</p>
+<h2 id="所有过程块（如：initial块、always块）、连续赋值语句、实例引用都是并行的">所有过程块（如：initial块、always块）、连续赋值语句、实例引用都是并行的</h2>
+<h2 id="延时标记？">延时标记？</h2>
+<blockquote>
+<p>“ <strong>#</strong> 用于说明过程(Procedural)语句和门的实例的延时，但不能用于模块的实例化。”</p>
+</blockquote>
+<p>这句话的意思是：内置的门级原语生成可以用#来表示延迟，但是模块实例化则不能这样使用。</p>
+<p>为什么？</p>
+<p><strong>因模块中使用# 用于设定内置参数。</strong> 例：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my_module #(parameter_value) instance_name (port_map);</span><br></pre></td></tr></table></figure>
+<h2 id="变量类型">变量类型</h2>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span>’Hx  <span class="comment">// 7位宽十六进制数，扩展到xxxxxxx</span></span><br><span class="line"></span><br><span class="line"><span class="number">8</span>’h2A <span class="comment">// 8位宽十六进制数</span></span><br><span class="line"></span><br><span class="line"><span class="number">12</span>’dz <span class="comment">// 12位宽高阻</span></span><br><span class="line"><span class="number">12</span>‘d? <span class="comment">// 也是12位宽高阻！</span></span><br><span class="line"></span><br><span class="line"><span class="number">8</span>’h4x <span class="comment">// 8位宽十六进制数，低4位为不定值</span></span><br><span class="line"></span><br><span class="line">-<span class="number">8</span>’d5 <span class="comment">// 8位十进制-5的补码</span></span><br></pre></td></tr></table></figure>
+<h3 id="如何分辨有符号数和无符号数？">如何分辨有符号数和无符号数？</h3>
+<details class="toggle" ><summary class="toggle-button" style="">分析</summary><div class="toggle-content"><p>实际上，Verilog中若无特别声明<code>signed</code>则都是无符号数，如下：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">wire</span> 	[<span class="number">7</span>:<span class="number">0</span>] unsigned1;</span><br><span class="line"><span class="keyword">wire</span> <span class="keyword">signed</span>	[<span class="number">7</span>:<span class="number">0</span>] signed1</span><br></pre></td></tr></table></figure>
+</div></details>
+<h3 id="z与x">z与x</h3>
+<ul>
+<li>z作为输入时代表x</li>
+<li>仿真开始时刻，所有的端口都是x</li>
+<li>如果你忘记连接输入端，这个输入端可以看做是z</li>
+</ul>
+<h3 id="parameter">parameter</h3>
+<p>在Verilog HDL中用<code>parameter</code>定义常量，即用<code>parameter</code>来定义一个标识符代表一个常量，称为符号常量，即标识符形式的常量。</p>
+<ul>
+<li>参数用于定义延时和变量宽度。</li>
+<li>用参数声明语句，参数<strong>只被赋值一次</strong>，且一直<strong>保持不变</strong>。</li>
+</ul>
+<h3 id="wire">wire</h3>
+<ul>
+<li>只能用连续信号赋值语句赋值，或者通过模块实例的输出端口赋值</li>
+<li><strong>初始化值为z</strong></li>
+</ul>
+<h3 id="reg">reg</h3>
+<ul>
+<li>reg类型在赋新值以前保持原值</li>
+<li>用行为描述结构给reg类型赋值。给reg类型赋值是在过程块中</li>
+<li><strong>reg初始值为x</strong></li>
+<li><strong>只能在always和initial语句中赋值</strong></li>
+</ul>
+<h2 id="运算">运算</h2>
+<h3 id="算术运算">算术运算</h3>
+<p>正常的加减乘没啥好说的。</p>
+<p>除法是略去小数部分，取整；取模的结果采用模运算式里第一个操作数的符号位。</p>
+<p><strong>若操作数中含有x或者z(部分位或者全部位)，则结果为x(全部位)。</strong></p>
+<p>例：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10</span> % <span class="number">3</span> = <span class="number">1</span>		余数为<span class="number">1</span></span><br><span class="line"><span class="number">11</span> % <span class="number">3</span> = <span class="number">2</span>		余数为<span class="number">2</span></span><br><span class="line"><span class="number">12</span> % <span class="number">3</span> = <span class="number">0</span>		余数为<span class="number">0</span></span><br><span class="line">-<span class="number">10</span>% <span class="number">3</span> = -<span class="number">1</span>		结果取第一个操作数符号</span><br><span class="line"><span class="number">11</span> %-<span class="number">3</span> = <span class="number">2</span>		结果取第一个操作数符号</span><br></pre></td></tr></table></figure>
+<p>还有位运算符。</p>
+<p><code>^~</code>是同或（异或取反）。<strong>注意看PPT P54的表格</strong>。</p>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20240418152844936_2024-4-18_1528_i4gbnmap6g.png" alt="和xz运算怎么办？" style="zoom: 33%;" />
+<p><strong>PPT P53的是错的。</strong> 更正为：<code>4’b0110 ^ 4’b1000 = 5'b10110</code>.</p>
+<div class="note info flat"><p>如果两个操作数位宽不一样，要按宽位的算。结果位宽需要看被赋值的变量位宽。</p>
+</div>
+<h3 id="逻辑运算">逻辑运算</h3>
+<p><code>&amp;&amp; || !</code>这仨。前俩是双目运算符，最后一个是单目。</p>
+<p>实际上，只要运算数不为0，它就看做是1<s>废话</s>。</p>
+<p>如果任意操作数内包含某一位为x或者z，而且逻辑操作的结果是不定的，则运算的结果为x。</p>
+<h3 id="等式运算">等式运算</h3>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">==	<span class="comment">//等于</span></span><br><span class="line">!=	<span class="comment">//不等于</span></span><br><span class="line"><span class="comment">// 上面两种可以被综合</span></span><br><span class="line"></span><br><span class="line">===	<span class="comment">//等于</span></span><br><span class="line">!==	<span class="comment">//不等于</span></span><br><span class="line"><span class="comment">/*	上面两种不能被综合</span></span><br><span class="line"><span class="comment">	这俩会严格按照位进行比较，包括x与z</span></span><br><span class="line"><span class="comment">	结果一定为1或者0</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 操作数位宽不相等时，较短的操作数左边补0</span></span><br></pre></td></tr></table></figure>
+<h3 id="位拼接和部分选择">位拼接和部分选择</h3>
+<p>这俩用的也不少，括号补全要看好。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;repetition_number &#123;expr1, expr2, ..., exprN&#125;&#125; </span><br><span class="line">&#123;<span class="number">3</span>&#123;ack&#125;&#125;=&#123;ack,ack,ack&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">reg</span> [<span class="number">1</span>:<span class="number">5</span>] mis_state;</span><br><span class="line">mis_state[<span class="number">1</span>] &amp;&amp; mis_state[<span class="number">4</span>] <span class="comment">//变量的位选择</span></span><br></pre></td></tr></table></figure>
+<h3 id="规约（缩减）运算符">规约（缩减）运算符</h3>
+<p><code>&amp;	~&amp;	|	~|	^	~^	^~</code></p>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20240418154331688_2024-4-18_1543_sd5gi9a7e5.png" alt="规约与运算示意图" style="zoom:50%;" />
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="number">4</span>‘b0110;</span><br><span class="line">b=<span class="number">4</span>‘b0100;</span><br><span class="line"><span class="comment">// |b为1，&amp;b为0，~^a为1</span></span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.esing.dev">Esing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.esing.dev/2024/04/17/dsd-p1/">https://blog.esing.dev/2024/04/17/dsd-p1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://blog.esing.dev" target="_blank">Esing的小站</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="post-meta__tags" href="/tags/%E5%A4%8D%E4%B9%A0/">复习</a><a class="post-meta__tags" href="/tags/Verilog/">Verilog</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E5%AD%97%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">数字系统设计</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/04/17/dsd-intro/" title="数字系统设计复习笔记：序篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/57419950_p0_20241213_1659.avif" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">数字系统设计复习笔记：序篇</div></div><div class="info-2"><div class="info-item-1">笔记内含大量图片，流量警告  前言 简单整理一下笔记，因为 我实在不知道怎么考 纯写代码？概念？填空？ 老师已经声明没有历年试题了。听学长说考概念比较多，纯写代码反而不多。 不管怎么样，整整看吧。  2024.04.20 大致整理完了。最后两个单元实在不想多看，毫无头猪。 2024.04.26 整理了一些简答题  复习资料  所有的PPT 《Verilog数字系统设计教程》第二版 （可选）刷点题！  HDLBits https://www.fpga4student.com/ https://github.com/    目录 标题后数字为对应PPT章节                      目录                                     第一篇                   概念、变量类型、运算符 0-4                            第二篇                   各种各样的语句：块、赋值、条件、生成 4-5                            第三篇                 ...</div></div></div></a><a class="pagination-related" href="/2024/04/18/dsd-p2/" title="数字系统设计复习笔记：第二篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/57419950_p0_20241213_1659.avif" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">数字系统设计复习笔记：第二篇</div></div><div class="info-2"><div class="info-item-1">赋值语句 我说这个必考，因为真会考。  阻塞赋值 使用=进行。  赋值语句执行完后，块才结束； b 的值在赋值语句执行完后立刻就改变的； 在时序逻辑中使用时，可能会产生意想不到的结果。  123456reg b,c;always @(posedge clk)    begin        b=a;//不建议使用        c=b;//不建议使用    end 有的仿真器可以综合成D触发器，但是不推荐。 在 三段式状态机 中，描述次态逻辑和输出逻辑的电路必须使用阻塞赋值，表明为组合电路。 状态机  非阻塞赋值 使用&lt;=进行赋值。  在语句块中，上面语句所赋的变量值不能立即就为下面的语句所用； 块结束后才能完成这次赋值操作，而所赋的变量值是上次赋值得到的； 在编写可综合的时序逻辑模块时，这是最常用的赋值方法。  例：下面代码会发生什么？ 12345always @(posedge clk)    begin        b&lt;=a;        a&lt;=b;    end 答案这俩会交换位置。因为：  在时钟沿到来前，两个表达式并行运算，已经确定好结果； 时钟...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2024/04/17/dsd-intro/" title="数字系统设计复习笔记：序篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/57419950_p0_20241213_1659.avif" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-17</div><div class="info-item-2">数字系统设计复习笔记：序篇</div></div><div class="info-2"><div class="info-item-1">笔记内含大量图片，流量警告  前言 简单整理一下笔记，因为 我实在不知道怎么考 纯写代码？概念？填空？ 老师已经声明没有历年试题了。听学长说考概念比较多，纯写代码反而不多。 不管怎么样，整整看吧。  2024.04.20 大致整理完了。最后两个单元实在不想多看，毫无头猪。 2024.04.26 整理了一些简答题  复习资料  所有的PPT 《Verilog数字系统设计教程》第二版 （可选）刷点题！  HDLBits https://www.fpga4student.com/ https://github.com/    目录 标题后数字为对应PPT章节                      目录                                     第一篇                   概念、变量类型、运算符 0-4                            第二篇                   各种各样的语句：块、赋值、条件、生成 4-5                            第三篇                 ...</div></div></div></a><a class="pagination-related" href="/2024/04/20/dsd-p10/" title="数字系统设计复习笔记：第十篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/57419950_p0_20241213_1659.avif" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-20</div><div class="info-item-2">数字系统设计复习笔记：第十篇</div></div><div class="info-2"><div class="info-item-1">复杂的时序逻辑电路设计 序列检测器 检测10010的产生。  第一步：画出状态转移图 第二步：化简状态状态示意图   第三步：编写逻辑代码  1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465module seqdet (    x,    z,    clk,    rst);    input x, clk, rst;    output z;    reg  [2:0] state;  //状态寄存器    wire       z;    parameter IDLE = 3&#x27;d0, A = 3&#x27;d1, B = 3&#x27;d2, C = 3&#x27;d3, D = 3&#x27;d4,        E = 3&#x27;d5, F = 3&#x27;d6, G = 3&#x27;d7;    assign z = (state == D &amp;&amp...</div></div></div></a><a class="pagination-related" href="/2025/09/16/vd-p1/" title="超大规模集成电路设计笔记：第一篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/134402712_p0_250916_1347_7WSL.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-16</div><div class="info-item-2">超大规模集成电路设计笔记：第一篇</div></div><div class="info-2"><div class="info-item-1">加法器 全加器 Full Adder FA 很简单，输入1bit的两个数以及前一级的进位，输出和与进位符： 123456789module f_add (    input  a,    input  b,    input  cin,    output sum,    output cout);    assign &#123;cout, sum&#125; = a + b + cin;endmodule 行波进位加法器 Ripple-Carry Adder RCA 我们把N个上面的全加器f_add首尾串联，便得到了一长串全加器链，它们的计算输入是N位，进位输入与输出均为1位。每次进行计算时，前一个的进位输出都会传进后一个的进位输入，看起来就像是进位在一整条全加器链上产生了波动，因此称其为“行波进位加法器”。  显然，行波进位加法器的优点是结构简单——只需串联就行，但缺点是延时太长。如上图所示，N个全加器串联后，总延时为tripple=N⋅tfat_{ripple} = N \cdot t_{fa}tripple​=N⋅tfa​，这是很致命的。 超前进位加法器 Carry-L...</div></div></div></a><a class="pagination-related" href="/2024/04/18/dsd-p2/" title="数字系统设计复习笔记：第二篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/57419950_p0_20241213_1659.avif" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-18</div><div class="info-item-2">数字系统设计复习笔记：第二篇</div></div><div class="info-2"><div class="info-item-1">赋值语句 我说这个必考，因为真会考。  阻塞赋值 使用=进行。  赋值语句执行完后，块才结束； b 的值在赋值语句执行完后立刻就改变的； 在时序逻辑中使用时，可能会产生意想不到的结果。  123456reg b,c;always @(posedge clk)    begin        b=a;//不建议使用        c=b;//不建议使用    end 有的仿真器可以综合成D触发器，但是不推荐。 在 三段式状态机 中，描述次态逻辑和输出逻辑的电路必须使用阻塞赋值，表明为组合电路。 状态机  非阻塞赋值 使用&lt;=进行赋值。  在语句块中，上面语句所赋的变量值不能立即就为下面的语句所用； 块结束后才能完成这次赋值操作，而所赋的变量值是上次赋值得到的； 在编写可综合的时序逻辑模块时，这是最常用的赋值方法。  例：下面代码会发生什么？ 12345always @(posedge clk)    begin        b&lt;=a;        a&lt;=b;    end 答案这俩会交换位置。因为：  在时钟沿到来前，两个表达式并行运算，已经确定好结果； 时钟...</div></div></div></a><a class="pagination-related" href="/2025/10/21/vd-p4/" title="超大规模集成电路设计笔记：第四篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/134402712_p0_250916_1347_7WSL.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-21</div><div class="info-item-2">超大规模集成电路设计笔记：第四篇</div></div><div class="info-2"><div class="info-item-1">Cache 可参考 计算机原理与嵌入式系统笔记：第六篇 直写与回写 Write-Through（直写） 和 Write-Back （回写）是两种 Cache 写策略，用来决定当 CPU 写数据时，数据如何更新到主存的。  当 CPU 对 cache 写数据时，同时也把数据写入主存，称为直写：  数据一致性好（cache 和 主存内容始终同步） 对系统可靠性高 简单易实现 写操作慢，写操作频繁时会增加总线带宽占用   当 CPU 写 cache 时，只更新 cache 中的数据，不立即写入主存，只有当该 cache block 被替换时，才将其写回主存，称为回写：  写操作快，节省总线带宽 数据一致性较差 实现复杂，需要 dirty 位标记 系统崩溃时可能丢失尚未写回的数据    写缓冲区可以解决直写写内存慢、回写替换时大量写回的问题，因此均需要写缓冲区。 性能例子 假设：  I-Cache命中缺失率2% D-Cahce命中缺失率4% 未命中惩罚为100周期 基础CPI为2 数据存取类指令占总共的36%  则可计算每次指令的缺失周期数：  I-Cache: 0.02 x 100 =...</div></div></div></a><a class="pagination-related" href="/2025/10/29/vd-p5/" title="超大规模集成电路设计笔记：第五篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/134402712_p0_250916_1347_7WSL.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-29</div><div class="info-item-2">超大规模集成电路设计笔记：第五篇</div></div><div class="info-2"><div class="info-item-1">这一章不考，至少往年题没有考过。  SoC总线  总线提供了系统中各个设备之间一种互连的访问共享硬件机制 在数字系统中，总线承担数据传输任务，如处理器和存储器之间的数据传输 总线的传输能力由总线的带宽和工作频率决定 总线的设计通常要考虑4个因素：总线宽度、时钟频率、仲裁机制和传输类型  常见的总线有：  AMBA：ARM公司定义的总线体系，广泛用于嵌入式SoC，包括 AHB、APB、AXI 等多个子协议 OCP：开放式核心接口协议，模块化设计，适合IP核集成 Wishbone：由OpenCores定义的开源SoC总线，简单易用，适合教学或FPGA设计 Avalon：原Altera公司定义的片上总线协议  AMBA    常见IP SoC中的常见IP包括：中断控制器、实时时钟、SPI、定时器、看门狗等。 一个完整的 SoC 通常包含如下模块（IP）： 123456789101112131415┌──────────────────────────┐│        CPU / DSP         │   ← 控制/计算IP├──────────────────────────┤...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Waline</span><span id="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Esing</div><div class="author-info-description">咱也不知道写点啥 (＠_＠;)</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">249</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">219</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Zxis233"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Zxis233" target="_blank" title="Github"><i class="fab fa-github" style="color: #ff80ac;"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss" style="color: #ff80ac;"></i></a><a class="social-icon" href="mailto:esing@mail.esing.dev" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #ff80ac;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p><b>将音乐解析 API 修改为自建版！</b><br><b>测试性开启 <u>Zstd</u> 压缩以提升网页加载速度 ！</b></p></div></div><div class="card-widget colo-info" id="colo-info"><div class="item-headline"><i class="fas fa-satellite-dish fa-flip-360"></i><span>Cloudflare 节点信息</span></div><div class="item-content"><div class="webinfo" data-cf-fields data-pangu-ignore>
+  <div class="webinfo-item"><div class="item-name">访问 IP :</div><div class="item-count" id="cf-ip">—</div></div>
+  <div class="webinfo-item"><div class="item-name">访问地区 :</div><div class="item-count" id="cf-loc">—</div></div>
+  <div class="webinfo-item"><div class="item-name">CDN 节点 :</div><div class="item-count" id="cf-colo">—</div></div>
+  <div class="webinfo-item"><div class="item-name">TLS 协议 :</div><div class="item-count" id="cf-tls">—</div></div>
+  <div class="webinfo-item"><div class="item-name">WARP :</div><div class="item-count" id="cf-warp">—</div></div>
+</div>
+<p data-cf-status role="status" aria-live="polite">节点信息需要 JavaScript 才能加载</p>
+<button type="button" data-cf-retry hidden>重试</button>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%BC%A9%E5%86%99"><span class="toc-number">1.</span> <span class="toc-text">常用缩写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%B0%E4%BB%A3%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">现代设计方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HDL%E8%AE%BE%E8%AE%A1vs%E5%8E%9F%E7%90%86%E5%9B%BE%E8%AE%BE%E8%AE%A1-Pros-Cons"><span class="toc-number">3.</span> <span class="toc-text">HDL设计vs原理图设计 Pros&amp;Cons</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E7%AD%89%E7%BA%A7"><span class="toc-number">4.</span> <span class="toc-text">抽象等级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Verilog%E8%AF%AD%E6%B3%95%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E4%B8%89%E4%B8%AA%E6%A6%82%E5%BF%B5%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">Verilog语法最重要的三个概念：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">6.</span> <span class="toc-text">综合是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">7.</span> <span class="toc-text">测试平台是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BF%E7%9C%9F%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">8.</span> <span class="toc-text">仿真是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Verilog%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AE%BE%E8%AE%A1%E5%8D%95%E5%85%83"><span class="toc-number">9.</span> <span class="toc-text">Verilog的基本设计单元</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%80%E6%9C%89%E8%BF%87%E7%A8%8B%E5%9D%97%EF%BC%88%E5%A6%82%EF%BC%9Ainitial%E5%9D%97%E3%80%81always%E5%9D%97%EF%BC%89%E3%80%81%E8%BF%9E%E7%BB%AD%E8%B5%8B%E5%80%BC%E8%AF%AD%E5%8F%A5%E3%80%81%E5%AE%9E%E4%BE%8B%E5%BC%95%E7%94%A8%E9%83%BD%E6%98%AF%E5%B9%B6%E8%A1%8C%E7%9A%84"><span class="toc-number">10.</span> <span class="toc-text">所有过程块（如：initial块、always块）、连续赋值语句、实例引用都是并行的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%B6%E6%97%B6%E6%A0%87%E8%AE%B0%EF%BC%9F"><span class="toc-number">11.</span> <span class="toc-text">延时标记？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B"><span class="toc-number">12.</span> <span class="toc-text">变量类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%86%E8%BE%A8%E6%9C%89%E7%AC%A6%E5%8F%B7%E6%95%B0%E5%92%8C%E6%97%A0%E7%AC%A6%E5%8F%B7%E6%95%B0%EF%BC%9F"><span class="toc-number">12.1.</span> <span class="toc-text">如何分辨有符号数和无符号数？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#z%E4%B8%8Ex"><span class="toc-number">12.2.</span> <span class="toc-text">z与x</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#parameter"><span class="toc-number">12.3.</span> <span class="toc-text">parameter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wire"><span class="toc-number">12.4.</span> <span class="toc-text">wire</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reg"><span class="toc-number">12.5.</span> <span class="toc-text">reg</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E7%AE%97"><span class="toc-number">13.</span> <span class="toc-text">运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97"><span class="toc-number">13.1.</span> <span class="toc-text">算术运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97"><span class="toc-number">13.2.</span> <span class="toc-text">逻辑运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%89%E5%BC%8F%E8%BF%90%E7%AE%97"><span class="toc-number">13.3.</span> <span class="toc-text">等式运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%8D%E6%8B%BC%E6%8E%A5%E5%92%8C%E9%83%A8%E5%88%86%E9%80%89%E6%8B%A9"><span class="toc-number">13.4.</span> <span class="toc-text">位拼接和部分选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%84%E7%BA%A6%EF%BC%88%E7%BC%A9%E5%87%8F%EF%BC%89%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">13.5.</span> <span class="toc-text">规约（缩减）运算符</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/09/23/wechat-lsposed-astrbot/" title="记一次用 LSPosed 把手机微信接入 AstrBot 的过程"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/3" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="记一次用 LSPosed 把手机微信接入 AstrBot 的过程"/></a><div class="content"><a class="title" href="/2026/09/23/wechat-lsposed-astrbot/" title="记一次用 LSPosed 把手机微信接入 AstrBot 的过程">记一次用 LSPosed 把手机微信接入 AstrBot 的过程</a><time datetime="2026-09-22T18:10:24.030Z" title="更新于 2026-09-23 02:10:24">2026-09-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/09/20/dom-router-problem/" title="记一次宿舍路由器安装问题排查"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/11" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="记一次宿舍路由器安装问题排查"/></a><div class="content"><a class="title" href="/2026/09/20/dom-router-problem/" title="记一次宿舍路由器安装问题排查">记一次宿舍路由器安装问题排查</a><time datetime="2026-09-20T05:58:56.185Z" title="更新于 2026-09-20 13:58:56">2026-09-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/16/starport-p13/" title="[星港游记] 金星大距：二分相"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/starport.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[星港游记] 金星大距：二分相"/></a><div class="content"><a class="title" href="/2026/08/16/starport-p13/" title="[星港游记] 金星大距：二分相">[星港游记] 金星大距：二分相</a><time datetime="2026-08-16T06:06:03.019Z" title="更新于 2026-08-16 14:06:03">2026-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/13/starport-p12/" title="[星港游记] 0813 英仙座流星雨"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/starport.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[星港游记] 0813 英仙座流星雨"/></a><div class="content"><a class="title" href="/2026/08/13/starport-p12/" title="[星港游记] 0813 英仙座流星雨">[星港游记] 0813 英仙座流星雨</a><time datetime="2026-08-16T05:07:00.070Z" title="更新于 2026-08-16 13:07:00">2026-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/08/cloudflare-workers-meting/" title="Cloudflare 搭建自托管 Meting.js 后端"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/57892762_p0_waifu2x_2x_jpg_2024-4-19_2216_y4dgn1bu98.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Cloudflare 搭建自托管 Meting.js 后端"/></a><div class="content"><a class="title" href="/2026/04/08/cloudflare-workers-meting/" title="Cloudflare 搭建自托管 Meting.js 后端">Cloudflare 搭建自托管 Meting.js 后端</a><time datetime="2026-08-13T09:03:58.156Z" title="更新于 2026-08-13 17:03:58">2026-08-13</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(https://pic.esing.dev/img/87257672_p0_2023-4-16_1808_qmfhwf6v6g.avif);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2023 - 2026 By Esing</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.7.0</a></span></div><div class="footer_custom_text">Deployed On <a href="https://pages.cloudflare.com/" target="_blank">Cloudflare Pages</a><a href="https://icp.gov.moe/?keyword=20237860" target="_blank"><br /><br /> 萌 ICP 备 20237860 号 </a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="rightMenu" role="menu" aria-label="页面操作" hidden data-min-width="0" data-random-url="/js/random-posts.json"><div class="rightMenu-group rightMenu-small" role="group" aria-label="页面导航"><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="back" aria-label="返回" title="返回"><i class="fas fa-arrow-left" aria-hidden="true"></i><span>返回</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="forward" aria-label="前进" title="前进"><i class="fas fa-arrow-right" aria-hidden="true"></i><span>前进</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="reload" aria-label="刷新" title="刷新"><i class="fas fa-rotate-right" aria-hidden="true"></i><span>刷新</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="top" aria-label="回到顶部" title="回到顶部"><i class="fas fa-arrow-up" aria-hidden="true"></i><span>回到顶部</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="选中文字" data-group="selection" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-selection" aria-label="复制选中文字" title="复制选中文字"><i class="fas fa-copy" aria-hidden="true"></i><span>复制选中文字</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="search" aria-label="百度搜索" title="百度搜索"><i class="rightmenu-baidu" aria-hidden="true"></i><span>百度搜索</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="选中的网址" data-group="selected-url" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="open-selection" aria-label="转到选中网址" title="转到选中网址"><i class="fas fa-link" aria-hidden="true"></i><span>转到选中网址</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="链接操作" data-group="link" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="open-link" aria-label="新标签打开链接" title="新标签打开链接"><i class="fas fa-up-right-from-square" aria-hidden="true"></i><span>新标签打开链接</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-link" aria-label="复制链接" title="复制链接"><i class="fas fa-copy" aria-hidden="true"></i><span>复制链接</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="图片操作" data-group="image" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="open-image" aria-label="新标签打开图片" title="新标签打开图片"><i class="fas fa-image" aria-hidden="true"></i><span>新标签打开图片</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-image" aria-label="复制图片链接" title="复制图片链接"><i class="fas fa-copy" aria-hidden="true"></i><span>复制图片链接</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="页面功能"><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-page" aria-label="复制本文地址" title="复制本文地址"><i class="fas fa-link" aria-hidden="true"></i><span>复制本文地址</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="random" aria-label="随便逛逛" title="随便逛逛"><i class="fas fa-paper-plane" aria-hidden="true"></i><span>随便逛逛</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="dark" aria-label="昼夜切换" title="昼夜切换"><i class="fas fa-moon" aria-hidden="true"></i><span>昼夜切换</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="read" aria-label="阅读模式" title="阅读模式"><i class="fas fa-book" aria-hidden="true"></i><span>阅读模式</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="fullscreen" aria-label="进入全屏" title="进入全屏"><i class="fas fa-expand" aria-hidden="true"></i><span>进入全屏</span></button></div></div><div id="rightmenu-status" role="status" aria-live="polite" aria-atomic="true"></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><script src="/vendor/pangu/pangu.umd.js?v=10.4.1" defer></script><script src="/js/pangu-spacing.js?v=10.4.1" defer data-field="post"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.18.1/dist/katex.min.css')
+    if (false) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.18.1/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const parseViewBox = viewBox => {
+    if (!viewBox) return null
+    const parts = viewBox.trim().split(/[\s,]+/).map(n => Number(n))
+    if (parts.length !== 4 || parts.some(n => Number.isNaN(n))) return null
+    return parts
+  }
+
+  const getSvgViewBox = svg => {
+    const attr = parseViewBox(svg.getAttribute('viewBox'))
+    if (attr) return attr
+
+    // Fallback: use bbox to build a viewBox
+    try {
+      const bbox = svg.getBBox()
+      if (bbox && bbox.width && bbox.height) return [bbox.x, bbox.y, bbox.width, bbox.height]
+    } catch (e) {
+      // getBBox may fail on some edge cases; ignore
+    }
+
+    const w = Number(svg.getAttribute('width')) || 0
+    const h = Number(svg.getAttribute('height')) || 0
+    if (w > 0 && h > 0) return [0, 0, w, h]
+    return [0, 0, 100, 100]
+  }
+
+  const setSvgViewBox = (svg, vb) => {
+    svg.setAttribute('viewBox', `${vb[0]} ${vb[1]} ${vb[2]} ${vb[3]}`)
+  }
+
+  const clamp = (v, min, max) => Math.max(min, Math.min(max, v))
+
+  const openSvgInNewTab = ({ source, initViewBox }) => {
+    const getClonedSvg = () => {
+      if (typeof source === 'string') {
+        const template = document.createElement('template')
+        template.innerHTML = source.trim()
+        const svg = template.content.querySelector('svg')
+        return svg ? svg.cloneNode(true) : null
+      }
+      if (source && typeof source.cloneNode === 'function') {
+        return source.cloneNode(true)
+      }
+      return null
+    }
+
+    const clone = getClonedSvg()
+    if (!clone) return
+    if (initViewBox && initViewBox.length === 4) {
+      clone.setAttribute('viewBox', initViewBox.join(' '))
+    }
+    if (!clone.getAttribute('xmlns')) clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+    if (!clone.getAttribute('xmlns:xlink') && clone.innerHTML.includes('xlink:')) {
+      clone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink')
+    }
+    // inject background to match current theme
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
+    const bg = getComputedStyle(document.body).backgroundColor || (isDark ? '#1e1e1e' : '#ffffff')
+    if (!clone.style.background) clone.style.background = bg
+
+    const serializer = new XMLSerializer()
+    const svgSource = serializer.serializeToString(clone)
+    const htmlSource = `<!doctype html><html><head><meta charset="utf-8" />
+      <style>
+        html, body { width: 100%; height: 100%; margin: 0; display: flex; align-items: center; justify-content: center; background: ${bg}; }
+        svg { max-width: 100%; max-height: 100%; height: auto; width: auto; }
+      </style>
+      </head><body>${svgSource}</body></html>`
+    const blob = new Blob([htmlSource], { type: 'text/html;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    window.open(url, '_blank', 'noopener')
+
+    setTimeout(() => URL.revokeObjectURL(url), 5000)
+  }
+
+  const attachMermaidViewerButton = wrap => {
+    let btn = wrap.querySelector('.mermaid-open-btn')
+    if (!btn) {
+      btn = document.createElement('button')
+      btn.type = 'button'
+      btn.className = 'mermaid-open-btn'
+      wrap.appendChild(btn)
+    }
+
+    btn.innerHTML = '<i class="fa fa-search fa-fw" aria-hidden="true"></i>'
+
+    if (!btn.__mermaidViewerBound) {
+      btn.addEventListener('click', e => {
+        e.preventDefault()
+        e.stopPropagation()
+        const svg = wrap.__mermaidOriginalSvg || wrap.querySelector('svg')
+        if (!svg) return
+        const initViewBox = wrap.__mermaidInitViewBox
+        openSvgInNewTab({ source: svg, initViewBox })
+      })
+      btn.__mermaidViewerBound = true
+    }
+  }
+
+  // Zoom around a point (px, py) in the SVG viewport (in viewBox coordinates)
+  const zoomAtPoint = (vb, factor, px, py) => {
+    const w = vb[2] * factor
+    const h = vb[3] * factor
+    const nx = px - (px - vb[0]) * factor
+    const ny = py - (py - vb[1]) * factor
+    return [nx, ny, w, h]
+  }
+
+  const initMermaidGestures = wrap => {
+    // Clean up previous event listeners and pending frames
+    if (wrap.__mermaidAbortController) {
+      wrap.__mermaidAbortController.abort()
+      if (wrap.__mermaidRafId) cancelAnimationFrame(wrap.__mermaidRafId)
+    }
+    const ac = new AbortController()
+    wrap.__mermaidAbortController = ac
+    const svg = wrap.querySelector('svg')
+    if (!svg) return
+
+    // Ensure viewBox exists so gestures always work
+    const initVb = getSvgViewBox(svg)
+    wrap.__mermaidInitViewBox = initVb
+    wrap.__mermaidCurViewBox = initVb.slice()
+    setSvgViewBox(svg, initVb)
+    // Disable default gestures to prevent scroll chaining and pinch-zoom penetration in Chrome
+    svg.style.touchAction = 'none'
+
+    // Cache BoundingClientRect, throttled on scroll to reduce reflow
+    let cachedRect = svg.getBoundingClientRect()
+    let rectDirty = false
+    const markRectDirty = () => { rectDirty = true }
+    window.addEventListener('resize', markRectDirty, { signal: ac.signal })
+    window.addEventListener('scroll', markRectDirty, { signal: ac.signal, capture: true })
+    const getRect = () => {
+      if (rectDirty) {
+        cachedRect = svg.getBoundingClientRect()
+        rectDirty = false
+      }
+      return cachedRect
+    }
+
+    // Precompute clamp bounds from initial viewBox
+    const minW = initVb[2] * 0.1
+    const maxW = initVb[2] * 10
+    const minH = initVb[3] * 0.1
+    const maxH = initVb[3] * 10
+    const clampVb = vb => {
+      const out = vb.slice()
+      out[2] = clamp(out[2], minW, maxW)
+      out[3] = clamp(out[3], minH, maxH)
+      return out
+    }
+
+    // Throttle DOM updates using requestAnimationFrame
+    let pendingVb = null
+    let rafId = null
+    const applyVb = () => {
+      if (pendingVb) {
+        wrap.__mermaidCurViewBox = pendingVb
+        setSvgViewBox(svg, pendingVb)
+        pendingVb = null
+      }
+      rafId = null
+      wrap.__mermaidRafId = null
+    }
+    const setCurVb = vb => {
+      pendingVb = clampVb(vb)
+      if (!rafId) {
+        rafId = requestAnimationFrame(applyVb)
+        wrap.__mermaidRafId = rafId
+      }
+    }
+
+    const state = {
+      pointers: new Map(),
+      startVb: null,
+      startDist: 0,
+      lastPointerX: 0,
+      lastPointerY: 0
+    }
+
+    const onPointerDown = e => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return
+      svg.setPointerCapture(e.pointerId)
+      const curVb = wrap.__mermaidCurViewBox
+      state.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+      if (state.pointers.size === 1) {
+        state.startVb = curVb.slice()
+        state.lastPointerX = e.clientX
+        state.lastPointerY = e.clientY
+      } else if (state.pointers.size === 2) {
+        const pts = [...state.pointers.values()]
+        const dx = pts[0].x - pts[1].x
+        const dy = pts[0].y - pts[1].y
+        state.startDist = Math.hypot(dx, dy)
+        state.startVb = curVb.slice()
+      }
+    }
+
+    const onPointerMove = e => {
+      if (!state.pointers.has(e.pointerId)) return
+      state.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+      const curVb = wrap.__mermaidCurViewBox
+      const rect = getRect()
+      if (state.pointers.size === 1 && state.startVb) {
+        const p = state.pointers.values().next().value
+        const dxClient = p.x - state.lastPointerX
+        const dyClient = p.y - state.lastPointerY
+        state.lastPointerX = p.x
+        state.lastPointerY = p.y
+        const dx = dxClient * (curVb[2] / rect.width)
+        const dy = dyClient * (curVb[3] / rect.height)
+        setCurVb([curVb[0] - dx, curVb[1] - dy, curVb[2], curVb[3]])
+        return
+      }
+      if (state.pointers.size === 2 && state.startVb && state.startDist > 0) {
+        const pts = [...state.pointers.values()]
+        const dx = pts[0].x - pts[1].x
+        const dy = pts[0].y - pts[1].y
+        const dist = Math.hypot(dx, dy)
+        if (!dist) return
+        const factor = state.startDist / dist
+        const cx = (pts[0].x + pts[1].x) / 2
+        const cy = (pts[0].y + pts[1].y) / 2
+        const px = curVb[0] + (cx - rect.left) * (curVb[2] / rect.width)
+        const py = curVb[1] + (cy - rect.top) * (curVb[3] / rect.height)
+        setCurVb(zoomAtPoint(state.startVb, factor, px, py))
+      }
+    }
+
+    const onPointerUpOrCancel = e => {
+      // Release PointerCapture to avoid event capture anomalies
+      if (svg.hasPointerCapture && svg.hasPointerCapture(e.pointerId)) {
+        svg.releasePointerCapture(e.pointerId)
+      }
+      state.pointers.delete(e.pointerId)
+      if (state.pointers.size === 0) {
+        state.startVb = null
+        state.startDist = 0
+      } else if (state.pointers.size === 1) {
+        const p = state.pointers.values().next().value
+        state.lastPointerX = p.x
+        state.lastPointerY = p.y
+      }
+    }
+
+    const onWheel = e => {
+      // Prevent event bubbling from triggering external scroll
+      e.preventDefault()
+      e.stopPropagation()
+      // Normalize deltaY across deltaMode (Chrome uses pixels, Safari uses lines)
+      let delta = e.deltaY
+      if (e.deltaMode === 1) delta *= 16
+      else if (e.deltaMode === 2) delta *= 400
+
+      // Continuous zoom factor: smoother than fixed 1.1/0.9 steps
+      const zoomFactor = Math.pow(1.001, delta)
+
+      const curVb = wrap.__mermaidCurViewBox
+      const rect = getRect()
+      const px = curVb[0] + (e.clientX - rect.left) * (curVb[2] / rect.width)
+      const py = curVb[1] + (e.clientY - rect.top) * (curVb[3] / rect.height)
+      setCurVb(zoomAtPoint(curVb, zoomFactor, px, py))
+    }
+
+    const onDblClick = () => {
+      const init = wrap.__mermaidInitViewBox
+      if (init) setCurVb(init)
+    }
+
+    svg.addEventListener('pointerdown', onPointerDown, { signal: ac.signal })
+    svg.addEventListener('pointermove', onPointerMove, { signal: ac.signal })
+    svg.addEventListener('pointerup', onPointerUpOrCancel, { signal: ac.signal })
+    svg.addEventListener('pointercancel', onPointerUpOrCancel, { signal: ac.signal })
+    svg.addEventListener('wheel', onWheel, { passive: false, signal: ac.signal })
+    svg.addEventListener('dblclick', onDblClick, { signal: ac.signal })
+  }
+
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const mode = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'
+    const themes = {"light":"base","dark":"base"}
+    const palettes = {"light":{"darkMode":false,"background":"#ffffff","textColor":"#2b3037","primaryColor":"#fff5f8","primaryTextColor":"#29313a","primaryBorderColor":"#d96a91","secondaryColor":"#ecfbf5","secondaryTextColor":"#213c34","secondaryBorderColor":"#269c78","tertiaryColor":"#f7f9fb","tertiaryTextColor":"#2b3037","tertiaryBorderColor":"#cfd8e3","lineColor":"#64717d","defaultLinkColor":"#64717d","titleColor":"#26323a","edgeLabelBackground":"#ffffff","clusterBkg":"#fbfcfd","clusterBorder":"#dbe3ea","noteBkgColor":"#fff8df","noteTextColor":"#3a3428","noteBorderColor":"#d6b25a","actorBkg":"#fff5f8","actorBorder":"#d96a91","actorTextColor":"#29313a","actorLineColor":"#8b96a3","signalColor":"#64717d","signalTextColor":"#2b3037","labelBoxBkgColor":"#f7f9fb","labelBoxBorderColor":"#dbe3ea","labelTextColor":"#2b3037","loopTextColor":"#2b3037","activationBkgColor":"#ecfbf5","activationBorderColor":"#269c78"},"dark":{"darkMode":true,"background":"#171a1f","textColor":"#e6edf3","primaryColor":"#33242c","primaryTextColor":"#f7eaf0","primaryBorderColor":"#f08cab","secondaryColor":"#1c332d","secondaryTextColor":"#e5f8f1","secondaryBorderColor":"#5bcaa0","tertiaryColor":"#20262e","tertiaryTextColor":"#e6edf3","tertiaryBorderColor":"#3b4652","lineColor":"#a7b1bc","defaultLinkColor":"#a7b1bc","titleColor":"#f0f4f8","edgeLabelBackground":"#171a1f","clusterBkg":"#1b2027","clusterBorder":"#323d48","noteBkgColor":"#352d1e","noteTextColor":"#f4e9c8","noteBorderColor":"#c8a856","actorBkg":"#33242c","actorBorder":"#f08cab","actorTextColor":"#f7eaf0","actorLineColor":"#687482","signalColor":"#c7d0d9","signalTextColor":"#e6edf3","labelBoxBkgColor":"#20262e","labelBoxBorderColor":"#3b4652","labelTextColor":"#e6edf3","loopTextColor":"#e6edf3","activationBkgColor":"#1c332d","activationBorderColor":"#5bcaa0"}}
+    const theme = themes[mode]
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      // Clean up event listeners before removing old SVG
+      if (item.__mermaidAbortController) {
+        item.__mermaidAbortController.abort()
+      }
+      const oldSvg = item.querySelector('svg')
+      if (oldSvg) oldSvg.remove()
+      let config = {}
+      try {
+        config = mermaidSrc.dataset.config ? JSON.parse(mermaidSrc.dataset.config) : {}
+      } catch (e) {
+        console.warn('[mermaid] failed to parse dataset.config:', e)
+      }
+      if (!config.theme) {
+        config.theme = theme
+      }
+      // Keep per-diagram overrides; do not tint an explicitly different theme.
+      if (config.theme === theme && palettes[mode]) {
+        config.themeVariables = { ...palettes[mode], ...config.themeVariables }
+      }
+      const mermaidThemeConfig = `%%{init: ${JSON.stringify(config)}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+        if (true) initMermaidGestures(item)
+        item.__mermaidOriginalSvg = svg
+        if (true) attachMermaidViewerButton(item)
+      }
+
+      const handleError = err => {
+        console.error(`[mermaid] render failed for block #${index}:`, err)
+        const errorEl = document.createElement('div')
+        errorEl.className = 'mermaid-error'
+        errorEl.textContent = `Mermaid render error: ${err.message || err}`
+        mermaidSrc.insertAdjacentElement('afterend', errorEl)
+      }
+
+      try {
+        const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+        // mermaid v9 and v10 compatibility
+        if (typeof renderFn === 'string') {
+          renderMermaid(renderFn)
+        } else {
+          renderFn.then(({ svg }) => renderMermaid(svg)).catch(handleError)
+        }
+      } catch (err) {
+        handleError(err)
+      }
+    })
+  }
+
+  const codeToMermaid = $article => {
+    const codeMermaidEle = $article.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    const $article = document.getElementById('article-container')
+    if (!$article) return
+
+    if (true) codeToMermaid($article)
+    const $mermaid = $article.querySelectorAll('.mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = {"search":false}
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://comment.esing.dev/',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.15.2/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client@3.15.2/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !true) {
+    if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = {"language":"zh-CN","perPage":7}
+
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  const initGitalk = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGitalk = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const gitalk = new Gitalk({
+      clientID: 'ad3070e381dc19ea10a3',
+      clientSecret: '70adf2f0332c581dfc5055033151ca3989b89ebd',
+      repo: 'BlogComment',
+      owner: 'Zxis233',
+      admin: ['Zxis233'],
+      updateCountCallback: commentCount,
+      ...option,
+      id: isShuoshuo ? path : (option && option.id) || '86a9941c604067496acbb24ae3a44109'
+    })
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async(el, path) => {
+    if (typeof Gitalk === 'function') initGitalk(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js')
+      initGitalk(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Gitalk'
+      ? window.shuoshuoComment = { loadComment: loadGitalk }
+      : window.loadOtherComment = loadGitalk
+    return
+  }
+
+  if ('Waline' === 'Gitalk' || !true) {
+    if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><script src="/js/meting.js" defer></script><script src="/js/music-pjax.js" defer></script><script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script><script src="/js/target-cursor.js" defer></script><script src="/js/cursor-toggle.js" defer></script><script src="/js/title.js" defer></script><script src="/js/titlelight.js" defer></script><script src="/js/autoload.js" defer></script><script src="/js/rightmenu.js" defer></script><script src="/js/cloudflare-info.js" defer></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"]):not([data-fancybox])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      if (!item.parentNode) return
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || ''
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    const responseURL = e.request && e.request.responseURL
+    if (e.request && e.request.status === 404) {
+      true
+        ? pjax.loadUrl('/404')
+        : responseURL && (window.location.href = responseURL)
+    } else if (responseURL) {
+      window.location.href = responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.7.0"></script></div></div></body></html>

@@ -1,0 +1,56 @@
+#colo-info .webinfo {
+  display: flex;
+  flex-direction: column;
+}
+
+#colo-info .webinfo-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0 8px;
+}
+
+#colo-info .item-name {
+  flex-shrink: 0;
+  text-align: left;
+}
+
+#colo-info .item-count {
+  min-width: 0;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+#colo-info .ip-wrap {
+  flex-direction: column;
+}
+
+#colo-info .ip-wrap .item-count {
+  width: 100%;
+}
+
+#colo-info [data-cf-status] {
+  margin: 8px 0 0;
+  color: var(--font-color);
+  font-size: 0.9em;
+}
+
+#colo-info [data-cf-retry] {
+  margin-top: 8px;
+  padding: 2px 12px;
+  border: 1px solid currentColor;
+  border-radius: 6px;
+  color: var(--font-color);
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+#colo-info [data-cf-retry]:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+#colo-info [hidden] {
+  display: none;
+}

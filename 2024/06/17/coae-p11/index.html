@@ -1,0 +1,1042 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>计算机原理与嵌入式系统笔记：第十一篇 | Esing的小站</title><meta name="author" content="Esing"><meta name="copyright" content="Esing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="CPU总线 计算系统包括微处理器（CPU）、输入输出设备（I&#x2F;O Devices）和存储器。 总线（bus） 是系统组件之间的公共连接，是CPU与存储器和设备进行通信的机制，定义它们之间通信的协议。 协议（protocol） 定义了设备之间如何通信。 四周期握手协议  设备1升高查询信号的输出电平，告诉设备2准备监听数据。 当设备2准备好接收数据时，它使应答信号为高电平。这时设备1和设备2已准备好">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机原理与嵌入式系统笔记：第十一篇">
+<meta property="og:url" content="https://blog.esing.dev/2024/06/17/coae-p11/">
+<meta property="og:site_name" content="Esing的小站">
+<meta property="og:description" content="CPU总线 计算系统包括微处理器（CPU）、输入输出设备（I&#x2F;O Devices）和存储器。 总线（bus） 是系统组件之间的公共连接，是CPU与存储器和设备进行通信的机制，定义它们之间通信的协议。 协议（protocol） 定义了设备之间如何通信。 四周期握手协议  设备1升高查询信号的输出电平，告诉设备2准备监听数据。 当设备2准备好接收数据时，它使应答信号为高电平。这时设备1和设备2已准备好">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png">
+<meta property="article:published_time" content="2024-06-17T12:17:14.000Z">
+<meta property="article:modified_time" content="2025-04-07T09:17:39.845Z">
+<meta property="article:author" content="Esing">
+<meta property="article:tag" content="ARM">
+<meta property="article:tag" content="复习">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="汇编">
+<meta property="article:tag" content="计算机原理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "计算机原理与嵌入式系统笔记：第十一篇",
+  "url": "https://blog.esing.dev/2024/06/17/coae-p11/",
+  "image": "https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png",
+  "datePublished": "2024-06-17T12:17:14.000Z",
+  "dateModified": "2025-04-07T09:17:39.845Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Esing",
+      "url": "https://blog.esing.dev"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://blog.esing.dev/2024/06/17/coae-p11/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const start = 8
+              const end = 24
+              const isNight =
+                start < end
+                    ? hour < start || hour >= end
+                    : hour >= start || hour < end
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;1aabda1500704262b993096aaa3b5c27&quot;}"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/misans@5.0.0/lib/Normal/MiSansVF.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":380,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":100,"languages":{"author":"作者: Esing","link":"链接: ","source":"来源: Esing的小站","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '计算机原理与嵌入式系统笔记：第十一篇',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/maple_new.css"><link rel="stylesheet" href="/css/target-cursor.css"><link rel="stylesheet" href="/css/legacy-appearance.css"><link rel="stylesheet" href="/vendor/aplayer/APlayer.min.css"><link rel="stylesheet" href="/css/aplayer-theme.css"><link rel="stylesheet" href="/css/rightmenu.css"><link rel="stylesheet" href="/css/cloudflare-info.css"><script src="/vendor/aplayer/APlayer.min.js"></script><meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="Esing的小站" type="application/atom+xml">
+</head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="/css/load.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">249</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">219</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E6%98%9F%E6%B8%AF%E6%B8%B8%E8%AE%B0/"><i class="fa-fw fa-solid fa-star-half-stroke"></i><span> 星港游记</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-code"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Esing的小站</span></a><a class="nav-page-title" href="/"><span class="site-name">计算机原理与嵌入式系统笔记：第十一篇</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E6%98%9F%E6%B8%AF%E6%B8%B8%E8%AE%B0/"><i class="fa-fw fa-solid fa-star-half-stroke"></i><span> 星港游记</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-code"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">计算机原理与嵌入式系统笔记：第十一篇</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-17T12:17:14.000Z" title="发表于 2024-06-17 20:17:14">2024-06-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-04-07T09:17:39.845Z" title="更新于 2025-04-07 17:17:39">2025-04-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">3.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:1000,&quot;messagePrev&quot;:&quot;本文最后更新于&quot;,&quot;messageNext&quot;:&quot;天前，部分内容可能已过时。&quot;,&quot;postUpdate&quot;:&quot;2025-04-07 17:17:39&quot;}" hidden></div><h2 id="CPU总线">CPU总线</h2>
+<p><strong>计算系统包括微处理器（CPU）、输入输出设备（I/O Devices）和存储器。</strong></p>
+<p><strong>总线（bus）</strong> 是系统组件之间的公共连接，是CPU与存储器和设备进行通信的机制，定义它们之间通信的协议。<br>
+<strong>协议（protocol）</strong> 定义了设备之间如何通信。</p>
+<h3 id="四周期握手协议">四周期握手协议</h3>
+<ol>
+<li>设备1升高查询信号的输出电平，告诉设备2准备监听数据。</li>
+<li>当设备2准备好接收数据时，它使应答信号为高电平。这时设备1和设备2已准备好发送或接收数据。</li>
+<li>一旦数据传送完毕，设备2使应答信号为低电平，表示已经接收完数据。</li>
+<li>检测到应答信号变低，设备1降低其查询信号的输出电平</li>
+</ol>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20240617201915221_2024-6-17_2019_iu520vo6pc.png" alt="典型的四周期握手协议示意图" style="zoom:50%;" />
+<h3 id="典型总线结构">典型总线结构</h3>
+<p>总线的基本操作是读和写，典型的总线结构包括以下组件：</p>
+<ul>
+<li><strong>Clock</strong>：时钟，用于总线各组件之间的同步。</li>
+<li><strong>R/W</strong>：当总线读时，R/W为1；当总线写时，R/W为0。</li>
+<li><strong>Address</strong>：是一个a位信号束（bundle），传输访问的地址。</li>
+<li><strong>Data</strong>：是一个n位信号束，用于传输CPU发送或者接收的数据。</li>
+<li><strong>Data ready</strong>：数据就绪，表示数据信号束上的值有效。</li>
+</ul>
+<p>传输由CPU控制，R/W和地址是单向信号，CPU决定地址和方向。</p>
+<h3 id="总线操作的时序图与顺序图">总线操作的时序图与顺序图</h3>
+<p>总线上的读或写操作称为<strong>事务（Transaction）</strong>。</p>
+<p>下面是一个一个先读后写的总线传输<strong>顺序图（sequence diagram）</strong>：</p>
+<ul>
+<li>CPU首先从内存中读取一个存储单元的数据；</li>
+<li>然后，CPU再将数据写入到设备dev1中；</li>
+<li>对于读或写事务，每次都由总线协议进行管理。</li>
+</ul>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20240617211404261_2024-6-17_2114_p7uk1a0355.png" alt="总线读写顺序图" style="zoom:50%;" />
+<p><strong>时序图（timing diagram）<strong>表示总线上的信号如何随时间变化。为了保证该信号在正确时间达到正确值，时序图经常显示</strong>时序约束（timing constraint）</strong>。时序约束既定义顺序也定义时间差。</p>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20240617211453083_2024-6-17_2114_osxagb8ap4.png" alt="总线读写时序图" style="zoom:50%;" />
+<h4 id="等待状态与突发传输">等待状态与突发传输</h4>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20240617211619621_2024-6-17_2116_w1dyz7ioi2.png" alt="总线的等待状态" style="zoom:50%;" />
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20240617211705877_2024-6-17_2117_hh8eqbwdoa.png" alt="总线的突发传输" style="zoom:50%;" />
+<h3 id="总线操作的状态机视图">总线操作的状态机视图</h3>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20240617211747835_2024-6-17_2117_9y4m6c83nm.png" alt="总线事务的状态机视图关注控制信号的转换过程" style="zoom:50%;" />
+<h3 id="直接存储器访问与总线主控器">直接存储器访问与总线主控器</h3>
+<p><strong>直接存储器访问（direct memory access, DMA）<strong>是一种</strong>不由CPU控制的总线读写操作</strong>。DMA传输由DMA控制器控制，它从CPU请求总线控制，得到控制权后，DMA控制器直接在设备和存储器之间执行读写操作。</p>
+<ul>
+<li><strong>总线请求（bus request）</strong> 是CPU的输入信号，通过它DMA控制器请求总线控制权。</li>
+<li><strong>总线授权（bus grant）</strong> 信号表示总线已经授权给DMA控制器。</li>
+</ul>
+<p>能够自己启动总线传输的设备叫<strong>总线主控器（bus master）</strong>。</p>
+<p><strong>默认情况下CPU是总线控制器，由CPU来启动DMA传输。</strong> DMA控制器也可以申请控制总线，使用总线请求和总线授权两个信号来获得总线控制权，过程类似四周期握手协议。CPU将总线控制权授予DMA控制器之前，将完成所有未完成的总线事务。在DMA工作期间，CPU不使用总线，停止驱动总线信号。<strong>只要DMA控制器成为总线控制器，它就拥有对所有总线信号的控制权。</strong></p>
+<p>DMA控制器包括以下三个寄存器：</p>
+<ul>
+<li><strong>起始地址寄存器</strong>：从何处开始传输；</li>
+<li><strong>长度寄存器</strong>：要传输的字的个数；</li>
+<li><strong>状态寄存器</strong>：用于CPU操作DMA控制器。</li>
+</ul>
+<h4 id="DMA控制器的工作模式">DMA控制器的工作模式</h4>
+<p>DMA传输期间，CPU不能使用总线。如CPU需要总线，则停止，等待DMA交出控制权。为防止CPU空闲太长时间，大多数DMA控制器实现了一次只占用总线几个周期的工作模式（4、8、16个字）。</p>
+<div class="note info flat"><p>DMA请求的周期调度：每块数据后，DMA控制器交还控制权给CPU，进入一个预置的睡眠周期，之后再次为下一块数据传输请求总线。</p>
+</div>
+<p>此外，DMA在CPU不使用总线时为系统提供<strong>并行（parallelism）</strong>。</p>
+<h3 id="系统总线配置">系统总线配置</h3>
+<p>一个微处理器系统可能含有多条总线，高速设备连到高速总线上，低速设备连到其他总线上。总线之间通过**桥接器（bridge）**互连。</p>
+<p><strong>使用多总线与桥接器的优点：</strong></p>
+<ol>
+<li>总线速度越高，能提供的<strong>数据带宽越大</strong>。</li>
+<li>高速总线通常需要更昂贵的电路和连接器。可通过使用较慢、较便宜的总线来<strong>降低低速设备的成本</strong>。</li>
+<li>桥接器允许总线独立操作，这样在I/O操作中可<strong>提供某些并行性</strong>。</li>
+</ol>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20240617213626877_2024-6-17_2136_qyrkicc3bl.png" alt="桥接器示意图" style="zoom:50%;" />
+<h3 id="AMBA总线">AMBA总线</h3>
+<p>AMBA规范包括两条总线：</p>
+<ul>
+<li>高性能总线AHB：经过优化专为高速传输服务，直接连接到ARM处理器上。支持一些高性能特性：流水线技术、突发传输、分离传输（split transfer）和多总线主控器等。</li>
+<li>外设总线APB：设计简易，便于实现，功耗也较低。</li>
+</ul>
+<div class="note info flat"><p>调研报告中有详细介绍，这里不做展开。</p>
+</div>
+<h2 id="存储设备">存储设备</h2>
+<ul>
+<li>存储设备组织：
+<ul>
+<li>容量</li>
+<li>数据宽度</li>
+</ul>
+</li>
+<li>256Mb存储器
+<ul>
+<li>64M×4位</li>
+<li>32M×8位</li>
+</ul>
+</li>
+<li>长宽比（aspect ratio）</li>
+</ul>
+<p>存储器内部，数据是存放在二维阵列存储单元中，n位地址被分成行地址r和列地址c（n=r+c）。行列地址联合起来选定一个特定存储单元（1位或子集）。</p>
+<h3 id="随机存储器">随机存储器</h3>
+<ul>
+<li><strong>随机存储器（RAM）</strong>：可以被读和写，地址可以按任意顺序读取。</li>
+<li><strong>静态随机存储器SRAM（Static Random AccessMemory）</strong>：小容量快速存储器。</li>
+<li><strong>动态随机存储器DRAM（Dynamic Random AccessMemory）</strong>：密度大、需要周期刷新。</li>
+<li><strong>同步DRAM（Synchronous DRAM，SDRAM）</strong>：使用<strong>同步时钟</strong>来提升DRAM的性能，内部刷新及数据传输都以系统时钟为准。</li>
+<li><strong>双倍数据速率DRAM（DDR SDRAM）</strong>：速度更快的同步动态随机存储器，<strong>能够在时钟的上升沿和下降沿各传输一次数据</strong>，因此一个时钟周期内传输两次数据。</li>
+</ul>
+<div class="note primary flat"><p>电脑中使用的内存即为DDR内存，现在已经到DDR5了。</p>
+<p>笔记本中的内存封装为SO-DIMM，DIMM表示双列直插内存模块，与之对应的是SIMM（单列直插内存模块）。</p>
+</div>
+<h3 id="只读存储器">只读存储器</h3>
+<p>嵌入式系统中很多代码以及数据不随时间改变，对辐射感应错误相对不敏感。<strong>只读存储器（read-only memory，ROM）</strong> 所存数据稳定，断电后所存数据也不会改变，并且其结构较简单，读出较方便。</p>
+<h3 id="闪存存储器">闪存存储器</h3>
+<p>闪存（flash）是非易失性存储器，可以电擦除。闪存使用标准系统电压擦写和编程，允许在标准系统内部再编程。擦写次数有限：10<sup>4</sup>~10<sup>5</sup>次。闪存使用随机读访问，写操作比读操作慢的多。</p>
+<p>闪存分为两大类：</p>
+<ul>
+<li><strong>NOR Flash</strong>：按字访问，整块擦除。地址线和数据线分开，适于随机读或写，可用作启动代码的存储芯片。</li>
+<li><strong>NAND Flash</strong>：读一页，整块擦除。<strong>更便宜，擦写速度快。</strong> 共用地址和数据线，适于顺序访问，可以用作存储媒体数据。</li>
+</ul>
+<h3 id="存储系统组织">存储系统组织</h3>
+<p>存储芯片内部的组织方式：</p>
+<ul>
+<li>多片存储器芯片串联，组合成更大容量。</li>
+<li>多片存储器芯片并联，组合成更大数据宽度。</li>
+</ul>
+<p><strong>通道和组是提高内存系统并行度的两种方式。</strong></p>
+<h2 id="I-O接口">I/O接口</h2>
+<div class="note info flat"><p>这一块不知道有啥好考的。我觉得基本不考。</p>
+</div>
+<h3 id="监视定时器">监视定时器</h3>
+<p>看门狗定时器（watchdog timer）是一个用于系统内部操作的I/O设备。看门狗定时器连接到CPU总线和CPU复位线上。CPU的软件在定时器未达到超时限制前，周期性的重置监视定时器；一旦定时器达到该限制，它的超时动作就复位处理器。</p>
+<div class="note primary flat"><p>之前折腾ESP系列单片机，在Watchdog上面卡了好久，总是跑到一半就自动复位。后来发现程序中的延时设置的不好，超过看门狗上限了。</p>
+</div>
+<h3 id="定时器-计数器">定时器&amp;计数器</h3>
+<ul>
+<li>定时器和计数器很相似，区别主要在用途，而不是其逻辑电路。</li>
+<li>它们都是由带有保存当前值的寄存器和向当前寄存器值加1的一个增量输入的加法器逻辑电路组成。</li>
+<li>定时器让它的计数连到周期性时钟信号上以测量时间间隔；而计数器让它的计数连到非周期性信号上以计算外部事件的发生次数。</li>
+<li>完成设定的定时时间或计数次数通常会产生<strong>中断</strong>。</li>
+</ul>
+<h3 id="触摸屏">触摸屏</h3>
+<p>触摸屏分为电阻屏和电容屏两种。</p>
+<ul>
+<li>电阻屏：精度高、噪声小；需要触笔、单点触控。</li>
+<li>电容屏：精度低、噪声大；用手指、多点触控。</li>
+</ul>
+<div class="note primary flat"><p>还有一种叫电磁屏，三星Note系列手机采用。电磁屏不仅具备电容屏的所有功能，还支持触笔。以前有台三星Note2，2012年的手机，自带的S-Pen已经支持1024级压感了。</p>
+</div>
+<h2 id="计算平台的设计与性能分析">计算平台的设计与性能分析</h2>
+<h3 id="系统的体系结构">系统的体系结构</h3>
+<p><strong>体系结构指共同构成一个单元的一组元件及元件之间的关系。</strong> 嵌入式计算系统的体系结构是实现嵌入式计算系统的蓝图（blueprint），定义系统需要的元件和如何连接。</p>
+<p>嵌入式计算系统的体系结构包括：</p>
+<ul>
+<li>硬件体系结构</li>
+<li>软件体系结构</li>
+</ul>
+<h4 id="硬件体系结构">硬件体系结构</h4>
+<p>硬件体系结构包括以下单元：</p>
+<ul>
+<li><strong>CPU</strong>：多种不同体系结构，一种体系结构内也有不同的时钟速度、存储结构、集成的外围设备等。</li>
+<li><strong>总线</strong>：总线的选择对系统的限制也许比CPU更多，必须保证总线能够提供足够的数据带宽。</li>
+<li><strong>存储器</strong>：不是有没有，而是有什么特性。存储容量？ROM与RAM的比例？SRAM还是DRAM？速度和带宽？</li>
+<li><strong>输入/输出设备</strong>：网络？传感器？接口？使用某一设备的难度与耗费在最终选择中起着重要作用。</li>
+</ul>
+<h4 id="软件体系结构">软件体系结构</h4>
+<p>软件体系结构设计的基本任务是<strong>划分</strong>——以利于实现、测试和修改的方式把系统功能分成块。良好的程序设计需要代表体系结构的结构设计，将系统的功能按照操作的主要方式和设备的功能分成块。</p>
+<h3 id="硬件平台">硬件平台</h3>
+<h4 id="评估板">评估板</h4>
+<p>在嵌入式系统设计的初期阶段，首先考虑采用微处理器造商和合作公司提供的<strong>评估板（evaluation board）</strong>。典型的评估板包括CPU、存储器、下载程序的串行链接和少数的I/O设备。</p>
+<h4 id="CPLD和FPGA">CPLD和FPGA</h4>
+<div class="note info flat"><ul>
+<li>IOB：可编程输入输出单元</li>
+<li>CLB：可配置逻辑单元</li>
+<li>DCM：数字时钟管理单元</li>
+<li>BRAM：嵌入式块RAM</li>
+</ul>
+</div>
+<h4 id="PC">PC</h4>
+<p>个人计算机（PC）也经常用作嵌入式计算的平台。</p>
+<ul>
+<li>
+<p>优点：</p>
+<ul>
+<li>预留I/O接口多，可扩展丰富的I/O设备。</li>
+<li>提供丰富的编程环境。</li>
+</ul>
+</li>
+<li>
+<p>缺点：</p>
+<ul>
+<li>体积大</li>
+<li>耗电量大</li>
+<li>比定制硬件平台昂贵</li>
+</ul>
+</li>
+</ul>
+<p><strong>基于PC的嵌入式系统通常用在对体积大小和耗电量不敏感的场合。</strong></p>
+<h4 id="典型的计算平台硬件架构">典型的计算平台硬件架构</h4>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20240617234325492_2024-6-17_2343_t542f76tr3.png" alt="典型的计算平台硬件架构" style="zoom:50%;" />
+<h3 id="软件层次">软件层次</h3>
+<p>层次图用于描述系统不同软件组件之间的关系：</p>
+<ul>
+<li><strong>硬件抽象层（HAL）提供硬件平台的基本功能抽象。</strong></li>
+<li>设备驱动（drivers）和电源管理借助HAL来访问底层硬件。</li>
+<li>操作系统和文件系统提供构建应用程序的基本接口。</li>
+<li>应用程序通过复用库函数来进行设计。</li>
+</ul>
+<h2 id="带宽传输">带宽传输</h2>
+<div class="note danger flat"><p>必考。</p>
+</div>
+<p><strong>带宽（bandwidth）</strong> 指数据传输的速率，涉及到嵌入式计算系统中的多个组件：</p>
+<ul>
+<li>总线</li>
+<li>存储器</li>
+<li>CPU</li>
+</ul>
+<p>必须经过时钟周期和带宽的换算，为系统每一部分的性能评估提供正确的参考，因为：</p>
+<ul>
+<li>系统不同部分采用不同的时钟频率</li>
+<li>系统不同部分的接口数据位宽也不相同</li>
+</ul>
+<h3 id="基本传输">基本传输</h3>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20240617234635537_2024-6-17_2346_yalh07k16u.png" alt="总线基本传输" style="zoom:50%;" />
+<h3 id="突发传输">突发传输</h3>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20240617234721315_2024-6-17_2347_fi9zwxrp2f.png" alt="总线突发传输" style="zoom:50%;" />
+<h3 id="带宽瓶颈">带宽瓶颈</h3>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20240617234824344_2024-6-17_2348_l6zyxtse7t.png" alt="一个带宽的传输瓶颈的例子" style="zoom:50%;" />
+<h3 id="练习">练习</h3>
+<p>假设CPU以30帧/秒的速度通过总线从存储器中读取高清视频（分辨率是1920×1080），分别计算满足带宽需求时，总线和存储器的最低时钟频率。</p>
+<ol>
+<li>
+<p><strong>总线时钟频率计算：</strong></p>
+<p>宽度4字节，突发模式B=16，D=1，O=3。</p>
+</li>
+<li>
+<p><strong>存储器时钟频率计算：</strong></p>
+<p>宽度4字节，突发模式B=4，D=1，O=4。</p>
+</li>
+</ol>
+<details class="toggle" ><summary class="toggle-button" style="">答案</summary><div class="toggle-content"><p>第一问：</p>
+<p>先计算每秒要传输的字节。</p>
+<p>N = 30x1920x1080x3x8 = 1492992000 bits = 186624000 bytes</p>
+<p>T = (16x1+3)xN/BW = 55404000 cycles，则最低时钟频率为55404000。</p>
+<p>第二问：</p>
+<p>T' = (4x1+4)xN/BW = 93312000 cycles，则最低时钟频率为93312000</p>
+</div></details>
+<p>下一章会开始讲程序的设计与分析，内容比较少</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.esing.dev">Esing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.esing.dev/2024/06/17/coae-p11/">https://blog.esing.dev/2024/06/17/coae-p11/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://blog.esing.dev" target="_blank">Esing的小站</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="post-meta__tags" href="/tags/%E5%A4%8D%E4%B9%A0/">复习</a><a class="post-meta__tags" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a><a class="post-meta__tags" href="/tags/ARM/">ARM</a><a class="post-meta__tags" href="/tags/%E6%B1%87%E7%BC%96/">汇编</a><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/">计算机原理</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/06/16/coae-p10/" title="计算机原理与嵌入式系统笔记：第十篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">计算机原理与嵌入式系统笔记：第十篇</div></div><div class="info-2"><div class="info-item-1">MIPS流水线结构 必考的牢弟  流水线组成与加速比估算 MIPS的流水线由5级组成，每级完成指令执行的一个步骤：  IF：从存储器中取指令 ID：指令解码和读寄存器 EX：指令执行操作或地址计算 MEM：存取存储器操作数 WB：将结果写回寄存器  一般假设寄存器堆的读或写为100ps，其他操作为200ps。则：  lw指令既要读又要写寄存器堆，并且要访问数据存储器，因此耗时800ps； sw指令不需要写入寄存器堆，因此耗时700ps； R-type指令不需要访问数据存储器，因此耗时600ps； branch指令不需要访问数据存储器，也不需要写入寄存器堆，因此耗时500ps。  则执行3条lw指令的加速比应该是1.71，执行3条R-type指令的加速比应该是1.28。 有关流水线的更多内容请参阅：ARM第四话：流水线！  流水线各级延时不均衡会降低加速比，进/出流水线的延时也会降低加速比。 面向流水线的指令集设计 设计适应流水线的MIPS指令集，应当遵循“4+1”原则：  所有的指令长度都相同（32-bit）  简化了流水线第一级取指和第二级译码 而x86指令的长度：1~15 b...</div></div></div></a><a class="pagination-related" href="/2024/06/18/coae-p12/" title="计算机原理与嵌入式系统笔记：第十二篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">计算机原理与嵌入式系统笔记：第十二篇</div></div><div class="info-2"><div class="info-item-1">程序组件与程序模型  嵌入式软件常用的三个组件结构：  状态机（State machine） 循环缓冲区（Circular buffer） 队列（Queue）    状态机适合于交互式系统，循环缓冲区和队列应用于数字信号处理系统。 状态机 有限状态机是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型，分为两种：  Moore机：输出只由当前状态确定 Mealy机：输出依赖于当前状态和输入  循环缓冲区 流数据通常用于信号处理领域的程序设计中，数据定期传送，新数据按规律到达，且每个数据生命周期有限，需要程序立即处理。循环缓冲区是便于程序高效处理流数据的一种数据结构。数据窗口尺寸不变，只是随时间滑动。 索引指向循环缓冲区的下一个被替换的数据位置（input）和当前使用的数据位置（use）。 12345678910111213141516171819202122232425262728293031#define CMAX 6  /* filter order */int circ[CMAX]; /* circular buffer */int pos;        /* ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2024/06/20/coae-p14/" title="计算机原理与嵌入式系统笔记：第十四篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-20</div><div class="info-item-2">计算机原理与嵌入式系统笔记：第十四篇</div></div><div class="info-2"><div class="info-item-1">试题为回忆版，可能有疏漏/错误  选择：  绪论  嵌入式系统设计流程 前变址 立即数判断  简答题：  直接映射和全相连的概念、二者优缺点 补码计算、CPSR位判断 AMBA总线  分析题：  MIPS数据通路、流水线寄存器位宽、信号含义 EDF调度表  编程题： While-Do结构的FIR滤波器/循环书写  总体是不算太难的。考场里最快交卷的时间是开考后一个半小时。 概念考察的不少，需要好好背一背。主要是理解。 信号数量、位宽啥的不用背，图上一般都会有，含义其实也能通过看图上面的MUX来判断。   2024.7.4 成绩下发。平时97，期末89，总分91，排名前15%。感觉老师改卷是偏松的。考的最好的一门 最好的应该是电工实习，战胜100%的人  </div></div></div></a><a class="pagination-related" href="/2024/06/18/coae-p13/" title="计算机原理与嵌入式系统笔记：第十三篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-18</div><div class="info-item-2">计算机原理与嵌入式系统笔记：第十三篇</div></div><div class="info-2"><div class="info-item-1">多进程与多速率系统 任务与进程  任务（task） 是一个密切相连的操作组合的功能描述。  任务也可定义为若干进程或线程的组成。   进程（process） 是一个程序的单次执行。  两次运行相同的程序，可以创建两个不同进程 每个进程拥有自己的状态：  寄存器状态 存储器状态   操作系统管理进程    为什么需要多进程？多任务本身即是多进程，多进程有助于在时间复杂系统中应用。 多速率系统 多速率（multirate） 的嵌入式计算系统很常见，程序设计必须满足多种速率对计算的时间要求。  任务之间可以是同步或不同步 同步的任务可以以不同的速率发生 根据任务的实际计算需求，进程运行在不同的速率  进程的时间约束 进程的时间约束会影响可用的调度策略，进程有两个重要的约束：  释放时间（release time）：也叫起始时间（initiation time），进程处于准备执行状态的时刻，此时未取得CPU控制，也没有开始运行。 截止时限（deadline）：指明计算何时必须结束。  非周期性进程由一个事件触发；周期性进程在每个周期都执行，在周期开始时初始化。 进程的速率约束 进程的速率...</div></div></div></a><a class="pagination-related" href="/2024/04/22/coae-p1/" title="计算机原理与嵌入式系统笔记：第一篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-22</div><div class="info-item-2">计算机原理与嵌入式系统笔记：第一篇</div></div><div class="info-2"><div class="info-item-1">绪论 记一记嵌入式系统的设计步骤  嵌入式系统本身引起的设计困难  测试的复杂性  怎么测试系统的实时性 怎么使用真实数据进行测试   有限的可观察性和可控性  嵌入式系统通常不具有键盘和屏幕 难以通过观测内部总线的电信号来了解系统内部运行过程   受限的开发环境  需要专门的模拟仿真软件    嵌入式计算的性能 在一般的计算中，性能都是指平均情况。嵌入式计算的核心是实时计算，在实时系统中，性能必须满足截止时限。 嵌入式系统的设计步骤  需求分析 需求分为功能性和非功能性两部分。  功能性需求:  系统的输入，以及相关输入的输出   非功能性需求:  性能：软件性能度量和满足特定操作的硬截止时限 成本：包括制造成本和一次性工程费用（NRE） 尺寸和重量：对于手持式设备需要严格约束 功耗：对于电池供电系统的重要因素      规格说明：规格说明解释系统做什么，并不涉及如何做 体系结构设计：描述系统如何实现规格的功能 硬件和软件组件的设计：组件设计是为了确保符合体系结构和规格说明的要求 系统集成：将建立的软硬件组件合并成能运转的系统  处理器 什么是处理器？  通用处理器是一个执行存...</div></div></div></a><a class="pagination-related" href="/2024/06/13/coae-p7/" title="计算机原理与嵌入式系统笔记：第七篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-13</div><div class="info-item-2">计算机原理与嵌入式系统笔记：第七篇</div></div><div class="info-2"><div class="info-item-1">存储管理单元 存储管理单元(Memory Management Unit, MMU)在CPU和物理主存之间进行地址转换，将地址从逻辑空间映射到物理空间，转换过程也称为内存映射。 DSP用于计算密集型任务，通常不使用MMU。   物理地址（physical address）：用于内存芯片级的单元寻址，与实际的RAM单元对应。 逻辑地址（logical address）：程序的抽象地址空间，不与实际的RAM单元对应  地址转换方法 两种基本的地址转换方法：   分段：支持较大的、大小可以不等的内存区域。  起始地址+大小    分页：支持较小的、大小相等的内存区域。   段页式寻址模式：将每个段分成页并且其地址转换分成两步的方法来建立。   段地址转换过程  分段寄存器：记录当前的活动段，寄存器存储当前活动段的基地址。 逻辑地址：来自于指令，作为相对段基址的偏移量。 物理地址：将段基址和偏移量相加 范围检查：检查物理地址是否超过段的上限  需要在分段寄存器中增加一项存储内容，记录段长。 用段长和偏移量进行比较，来判断物理地址的合法性     页地址转换过程  逻辑地址分为两部分：页号...</div></div></div></a><a class="pagination-related" href="/2024/06/13/coae-p8/" title="计算机原理与嵌入式系统笔记：第八篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-13</div><div class="info-item-2">计算机原理与嵌入式系统笔记：第八篇</div></div><div class="info-2"><div class="info-item-1">输入/输出设备 输入输出设备（I/O Devices）通常有一些模拟元件或非电子元件（比如磁盘驱动器），但与CPU的接口通常是数字逻辑——一组寄存器。 对于IO编程支持，有两种办法：IO指令和内存映射IO：  I/O指令为I/O设备提供了单独的地址空间。 内存映射I/O是最普遍的方法，即使是提供I/O指令的CPU也不排除使用内存映射I/O。  内存映射I/O是为每个I/O设备的寄存器提供一个地址。 程序使用普通的CPU读写内存命令来与设备通信。    如： 在C语言中定义和使用一个变量时，编译器隐藏了变量地址，可以使用指针来操纵I/O设备的地址。 123456789101112// 读取任意存储单元的函数peekint peek(char *location) &#123;    return *location; &#125;#define DEV1 0x1000dev_status = peek(DEV1); /*读取设备寄存器*/// 写入任意存储单元的函数pokevoid poke(char *location, char newval) &#123;    (*loca...</div></div></div></a><a class="pagination-related" href="/2024/06/12/coae-p6/" title="计算机原理与嵌入式系统笔记：第六篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/118011676_p0_2024-4-21_1656_vbrnqi2lxy.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-12</div><div class="info-item-2">计算机原理与嵌入式系统笔记：第六篇</div></div><div class="info-2"><div class="info-item-1">最烦的一节，必考。  高速缓存 局部性原理 局部性原理是存储系统层级构成的基础。  时间局部性：当前被访问的数据有可能很快再次被访问。就比如刚拿了一本书到书桌上查阅，可能会很快地再次查阅它。 空间局部性：当前被访问数据地址相近的数据有可能很快被访问。就比如找到一本关于ARM的书籍时，也许紧挨着它的另一本书籍也是需要的，因为图书馆会将相同主题的书放在同一书架上。  程序为何会具有局部性？  程序中的循环结构，呈现出时间局部性 程序中的顺序执行指令，呈现出空间局部性   访问时间与缓存未命中  强制性未命中（compulsory miss）：  也称为冷未命中（cold miss）， 发生在存储单元第一次被访问时。   容量未命中（capacity miss）：  由于工作集过大造成的缓存未命中。   冲突未命中（conflict miss）：  由于两个地址映射到高速缓存的同一个单元，缓存存入时互相挤占对方导致的未命中。    平均内存访问时间计算公式 一级缓存： tav=htcache+(1−h)tmaint_{av}=ht_{cache}+(1-h)t_{main} tav​=...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Waline</span><span id="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Esing</div><div class="author-info-description">咱也不知道写点啥 (＠_＠;)</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">249</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">219</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Zxis233"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Zxis233" target="_blank" title="Github"><i class="fab fa-github" style="color: #ff80ac;"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss" style="color: #ff80ac;"></i></a><a class="social-icon" href="mailto:esing@mail.esing.dev" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #ff80ac;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p><b>将音乐解析 API 修改为自建版！</b><br><b>测试性开启 <u>Zstd</u> 压缩以提升网页加载速度 ！</b></p></div></div><div class="card-widget colo-info" id="colo-info"><div class="item-headline"><i class="fas fa-satellite-dish fa-flip-360"></i><span>Cloudflare 节点信息</span></div><div class="item-content"><div class="webinfo" data-cf-fields data-pangu-ignore>
+  <div class="webinfo-item"><div class="item-name">访问 IP :</div><div class="item-count" id="cf-ip">—</div></div>
+  <div class="webinfo-item"><div class="item-name">访问地区 :</div><div class="item-count" id="cf-loc">—</div></div>
+  <div class="webinfo-item"><div class="item-name">CDN 节点 :</div><div class="item-count" id="cf-colo">—</div></div>
+  <div class="webinfo-item"><div class="item-name">TLS 协议 :</div><div class="item-count" id="cf-tls">—</div></div>
+  <div class="webinfo-item"><div class="item-name">WARP :</div><div class="item-count" id="cf-warp">—</div></div>
+</div>
+<p data-cf-status role="status" aria-live="polite">节点信息需要 JavaScript 才能加载</p>
+<button type="button" data-cf-retry hidden>重试</button>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CPU%E6%80%BB%E7%BA%BF"><span class="toc-number">1.</span> <span class="toc-text">CPU总线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E5%91%A8%E6%9C%9F%E6%8F%A1%E6%89%8B%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.1.</span> <span class="toc-text">四周期握手协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B8%E5%9E%8B%E6%80%BB%E7%BA%BF%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">典型总线结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BA%BF%E6%93%8D%E4%BD%9C%E7%9A%84%E6%97%B6%E5%BA%8F%E5%9B%BE%E4%B8%8E%E9%A1%BA%E5%BA%8F%E5%9B%BE"><span class="toc-number">1.3.</span> <span class="toc-text">总线操作的时序图与顺序图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%89%E5%BE%85%E7%8A%B6%E6%80%81%E4%B8%8E%E7%AA%81%E5%8F%91%E4%BC%A0%E8%BE%93"><span class="toc-number">1.3.1.</span> <span class="toc-text">等待状态与突发传输</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BA%BF%E6%93%8D%E4%BD%9C%E7%9A%84%E7%8A%B6%E6%80%81%E6%9C%BA%E8%A7%86%E5%9B%BE"><span class="toc-number">1.4.</span> <span class="toc-text">总线操作的状态机视图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E5%AD%98%E5%82%A8%E5%99%A8%E8%AE%BF%E9%97%AE%E4%B8%8E%E6%80%BB%E7%BA%BF%E4%B8%BB%E6%8E%A7%E5%99%A8"><span class="toc-number">1.5.</span> <span class="toc-text">直接存储器访问与总线主控器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DMA%E6%8E%A7%E5%88%B6%E5%99%A8%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.5.1.</span> <span class="toc-text">DMA控制器的工作模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%80%BB%E7%BA%BF%E9%85%8D%E7%BD%AE"><span class="toc-number">1.6.</span> <span class="toc-text">系统总线配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AMBA%E6%80%BB%E7%BA%BF"><span class="toc-number">1.7.</span> <span class="toc-text">AMBA总线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E8%AE%BE%E5%A4%87"><span class="toc-number">2.</span> <span class="toc-text">存储设备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">2.1.</span> <span class="toc-text">随机存储器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AA%E8%AF%BB%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">2.2.</span> <span class="toc-text">只读存储器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AA%E5%AD%98%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">2.3.</span> <span class="toc-text">闪存存储器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F%E7%BB%84%E7%BB%87"><span class="toc-number">2.4.</span> <span class="toc-text">存储系统组织</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-O%E6%8E%A5%E5%8F%A3"><span class="toc-number">3.</span> <span class="toc-text">I&#x2F;O接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%91%E8%A7%86%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-number">3.1.</span> <span class="toc-text">监视定时器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="toc-number">3.2.</span> <span class="toc-text">定时器&amp;计数器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A6%E6%91%B8%E5%B1%8F"><span class="toc-number">3.3.</span> <span class="toc-text">触摸屏</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%B9%B3%E5%8F%B0%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-number">4.</span> <span class="toc-text">计算平台的设计与性能分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">4.1.</span> <span class="toc-text">系统的体系结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">4.1.1.</span> <span class="toc-text">硬件体系结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">4.1.2.</span> <span class="toc-text">软件体系结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E5%B9%B3%E5%8F%B0"><span class="toc-number">4.2.</span> <span class="toc-text">硬件平台</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%84%E4%BC%B0%E6%9D%BF"><span class="toc-number">4.2.1.</span> <span class="toc-text">评估板</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CPLD%E5%92%8CFPGA"><span class="toc-number">4.2.2.</span> <span class="toc-text">CPLD和FPGA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PC"><span class="toc-number">4.2.3.</span> <span class="toc-text">PC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B8%E5%9E%8B%E7%9A%84%E8%AE%A1%E7%AE%97%E5%B9%B3%E5%8F%B0%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84"><span class="toc-number">4.2.4.</span> <span class="toc-text">典型的计算平台硬件架构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E5%B1%82%E6%AC%A1"><span class="toc-number">4.3.</span> <span class="toc-text">软件层次</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%A6%E5%AE%BD%E4%BC%A0%E8%BE%93"><span class="toc-number">5.</span> <span class="toc-text">带宽传输</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BC%A0%E8%BE%93"><span class="toc-number">5.1.</span> <span class="toc-text">基本传输</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AA%81%E5%8F%91%E4%BC%A0%E8%BE%93"><span class="toc-number">5.2.</span> <span class="toc-text">突发传输</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%A6%E5%AE%BD%E7%93%B6%E9%A2%88"><span class="toc-number">5.3.</span> <span class="toc-text">带宽瓶颈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0"><span class="toc-number">5.4.</span> <span class="toc-text">练习</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/09/23/wechat-lsposed-astrbot/" title="记一次用 LSPosed 把手机微信接入 AstrBot 的过程"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/3" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="记一次用 LSPosed 把手机微信接入 AstrBot 的过程"/></a><div class="content"><a class="title" href="/2026/09/23/wechat-lsposed-astrbot/" title="记一次用 LSPosed 把手机微信接入 AstrBot 的过程">记一次用 LSPosed 把手机微信接入 AstrBot 的过程</a><time datetime="2026-09-22T18:10:24.030Z" title="更新于 2026-09-23 02:10:24">2026-09-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/09/20/dom-router-problem/" title="记一次宿舍路由器安装问题排查"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/11" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="记一次宿舍路由器安装问题排查"/></a><div class="content"><a class="title" href="/2026/09/20/dom-router-problem/" title="记一次宿舍路由器安装问题排查">记一次宿舍路由器安装问题排查</a><time datetime="2026-09-20T05:58:56.185Z" title="更新于 2026-09-20 13:58:56">2026-09-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/16/starport-p13/" title="[星港游记] 金星大距：二分相"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/starport.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[星港游记] 金星大距：二分相"/></a><div class="content"><a class="title" href="/2026/08/16/starport-p13/" title="[星港游记] 金星大距：二分相">[星港游记] 金星大距：二分相</a><time datetime="2026-08-16T06:06:03.019Z" title="更新于 2026-08-16 14:06:03">2026-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/13/starport-p12/" title="[星港游记] 0813 英仙座流星雨"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/starport.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[星港游记] 0813 英仙座流星雨"/></a><div class="content"><a class="title" href="/2026/08/13/starport-p12/" title="[星港游记] 0813 英仙座流星雨">[星港游记] 0813 英仙座流星雨</a><time datetime="2026-08-16T05:07:00.070Z" title="更新于 2026-08-16 13:07:00">2026-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/08/cloudflare-workers-meting/" title="Cloudflare 搭建自托管 Meting.js 后端"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/57892762_p0_waifu2x_2x_jpg_2024-4-19_2216_y4dgn1bu98.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Cloudflare 搭建自托管 Meting.js 后端"/></a><div class="content"><a class="title" href="/2026/04/08/cloudflare-workers-meting/" title="Cloudflare 搭建自托管 Meting.js 后端">Cloudflare 搭建自托管 Meting.js 后端</a><time datetime="2026-08-13T09:03:58.156Z" title="更新于 2026-08-13 17:03:58">2026-08-13</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(https://pic.esing.dev/img/87257672_p0_2023-4-16_1808_qmfhwf6v6g.avif);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2023 - 2026 By Esing</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.7.0</a></span></div><div class="footer_custom_text">Deployed On <a href="https://pages.cloudflare.com/" target="_blank">Cloudflare Pages</a><a href="https://icp.gov.moe/?keyword=20237860" target="_blank"><br /><br /> 萌 ICP 备 20237860 号 </a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="rightMenu" role="menu" aria-label="页面操作" hidden data-min-width="0" data-random-url="/js/random-posts.json"><div class="rightMenu-group rightMenu-small" role="group" aria-label="页面导航"><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="back" aria-label="返回" title="返回"><i class="fas fa-arrow-left" aria-hidden="true"></i><span>返回</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="forward" aria-label="前进" title="前进"><i class="fas fa-arrow-right" aria-hidden="true"></i><span>前进</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="reload" aria-label="刷新" title="刷新"><i class="fas fa-rotate-right" aria-hidden="true"></i><span>刷新</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="top" aria-label="回到顶部" title="回到顶部"><i class="fas fa-arrow-up" aria-hidden="true"></i><span>回到顶部</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="选中文字" data-group="selection" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-selection" aria-label="复制选中文字" title="复制选中文字"><i class="fas fa-copy" aria-hidden="true"></i><span>复制选中文字</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="search" aria-label="百度搜索" title="百度搜索"><i class="rightmenu-baidu" aria-hidden="true"></i><span>百度搜索</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="选中的网址" data-group="selected-url" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="open-selection" aria-label="转到选中网址" title="转到选中网址"><i class="fas fa-link" aria-hidden="true"></i><span>转到选中网址</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="链接操作" data-group="link" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="open-link" aria-label="新标签打开链接" title="新标签打开链接"><i class="fas fa-up-right-from-square" aria-hidden="true"></i><span>新标签打开链接</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-link" aria-label="复制链接" title="复制链接"><i class="fas fa-copy" aria-hidden="true"></i><span>复制链接</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="图片操作" data-group="image" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="open-image" aria-label="新标签打开图片" title="新标签打开图片"><i class="fas fa-image" aria-hidden="true"></i><span>新标签打开图片</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-image" aria-label="复制图片链接" title="复制图片链接"><i class="fas fa-copy" aria-hidden="true"></i><span>复制图片链接</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="页面功能"><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-page" aria-label="复制本文地址" title="复制本文地址"><i class="fas fa-link" aria-hidden="true"></i><span>复制本文地址</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="random" aria-label="随便逛逛" title="随便逛逛"><i class="fas fa-paper-plane" aria-hidden="true"></i><span>随便逛逛</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="dark" aria-label="昼夜切换" title="昼夜切换"><i class="fas fa-moon" aria-hidden="true"></i><span>昼夜切换</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="read" aria-label="阅读模式" title="阅读模式"><i class="fas fa-book" aria-hidden="true"></i><span>阅读模式</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="fullscreen" aria-label="进入全屏" title="进入全屏"><i class="fas fa-expand" aria-hidden="true"></i><span>进入全屏</span></button></div></div><div id="rightmenu-status" role="status" aria-live="polite" aria-atomic="true"></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><script src="/vendor/pangu/pangu.umd.js?v=10.4.1" defer></script><script src="/js/pangu-spacing.js?v=10.4.1" defer data-field="post"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.18.1/dist/katex.min.css')
+    if (false) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.18.1/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const parseViewBox = viewBox => {
+    if (!viewBox) return null
+    const parts = viewBox.trim().split(/[\s,]+/).map(n => Number(n))
+    if (parts.length !== 4 || parts.some(n => Number.isNaN(n))) return null
+    return parts
+  }
+
+  const getSvgViewBox = svg => {
+    const attr = parseViewBox(svg.getAttribute('viewBox'))
+    if (attr) return attr
+
+    // Fallback: use bbox to build a viewBox
+    try {
+      const bbox = svg.getBBox()
+      if (bbox && bbox.width && bbox.height) return [bbox.x, bbox.y, bbox.width, bbox.height]
+    } catch (e) {
+      // getBBox may fail on some edge cases; ignore
+    }
+
+    const w = Number(svg.getAttribute('width')) || 0
+    const h = Number(svg.getAttribute('height')) || 0
+    if (w > 0 && h > 0) return [0, 0, w, h]
+    return [0, 0, 100, 100]
+  }
+
+  const setSvgViewBox = (svg, vb) => {
+    svg.setAttribute('viewBox', `${vb[0]} ${vb[1]} ${vb[2]} ${vb[3]}`)
+  }
+
+  const clamp = (v, min, max) => Math.max(min, Math.min(max, v))
+
+  const openSvgInNewTab = ({ source, initViewBox }) => {
+    const getClonedSvg = () => {
+      if (typeof source === 'string') {
+        const template = document.createElement('template')
+        template.innerHTML = source.trim()
+        const svg = template.content.querySelector('svg')
+        return svg ? svg.cloneNode(true) : null
+      }
+      if (source && typeof source.cloneNode === 'function') {
+        return source.cloneNode(true)
+      }
+      return null
+    }
+
+    const clone = getClonedSvg()
+    if (!clone) return
+    if (initViewBox && initViewBox.length === 4) {
+      clone.setAttribute('viewBox', initViewBox.join(' '))
+    }
+    if (!clone.getAttribute('xmlns')) clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+    if (!clone.getAttribute('xmlns:xlink') && clone.innerHTML.includes('xlink:')) {
+      clone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink')
+    }
+    // inject background to match current theme
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
+    const bg = getComputedStyle(document.body).backgroundColor || (isDark ? '#1e1e1e' : '#ffffff')
+    if (!clone.style.background) clone.style.background = bg
+
+    const serializer = new XMLSerializer()
+    const svgSource = serializer.serializeToString(clone)
+    const htmlSource = `<!doctype html><html><head><meta charset="utf-8" />
+      <style>
+        html, body { width: 100%; height: 100%; margin: 0; display: flex; align-items: center; justify-content: center; background: ${bg}; }
+        svg { max-width: 100%; max-height: 100%; height: auto; width: auto; }
+      </style>
+      </head><body>${svgSource}</body></html>`
+    const blob = new Blob([htmlSource], { type: 'text/html;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    window.open(url, '_blank', 'noopener')
+
+    setTimeout(() => URL.revokeObjectURL(url), 5000)
+  }
+
+  const attachMermaidViewerButton = wrap => {
+    let btn = wrap.querySelector('.mermaid-open-btn')
+    if (!btn) {
+      btn = document.createElement('button')
+      btn.type = 'button'
+      btn.className = 'mermaid-open-btn'
+      wrap.appendChild(btn)
+    }
+
+    btn.innerHTML = '<i class="fa fa-search fa-fw" aria-hidden="true"></i>'
+
+    if (!btn.__mermaidViewerBound) {
+      btn.addEventListener('click', e => {
+        e.preventDefault()
+        e.stopPropagation()
+        const svg = wrap.__mermaidOriginalSvg || wrap.querySelector('svg')
+        if (!svg) return
+        const initViewBox = wrap.__mermaidInitViewBox
+        openSvgInNewTab({ source: svg, initViewBox })
+      })
+      btn.__mermaidViewerBound = true
+    }
+  }
+
+  // Zoom around a point (px, py) in the SVG viewport (in viewBox coordinates)
+  const zoomAtPoint = (vb, factor, px, py) => {
+    const w = vb[2] * factor
+    const h = vb[3] * factor
+    const nx = px - (px - vb[0]) * factor
+    const ny = py - (py - vb[1]) * factor
+    return [nx, ny, w, h]
+  }
+
+  const initMermaidGestures = wrap => {
+    // Clean up previous event listeners and pending frames
+    if (wrap.__mermaidAbortController) {
+      wrap.__mermaidAbortController.abort()
+      if (wrap.__mermaidRafId) cancelAnimationFrame(wrap.__mermaidRafId)
+    }
+    const ac = new AbortController()
+    wrap.__mermaidAbortController = ac
+    const svg = wrap.querySelector('svg')
+    if (!svg) return
+
+    // Ensure viewBox exists so gestures always work
+    const initVb = getSvgViewBox(svg)
+    wrap.__mermaidInitViewBox = initVb
+    wrap.__mermaidCurViewBox = initVb.slice()
+    setSvgViewBox(svg, initVb)
+    // Disable default gestures to prevent scroll chaining and pinch-zoom penetration in Chrome
+    svg.style.touchAction = 'none'
+
+    // Cache BoundingClientRect, throttled on scroll to reduce reflow
+    let cachedRect = svg.getBoundingClientRect()
+    let rectDirty = false
+    const markRectDirty = () => { rectDirty = true }
+    window.addEventListener('resize', markRectDirty, { signal: ac.signal })
+    window.addEventListener('scroll', markRectDirty, { signal: ac.signal, capture: true })
+    const getRect = () => {
+      if (rectDirty) {
+        cachedRect = svg.getBoundingClientRect()
+        rectDirty = false
+      }
+      return cachedRect
+    }
+
+    // Precompute clamp bounds from initial viewBox
+    const minW = initVb[2] * 0.1
+    const maxW = initVb[2] * 10
+    const minH = initVb[3] * 0.1
+    const maxH = initVb[3] * 10
+    const clampVb = vb => {
+      const out = vb.slice()
+      out[2] = clamp(out[2], minW, maxW)
+      out[3] = clamp(out[3], minH, maxH)
+      return out
+    }
+
+    // Throttle DOM updates using requestAnimationFrame
+    let pendingVb = null
+    let rafId = null
+    const applyVb = () => {
+      if (pendingVb) {
+        wrap.__mermaidCurViewBox = pendingVb
+        setSvgViewBox(svg, pendingVb)
+        pendingVb = null
+      }
+      rafId = null
+      wrap.__mermaidRafId = null
+    }
+    const setCurVb = vb => {
+      pendingVb = clampVb(vb)
+      if (!rafId) {
+        rafId = requestAnimationFrame(applyVb)
+        wrap.__mermaidRafId = rafId
+      }
+    }
+
+    const state = {
+      pointers: new Map(),
+      startVb: null,
+      startDist: 0,
+      lastPointerX: 0,
+      lastPointerY: 0
+    }
+
+    const onPointerDown = e => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return
+      svg.setPointerCapture(e.pointerId)
+      const curVb = wrap.__mermaidCurViewBox
+      state.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+      if (state.pointers.size === 1) {
+        state.startVb = curVb.slice()
+        state.lastPointerX = e.clientX
+        state.lastPointerY = e.clientY
+      } else if (state.pointers.size === 2) {
+        const pts = [...state.pointers.values()]
+        const dx = pts[0].x - pts[1].x
+        const dy = pts[0].y - pts[1].y
+        state.startDist = Math.hypot(dx, dy)
+        state.startVb = curVb.slice()
+      }
+    }
+
+    const onPointerMove = e => {
+      if (!state.pointers.has(e.pointerId)) return
+      state.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+      const curVb = wrap.__mermaidCurViewBox
+      const rect = getRect()
+      if (state.pointers.size === 1 && state.startVb) {
+        const p = state.pointers.values().next().value
+        const dxClient = p.x - state.lastPointerX
+        const dyClient = p.y - state.lastPointerY
+        state.lastPointerX = p.x
+        state.lastPointerY = p.y
+        const dx = dxClient * (curVb[2] / rect.width)
+        const dy = dyClient * (curVb[3] / rect.height)
+        setCurVb([curVb[0] - dx, curVb[1] - dy, curVb[2], curVb[3]])
+        return
+      }
+      if (state.pointers.size === 2 && state.startVb && state.startDist > 0) {
+        const pts = [...state.pointers.values()]
+        const dx = pts[0].x - pts[1].x
+        const dy = pts[0].y - pts[1].y
+        const dist = Math.hypot(dx, dy)
+        if (!dist) return
+        const factor = state.startDist / dist
+        const cx = (pts[0].x + pts[1].x) / 2
+        const cy = (pts[0].y + pts[1].y) / 2
+        const px = curVb[0] + (cx - rect.left) * (curVb[2] / rect.width)
+        const py = curVb[1] + (cy - rect.top) * (curVb[3] / rect.height)
+        setCurVb(zoomAtPoint(state.startVb, factor, px, py))
+      }
+    }
+
+    const onPointerUpOrCancel = e => {
+      // Release PointerCapture to avoid event capture anomalies
+      if (svg.hasPointerCapture && svg.hasPointerCapture(e.pointerId)) {
+        svg.releasePointerCapture(e.pointerId)
+      }
+      state.pointers.delete(e.pointerId)
+      if (state.pointers.size === 0) {
+        state.startVb = null
+        state.startDist = 0
+      } else if (state.pointers.size === 1) {
+        const p = state.pointers.values().next().value
+        state.lastPointerX = p.x
+        state.lastPointerY = p.y
+      }
+    }
+
+    const onWheel = e => {
+      // Prevent event bubbling from triggering external scroll
+      e.preventDefault()
+      e.stopPropagation()
+      // Normalize deltaY across deltaMode (Chrome uses pixels, Safari uses lines)
+      let delta = e.deltaY
+      if (e.deltaMode === 1) delta *= 16
+      else if (e.deltaMode === 2) delta *= 400
+
+      // Continuous zoom factor: smoother than fixed 1.1/0.9 steps
+      const zoomFactor = Math.pow(1.001, delta)
+
+      const curVb = wrap.__mermaidCurViewBox
+      const rect = getRect()
+      const px = curVb[0] + (e.clientX - rect.left) * (curVb[2] / rect.width)
+      const py = curVb[1] + (e.clientY - rect.top) * (curVb[3] / rect.height)
+      setCurVb(zoomAtPoint(curVb, zoomFactor, px, py))
+    }
+
+    const onDblClick = () => {
+      const init = wrap.__mermaidInitViewBox
+      if (init) setCurVb(init)
+    }
+
+    svg.addEventListener('pointerdown', onPointerDown, { signal: ac.signal })
+    svg.addEventListener('pointermove', onPointerMove, { signal: ac.signal })
+    svg.addEventListener('pointerup', onPointerUpOrCancel, { signal: ac.signal })
+    svg.addEventListener('pointercancel', onPointerUpOrCancel, { signal: ac.signal })
+    svg.addEventListener('wheel', onWheel, { passive: false, signal: ac.signal })
+    svg.addEventListener('dblclick', onDblClick, { signal: ac.signal })
+  }
+
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const mode = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'
+    const themes = {"light":"base","dark":"base"}
+    const palettes = {"light":{"darkMode":false,"background":"#ffffff","textColor":"#2b3037","primaryColor":"#fff5f8","primaryTextColor":"#29313a","primaryBorderColor":"#d96a91","secondaryColor":"#ecfbf5","secondaryTextColor":"#213c34","secondaryBorderColor":"#269c78","tertiaryColor":"#f7f9fb","tertiaryTextColor":"#2b3037","tertiaryBorderColor":"#cfd8e3","lineColor":"#64717d","defaultLinkColor":"#64717d","titleColor":"#26323a","edgeLabelBackground":"#ffffff","clusterBkg":"#fbfcfd","clusterBorder":"#dbe3ea","noteBkgColor":"#fff8df","noteTextColor":"#3a3428","noteBorderColor":"#d6b25a","actorBkg":"#fff5f8","actorBorder":"#d96a91","actorTextColor":"#29313a","actorLineColor":"#8b96a3","signalColor":"#64717d","signalTextColor":"#2b3037","labelBoxBkgColor":"#f7f9fb","labelBoxBorderColor":"#dbe3ea","labelTextColor":"#2b3037","loopTextColor":"#2b3037","activationBkgColor":"#ecfbf5","activationBorderColor":"#269c78"},"dark":{"darkMode":true,"background":"#171a1f","textColor":"#e6edf3","primaryColor":"#33242c","primaryTextColor":"#f7eaf0","primaryBorderColor":"#f08cab","secondaryColor":"#1c332d","secondaryTextColor":"#e5f8f1","secondaryBorderColor":"#5bcaa0","tertiaryColor":"#20262e","tertiaryTextColor":"#e6edf3","tertiaryBorderColor":"#3b4652","lineColor":"#a7b1bc","defaultLinkColor":"#a7b1bc","titleColor":"#f0f4f8","edgeLabelBackground":"#171a1f","clusterBkg":"#1b2027","clusterBorder":"#323d48","noteBkgColor":"#352d1e","noteTextColor":"#f4e9c8","noteBorderColor":"#c8a856","actorBkg":"#33242c","actorBorder":"#f08cab","actorTextColor":"#f7eaf0","actorLineColor":"#687482","signalColor":"#c7d0d9","signalTextColor":"#e6edf3","labelBoxBkgColor":"#20262e","labelBoxBorderColor":"#3b4652","labelTextColor":"#e6edf3","loopTextColor":"#e6edf3","activationBkgColor":"#1c332d","activationBorderColor":"#5bcaa0"}}
+    const theme = themes[mode]
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      // Clean up event listeners before removing old SVG
+      if (item.__mermaidAbortController) {
+        item.__mermaidAbortController.abort()
+      }
+      const oldSvg = item.querySelector('svg')
+      if (oldSvg) oldSvg.remove()
+      let config = {}
+      try {
+        config = mermaidSrc.dataset.config ? JSON.parse(mermaidSrc.dataset.config) : {}
+      } catch (e) {
+        console.warn('[mermaid] failed to parse dataset.config:', e)
+      }
+      if (!config.theme) {
+        config.theme = theme
+      }
+      // Keep per-diagram overrides; do not tint an explicitly different theme.
+      if (config.theme === theme && palettes[mode]) {
+        config.themeVariables = { ...palettes[mode], ...config.themeVariables }
+      }
+      const mermaidThemeConfig = `%%{init: ${JSON.stringify(config)}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+        if (true) initMermaidGestures(item)
+        item.__mermaidOriginalSvg = svg
+        if (true) attachMermaidViewerButton(item)
+      }
+
+      const handleError = err => {
+        console.error(`[mermaid] render failed for block #${index}:`, err)
+        const errorEl = document.createElement('div')
+        errorEl.className = 'mermaid-error'
+        errorEl.textContent = `Mermaid render error: ${err.message || err}`
+        mermaidSrc.insertAdjacentElement('afterend', errorEl)
+      }
+
+      try {
+        const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+        // mermaid v9 and v10 compatibility
+        if (typeof renderFn === 'string') {
+          renderMermaid(renderFn)
+        } else {
+          renderFn.then(({ svg }) => renderMermaid(svg)).catch(handleError)
+        }
+      } catch (err) {
+        handleError(err)
+      }
+    })
+  }
+
+  const codeToMermaid = $article => {
+    const codeMermaidEle = $article.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    const $article = document.getElementById('article-container')
+    if (!$article) return
+
+    if (true) codeToMermaid($article)
+    const $mermaid = $article.querySelectorAll('.mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = {"search":false}
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://comment.esing.dev/',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.15.2/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client@3.15.2/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !true) {
+    if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = {"language":"zh-CN","perPage":7}
+
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  const initGitalk = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGitalk = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const gitalk = new Gitalk({
+      clientID: 'ad3070e381dc19ea10a3',
+      clientSecret: '70adf2f0332c581dfc5055033151ca3989b89ebd',
+      repo: 'BlogComment',
+      owner: 'Zxis233',
+      admin: ['Zxis233'],
+      updateCountCallback: commentCount,
+      ...option,
+      id: isShuoshuo ? path : (option && option.id) || '33a96a8d77368373b2f956b2a5b38e4e'
+    })
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async(el, path) => {
+    if (typeof Gitalk === 'function') initGitalk(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js')
+      initGitalk(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Gitalk'
+      ? window.shuoshuoComment = { loadComment: loadGitalk }
+      : window.loadOtherComment = loadGitalk
+    return
+  }
+
+  if ('Waline' === 'Gitalk' || !true) {
+    if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><script src="/js/meting.js" defer></script><script src="/js/music-pjax.js" defer></script><script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script><script src="/js/target-cursor.js" defer></script><script src="/js/cursor-toggle.js" defer></script><script src="/js/title.js" defer></script><script src="/js/titlelight.js" defer></script><script src="/js/autoload.js" defer></script><script src="/js/rightmenu.js" defer></script><script src="/js/cloudflare-info.js" defer></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"]):not([data-fancybox])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      if (!item.parentNode) return
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || ''
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    const responseURL = e.request && e.request.responseURL
+    if (e.request && e.request.status === 404) {
+      true
+        ? pjax.loadUrl('/404')
+        : responseURL && (window.location.href = responseURL)
+    } else if (responseURL) {
+      window.location.href = responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.7.0"></script></div></div></body></html>
