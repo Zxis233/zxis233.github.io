@@ -222,8 +222,8 @@ hr:before,
 #post .post-outdate-notice:before,
 .note:not(.no-icon)::before {
   display: inline-block;
-  font-weight: 600;
-  font-family: var(--fa-family-classic);
+  font-weight: 900;
+  font-family: 'Font Awesome 7 Free';
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
 }
