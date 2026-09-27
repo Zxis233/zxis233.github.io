@@ -1,0 +1,138 @@
+/* 粉色为主色；绿色只用于用户身份标签。 */
+#waline-wrap {
+    --waline-font-size: 15px;
+    --waline-theme-color: #b83d69;
+    --waline-active-color: #ff80ac;
+    --waline-color: #423f3e;
+    --waline-white: #fff;
+    --waline-light-grey: #807078;
+    --waline-dark-grey: #66525c;
+    --waline-info-color: #807078;
+    --waline-bg-color: #fff;
+    --waline-bg-color-light: #fff1f6;
+    --waline-bg-color-hover: #fff0f5;
+    --waline-border-color: #efd0dc;
+    --waline-info-bg-color: #f9eaf0;
+    --waline-disable-bg-color: #f3e9ed;
+    --waline-disable-color: #807078;
+    --waline-bq-color: #edb0c6;
+    --waline-badge-color: #16815e;
+    --waline-avatar-radius: 12px;
+    --waline-box-shadow: 0 6px 24px rgb(184 61 105 / 7%);
+    --comment-accent: #d9658e;
+    --comment-ring: rgb(255 128 172 / 18%);
+    color: var(--waline-color);
+    text-shadow: none;
+}
+
+/* 深色模式 */
+html[data-theme="dark"] #waline-wrap {
+    --waline-theme-color: #ff80ac;
+    --waline-color: #eadfe4;
+    --waline-light-grey: #b8a3ad;
+    --waline-dark-grey: #d6c1cb;
+    --waline-info-color: #b8a3ad;
+    --waline-bg-color: #231e21;
+    --waline-bg-color-light: #2d2429;
+    --waline-bg-color-hover: #3c2933;
+    --waline-border-color: #64404f;
+    --waline-info-bg-color: #35272e;
+    --waline-disable-bg-color: #32282d;
+    --waline-disable-color: #b8a3ad;
+    --waline-badge-color: #65d6aa;
+    --waline-bq-color: #94516c;
+    --waline-active-color: #ffabc7;
+    --waline-box-shadow: 0 6px 24px rgb(0 0 0 / 12%);
+    color-scheme: dark;
+}
+
+/* 评论编辑框外边框 */
+#waline-wrap .wl-panel {
+    border-color: #d9658e;
+    border-width: 2px;
+}
+
+#waline-wrap .wl-header {
+    border-color: #d9658e;
+}
+
+/* 评论卡片 */
+#waline-wrap .wl-cards>.wl-card-item {
+    margin-bottom: 12px;
+    padding: 16px;
+    border: 2px solid var(--waline-border-color);
+    border-radius: 14px;
+    background: var(--waline-bg-color);
+}
+
+#waline-wrap .wl-editor:focus,
+#waline-wrap .wl-input:focus {
+    background: transparent;
+}
+
+/* 当前背景图宽 200px；失焦时从右侧框外滑回主题默认的右下角。 */
+#waline-wrap .wl-editor:focus {
+    background-position: calc(100% + 200px) 100%;
+}
+
+/* 长评论折叠遮罩 */
+#waline-wrap .wl-content.expand::before {
+    background: linear-gradient(transparent, var(--waline-bg-color));
+}
+
+#waline-wrap .wl-content.expand::after {
+    background: var(--waline-bg-color);
+    color: var(--waline-theme-color);
+}
+
+/* 暂无评论 */
+#waline-wrap .wl-empty {
+    padding: 32px 12px;
+    border: 1px dashed var(--waline-border-color);
+    border-radius: 14px;
+    background: var(--waline-bg-color-light);
+    color: var(--waline-info-color);
+}
+
+/* 尊重系统减少动态效果设置 */
+@media (prefers-reduced-motion: reduce) {
+
+    #waline-wrap *,
+    #waline-wrap *::before,
+    #waline-wrap *::after {
+        transition: none !important;
+    }
+}
+
+/* 深粉按钮保持白字可读性，浅粉用于背景和点缀。 */
+#waline-wrap .wl-btn.primary:not(:disabled) {
+    background: #b83d69;
+    border-color: #b83d69;
+    color: #fff;
+}
+
+#waline-wrap .wl-btn.primary:not(:disabled):hover,
+#waline-wrap .wl-btn.primary:not(:disabled):active {
+    background: #9f3159;
+    border-color: #9f3159;
+}
+
+/* 绿色点缀集中在身份标签，深色模式提高文字亮度。 */
+#waline-wrap .wl-badge {
+    background: rgb(22 129 94 / 8%);
+}
+
+html[data-theme="dark"] #waline-wrap .wl-badge {
+    background: rgb(22 129 94 / 16%);
+}
+
+/* 窄屏字段分隔线和引用同样使用粉色。 */
+#waline-wrap .wl-header-item:not(:last-child) {
+    border-color: var(--waline-border-color);
+}
+
+#waline-wrap .wl-content blockquote {
+    border-color: var(--waline-bq-color);
+    background: var(--waline-bg-color-light);
+    color: var(--waline-dark-grey);
+}
