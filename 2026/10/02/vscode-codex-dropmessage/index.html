@@ -1,0 +1,763 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>VSCode Codex 插件吞掉消息的临时解决方案 | Esing的小站</title><meta name="author" content="Esing"><meta name="copyright" content="Esing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="O8分钱、Tibo分钱">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VSCode Codex 插件吞掉消息的临时解决方案">
+<meta property="og:url" content="https://blog.esing.dev/2026/10/02/vscode-codex-dropmessage/">
+<meta property="og:site_name" content="Esing的小站">
+<meta property="og:description" content="O8分钱、Tibo分钱">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://webpn.esing.dev/img/83647245_p0_20240901_1726.png">
+<meta property="article:published_time" content="2026-10-02T09:57:23.000Z">
+<meta property="article:modified_time" content="2026-10-02T13:42:46.457Z">
+<meta property="article:author" content="Esing">
+<meta property="article:tag" content="Codex">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="OpenAI">
+<meta property="article:tag" content="VSCode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://webpn.esing.dev/img/83647245_p0_20240901_1726.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "VSCode Codex 插件吞掉消息的临时解决方案",
+  "url": "https://blog.esing.dev/2026/10/02/vscode-codex-dropmessage/",
+  "image": "https://webpn.esing.dev/img/83647245_p0_20240901_1726.png",
+  "datePublished": "2026-10-02T09:57:23.000Z",
+  "dateModified": "2026-10-02T13:42:46.457Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Esing",
+      "url": "https://blog.esing.dev"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://blog.esing.dev/2026/10/02/vscode-codex-dropmessage/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const start = 8
+              const end = 24
+              const isNight =
+                start < end
+                    ? hour < start || hour >= end
+                    : hour >= start || hour < end
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;1aabda1500704262b993096aaa3b5c27&quot;}"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/misans@5.0.0/lib/Normal/MiSansVF.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":380,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":100,"languages":{"author":"作者: Esing","link":"链接: ","source":"来源: Esing的小站","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'VSCode Codex 插件吞掉消息的临时解决方案',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/maple_new.css"><link rel="stylesheet" href="/css/target-cursor.css"><link rel="stylesheet" href="/css/legacy-appearance.css"><link rel="stylesheet" href="/vendor/aplayer/APlayer.min.css"><link rel="stylesheet" href="/css/aplayer-theme.css"><link rel="stylesheet" href="/css/rightmenu.css"><link rel="stylesheet" href="/css/cloudflare-info.css"><script src="/vendor/aplayer/APlayer.min.js"></script><meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="Esing的小站" type="application/atom+xml">
+</head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="/css/load.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">250</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">220</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E6%98%9F%E6%B8%AF%E6%B8%B8%E8%AE%B0/"><i class="fa-fw fa-solid fa-star-half-stroke"></i><span> 星港游记</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-code"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://webpn.esing.dev/img/83647245_p0_20240901_1726.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Esing的小站</span></a><a class="nav-page-title" href="/"><span class="site-name">VSCode Codex 插件吞掉消息的临时解决方案</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E6%98%9F%E6%B8%AF%E6%B8%B8%E8%AE%B0/"><i class="fa-fw fa-solid fa-star-half-stroke"></i><span> 星港游记</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-code"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">VSCode Codex 插件吞掉消息的临时解决方案</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-10-02T09:57:23.000Z" title="发表于 2026-10-02 17:57:23">2026-10-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-10-02T13:42:46.457Z" title="更新于 2026-10-02 21:42:46">2026-10-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:1000,&quot;messagePrev&quot;:&quot;本文最后更新于&quot;,&quot;messageNext&quot;:&quot;天前，部分内容可能已过时。&quot;,&quot;postUpdate&quot;:&quot;2026-10-02 21:42:46&quot;}" hidden></div><h2 id="前言">前言</h2>
+<p>OpenAI DevDay之后就接连好消息不断。先是自家服务直接炸了半天，然后又是GPT-6.1-Sol奇慢无比，最后又是第二天更新给自己的Codex插件更新炸了。O\也不像人了我看。</p>
+<p>每次VSCode内在之前的对话中继续发消息，就会吞掉第一次发的，必须重新发一遍才正常。</p>
+<h2 id="AI分析">AI分析</h2>
+<p>VSCode内有一行日志：<code>Failed to release queued message send lock &quot;undefined&quot; is not valid JSON</code></p>
+<p>让AI看了下插件代码分析了下：</p>
+<blockquote>
+<p>Codex 扩展会使用发送锁来协调消息发送。释放锁的函数执行完毕后，没有返回任何值，因此函数结果是 JavaScript 中的 <code>undefined</code>。随后，扩展内部的桥接层尝试通过 <code>JSON.stringify</code> 序列化这个结果，前端再通过 <code>JSON.parse</code> 解析它。</p>
+</blockquote>
+<p>检查代码后发现，扩展释放发送锁的函数没有返回值，而负责传递结果的桥接层和前端却执行了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">JSON</span>.<span class="title function_">stringify</span>(<span class="literal">undefined</span>) <span class="comment">// 返回 undefined，而不是 JSON 字符串</span></span><br><span class="line"><span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="literal">undefined</span>)     <span class="comment">// 抛出 SyntaxError</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>也就是，发送锁实际上已经释放，但释放操作的成功响应无法被前端正常解析。日志里的“释放发送锁失败”，并不直接代表锁仍然处于占用状态。</p>
+</blockquote>
+<h2 id="临时修复">临时修复</h2>
+<p>在释放锁的处理函数末尾补上一个明确的成功返回值：<code>return { success: true };</code></p>
+<p>让AI写了一个多端通用的脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;检查、修补或还原 Codex VS Code 扩展的发送锁返回值错误（仅标准库）。&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> annotations</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> tempfile</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">BACKUP_NAME = <span class="string">&quot;extension.js.before-send-lock-fix&quot;</span></span><br><span class="line">HANDLER_KEY = re.<span class="built_in">compile</span>(<span class="string">rb&#x27;[&quot;\&#x27;]queued-follow-up-send-lock-release[&quot;\&#x27;]\s*:&#x27;</span>)</span><br><span class="line">HANDLER = re.<span class="built_in">compile</span>(</span><br><span class="line">    HANDLER_KEY.pattern</span><br><span class="line">    + <span class="string">rb&quot;\s*async\s*\(\s*\&#123;[^&#123;&#125;]&#123;1,300&#125;\&#125;\s*\)\s*=&gt;\s*\&#123;&quot;</span></span><br><span class="line">    + <span class="string">rb&quot;(?P&lt;release&gt;\s*this\.queuedFollowUpSendLocks\.release\(&quot;</span></span><br><span class="line">    + <span class="string">rb&quot;\s*\&#123;[^&#123;&#125;]&#123;1,300&#125;\&#125;\s*\)\s*;?\s*)&quot;</span></span><br><span class="line">    + <span class="string">rb&quot;(?P&lt;returned&gt;return\s+(?:\&#123;[^&#123;&#125;]&#123;0,200&#125;\&#125;|null|true|!0)\s*;?\s*)?\&#125;&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">inspect_handler</span>(<span class="params">content: <span class="built_in">bytes</span></span>) -&gt; <span class="built_in">tuple</span>[re.Match[<span class="built_in">bytes</span>], <span class="built_in">bool</span>]:</span><br><span class="line">    keys = <span class="built_in">list</span>(HANDLER_KEY.finditer(content))</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(keys) != <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;发送锁处理函数未唯一匹配，拒绝修改此版本。&quot;</span>)</span><br><span class="line">    <span class="keyword">match</span> = HANDLER.<span class="keyword">match</span>(content, keys[<span class="number">0</span>].start())</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">match</span> <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;发送锁处理函数结构已经变化，需要重新检查此版本。&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">match</span>, <span class="keyword">match</span>.group(<span class="string">&quot;returned&quot;</span>) <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">patched_content</span>(<span class="params">content: <span class="built_in">bytes</span></span>) -&gt; <span class="built_in">bytes</span>:</span><br><span class="line">    <span class="keyword">match</span>, has_return = inspect_handler(content)</span><br><span class="line">    <span class="keyword">if</span> has_return:</span><br><span class="line">        <span class="keyword">return</span> content</span><br><span class="line">    <span class="comment"># Insert a statement separator even when the original minifier omitted it.</span></span><br><span class="line">    position = <span class="keyword">match</span>.end() - <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> content[:position] + <span class="string">b&quot;;return &#123;success:true&#125;&quot;</span> + content[position:]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">replace_file</span>(<span class="params">path: Path, content: <span class="built_in">bytes</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Write beside the source and replace it only after the complete write.&quot;&quot;&quot;</span></span><br><span class="line">    temporary = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> tempfile.NamedTemporaryFile(<span class="built_in">dir</span>=path.parent, delete=<span class="literal">False</span>) <span class="keyword">as</span> stream:</span><br><span class="line">            temporary = Path(stream.name)</span><br><span class="line">            stream.write(content)</span><br><span class="line">            stream.flush()</span><br><span class="line">            os.fsync(stream.fileno())</span><br><span class="line">        shutil.copymode(path, temporary)</span><br><span class="line">        os.replace(temporary, path)</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        <span class="keyword">if</span> temporary <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            temporary.unlink(missing_ok=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">process_file</span>(<span class="params">path: Path, action: <span class="built_in">str</span>, dry_run: <span class="built_in">bool</span> = <span class="literal">False</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">    content = path.read_bytes()</span><br><span class="line">    backup = path.with_name(BACKUP_NAME)</span><br><span class="line">    <span class="keyword">if</span> action == <span class="string">&quot;restore&quot;</span>:</span><br><span class="line">        original = backup.read_bytes()</span><br><span class="line">        _, backup_has_return = inspect_handler(original)</span><br><span class="line">        <span class="keyword">if</span> backup_has_return:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&quot;备份不是修补前的原文件，拒绝还原。&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> content == original:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;已经还原&quot;</span></span><br><span class="line">        <span class="keyword">if</span> content != patched_content(original):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&quot;当前文件与此备份不属于同一次修补，拒绝覆盖。&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> dry_run:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;将还原（未写入）&quot;</span></span><br><span class="line">        replace_file(path, original)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;已还原，备份保留&quot;</span></span><br><span class="line"></span><br><span class="line">    _, has_return = inspect_handler(content)</span><br><span class="line">    <span class="keyword">if</span> has_return:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;已有返回值，无需修补&quot;</span></span><br><span class="line">    <span class="keyword">if</span> action == <span class="string">&quot;check&quot;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;需要修补&quot;</span></span><br><span class="line">    <span class="keyword">if</span> backup.exists() <span class="keyword">and</span> backup.read_bytes() != content:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;已有备份与当前原文件不同，拒绝覆盖备份或扩展。&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> dry_run:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;将修补并备份（未写入）&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> backup.exists():</span><br><span class="line">        <span class="comment"># Exclusive creation prevents accidentally overwriting an older backup.</span></span><br><span class="line">        <span class="keyword">with</span> backup.<span class="built_in">open</span>(<span class="string">&quot;xb&quot;</span>) <span class="keyword">as</span> stream:</span><br><span class="line">            stream.write(content)</span><br><span class="line">            stream.flush()</span><br><span class="line">            os.fsync(stream.fileno())</span><br><span class="line">        shutil.copystat(path, backup)</span><br><span class="line">    <span class="keyword">if</span> path.read_bytes() != content:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;读取后扩展文件发生变化，拒绝修改；备份已保留。&quot;</span>)</span><br><span class="line">    replace_file(path, patched_content(content))</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;已修补，备份：&quot;</span> + <span class="built_in">str</span>(backup)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">native_roots</span>(<span class="params">user_home: Path</span>) -&gt; <span class="built_in">list</span>[Path]:</span><br><span class="line">    roots = [</span><br><span class="line">        user_home / name / <span class="string">&quot;extensions&quot;</span></span><br><span class="line">        <span class="keyword">for</span> name <span class="keyword">in</span> (</span><br><span class="line">            <span class="string">&quot;.vscode&quot;</span>,</span><br><span class="line">            <span class="string">&quot;.vscode-insiders&quot;</span>,</span><br><span class="line">            <span class="string">&quot;.vscode-server&quot;</span>,</span><br><span class="line">            <span class="string">&quot;.vscode-server-insiders&quot;</span>,</span><br><span class="line">        )</span><br><span class="line">    ]</span><br><span class="line">    <span class="keyword">if</span> os.environ.get(<span class="string">&quot;VSCODE_PORTABLE&quot;</span>):</span><br><span class="line">        roots.append(Path(os.environ[<span class="string">&quot;VSCODE_PORTABLE&quot;</span>]) / <span class="string">&quot;extensions&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> roots</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">is_wsl</span>() -&gt; <span class="built_in">bool</span>:</span><br><span class="line">    <span class="keyword">if</span> sys.platform != <span class="string">&quot;linux&quot;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="built_in">bool</span>(os.environ.get(<span class="string">&quot;WSL_DISTRO_NAME&quot;</span>))</span><br><span class="line">        <span class="keyword">or</span> <span class="string">&quot;microsoft&quot;</span> <span class="keyword">in</span> os.uname().release.lower()</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">windows_profile_from_wsl</span>(<span class="params">user_home: Path</span>) -&gt; Path:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Resolve only the current Windows profile, without scanning other users.&quot;&quot;&quot;</span></span><br><span class="line">    profile = os.environ.get(<span class="string">&quot;USERPROFILE&quot;</span>)</span><br><span class="line">    powershell = shutil.which(<span class="string">&quot;powershell.exe&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> profile <span class="keyword">and</span> powershell:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            result = subprocess.run(</span><br><span class="line">                [</span><br><span class="line">                    powershell,</span><br><span class="line">                    <span class="string">&quot;-NoProfile&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;-NonInteractive&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;-Command&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;[Console]::OutputEncoding = [System.Text.UTF8Encoding]::new($false); &quot;</span></span><br><span class="line">                    <span class="string">&quot;[Environment]::GetFolderPath(&#x27;UserProfile&#x27;)&quot;</span>,</span><br><span class="line">                ],</span><br><span class="line">                capture_output=<span class="literal">True</span>,</span><br><span class="line">                timeout=<span class="number">8</span>,</span><br><span class="line">                check=<span class="literal">True</span>,</span><br><span class="line">            )</span><br><span class="line">            profile = result.stdout.decode(<span class="string">&quot;utf-8-sig&quot;</span>).strip()</span><br><span class="line">        <span class="keyword">except</span> (OSError, subprocess.SubprocessError, UnicodeError):</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">if</span> profile:</span><br><span class="line">        <span class="keyword">if</span> profile.startswith(<span class="string">&quot;/&quot;</span>):</span><br><span class="line">            <span class="keyword">return</span> Path(profile)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            result = subprocess.run(</span><br><span class="line">                [<span class="string">&quot;wslpath&quot;</span>, <span class="string">&quot;-u&quot;</span>, profile],</span><br><span class="line">                capture_output=<span class="literal">True</span>,</span><br><span class="line">                text=<span class="literal">True</span>,</span><br><span class="line">                timeout=<span class="number">5</span>,</span><br><span class="line">                check=<span class="literal">True</span>,</span><br><span class="line">            )</span><br><span class="line">            <span class="keyword">return</span> Path(result.stdout.strip())</span><br><span class="line">        <span class="keyword">except</span> (OSError, subprocess.SubprocessError):</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">    <span class="comment"># Common fallback when Windows tools are not on the WSL PATH.</span></span><br><span class="line">    matches = [</span><br><span class="line">        path</span><br><span class="line">        <span class="keyword">for</span> path <span class="keyword">in</span> Path(<span class="string">&quot;/mnt/c/Users&quot;</span>).glob(<span class="string">&quot;*&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> path.is_dir() <span class="keyword">and</span> path.name.casefold() == user_home.name.casefold()</span><br><span class="line">    ]</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(matches) == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> matches[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">raise</span> ValueError(<span class="string">&quot;无法确定 Windows 用户目录，请用 --extensions-dir 指定扩展目录。&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">discover_roots</span>(<span class="params">target: <span class="built_in">str</span>, user_home: Path</span>) -&gt; <span class="built_in">list</span>[Path]:</span><br><span class="line">    roots = native_roots(user_home) <span class="keyword">if</span> target <span class="keyword">in</span> (<span class="string">&quot;native&quot;</span>, <span class="string">&quot;all&quot;</span>) <span class="keyword">else</span> []</span><br><span class="line">    <span class="keyword">if</span> target <span class="keyword">in</span> (<span class="string">&quot;windows&quot;</span>, <span class="string">&quot;all&quot;</span>):</span><br><span class="line">        <span class="keyword">if</span> sys.platform == <span class="string">&quot;win32&quot;</span>:</span><br><span class="line">            roots.extend(native_roots(user_home))</span><br><span class="line">        <span class="keyword">elif</span> is_wsl():</span><br><span class="line">            profile = windows_profile_from_wsl(user_home)</span><br><span class="line">            roots.extend(</span><br><span class="line">                profile / name / <span class="string">&quot;extensions&quot;</span></span><br><span class="line">                <span class="keyword">for</span> name <span class="keyword">in</span> (<span class="string">&quot;.vscode&quot;</span>, <span class="string">&quot;.vscode-insiders&quot;</span>)</span><br><span class="line">            )</span><br><span class="line">        <span class="keyword">elif</span> target == <span class="string">&quot;windows&quot;</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(</span><br><span class="line">                <span class="string">&quot;当前不是 Windows 或 WSL，请用 --extensions-dir 指定目录。&quot;</span></span><br><span class="line">            )</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">dict</span>.fromkeys(path.resolve() <span class="keyword">for</span> path <span class="keyword">in</span> roots))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">select_extensions</span>(<span class="params">root: Path</span>) -&gt; <span class="built_in">list</span>[Path]:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Prefer registered versions; cached older installations are not selected.&quot;&quot;&quot;</span></span><br><span class="line">    registry = root / <span class="string">&quot;extensions.json&quot;</span></span><br><span class="line">    <span class="keyword">if</span> registry.exists():</span><br><span class="line">        entries = json.loads(registry.read_text(encoding=<span class="string">&quot;utf-8-sig&quot;</span>))</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(entries, <span class="built_in">list</span>):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&quot;extensions.json 不是扩展列表。&quot;</span>)</span><br><span class="line">        selected = []</span><br><span class="line">        <span class="keyword">for</span> entry <span class="keyword">in</span> entries:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(entry, <span class="built_in">dict</span>) <span class="keyword">or</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(</span><br><span class="line">                entry.get(<span class="string">&quot;identifier&quot;</span>), <span class="built_in">dict</span></span><br><span class="line">            ):</span><br><span class="line">                <span class="keyword">raise</span> ValueError(<span class="string">&quot;extensions.json 包含无效登记项。&quot;</span>)</span><br><span class="line">            <span class="keyword">if</span> entry.get(<span class="string">&quot;identifier&quot;</span>, &#123;&#125;).get(<span class="string">&quot;id&quot;</span>, <span class="string">&quot;&quot;</span>).lower() != <span class="string">&quot;openai.chatgpt&quot;</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            relative = entry.get(<span class="string">&quot;relativeLocation&quot;</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> relative:</span><br><span class="line">                <span class="keyword">raise</span> ValueError(</span><br><span class="line">                    <span class="string">&quot;登记项缺少 relativeLocation，请显式指定扩展安装目录。&quot;</span></span><br><span class="line">                )</span><br><span class="line">            path = (root / relative).resolve()</span><br><span class="line">            <span class="keyword">if</span> path.parent != root.resolve():</span><br><span class="line">                <span class="keyword">raise</span> ValueError(<span class="string">&quot;登记项路径超出扩展目录，拒绝使用。&quot;</span>)</span><br><span class="line">            selected.append(path)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">dict</span>.fromkeys(selected))</span><br><span class="line"></span><br><span class="line">    candidates = []</span><br><span class="line">    <span class="keyword">for</span> path <span class="keyword">in</span> root.glob(<span class="string">&quot;openai.chatgpt-*&quot;</span>):</span><br><span class="line">        manifest = path / <span class="string">&quot;package.json&quot;</span></span><br><span class="line">        <span class="keyword">if</span> manifest.exists():</span><br><span class="line">            metadata = json.loads(manifest.read_text(encoding=<span class="string">&quot;utf-8-sig&quot;</span>))</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(metadata, <span class="built_in">dict</span>):</span><br><span class="line">                <span class="keyword">raise</span> ValueError(<span class="string">&quot;package.json 不是扩展信息对象。&quot;</span>)</span><br><span class="line">            version = <span class="built_in">str</span>(metadata.get(<span class="string">&quot;version&quot;</span>, <span class="string">&quot;&quot;</span>))</span><br><span class="line">            <span class="keyword">if</span> re.fullmatch(<span class="string">r&quot;\d+\.\d+\.\d+&quot;</span>, version):</span><br><span class="line">                candidates.append((<span class="built_in">tuple</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, version.split(<span class="string">&quot;.&quot;</span>))), path))</span><br><span class="line">    <span class="keyword">return</span> [<span class="built_in">max</span>(candidates, key=<span class="keyword">lambda</span> item: item[<span class="number">0</span>])[<span class="number">1</span>]] <span class="keyword">if</span> candidates <span class="keyword">else</span> []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">extension_file</span>(<span class="params">path: Path</span>) -&gt; Path:</span><br><span class="line">    manifest = json.loads((path / <span class="string">&quot;package.json&quot;</span>).read_text(encoding=<span class="string">&quot;utf-8-sig&quot;</span>))</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(manifest, <span class="built_in">dict</span>):</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;package.json 不是扩展信息对象。&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> manifest.get(<span class="string">&quot;publisher&quot;</span>) != <span class="string">&quot;openai&quot;</span> <span class="keyword">or</span> manifest.get(<span class="string">&quot;name&quot;</span>) != <span class="string">&quot;chatgpt&quot;</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;此目录不是 openai.chatgpt 扩展。&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> path / <span class="string">&quot;out&quot;</span> / <span class="string">&quot;extension.js&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>() -&gt; <span class="built_in">int</span>:</span><br><span class="line">    parser = argparse.ArgumentParser(description=__doc__)</span><br><span class="line">    parser.add_argument(</span><br><span class="line">        <span class="string">&quot;action&quot;</span>, nargs=<span class="string">&quot;?&quot;</span>, choices=(<span class="string">&quot;check&quot;</span>, <span class="string">&quot;patch&quot;</span>, <span class="string">&quot;restore&quot;</span>), default=<span class="string">&quot;check&quot;</span></span><br><span class="line">    )</span><br><span class="line">    parser.add_argument(</span><br><span class="line">        <span class="string">&quot;--target&quot;</span>,</span><br><span class="line">        choices=(<span class="string">&quot;native&quot;</span>, <span class="string">&quot;windows&quot;</span>, <span class="string">&quot;all&quot;</span>),</span><br><span class="line">        default=<span class="string">&quot;native&quot;</span>,</span><br><span class="line">        <span class="built_in">help</span>=<span class="string">&quot;默认当前系统；WSL 中可选 windows 或 all。&quot;</span>,</span><br><span class="line">    )</span><br><span class="line">    parser.add_argument(</span><br><span class="line">        <span class="string">&quot;--extensions-dir&quot;</span>,</span><br><span class="line">        <span class="built_in">type</span>=Path,</span><br><span class="line">        action=<span class="string">&quot;append&quot;</span>,</span><br><span class="line">        <span class="built_in">help</span>=<span class="string">&quot;自定义扩展集合目录，或具体 openai.chatgpt 安装目录；可重复指定。&quot;</span>,</span><br><span class="line">    )</span><br><span class="line">    parser.add_argument(</span><br><span class="line">        <span class="string">&quot;--dry-run&quot;</span>, action=<span class="string">&quot;store_true&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;仅显示修补或还原计划，不写入。&quot;</span></span><br><span class="line">    )</span><br><span class="line">    args = parser.parse_args()</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        roots = args.extensions_dir <span class="keyword">or</span> discover_roots(args.target, Path.home())</span><br><span class="line">        installations = []</span><br><span class="line">        <span class="keyword">for</span> root <span class="keyword">in</span> roots:</span><br><span class="line">            root = root.expanduser().resolve()</span><br><span class="line">            <span class="keyword">if</span> (root / <span class="string">&quot;package.json&quot;</span>).exists():</span><br><span class="line">                installations.append(root)</span><br><span class="line">            <span class="keyword">elif</span> root.is_dir():</span><br><span class="line">                installations.extend(select_extensions(root))</span><br><span class="line">        installations = <span class="built_in">list</span>(<span class="built_in">dict</span>.fromkeys(installations))</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> installations:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&quot;未找到 Codex 扩展，请用 --extensions-dir 指定目录。&quot;</span>)</span><br><span class="line">        failed = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">for</span> installation <span class="keyword">in</span> installations:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                status = process_file(</span><br><span class="line">                    extension_file(installation), args.action, args.dry_run</span><br><span class="line">                )</span><br><span class="line">                <span class="built_in">print</span>(<span class="built_in">str</span>(installation) + <span class="string">&quot;\n  &quot;</span> + status)</span><br><span class="line">            <span class="keyword">except</span> (OSError, ValueError) <span class="keyword">as</span> error:</span><br><span class="line">                <span class="built_in">print</span>(<span class="built_in">str</span>(installation) + <span class="string">&quot;\n  失败：&quot;</span> + <span class="built_in">str</span>(error), file=sys.stderr)</span><br><span class="line">                failed = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">if</span> args.action != <span class="string">&quot;check&quot;</span> <span class="keyword">and</span> <span class="keyword">not</span> args.dry_run <span class="keyword">and</span> <span class="keyword">not</span> failed:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;等当前任务结束后，在 VS Code 中运行 Developer: Reload Window。&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> <span class="keyword">if</span> failed <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">except</span> (OSError, ValueError) <span class="keyword">as</span> error:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;失败：&quot;</span> + <span class="built_in">str</span>(error), file=sys.stderr)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="keyword">raise</span> SystemExit(main())</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>最后，O8分钱、Tibo分钱。</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.esing.dev">Esing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.esing.dev/2026/10/02/vscode-codex-dropmessage/">https://blog.esing.dev/2026/10/02/vscode-codex-dropmessage/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://blog.esing.dev" target="_blank">Esing的小站</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaScript/">JavaScript</a><a class="post-meta__tags" href="/tags/Codex/">Codex</a><a class="post-meta__tags" href="/tags/OpenAI/">OpenAI</a><a class="post-meta__tags" href="/tags/VSCode/">VSCode</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/10/01/wsl-vscode-githubauth-popup/" title="VSCode下打开窗口后一直弹出“Github身份认证过期”"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/6" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">VSCode下打开窗口后一直弹出“Github身份认证过期”</div></div><div class="info-2"><div class="info-item-1">前言 之前某一次VSCode更新后，切换到特定的配置文件就会弹出“Github身份验证 - 需要重新加载”的弹出窗口。虽然关了也没事，但是看着很烦。  而且在多次测试后发现，切换到默认的配置文件和其他配置文件就不会有这个问题。非常神秘。 接着用VSCode自带的二分法（按下Ctrl+Shift+P后命令面板内搜Bisect）排查问题也没查出来，说明问题不出在插件上。那只可能是配置文件坏了。 解决方法（旧） 备份原先的JSON配置，之后导出有问题的配置为单个vscode配置文件，再直接删除有问题的配置。 接着再重新新建配置，先安装原先一样的扩展后测试。一般到这一步就不会再有问题了。后面继续覆盖原本的JSON配置。 解决方法（新） 省流：修改应用设置内的github-authentication.useElectronFetch，删除其设置即可。  直接跟Codex说：  我发现我自从VSCode切换到VIDE的配置文件后，不论打开什么工作区，VSCode都会弹出一个“Github身份验证-需要重新加载”的提示框，写着“需要重新加载才能使提取设置更改生效”。我一直没找到问题，你能帮我...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/05/11/cpa-setup/" title="使用 CLIProxyAPI + CC-Switch 实现多账号额度整合"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/57892762_p0_waifu2x_2x_jpg_2024-4-19_2216_y4dgn1bu98.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-11</div><div class="info-item-2">使用 CLIProxyAPI + CC-Switch 实现多账号额度整合</div></div><div class="info-2"><div class="info-item-1">世间万物，他皆为我所用~</div></div></div></a><a class="pagination-related" href="/2025/09/17/nonblocking-display/" title="修改Verilog非阻塞赋值的字体样式"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/3" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-17</div><div class="info-item-2">修改Verilog非阻塞赋值的字体样式</div></div><div class="info-2"><div class="info-item-1">前言 经常写Verilog的朋友都知道，Verilog的非阻塞赋值符号是 &lt; = 。但是对于大部分开启了连字的等宽字体，这样子写后，会显示为&lt;=而非&lt;=。显然，前者的显示方法是错误的。如何显示为后者呢？ OpenType字体：随心所欲自定义 微软和 Adobe 在 1996 年开发了 OpenType 字体格式，基于 TrueType 和 PostScript 的技术，旨在提供更强大的功能。最重要的一点，便是支持连字、替代字形、上下标、旧式数字等高级排版特性。此外，为了不同场合下自定义，OpenType 字体包含了许多可开启的特性。 我使用Maple Mono Normal NF CN作为系统与博客的等宽字体，因其对中文十分友好。查看文档可知，在v7.1版本加入了cv63特性，即替代&lt;=为箭头样式。因此，只需手动指定某一语言下的样式即可。 VSCode自定义 我曾经试过在VSCode的配置中搜索@lang:verilog，以确保设置应用于Verilog语言，但是好像字体修改部分并不会生效。没办法，只能修改工作区配置了。 在工作区配置的settings.js...</div></div></div></a><a class="pagination-related" href="/2026/04/08/cloudflare-workers-meting/" title="Cloudflare 搭建自托管 Meting.js 后端"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/8" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-08</div><div class="info-item-2">Cloudflare 搭建自托管 Meting.js 后端</div></div><div class="info-2"><div class="info-item-1">前言 之前一直用的 Baka API 因为被滥用结果永久关停了，哭。还好Github上有源码，可以自己部署一份。 只能想办法自建了。但是源码是PHP，实在不想用。最方便的无服务器托管服务就是Cloudflare了，能不能参考原来的代码，写一个托管在Workers上的呢？ Codex还是太好用了。 部署 直接Fork一份到自己的库里：https://github.com/Zxis233/meting-workers 然后Cloudflare上选择一下存储库部署就行。部署后参考说明填一下相应的环境变量即可。 演示 测试一下自己部署的版本！做了鉴权，会校验Referer和Origin。别给我Workers流量打没了 &gt;_&lt; 普通歌曲       VIP专属       VIP也听不了的 Acacia 你国区运营真是臭傻逼。        2026.08.07 魔裁专辑打赢复活赛了（除了上面那首）        后记  2026.06.04  添加了账号密码登录后的Cookie自动刷新。 使用二维码登录后的Cookie是刷新不了的！  2026.06.15  参考Baka的音...</div></div></div></a><a class="pagination-related" href="/2024/10/03/cloudflare-workers-randomimgapi/" title="使用 Cloudflare Workers 搭建随机图片API"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2020/10" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-10-03</div><div class="info-item-2">使用 Cloudflare Workers 搭建随机图片API</div></div><div class="info-2"><div class="info-item-1">感谢Cloudflare提供的免费服务，让本项目得以实现。 在此向Cloudflare致以最高的敬意。  前言 看了BlueSkyXN的博客后，准备自己搭一个二刺螈随机图片API（毕竟网上找到的都良莠不齐）。他的博客提到了这个库：BlueSkyXN/RandomIMGAPI: 业内最简的原创随机图API源码。自己在西雅图的服务器上部署了一下，效果不错，就是每次请求会很慢，毕竟线路很差。目光自然又转向了Cloudflare。能不能用Cloudflare Workers实现呢？ 准备  功能正常的Cloudflare账号 一个托管在Cloudflare的域名 包含目标图片的GitHub库（比如我的：Zxis233/img2020S7: Pixiv 2020精选集 删除大量NSFW图片）  步骤 创建Cloudflare Workers   左侧栏找到“Workers与Pages”，点进去新建。模板直接选JS的Hello World就行 （注意不要选成Python的了）   部署完毕后编辑代码，将下面的代码粘贴进去： 1234567891011121314151617181920212...</div></div></div></a><a class="pagination-related" href="/2026/05/18/cpa-server-setup/" title="服务器部署自己的CPA API"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/9" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-18</div><div class="info-item-2">服务器部署自己的CPA API</div></div><div class="info-2"><div class="info-item-1">全网呼叫Agent工具 让我开蹬！</div></div></div></a><a class="pagination-related" href="/2024/09/01/hexo-webp-cloud-proxy-problem/" title="使用Hexo Webp Cloud Proxy插件渲染博客后图片变为Undefined"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/15" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-01</div><div class="info-item-2">使用Hexo Webp Cloud Proxy插件渲染博客后图片变为Undefined</div></div><div class="info-2"><div class="info-item-1">前言 继先前使用 Cloudflare R2 存储桶搭建图床之后，为了再一次提高图片的访问速度，我采用了WebP Cloud Services来讲图片转为适合浏览器的现代化文件格式Webp。找了下，有一个Hexo博客插件hexo-webp-cloud-proxy可以方便的做到这一点。它可以很好的将所有的Post内图片链接转换成带有WebP Cloud的链接。 安装 npm install hexo-webp-cloud-proxy --save 问题 博客内含有GIF图，这玩意难以压缩，体积又大，很容易就把WebP Cloud的200M缓存吃光，因此我不打算处理它们。在Hexo根目录的_config.yml_插件设置内配置： 12345678910webp_cloud_proxy:  enable: true  # the suffix of img type to use webp cloud service  convert_type_list: [&quot;jpg&quot;, &quot;jpeg&quot;, &quot;png&quot;]  # your site...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Esing</div><div class="author-info-description">咱也不知道写点啥 (＠_＠;)</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">250</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">220</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Zxis233"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Zxis233" target="_blank" title="Github"><i class="fab fa-github" style="color: #ff80ac;"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss" style="color: #ff80ac;"></i></a><a class="social-icon" href="mailto:esing@mail.esing.dev" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #ff80ac;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p><b>将音乐解析 API 修改为自建版！</b><br><b>迁移到最新的Hexo 与 Butterfly！</b></p></div></div><div class="card-widget colo-info" id="colo-info"><div class="item-headline"><i class="fas fa-satellite-dish fa-flip-360"></i><span>Cloudflare 节点信息</span></div><div class="item-content"><div class="webinfo" data-cf-fields data-pangu-ignore>
+  <div class="webinfo-item"><div class="item-name">访问 IP :</div><div class="item-count" id="cf-ip">—</div></div>
+  <div class="webinfo-item"><div class="item-name">访问地区 :</div><div class="item-count" id="cf-loc">—</div></div>
+  <div class="webinfo-item"><div class="item-name">CDN 节点 :</div><div class="item-count" id="cf-colo">—</div></div>
+  <div class="webinfo-item"><div class="item-name">TLS 协议 :</div><div class="item-count" id="cf-tls">—</div></div>
+  <div class="webinfo-item"><div class="item-name">WARP :</div><div class="item-count" id="cf-warp">—</div></div>
+</div>
+<p data-cf-status role="status" aria-live="polite">节点信息需要 JavaScript 才能加载</p>
+<button type="button" data-cf-retry hidden>重试</button>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AI%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">AI分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%B4%E6%97%B6%E4%BF%AE%E5%A4%8D"><span class="toc-number">3.</span> <span class="toc-text">临时修复</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline" style="font-weight: bold;"><i class="fas fa-history fa-spin fa-spin-reverse"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/10/02/vscode-codex-dropmessage/" title="VSCode Codex 插件吞掉消息的临时解决方案"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/83647245_p0_20240901_1726.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="VSCode Codex 插件吞掉消息的临时解决方案"/></a><div class="content"><a class="title" href="/2026/10/02/vscode-codex-dropmessage/" title="VSCode Codex 插件吞掉消息的临时解决方案">VSCode Codex 插件吞掉消息的临时解决方案</a><time datetime="2026-10-02T13:42:46.457Z" title="更新于 2026-10-02 21:42:46">2026-10-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/10/01/wsl-vscode-githubauth-popup/" title="VSCode下打开窗口后一直弹出“Github身份认证过期”"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/6" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="VSCode下打开窗口后一直弹出“Github身份认证过期”"/></a><div class="content"><a class="title" href="/2026/10/01/wsl-vscode-githubauth-popup/" title="VSCode下打开窗口后一直弹出“Github身份认证过期”">VSCode下打开窗口后一直弹出“Github身份认证过期”</a><time datetime="2026-10-01T09:53:33.598Z" title="更新于 2026-10-01 17:53:33">2026-10-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/09/23/wechat-lsposed-astrbot/" title="记一次用 LSPosed 把手机微信接入 AstrBot 的过程"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/top_2_2023-4-23_1835_ve2mzpmu1v.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="记一次用 LSPosed 把手机微信接入 AstrBot 的过程"/></a><div class="content"><a class="title" href="/2026/09/23/wechat-lsposed-astrbot/" title="记一次用 LSPosed 把手机微信接入 AstrBot 的过程">记一次用 LSPosed 把手机微信接入 AstrBot 的过程</a><time datetime="2026-09-22T18:10:24.030Z" title="更新于 2026-09-23 02:10:24">2026-09-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/09/20/dom-router-problem/" title="记一次宿舍路由器安装问题排查"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgrandom.esing.dev/2021/11" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="记一次宿舍路由器安装问题排查"/></a><div class="content"><a class="title" href="/2026/09/20/dom-router-problem/" title="记一次宿舍路由器安装问题排查">记一次宿舍路由器安装问题排查</a><time datetime="2026-09-20T05:58:56.185Z" title="更新于 2026-09-20 13:58:56">2026-09-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/16/starport-p13/" title="[星港游记] 金星大距：二分相"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/starport.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[星港游记] 金星大距：二分相"/></a><div class="content"><a class="title" href="/2026/08/16/starport-p13/" title="[星港游记] 金星大距：二分相">[星港游记] 金星大距：二分相</a><time datetime="2026-08-16T06:06:03.019Z" title="更新于 2026-08-16 14:06:03">2026-08-16</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(https://pic.esing.dev/img/87257672_p0_2023-4-16_1808_qmfhwf6v6g.avif);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2023 - 2026 By Esing</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></span></div><div class="footer_custom_text">Deployed On <a href="https://pages.cloudflare.com/" target="_blank">Cloudflare Pages</a><a href="https://icp.gov.moe/?keyword=20237860" target="_blank"><br /><br /> 萌 ICP 备 20237860 号 </a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="rightMenu" role="menu" aria-label="页面操作" hidden data-min-width="0" data-random-url="/js/random-posts.json"><div class="rightMenu-group rightMenu-small" role="group" aria-label="页面导航"><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="back" aria-label="返回" title="返回"><i class="fas fa-arrow-left" aria-hidden="true"></i><span>返回</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="forward" aria-label="前进" title="前进"><i class="fas fa-arrow-right" aria-hidden="true"></i><span>前进</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="reload" aria-label="刷新" title="刷新"><i class="fas fa-rotate-right" aria-hidden="true"></i><span>刷新</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="top" aria-label="回到顶部" title="回到顶部"><i class="fas fa-arrow-up" aria-hidden="true"></i><span>回到顶部</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="选中文字" data-group="selection" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-selection" aria-label="复制选中文字" title="复制选中文字"><i class="fas fa-copy" aria-hidden="true"></i><span>复制选中文字</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="search" aria-label="百度搜索" title="百度搜索"><i class="rightmenu-baidu" aria-hidden="true"></i><span>百度搜索</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="选中的网址" data-group="selected-url" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="open-selection" aria-label="转到选中网址" title="转到选中网址"><i class="fas fa-link" aria-hidden="true"></i><span>转到选中网址</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="链接操作" data-group="link" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="open-link" aria-label="新标签打开链接" title="新标签打开链接"><i class="fas fa-up-right-from-square" aria-hidden="true"></i><span>新标签打开链接</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-link" aria-label="复制链接" title="复制链接"><i class="fas fa-copy" aria-hidden="true"></i><span>复制链接</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="图片操作" data-group="image" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="open-image" aria-label="新标签打开图片" title="新标签打开图片"><i class="fas fa-image" aria-hidden="true"></i><span>新标签打开图片</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-image" aria-label="复制图片链接" title="复制图片链接"><i class="fas fa-copy" aria-hidden="true"></i><span>复制图片链接</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="页面功能"><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-page" aria-label="复制本文地址" title="复制本文地址"><i class="fas fa-link" aria-hidden="true"></i><span>复制本文地址</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="random" aria-label="随便逛逛" title="随便逛逛"><i class="fas fa-paper-plane" aria-hidden="true"></i><span>随便逛逛</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="dark" aria-label="昼夜切换" title="昼夜切换"><i class="fas fa-moon" aria-hidden="true"></i><span>昼夜切换</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="read" aria-label="阅读模式" title="阅读模式"><i class="fas fa-book" aria-hidden="true"></i><span>阅读模式</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="fullscreen" aria-label="进入全屏" title="进入全屏"><i class="fas fa-expand" aria-hidden="true"></i><span>进入全屏</span></button></div></div><div id="rightmenu-status" role="status" aria-live="polite" aria-atomic="true"></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><script src="/vendor/pangu/pangu.umd.js?v=10.4.1" defer></script><script src="/js/pangu-spacing.js?v=10.4.1" defer data-field="post"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.18.1/dist/katex.min.css')
+    if (false) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.18.1/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const parseViewBox = viewBox => {
+    if (!viewBox) return null
+    const parts = viewBox.trim().split(/[\s,]+/).map(n => Number(n))
+    if (parts.length !== 4 || parts.some(n => Number.isNaN(n))) return null
+    return parts
+  }
+
+  const getSvgViewBox = svg => {
+    const attr = parseViewBox(svg.getAttribute('viewBox'))
+    if (attr) return attr
+
+    // Fallback: use bbox to build a viewBox
+    try {
+      const bbox = svg.getBBox()
+      if (bbox && bbox.width && bbox.height) return [bbox.x, bbox.y, bbox.width, bbox.height]
+    } catch (e) {
+      // getBBox may fail on some edge cases; ignore
+    }
+
+    const w = Number(svg.getAttribute('width')) || 0
+    const h = Number(svg.getAttribute('height')) || 0
+    if (w > 0 && h > 0) return [0, 0, w, h]
+    return [0, 0, 100, 100]
+  }
+
+  const setSvgViewBox = (svg, vb) => {
+    svg.setAttribute('viewBox', `${vb[0]} ${vb[1]} ${vb[2]} ${vb[3]}`)
+  }
+
+  const clamp = (v, min, max) => Math.max(min, Math.min(max, v))
+
+  const openSvgInNewTab = ({ source, initViewBox }) => {
+    const getClonedSvg = () => {
+      if (typeof source === 'string') {
+        const template = document.createElement('template')
+        template.innerHTML = source.trim()
+        const svg = template.content.querySelector('svg')
+        return svg ? svg.cloneNode(true) : null
+      }
+      if (source && typeof source.cloneNode === 'function') {
+        return source.cloneNode(true)
+      }
+      return null
+    }
+
+    const clone = getClonedSvg()
+    if (!clone) return
+    if (initViewBox && initViewBox.length === 4) {
+      clone.setAttribute('viewBox', initViewBox.join(' '))
+    }
+    if (!clone.getAttribute('xmlns')) clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+    if (!clone.getAttribute('xmlns:xlink') && clone.innerHTML.includes('xlink:')) {
+      clone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink')
+    }
+    // inject background to match current theme
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
+    const bg = getComputedStyle(document.body).backgroundColor || (isDark ? '#1e1e1e' : '#ffffff')
+    if (!clone.style.background) clone.style.background = bg
+
+    const serializer = new XMLSerializer()
+    const svgSource = serializer.serializeToString(clone)
+    const htmlSource = `<!doctype html><html><head><meta charset="utf-8" />
+      <style>
+        html, body { width: 100%; height: 100%; margin: 0; display: flex; align-items: center; justify-content: center; background: ${bg}; }
+        svg { max-width: 100%; max-height: 100%; height: auto; width: auto; }
+      </style>
+      </head><body>${svgSource}</body></html>`
+    const blob = new Blob([htmlSource], { type: 'text/html;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    window.open(url, '_blank', 'noopener')
+
+    setTimeout(() => URL.revokeObjectURL(url), 5000)
+  }
+
+  const attachMermaidViewerButton = wrap => {
+    let btn = wrap.querySelector('.mermaid-open-btn')
+    if (!btn) {
+      btn = document.createElement('button')
+      btn.type = 'button'
+      btn.className = 'mermaid-open-btn'
+      wrap.appendChild(btn)
+    }
+
+    btn.innerHTML = '<i class="fa fa-search fa-fw" aria-hidden="true"></i>'
+
+    if (!btn.__mermaidViewerBound) {
+      btn.addEventListener('click', e => {
+        e.preventDefault()
+        e.stopPropagation()
+        const svg = wrap.__mermaidOriginalSvg || wrap.querySelector('svg')
+        if (!svg) return
+        const initViewBox = wrap.__mermaidInitViewBox
+        openSvgInNewTab({ source: svg, initViewBox })
+      })
+      btn.__mermaidViewerBound = true
+    }
+  }
+
+  // Zoom around a point (px, py) in the SVG viewport (in viewBox coordinates)
+  const zoomAtPoint = (vb, factor, px, py) => {
+    const w = vb[2] * factor
+    const h = vb[3] * factor
+    const nx = px - (px - vb[0]) * factor
+    const ny = py - (py - vb[1]) * factor
+    return [nx, ny, w, h]
+  }
+
+  const initMermaidGestures = wrap => {
+    // Clean up previous event listeners and pending frames
+    if (wrap.__mermaidAbortController) {
+      wrap.__mermaidAbortController.abort()
+      if (wrap.__mermaidRafId) cancelAnimationFrame(wrap.__mermaidRafId)
+    }
+    const ac = new AbortController()
+    wrap.__mermaidAbortController = ac
+    const svg = wrap.querySelector('svg')
+    if (!svg) return
+
+    // Ensure viewBox exists so gestures always work
+    const initVb = getSvgViewBox(svg)
+    wrap.__mermaidInitViewBox = initVb
+    wrap.__mermaidCurViewBox = initVb.slice()
+    setSvgViewBox(svg, initVb)
+    // Disable default gestures to prevent scroll chaining and pinch-zoom penetration in Chrome
+    svg.style.touchAction = 'none'
+
+    // Cache BoundingClientRect, throttled on scroll to reduce reflow
+    let cachedRect = svg.getBoundingClientRect()
+    let rectDirty = false
+    const markRectDirty = () => { rectDirty = true }
+    window.addEventListener('resize', markRectDirty, { signal: ac.signal })
+    window.addEventListener('scroll', markRectDirty, { signal: ac.signal, capture: true })
+    const getRect = () => {
+      if (rectDirty) {
+        cachedRect = svg.getBoundingClientRect()
+        rectDirty = false
+      }
+      return cachedRect
+    }
+
+    // Precompute clamp bounds from initial viewBox
+    const minW = initVb[2] * 0.1
+    const maxW = initVb[2] * 10
+    const minH = initVb[3] * 0.1
+    const maxH = initVb[3] * 10
+    const clampVb = vb => {
+      const out = vb.slice()
+      out[2] = clamp(out[2], minW, maxW)
+      out[3] = clamp(out[3], minH, maxH)
+      return out
+    }
+
+    // Throttle DOM updates using requestAnimationFrame
+    let pendingVb = null
+    let rafId = null
+    const applyVb = () => {
+      if (pendingVb) {
+        wrap.__mermaidCurViewBox = pendingVb
+        setSvgViewBox(svg, pendingVb)
+        pendingVb = null
+      }
+      rafId = null
+      wrap.__mermaidRafId = null
+    }
+    const setCurVb = vb => {
+      pendingVb = clampVb(vb)
+      if (!rafId) {
+        rafId = requestAnimationFrame(applyVb)
+        wrap.__mermaidRafId = rafId
+      }
+    }
+
+    const state = {
+      pointers: new Map(),
+      startVb: null,
+      startDist: 0,
+      lastPointerX: 0,
+      lastPointerY: 0
+    }
+
+    const onPointerDown = e => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return
+      svg.setPointerCapture(e.pointerId)
+      const curVb = wrap.__mermaidCurViewBox
+      state.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+      if (state.pointers.size === 1) {
+        state.startVb = curVb.slice()
+        state.lastPointerX = e.clientX
+        state.lastPointerY = e.clientY
+      } else if (state.pointers.size === 2) {
+        const pts = [...state.pointers.values()]
+        const dx = pts[0].x - pts[1].x
+        const dy = pts[0].y - pts[1].y
+        state.startDist = Math.hypot(dx, dy)
+        state.startVb = curVb.slice()
+      }
+    }
+
+    const onPointerMove = e => {
+      if (!state.pointers.has(e.pointerId)) return
+      state.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+      const curVb = wrap.__mermaidCurViewBox
+      const rect = getRect()
+      if (state.pointers.size === 1 && state.startVb) {
+        const p = state.pointers.values().next().value
+        const dxClient = p.x - state.lastPointerX
+        const dyClient = p.y - state.lastPointerY
+        state.lastPointerX = p.x
+        state.lastPointerY = p.y
+        const dx = dxClient * (curVb[2] / rect.width)
+        const dy = dyClient * (curVb[3] / rect.height)
+        setCurVb([curVb[0] - dx, curVb[1] - dy, curVb[2], curVb[3]])
+        return
+      }
+      if (state.pointers.size === 2 && state.startVb && state.startDist > 0) {
+        const pts = [...state.pointers.values()]
+        const dx = pts[0].x - pts[1].x
+        const dy = pts[0].y - pts[1].y
+        const dist = Math.hypot(dx, dy)
+        if (!dist) return
+        const factor = state.startDist / dist
+        const cx = (pts[0].x + pts[1].x) / 2
+        const cy = (pts[0].y + pts[1].y) / 2
+        const px = curVb[0] + (cx - rect.left) * (curVb[2] / rect.width)
+        const py = curVb[1] + (cy - rect.top) * (curVb[3] / rect.height)
+        setCurVb(zoomAtPoint(state.startVb, factor, px, py))
+      }
+    }
+
+    const onPointerUpOrCancel = e => {
+      // Release PointerCapture to avoid event capture anomalies
+      if (svg.hasPointerCapture && svg.hasPointerCapture(e.pointerId)) {
+        svg.releasePointerCapture(e.pointerId)
+      }
+      state.pointers.delete(e.pointerId)
+      if (state.pointers.size === 0) {
+        state.startVb = null
+        state.startDist = 0
+      } else if (state.pointers.size === 1) {
+        const p = state.pointers.values().next().value
+        state.lastPointerX = p.x
+        state.lastPointerY = p.y
+      }
+    }
+
+    const onWheel = e => {
+      // Prevent event bubbling from triggering external scroll
+      e.preventDefault()
+      e.stopPropagation()
+      // Normalize deltaY across deltaMode (Chrome uses pixels, Safari uses lines)
+      let delta = e.deltaY
+      if (e.deltaMode === 1) delta *= 16
+      else if (e.deltaMode === 2) delta *= 400
+
+      // Continuous zoom factor: smoother than fixed 1.1/0.9 steps
+      const zoomFactor = Math.pow(1.001, delta)
+
+      const curVb = wrap.__mermaidCurViewBox
+      const rect = getRect()
+      const px = curVb[0] + (e.clientX - rect.left) * (curVb[2] / rect.width)
+      const py = curVb[1] + (e.clientY - rect.top) * (curVb[3] / rect.height)
+      setCurVb(zoomAtPoint(curVb, zoomFactor, px, py))
+    }
+
+    const onDblClick = () => {
+      const init = wrap.__mermaidInitViewBox
+      if (init) setCurVb(init)
+    }
+
+    svg.addEventListener('pointerdown', onPointerDown, { signal: ac.signal })
+    svg.addEventListener('pointermove', onPointerMove, { signal: ac.signal })
+    svg.addEventListener('pointerup', onPointerUpOrCancel, { signal: ac.signal })
+    svg.addEventListener('pointercancel', onPointerUpOrCancel, { signal: ac.signal })
+    svg.addEventListener('wheel', onWheel, { passive: false, signal: ac.signal })
+    svg.addEventListener('dblclick', onDblClick, { signal: ac.signal })
+  }
+
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const mode = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'
+    const themes = {"light":"base","dark":"base"}
+    const palettes = {"light":{"darkMode":false,"background":"#ffffff","textColor":"#2b3037","primaryColor":"#fff5f8","primaryTextColor":"#29313a","primaryBorderColor":"#d96a91","secondaryColor":"#ecfbf5","secondaryTextColor":"#213c34","secondaryBorderColor":"#269c78","tertiaryColor":"#f7f9fb","tertiaryTextColor":"#2b3037","tertiaryBorderColor":"#cfd8e3","lineColor":"#64717d","defaultLinkColor":"#64717d","titleColor":"#26323a","edgeLabelBackground":"#ffffff","clusterBkg":"#fbfcfd","clusterBorder":"#dbe3ea","noteBkgColor":"#fff8df","noteTextColor":"#3a3428","noteBorderColor":"#d6b25a","actorBkg":"#fff5f8","actorBorder":"#d96a91","actorTextColor":"#29313a","actorLineColor":"#8b96a3","signalColor":"#64717d","signalTextColor":"#2b3037","labelBoxBkgColor":"#f7f9fb","labelBoxBorderColor":"#dbe3ea","labelTextColor":"#2b3037","loopTextColor":"#2b3037","activationBkgColor":"#ecfbf5","activationBorderColor":"#269c78"},"dark":{"darkMode":true,"background":"#171a1f","textColor":"#e6edf3","primaryColor":"#33242c","primaryTextColor":"#f7eaf0","primaryBorderColor":"#f08cab","secondaryColor":"#1c332d","secondaryTextColor":"#e5f8f1","secondaryBorderColor":"#5bcaa0","tertiaryColor":"#20262e","tertiaryTextColor":"#e6edf3","tertiaryBorderColor":"#3b4652","lineColor":"#a7b1bc","defaultLinkColor":"#a7b1bc","titleColor":"#f0f4f8","edgeLabelBackground":"#171a1f","clusterBkg":"#1b2027","clusterBorder":"#323d48","noteBkgColor":"#352d1e","noteTextColor":"#f4e9c8","noteBorderColor":"#c8a856","actorBkg":"#33242c","actorBorder":"#f08cab","actorTextColor":"#f7eaf0","actorLineColor":"#687482","signalColor":"#c7d0d9","signalTextColor":"#e6edf3","labelBoxBkgColor":"#20262e","labelBoxBorderColor":"#3b4652","labelTextColor":"#e6edf3","loopTextColor":"#e6edf3","activationBkgColor":"#1c332d","activationBorderColor":"#5bcaa0"}}
+    const theme = themes[mode]
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      // Clean up event listeners before removing old SVG
+      if (item.__mermaidAbortController) {
+        item.__mermaidAbortController.abort()
+      }
+      const oldSvg = item.querySelector('svg')
+      if (oldSvg) oldSvg.remove()
+      let config = {}
+      try {
+        config = mermaidSrc.dataset.config ? JSON.parse(mermaidSrc.dataset.config) : {}
+      } catch (e) {
+        console.warn('[mermaid] failed to parse dataset.config:', e)
+      }
+      if (!config.theme) {
+        config.theme = theme
+      }
+      // Keep per-diagram overrides; do not tint an explicitly different theme.
+      if (config.theme === theme && palettes[mode]) {
+        config.themeVariables = { ...palettes[mode], ...config.themeVariables }
+      }
+      const mermaidThemeConfig = `%%{init: ${JSON.stringify(config)}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+        if (true) initMermaidGestures(item)
+        item.__mermaidOriginalSvg = svg
+        if (true) attachMermaidViewerButton(item)
+      }
+
+      const handleError = err => {
+        console.error(`[mermaid] render failed for block #${index}:`, err)
+        const errorEl = document.createElement('div')
+        errorEl.className = 'mermaid-error'
+        errorEl.textContent = `Mermaid render error: ${err.message || err}`
+        mermaidSrc.insertAdjacentElement('afterend', errorEl)
+      }
+
+      try {
+        const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+        // mermaid v9 and v10 compatibility
+        if (typeof renderFn === 'string') {
+          renderMermaid(renderFn)
+        } else {
+          renderFn.then(({ svg }) => renderMermaid(svg)).catch(handleError)
+        }
+      } catch (err) {
+        handleError(err)
+      }
+    })
+  }
+
+  const codeToMermaid = $article => {
+    const codeMermaidEle = $article.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    const $article = document.getElementById('article-container')
+    if (!$article) return
+
+    if (true) codeToMermaid($article)
+    const $mermaid = $article.querySelectorAll('.mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = {"search":false}
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://comment.esing.dev/',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.15.2/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client@3.15.2/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !true) {
+    if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script src="/js/meting.js" defer></script><script src="/js/music-pjax.js" defer></script><script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script><script src="/js/target-cursor.js" defer></script><script src="/js/cursor-toggle.js" defer></script><script src="/js/title.js" defer></script><script src="/js/titlelight.js" defer></script><script src="/js/autoload.js" defer></script><script src="/js/rightmenu.js" defer></script><link rel="stylesheet" href="/css/waline-custom.css"><script src="/js/cloudflare-info.js" defer></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"]):not([data-fancybox])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      if (!item.parentNode) return
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || ''
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    const responseURL = e.request && e.request.responseURL
+    if (e.request && e.request.status === 404) {
+      true
+        ? pjax.loadUrl('/404')
+        : responseURL && (window.location.href = responseURL)
+    } else if (responseURL) {
+      window.location.href = responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.7.0"></script></div></div></body></html>

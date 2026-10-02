@@ -2034,7 +2034,7 @@ blockquote {
   border-left: 4px solid #28c28c;
   background-color: var(--blockquote-bg);
   color: var(--blockquote-color);
-  border-radius: 6px;
+  border-radius: 8px;
 }
 blockquote footer cite:before {
   padding: 0 5px;
@@ -4191,7 +4191,13 @@ figure.highlight pre .javascript .function {
   animation: more-btn-move 1s infinite;
 }
 #aside-content .card-announcement .item-headline i {
-  color: #f00;
+  color: #ff80ac;
+}
+#aside-content .colo-info .item-headline i {
+  color: #f38020;
+}
+#aside-content .card-recent-post .item-headline i {
+  color: #28c28c;
 }
 .avatar-img {
   overflow: hidden;
@@ -7165,7 +7171,7 @@ blockquote.pullquote.right {
   border: initial;
   border-left: 5px solid var(--note-default-border);
   background-color: var(--note-default-bg);
-  color: var(--note-default-text);
+  color: var(--font-color);
 }
 .note h2,
 .note h3,
