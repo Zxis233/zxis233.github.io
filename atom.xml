@@ -6,7 +6,7 @@
   <link href="https://blog.esing.dev/atom.xml" rel="self"/>
   
   <link href="https://blog.esing.dev/"/>
-  <updated>2026-10-03T03:57:30.139Z</updated>
+  <updated>2026-10-07T16:47:14.572Z</updated>
   <id>https://blog.esing.dev/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[星港游记] 残月、火星与木星</title>
+    <link href="https://blog.esing.dev/2026/10/07/starport-p14/"/>
+    <id>https://blog.esing.dev/2026/10/07/starport-p14/</id>
+    <published>2026-10-07T15:41:47.000Z</published>
+    <updated>2026-10-07T16:47:14.572Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言">前言</h2><p>室友转了一篇公众号文章给我，说是6号凌晨有火星、木星、月亮一线的景观。行星连线没啥好看的，但还是看一看吧。</p><h2 id="深夜观星">深夜观星</h2><p>玩《控制·共振》玩到一点多才睡，等睡着又得两点了。订的是四点的闹铃，起来看星星。</p><p>夜晚是真冷啊，昼夜温差有点大。晚上只有十度出头。</p><p>出了宿舍门一抬头，就能看到。并不高，但是很醒目。月亮刚好是个月牙，而木星又非常醒目，火星则暗淡一点，还能看出来微微泛红。但说实话，肉眼看上去，还没参宿四红。</p><p>手机拍出来效果不好：要么月亮过曝，比起月牙更像个饺子；要么火星看不到。</p><p><img src="https://webpn.esing.dev/img/IMG_20261007_234942_261007_2357_vBBk.jpg" alt="箭头标注出了火星与木星"></p><h2 id="冬季大三角与冬季六边形">冬季大三角与冬季六边形</h2><p>秋天的下半夜，冬季星座也升起了。冬天的夜空真的是格外清晰，感觉看到的星星比夏天更多了。</p><p>猎户座的腰带和参宿四的辨识度太高了，很容易就看到冬季大三角和冬季六边形了。不过冬季六边形太大了，一时半会还不好拍出。</p><img src="https://webpn.esing.dev/img/IMG_20261008_002518_261008_0025_4qIe.jpg" alt="冬季大三角和缺了最上面的冬季六边形" style="zoom:20%;" />]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+&lt;p&gt;室友转了一篇公众号文章给我，说是6号凌晨有火星、木星、月亮一线的景观。行星连线没啥好看的，但还是看一看吧。&lt;/p&gt;
+&lt;h2 id=&quot;深夜观星&quot;&gt;深夜观星&lt;</summary>
+      
+    
+    
+    
+    <category term="星港游记" scheme="https://blog.esing.dev/categories/%E6%98%9F%E6%B8%AF%E6%B8%B8%E8%AE%B0/"/>
+    
+    
+    <category term="天文" scheme="https://blog.esing.dev/tags/%E5%A4%A9%E6%96%87/"/>
+    
+  </entry>
   
   <entry>
     <title>VSCode Codex 插件吞掉消息的临时解决方案</title>
@@ -482,27 +508,6 @@
     
     
     <category term="天文" scheme="https://blog.esing.dev/tags/%E5%A4%A9%E6%96%87/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>解决Windows下鼠标光标泛白的问题</title>
-    <link href="https://blog.esing.dev/2026/06/01/win11-cursor-whitening/"/>
-    <id>https://blog.esing.dev/2026/06/01/win11-cursor-whitening/</id>
-    <published>2026-06-01T02:13:16.000Z</published>
-    <updated>2026-06-01T15:36:35.779Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言">前言</h2><p>更新完显卡驱动后发现鼠标泛白了（截图和录屏中显示正常，只能拍屏）：</p><p><img src="https://webp.esing.dev/img/image-20260601233202166_260601_2332_VJoW.png" alt="请选择你的拍屏导师"></p><p>百思不得其解，重启了好几次，也重装了显卡驱动，依旧没效果。</p><h2 id="解决">解决</h2><p>在<a href="https://www.zhihu.com/question/567202605/answer/4333740113">笔记本在独显模式下鼠标指针异常颜色发白变淡 求解答？ - 知乎</a>找到了解决方案：</p><p>下载<a href="https://www.monitortests.com/forum/Thread-SoftCursor">SoftCursor</a>，运行后可以看到，此时光标为<code>Hardware Cursor</code>。修改为<code>Software Cursor</code>即恢复。</p><p>非常神秘的BUG。</p><hr><p>AI分析：</p><blockquote><p><strong>Hardware Cursor</strong><br>光标由显卡/显示控制器作为一个独立叠加层画到屏幕上。优点是延迟低、性能好；缺点是它可能绕过一部分桌面合成、色彩管理、HDR/夜间模式/ICC 配置文件处理。</p><p><strong>Software Cursor</strong><br>光标像普通画面内容一样被 Windows/DWM 合成进去。它更容易跟随当前的颜色配置、夜间模式、HDR 映射等显示管线。</p></blockquote><p>问题大概率在这里之一：</p><ul><li>显卡驱动的硬件光标渲染 bug</li><li>HDR / 色彩配置 / 夜间模式和硬件光标不一致</li><li>MPO / Overlay 多平面叠加路径异常</li><li>独显输出模式下的光标叠加层颜色空间处理不对</li></ul>]]></content>
-    
-    
-    <summary type="html">阿三系统</summary>
-    
-    
-    
-    <category term="技术分享" scheme="https://blog.esing.dev/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
-    
-    
-    <category term="Windows" scheme="https://blog.esing.dev/tags/Windows/"/>
     
   </entry>
   
