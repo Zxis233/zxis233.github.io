@@ -85,7 +85,8 @@
     const text = selection ? selection.toString() : '';
     const ranges = selection ? Array.from({ length: selection.rangeCount }, (_, i) => selection.getRangeAt(i).cloneRange()) : [];
     const active = document.activeElement;
-    context = Object.freeze({ text, ranges, link, image: imageURL, selectedURL: selectedURL(text),
+    const isCodeBlock = window.btf.isCodeBlockSelection(selection);
+    context = Object.freeze({ text, ranges, isCodeBlock, link, image: imageURL, selectedURL: selectedURL(text),
       pageURL: location.href, epoch, focus: active && !menu.contains(active) ? active : context && context.focus });
     const groups = { selection: !!text.trim(), 'selected-url': !!context.selectedURL, link: !!link, image: !!imageURL };
     menu.querySelectorAll('[data-group]').forEach(group => { group.hidden = !groups[group.dataset.group]; });
@@ -125,7 +126,7 @@
 
   function selectedText(snapshot) {
     const copyright = window.GLOBAL_CONFIG && window.GLOBAL_CONFIG.copyright;
-    if (!copyright || snapshot.text.length <= copyright.limitCount) return snapshot.text;
+    if (!copyright || snapshot.isCodeBlock || snapshot.text.length <= copyright.limitCount) return snapshot.text;
     const { languages } = copyright;
     return `${snapshot.text}\n\n\n${languages.author}\n${languages.link}${snapshot.pageURL}\n${languages.source}\n${languages.info}`;
   }

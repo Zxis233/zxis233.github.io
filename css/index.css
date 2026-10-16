@@ -2022,7 +2022,7 @@ img[data-lazy-src].error {
   filter: none;
 }
 .img-alt {
-  margin: -2px 0 10px;
+  margin: -10px 0 10px;
   color: #858585;
 }
 .img-alt:hover {

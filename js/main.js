@@ -773,8 +773,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const { limitCount, languages } = GLOBAL_CONFIG.copyright
 
     const handleCopy = e => {
+      const selection = window.getSelection()
+      if (btf.isCodeBlockSelection(selection)) return
+
       e.preventDefault()
-      const copyFont = window.getSelection(0).toString()
+      const copyFont = selection.toString()
       let textFont = copyFont
       if (copyFont.length > limitCount) {
         textFont = `${copyFont}\n\n\n${languages.author}\n${languages.link}${window.location.href}\n${languages.source}\n${languages.info}`

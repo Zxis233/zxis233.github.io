@@ -1,0 +1,1029 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>从零开始搭建Synopsys数字EDA开发环境 | Esing的小站</title><meta name="author" content="Esing"><meta name="copyright" content="Esing"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="所有资源均为网络资源转载。如有侵权请第一时间联系。 本教程与所用的工具仅用于学习探讨，严禁用于商业用途。        前言 学校太抠了，只给模拟组分Cadence服务器，数字组就自求多福吧。 [剧透已隐藏] 那就只能自己搜集一通资料自己来了。 参考资料如下： synopsys2022安装方法简单说明 - EETOP [Windows] Synopsys License Generator - E">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从零开始搭建Synopsys数字EDA开发环境">
+<meta property="og:url" content="https://blog.esing.dev/2026/10/15/vcsserver/">
+<meta property="og:site_name" content="Esing的小站">
+<meta property="og:description" content="所有资源均为网络资源转载。如有侵权请第一时间联系。 本教程与所用的工具仅用于学习探讨，严禁用于商业用途。        前言 学校太抠了，只给模拟组分Cadence服务器，数字组就自求多福吧。 [剧透已隐藏] 那就只能自己搜集一通资料自己来了。 参考资料如下： synopsys2022安装方法简单说明 - EETOP [Windows] Synopsys License Generator - E">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://opic.esing.dev/img/chip1_261016_1720_ft5S.webp">
+<meta property="article:published_time" content="2026-10-14T16:17:49.000Z">
+<meta property="article:modified_time" content="2026-10-16T12:37:50.754Z">
+<meta property="article:author" content="Esing">
+<meta property="article:tag" content="EDA">
+<meta property="article:tag" content="Synopsys">
+<meta property="article:tag" content="SystemVerilog">
+<meta property="article:tag" content="Verilog">
+<meta property="article:tag" content="微电子">
+<meta property="article:tag" content="数字逻辑电路">
+<meta property="article:tag" content="踩坑">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://opic.esing.dev/img/chip1_261016_1720_ft5S.webp"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "从零开始搭建Synopsys数字EDA开发环境",
+  "url": "https://blog.esing.dev/2026/10/15/vcsserver/",
+  "image": "https://opic.esing.dev/img/chip1_261016_1720_ft5S.webp",
+  "datePublished": "2026-10-14T16:17:49.000Z",
+  "dateModified": "2026-10-16T12:37:50.754Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Esing",
+      "url": "https://blog.esing.dev"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://blog.esing.dev/2026/10/15/vcsserver/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const start = 8
+              const end = 24
+              const isNight =
+                start < end
+                    ? hour < start || hour >= end
+                    : hour >= start || hour < end
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;1aabda1500704262b993096aaa3b5c27&quot;}"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/misans@5.0.0/lib/Normal/MiSansVF.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":380,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":100,"languages":{"author":"作者: Esing","link":"链接: ","source":"来源: Esing的小站","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '从零开始搭建Synopsys数字EDA开发环境',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/maple_new.css"><link rel="stylesheet" href="/css/target-cursor.css"><link rel="stylesheet" href="/css/legacy-appearance.css"><link rel="stylesheet" href="/css/heimu.css"><link rel="stylesheet" href="/vendor/aplayer/APlayer.min.css"><link rel="stylesheet" href="/css/aplayer-theme.css"><link rel="stylesheet" href="/css/rightmenu.css"><link rel="stylesheet" href="/css/cloudflare-info.css"><script src="/vendor/aplayer/APlayer.min.js"></script><meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="Esing的小站" type="application/atom+xml">
+</head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="/css/load.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">253</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">225</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E6%98%9F%E6%B8%AF%E6%B8%B8%E8%AE%B0/"><i class="fa-fw fa-solid fa-star-half-stroke"></i><span> 星港游记</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-code"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://opic.esing.dev/img/chip1_261016_1720_ft5S.webp);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Esing的小站</span></a><a class="nav-page-title" href="/"><span class="site-name">从零开始搭建Synopsys数字EDA开发环境</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%BF%86%E8%AF%AD%E6%B8%B8%E5%BF%83/"><i class="fa-fw fas fa-gamepad"></i><span> 忆语游心</span></a></li><li><a class="site-page child" href="/categories/%E6%98%9F%E6%B8%AF%E6%B8%B8%E8%AE%B0/"><i class="fa-fw fa-solid fa-star-half-stroke"></i><span> 星港游记</span></a></li><li><a class="site-page child" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa-fw fas fa-graduation-cap"></i><span> 学习</span></a></li><li><a class="site-page child" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-pen-nib"></i><span> 随笔</span></a></li><li><a class="site-page child" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><i class="fa-fw fas fa-code"></i><span> 技术分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">从零开始搭建Synopsys数字EDA开发环境</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-10-14T16:17:49.000Z" title="发表于 2026-10-15 00:17:49">2026-10-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-10-16T12:37:50.754Z" title="更新于 2026-10-16 20:37:50">2026-10-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">6.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>28分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:1000,&quot;messagePrev&quot;:&quot;本文最后更新于&quot;,&quot;messageNext&quot;:&quot;天前，部分内容可能已过时。&quot;,&quot;postUpdate&quot;:&quot;2026-10-16 20:37:50&quot;}" hidden></div><div class="note danger flat"><p>所有资源均为网络资源转载。如有侵权请第一时间联系。</p>
+<p>本教程与所用的工具仅用于学习探讨，严禁用于商业用途。</p>
+</div>
+
+    <div id="aplayer-aTzVzrJg" class="aplayer aplayer-tag-marker meting-tag-marker"
+         data-id="21948133" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ad7a86"
+    ></div>
+<h2 id="前言">前言</h2>
+<p>学校太抠了，只给模拟组分Cadence服务器，数字组就自求多福吧。 <!--heimu:start--><span class="heimu" title="你看不见我🍁"><button class="heimu-toggle" type="button" aria-label="显示防剧透内容" aria-expanded="false" aria-controls="heimu-content-2"></button><span class="heimu-content" id="heimu-content-2" aria-hidden="true" inert>哪有福</span></span><!--heimu:end--></p>
+<p>那就只能自己搜集一通资料自己来了。</p>
+<p>参考资料如下：</p>
+<p><a target="_blank" rel="noopener" href="https://bbs.eetop.cn/thread-1000937-1-1.html">synopsys2022安装方法简单说明 - EETOP</a></p>
+<p><a target="_blank" rel="noopener" href="https://bbs.eetop.cn/forum.php?mod=viewthread&amp;tid=992786&amp;extra=page%3D1&amp;page=1">[Windows] Synopsys License Generator - EETOP</a></p>
+<p><a target="_blank" rel="noopener" href="https://bbs.eetop.cn/thread-978013-1-1.html">SynopsysMonoSlayer v24.09 request - EETOP</a></p>
+<h2 id="装机（物理）">装机（物理）</h2>
+<p>既然是从零开始，那直接闲置机子耍起嘛。在组里不用的旧主机里刨了半天刨了个<code>i5-9400F</code>。没核显不行，装显卡驱动可能就要老半天。继续刨，又刨出来个<code>i5-11400</code>，六核十二线程，不过只有区区16GB内存。如果大家都挂仿真、综合任务的话，肯定是不够的。</p>
+<p>找师兄要了两条内存条，一条英睿达一条七彩虹。拿磨砂橡皮擦擦，待会用。</p>
+<p>先换硅脂。散热器很好拆，是小型散热器，最上面是风扇往外吹。拆下来一看，硅脂其实还是湿的，感觉没换太久，但拆都拆了不能再放回去，只能顺手涂一下。之前淘宝买了10块钱30g的高导GD3，这价格还说啥了，半年换一次都没问题。</p>
+<p>上次亲自涂硅脂是四年前了吧，到同学家里装电脑。后面就再也没自己涂过硅脂了，笔记本清灰后换的都是霍尼韦尔的相变片。刮腻子的手法也生疏了，真得多练。</p>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/IMG_20261014_154651_261015_1332_GmFE.jpg" alt="服务器那台已经装好了，拍一张同一时间涂的9400F" style="zoom:50%;" />
+<p>涂完后上机烤机。中午直接去睡觉忘记关了，回来一看跑了两小时最高温度才55°C，无敌。</p>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/1791963664212_261016_0101_cp5q.jpg" alt="稳定性测试过关" style="zoom: 50%;" />
+<p><strong>你就不怕用便宜硅脂把电脑搞坏吗？</strong></p>
+<p><strong>怕，但更怕被假货宰一刀。</strong></p>
+<p><strong>便宜是便宜了点，涂着顺滑，不烧<!--heimu:start--><span class="heimu" title="你看不见我🍁"><button class="heimu-toggle" type="button" aria-label="显示防剧透内容" aria-expanded="false" aria-controls="heimu-content-3"></button><span class="heimu-content" id="heimu-content-3" aria-hidden="true" inert>核</span></span><!--heimu:end-->心。</strong></p>
+<h2 id="装机（软件）">装机（软件）</h2>
+<p>硬件搞完改搞软件了，先把系统整上去。</p>
+<p>Synopsys的安装器只认RedHat系（CentOS/RHEL/RockyLinux）。CentOS从24年之后就改变了整个系统更新的逻辑，变成持续集成了；论稳定，还是选择Rocky Linux。问了下AI，要装的Synopsys 2022支持RockyLinux 8系列，于是选择目前的最新版本 <a target="_blank" rel="noopener" href="https://rockylinux.org/download">Rocky Linux 8.10</a> 。</p>
+<p>进入下载页面后直接选择版本为Rocky Linux 8，选DVD ISO下载。有点大，大约15G，不过还好校内镜像源可以跑满千兆，五分钟就下完了。</p>
+<p>然后用Rufus做个启动盘，参数如下即可。</p>
+<div class="note warning flat"><p>必须选择“分区类型”为GPT，并开启UEFI启动！</p>
+</div>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20261016011833831_261016_1731_RE5p.png" alt="烧录参数"></p>
+<p>然后点击之后会出一个对话框，问你用默认ISO方式还是DD方式写入：</p>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/133205_261016_0121_7t2g.png" alt="DD or ISO?" style="zoom: 80%;" />
+<div class="note warning flat"><p>二者有什么区别？</p>
+<p>ISO 模式下，Rufus 会解包镜像并重新组织 U 盘文件结构，可能导致 Rocky Linux 安装程序无法识别本地安装源；DD 模式则原样写入 ISO 镜像，保留分区表、文件系统和启动信息，兼容性更可靠。</p>
+<p><strong>官方也在<a target="_blank" rel="noopener" href="https://docs.rockylinux.org/latest/teams/rel_eng/image/#not-recommended-avoid">文档</a>中特别声明：使用 Rufus 写入其镜像时，应选择 DD 模式，否则可能生成无法正常安装的介质！</strong></p>
+</div>
+<p>然后就是漫长的烧录，烧了半个小时。刚好趁这段时间回宿舍去拷下好的EDA大全套。</p>
+<hr>
+<p>烧录完毕进去装机，没啥好说的。USB启动，之后选择第一项进系统安装。进入安装方案选择时选“带GUI的服务器”预设即可，然后右边的选项看自己需求勾一勾。</p>
+<p>之后就是第二次漫长的等待了，大约半个小时之后就可以安装完。</p>
+<p>进系统后先加个自己的公钥，登录SSH干活也方便。</p>
+<p>第一次装完，先换源，再跑个系统更新：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切Root账户</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> -i</span><br><span class="line"></span><br><span class="line"><span class="comment"># 备份</span></span><br><span class="line">repo_backup=<span class="string">&quot;/root/yum.repos.d.before-eda-<span class="subst">$(date +%Y%m%d-%H%M%S)</span>&quot;</span></span><br><span class="line"><span class="built_in">cp</span> -a /etc/yum.repos.d <span class="string">&quot;<span class="variable">$repo_backup</span>&quot;</span></span><br><span class="line"><span class="built_in">printf</span> <span class="string">&#x27;仓库备份：%s\n&#x27;</span> <span class="string">&quot;<span class="variable">$repo_backup</span>&quot;</span></span><br><span class="line">dnf repolist --all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 替换仓库</span></span><br><span class="line"></span><br><span class="line">sed -e <span class="string">&#x27;s|^mirrorlist=|#mirrorlist=|g&#x27;</span> \</span><br><span class="line">    -e <span class="string">&#x27;s|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.ustc.edu.cn/rocky|g&#x27;</span> \</span><br><span class="line">    -i.bak \</span><br><span class="line">    /etc/yum.repos.d/Rocky-AppStream.repo \</span><br><span class="line">    /etc/yum.repos.d/Rocky-BaseOS.repo \</span><br><span class="line">    /etc/yum.repos.d/Rocky-Extras.repo \</span><br><span class="line">    /etc/yum.repos.d/Rocky-PowerTools.repo</span><br><span class="line"></span><br><span class="line">grep -E <span class="string">&#x27;^\[|^baseurl=|^mirrorlist=|^enabled=|^gpgcheck=|^gpgkey=&#x27;</span> \</span><br><span class="line">  /etc/yum.repos.d/Rocky-&#123;BaseOS,AppStream,Extras,PowerTools&#125;.repo</span><br><span class="line"></span><br><span class="line">dnf clean all</span><br><span class="line">dnf makecache</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启用PowerTools并替换EPEL源</span></span><br><span class="line"></span><br><span class="line">dnf install -y dnf-plugins-core</span><br><span class="line">dnf config-manager --set-enabled powertools</span><br><span class="line">dnf install -y epel-release</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> repo_file <span class="keyword">in</span> /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel-testing.repo; <span class="keyword">do</span></span><br><span class="line">  [ -f <span class="string">&quot;<span class="variable">$repo_file</span>&quot;</span> ] || <span class="built_in">continue</span></span><br><span class="line">  sed -i.bak \</span><br><span class="line">    -e <span class="string">&#x27;s!^metalink=!#metalink=!g&#x27;</span> \</span><br><span class="line">    -e <span class="string">&#x27;s!^#baseurl=!baseurl=!g&#x27;</span> \</span><br><span class="line">    -e <span class="string">&#x27;s!https\?://download\.fedoraproject\.org/pub/epel!https://mirrors.ustc.edu.cn/epel!g&#x27;</span> \</span><br><span class="line">    -e <span class="string">&#x27;s!https\?://download\.example/pub/epel!https://mirrors.ustc.edu.cn/epel!g&#x27;</span> \</span><br><span class="line">    <span class="string">&quot;<span class="variable">$repo_file</span>&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">dnf clean all</span><br><span class="line">dnf makecache</span><br><span class="line">dnf repolist</span><br><span class="line">dnf repoinfo epel</span><br><span class="line"></span><br><span class="line"><span class="comment"># 系统更新与重启</span></span><br><span class="line"></span><br><span class="line">dnf upgrade --refresh -y</span><br><span class="line">reboot now</span><br></pre></td></tr></table></figure>
+<p>然后需要看一下自己的主机名，自己设定一个，且要记住，后续激活时会用到：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hostnamectl set-hostname 0d00.0721.dev</span><br><span class="line">hostnamectl --static</span><br><span class="line">getent hosts 0d00.0721.dev</span><br></pre></td></tr></table></figure>
+<p>这里，自己的主机名就是<code>0d00.0721.dev</code></p>
+<h2 id="Synopsys-EDA安装">Synopsys EDA安装</h2>
+<p>先准备一下资源：</p>
+<ul>
+<li>Synopsys全套：<code>aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3MvMThqN1JZRjVBcWJGcTVsQVpyZnlpdWc/cHdkPUVMNjM=</code></li>
+<li>Synopsys补丁：<code>aHR0cHM6Ly9jbG91ZC5lc2luZy5kZXYvcy83S0hR</code> 密码：<code>0721</code></li>
+</ul>
+<hr>
+<div class="note green icon-padding flat"><i class="note-icon fab fa-openai"></i><p>一句话让Codex自己安装（不含Patch）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我已经将Synopsys安装包放到了xxxx，请你分析文件并帮我进行安装。我想让多用户可以通过VNC连接后同时使用。</span><br></pre></td></tr></table></figure>
+<p>请合理管理自己的Agent。因AI而导致的系统崩溃和数据丢失问题概不负责。</p>
+</div>
+<h3 id="系统环境准备">系统环境准备</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开发用软件包准备</span></span><br><span class="line"></span><br><span class="line">dnf groupinstall -y <span class="string">&quot;Development Tools&quot;</span></span><br><span class="line"></span><br><span class="line">dnf install -y \</span><br><span class="line">  gcc gcc-c++ make binutils glibc-devel libstdc++-devel \</span><br><span class="line">  perl python3 tcsh ksh \</span><br><span class="line">  git vim-enhanced wget curl rsync \</span><br><span class="line">  tar gzip bzip2 xz unzip zip \</span><br><span class="line">  openssh-server openssh-clients chrony firewalld \</span><br><span class="line">  tmux htop lsof strace gdb \</span><br><span class="line">  policycoreutils-python-utils</span><br><span class="line"></span><br><span class="line">dnf install -y \</span><br><span class="line">  libnsl libnsl2 libpng12 numactl-libs sqlite-libs \</span><br><span class="line">  libX11 libXext libXrender libXt libXtst libXi libXft libXmu libXpm \</span><br><span class="line">  libSM libICE libxcb mesa-libGL fontconfig freetype \</span><br><span class="line">  dbus-x11 xorg-x11-xauth xorg-x11-utils \</span><br><span class="line">  dejavu-sans-fonts liberation-fonts google-noto-sans-cjk-ttc-fonts</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置时间自动同步</span></span><br><span class="line">systemctl <span class="built_in">enable</span> --now sshd chronyd</span><br><span class="line">chronyc tracking</span><br><span class="line">timedatectl</span><br><span class="line"></span><br><span class="line"><span class="comment"># 若无网络则手动时区设置</span></span><br><span class="line">timedatectl set-timezone Asia/Shanghai</span><br><span class="line">timedatectl set-ntp <span class="literal">false</span></span><br><span class="line">timedatectl set-time <span class="string">&quot;2026-10-16 12:30:00&quot;</span></span><br><span class="line"><span class="comment">## 恢复自动校时</span></span><br><span class="line">timedatectl set-ntp <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>考虑到服务器要共享，做成多人使用的模式，还需进行权限管理（个人使用可以跳过）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">groupadd -f eda</span><br><span class="line">usermod -aG eda esing</span><br><span class="line"><span class="built_in">id</span> esing</span><br></pre></td></tr></table></figure>
+<p>随后管理员要重新登陆，使新会话获得 <code>eda</code> 组。</p>
+<p>然后规划一下存储路径：</p>
+<figure class="highlight tree"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">/home/esing/Synopsys/</span><span class="comment">                 原始安装包、安装日志</span></span><br><span class="line"><span class="meta">├── </span><span class="title">installer/5.8/</span></span><br><span class="line"><span class="meta">├── </span><span class="title">vcs_vT-2022.06-SP2-10/</span></span><br><span class="line"><span class="meta">├── </span><span class="title">verdi_vT-2022.06-SP2-10/</span></span><br><span class="line"><span class="meta">├── </span><span class="title">dve_vT-2022.06-SP2-10/</span></span><br><span class="line"><span class="meta">├── </span><span class="title">scl_v2022.12/</span></span><br><span class="line"><span class="meta">├── </span><span class="title">syn_vU-2022.12-SP7-3/</span></span><br><span class="line"><span class="meta">├── </span><span class="title">prime_vU-2022.12-SP5-2/</span></span><br><span class="line"><span class="meta">├── </span><span class="title">fm_vU-2022.12-SP6/</span></span><br><span class="line"><span class="meta">├── </span><span class="title">vc_static_vT-2022.06-SP2/</span></span><br><span class="line"><span class="meta">├── </span><span class="title">lc_vU-2022.12-SP6/</span></span><br><span class="line"><span class="meta">└── </span><span class="title">PDK/</span></span><br><span class="line"></span><br><span class="line"><span class="title">/home/eda-tools/</span></span><br><span class="line"><span class="meta">├── </span><span class="title">synopsys/</span><span class="comment">                        软件安装树，普通用户只读</span></span><br><span class="line"><span class="meta">├── </span><span class="title">pdk/</span><span class="comment">                             工艺库，普通用户只读</span></span><br><span class="line"><span class="meta">├── </span><span class="title">examples/</span><span class="comment">                        可复制的教学示例</span></span><br><span class="line"><span class="meta">└── </span><span class="title">docs/</span><span class="comment">                            共享说明</span></span><br><span class="line"></span><br><span class="line"><span class="title">/etc/synopsys/license/</span><span class="comment">               本教程建议的受限许可证目录</span></span><br><span class="line"><span class="title">/home/各用户/eda-work/</span><span class="comment">               个人工程、仿真和报告</span></span><br></pre></td></tr></table></figure>
+<p>之后创建用于安装EDA工具的文件夹，以确保共享软件和个人工作目录分开：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">install -d -o root -g root -m 0755 /home/eda-tools</span><br><span class="line">install -d -o root -g eda -m 0755 /home/eda-tools/synopsys</span><br><span class="line">install -d -o root -g eda -m 0750 \</span><br><span class="line">  /home/eda-tools/pdk /home/eda-tools/examples /home/eda-tools/docs</span><br></pre></td></tr></table></figure>
+<p>最后保持SELinux启用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getenforce</span><br><span class="line">semanage fcontext -a -t usr_t <span class="string">&#x27;/home/eda-tools(/.*)?&#x27;</span></span><br><span class="line">restorecon -RFv /home/eda-tools</span><br></pre></td></tr></table></figure>
+<h3 id="检查Synopsys安装包">检查Synopsys安装包</h3>
+<p>正常下载下来的包应当是有CHECKSUM的，建议核对一遍，不然安装到一半出问题就寄了。</p>
+<p>先检查一下安装包的目录和平台：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">find /home/esing/Synopsys -maxdepth 2 -<span class="built_in">type</span> f \</span><br><span class="line">  \( -name <span class="string">&#x27;*INSTALL_README*&#x27;</span> -o -name <span class="string">&#x27;checksum_info.txt&#x27;</span> -o -name <span class="string">&#x27;*.spf*&#x27;</span> \) \</span><br><span class="line">  -<span class="built_in">printf</span> <span class="string">&#x27;%p\n&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>我是装在<code>x86_64</code>上，不知道<code>arm64</code>能不能正常安装</p>
+<p>之后进行校验。<code>ckecksum_info.txt</code>格式为<code>CRC size filename</code>，因此写一个Python脚本来进行自动化校验：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"></span><br><span class="line">source_dir = Path(<span class="string">&#x27;/home/esing/Synopsys/vcs_vT-2022.06-SP2-10&#x27;</span>)</span><br><span class="line">failed = []</span><br><span class="line">checked = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> (source_dir / <span class="string">&#x27;checksum_info.txt&#x27;</span>).read_text().splitlines():</span><br><span class="line">    fields = line.split(<span class="literal">None</span>, <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(fields) != <span class="number">3</span> <span class="keyword">or</span> <span class="keyword">not</span> fields[<span class="number">0</span>].isdigit() <span class="keyword">or</span> <span class="keyword">not</span> fields[<span class="number">1</span>].isdigit():</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    crc, size, name = fields</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> (<span class="string">&#x27;common&#x27;</span> <span class="keyword">in</span> name <span class="keyword">or</span> <span class="string">&#x27;linux64&#x27;</span> <span class="keyword">in</span> name <span class="keyword">or</span> name.endswith(<span class="string">&#x27;_INSTALL_README.txt&#x27;</span>)):</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    path = source_dir / name</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> path.is_file():</span><br><span class="line">        failed.append(<span class="string">&#x27;MISSING: &#x27;</span> + name)</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    result = subprocess.check_output([<span class="string">&#x27;cksum&#x27;</span>, <span class="built_in">str</span>(path)], universal_newlines=<span class="literal">True</span>).split()</span><br><span class="line">    checked += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> result[:<span class="number">2</span>] != [crc, size]:</span><br><span class="line">        failed.append(<span class="string">&#x27;MISMATCH: &#x27;</span> + name)</span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> failed:</span><br><span class="line">    <span class="built_in">print</span>(item)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;checked=%d failed=%d&#x27;</span> % (checked, <span class="built_in">len</span>(failed)))</span><br><span class="line"><span class="keyword">if</span> failed <span class="keyword">or</span> checked == <span class="number">0</span>:</span><br><span class="line">    <span class="keyword">raise</span> SystemExit(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>然后记得要用<code>python3</code>运行，但默认的<code>python3</code>是<code>python3.6.8</code>，最好使用<code>python 3.12</code>来运行，或者切换默认<code>python3</code>提供者：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alternatives --<span class="built_in">set</span> python3 /usr/bin/python3.12</span><br><span class="line">alternatives --<span class="built_in">set</span> python /usr/bin/python3</span><br></pre></td></tr></table></figure>
+<p>针对安装器，简单对一下sha256即可。这里使用最新的5.8安装器，其明确列出了支持Rocky Linux下安装。</p>
+<h3 id="纯终端环境安装Synopsys">纯终端环境安装Synopsys</h3>
+<p>终端比VNC快，所以选择纯终端安装了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/esing/Synopsys/installer/5.8</span><br><span class="line"><span class="built_in">chmod</span> 755 SynopsysInstaller_v5.8.run</span><br><span class="line">./SynopsysInstaller_v5.8.run</span><br></pre></td></tr></table></figure>
+<p>接着按照提示将安装器放到<code>/home/eda-tools/synopsys/installer/5.8</code>，并检查入口和帮助：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/eda-tools/synopsys/installer/5.8/installer -<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+<p>这里注意，Installer 5.8 的默认/批处理模式要求 <code>-target</code> 是<strong>总安装目录</strong>，即<code>/home/eda-tools/synopsys</code>，安装器自行生成 <code>vcs/&lt;version&gt;</code>、<code>syn/&lt;version&gt;</code>、<code>prime/&lt;version&gt;</code> 等子目录。不要给 VCS 的 <code>-target</code> 填上 <code>/home/eda-tools/synopsys/vcs/T-2022.06-SP2-10</code>，否则可能产生重复嵌套目录！</p>
+<h3 id="安装基础产品并保存日志">安装基础产品并保存日志</h3>
+<p>确认源目录名与上文一致后，在 root shell 运行。为了安全，设置为遇到安装命令失败就停止，并将日志保存在源目录的 <code>install-logs</code> 中，后面也方便Debug：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">(</span><br><span class="line">  <span class="built_in">set</span> -euo pipefail</span><br><span class="line"></span><br><span class="line">  installer_bin=/home/eda-tools/synopsys/installer/5.8/installer</span><br><span class="line">  source_root=/home/esing/Synopsys</span><br><span class="line">  tools_root=/home/eda-tools/synopsys</span><br><span class="line">  log_root=<span class="string">&quot;<span class="variable">$source_root</span>/install-logs&quot;</span></span><br><span class="line">  <span class="built_in">mkdir</span> -p <span class="string">&quot;<span class="variable">$log_root</span>&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">install_product</span></span>() &#123;</span><br><span class="line">    <span class="built_in">local</span> source_name=<span class="string">&quot;<span class="variable">$1</span>&quot;</span> product=<span class="string">&quot;<span class="variable">$2</span>&quot;</span> release=<span class="string">&quot;<span class="variable">$3</span>&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> [ ! -d <span class="string">&quot;<span class="variable">$source_root</span>/<span class="variable">$source_name</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">      <span class="built_in">echo</span> <span class="string">&quot;安装包目录不存在：<span class="variable">$source_root</span>/<span class="variable">$source_name</span>&quot;</span> &gt;&amp;2</span><br><span class="line">      <span class="built_in">return</span> 1</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;<span class="variable">$installer_bin</span>&quot;</span> -batch_installer -install_as_root \</span><br><span class="line">      -<span class="built_in">source</span> <span class="string">&quot;<span class="variable">$source_root</span>/<span class="variable">$source_name</span>&quot;</span> \</span><br><span class="line">      -target <span class="string">&quot;<span class="variable">$tools_root</span>&quot;</span> \</span><br><span class="line">      -product <span class="string">&quot;<span class="variable">$product</span>&quot;</span> \</span><br><span class="line">      -release <span class="string">&quot;<span class="variable">$release</span>&quot;</span> \</span><br><span class="line">      -platform linux64 \</span><br><span class="line">      2&gt;&amp;1 | <span class="built_in">tee</span> <span class="string">&quot;<span class="variable">$log_root</span>/<span class="variable">$&#123;product&#125;</span>_<span class="variable">$&#123;release&#125;</span>.log&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  install_product scl_v2022.12 scl 2022.12</span><br><span class="line"></span><br><span class="line">  install_product vcs_vT-2022.06-SP2-10 vcs T-2022.06-SP2-10</span><br><span class="line">  install_product dve_vT-2022.06-SP2-10 dve-addon T-2022.06-SP2-10</span><br><span class="line"></span><br><span class="line">  install_product verdi_vT-2022.06-SP2-10 verdi T-2022.06-SP2-10</span><br><span class="line">  install_product lc_vU-2022.12-SP6 lc U-2022.12-SP6</span><br><span class="line">  install_product fm_vU-2022.12-SP6 fm U-2022.12-SP6</span><br><span class="line">  install_product prime_vU-2022.12-SP5-2 prime U-2022.12-SP5-2</span><br><span class="line">  install_product syn_vU-2022.12-SP7-3 syn U-2022.12-SP7-3</span><br><span class="line">  install_product vc_static_vT-2022.06-SP2 vc_static T-2022.06-SP2</span><br><span class="line">  install_product icc2_vU-2022.12-SP6 icc2 U-2022.12-SP6</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>然后就是第三次漫长的等待了……</p>
+<p>安装完毕后，先测试一下，看看能不能正常获取到自己的<code>HostID</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scl_bin=/home/eda-tools/synopsys/scl/2022.12/linux64/bin</span><br><span class="line">hostnamectl --static</span><br><span class="line"><span class="string">&quot;<span class="variable">$scl_bin</span>/lmutil&quot;</span> lmhostid</span><br></pre></td></tr></table></figure>
+<p>输出形如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0d00.0721.dev</span><br><span class="line">lmutil - Copyright (c) 1989-2022 Flexera. All Rights Reserved.</span><br><span class="line">The FlexNet host ID of this machine is &quot;0d0007210721&quot;</span><br></pre></td></tr></table></figure>
+<p>这里已经把主机名和<code>HostID</code>都列出来了，记下备用。</p>
+<h3 id="Verdi-Supplementary-Package-单独处理">Verdi Supplementary Package 单独处理</h3>
+<p>Verdi Supplementary Package是Verdi的补充包，提供额外组件，顺手的事。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">verdi_root=/home/eda-tools/synopsys/verdi/T-2022.06-SP2-10</span><br><span class="line">install -d <span class="string">&quot;<span class="variable">$verdi_root</span>/platform/linux64/lib&quot;</span></span><br><span class="line"></span><br><span class="line">/home/eda-tools/synopsys/installer/5.8/installer \</span><br><span class="line">  -batch_installer -install_as_root \</span><br><span class="line">  -<span class="built_in">source</span> /home/esing/Synopsys/verdi_vT-2022.06-SP2-10 \</span><br><span class="line">  -target <span class="string">&quot;<span class="variable">$verdi_root</span>/platform/linux64/lib&quot;</span> \</span><br><span class="line">  -product verdi_supp -release T-2022.06-SP2-10 -platform common</span><br></pre></td></tr></table></figure>
+<p>若后置步骤尚未完成，脚本通常仍在初始展开路径，可先查看帮助，再执行修复：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">verdi_root=/home/eda-tools/synopsys/verdi/T-2022.06-SP2-10</span><br><span class="line">supp_root=<span class="string">&quot;<span class="variable">$verdi_root</span>/platform/linux64/lib/verdi_supp/T-2022.06-SP2-10&quot;</span></span><br><span class="line">post_script=<span class="string">&quot;<span class="variable">$supp_root</span>/etc/post_install.sh&quot;</span></span><br><span class="line"><span class="built_in">test</span> -f <span class="string">&quot;<span class="variable">$post_script</span>&quot;</span></span><br><span class="line">bash <span class="string">&quot;<span class="variable">$post_script</span>&quot;</span> -h</span><br><span class="line">bash <span class="string">&quot;<span class="variable">$post_script</span>&quot;</span> -r <span class="string">&quot;<span class="variable">$supp_root</span>&quot;</span> -verdi_home <span class="string">&quot;<span class="variable">$verdi_root</span>&quot;</span> \</span><br><span class="line">  -install_verdi_supp Yes -plat linux64</span><br></pre></td></tr></table></figure>
+<p>此版本的 <code>-install_verdi_supp</code> 后面必须带 <code>Yes</code>。后置脚本可能移动补充包目录，所以重复操作前先定位现有脚本。</p>
+<p>此次完成后，补充包位于 <code>platform/verdi_supp/T-2022.06-SP2-10</code>，并存在以下链接：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">platform/linux64/lib/vcs -&gt; ../../verdi_supp/T-2022.06-SP2-10</span><br></pre></td></tr></table></figure>
+<p>检查最终链接，不手工覆盖一个已经存在的真实 <code>vcs</code> 目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">readlink</span> -f /home/eda-tools/synopsys/verdi/T-2022.06-SP2-10/platform/linux64/lib/vcs</span><br></pre></td></tr></table></figure>
+<h3 id="安装目录权限修改">安装目录权限修改</h3>
+<p>把软件安装目录改为只读：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> -R root:eda /home/eda-tools/synopsys</span><br><span class="line"><span class="built_in">chmod</span> -R u+rwX,g+rX,g-w,o-rwx /home/eda-tools/synopsys</span><br><span class="line"></span><br><span class="line"><span class="comment"># 许可服务账号要有权限</span></span><br><span class="line"><span class="built_in">chmod</span> 0755 /home/eda-tools /home/eda-tools/synopsys</span><br><span class="line"></span><br><span class="line"><span class="comment"># SCL 的可执行工具供普通账号和许可服务账号读取</span></span><br><span class="line"><span class="built_in">chown</span> -R root:root /home/eda-tools/synopsys/scl</span><br><span class="line"><span class="built_in">chmod</span> -R u+rwX,go+rX,go-w /home/eda-tools/synopsys/scl</span><br><span class="line"></span><br><span class="line">restorecon -RF /home/eda-tools</span><br></pre></td></tr></table></figure>
+<p>这里的 <code>X</code> 只对目录和原本可执行的文件增加执行权限，避免把所有文档都改成可执行文件。使用者不需要共享软件树的写权限。</p>
+<h3 id="Patch激活">Patch激活</h3>
+<p>然后就要用到之前准备的妙妙工具：</p>
+<figure class="highlight tree"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="title">Synopsys_Patch</span>                        </span><br><span class="line"><span class="meta">├── </span> <span class="string">Synopsys.src</span><span class="comment">                   # 用于生成许可的SRC源文件</span></span><br><span class="line"><span class="meta">├── </span><span class="string"> SynopsysLicenseGenerator.exe</span><span class="comment">   # 用 SRC 生成 LIC 许可的注册机</span></span><br><span class="line"><span class="meta">└── </span><span class="variable">󰡯 SynopsysMonoSlayer</span><span class="comment">             # 去除 Synopsys Checksum 的 Patch</span></span><br></pre></td></tr></table></figure>
+<p>首先打开<code>SynopsysLicenseGenerator.exe</code>软件，如果SRC文件有效，会弹出一个Get features窗口，应该是2842。随后进入软件：</p>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webp.esing.dev/img/image-20261016112412240_261016_1124_Xlp7.png" alt="SynopsysLicenseGenerator界面" style="zoom:50%;" />
+<p>然后填写<a href="#%E5%AE%89%E8%A3%85%E5%9F%BA%E7%A1%80%E4%BA%A7%E5%93%81%E5%B9%B6%E4%BF%9D%E5%AD%98%E6%97%A5%E5%BF%97">之前</a>保存的主机名和<code>HostID</code>，剩下保持默认， <strong>接着将整个窗口移到屏幕靠侧面的地方，再点击Generate，</strong> 不然结束后的窗口会被主窗口挡住<!--heimu:start--><span class="heimu" title="你看不见我🍁"><button class="heimu-toggle" type="button" aria-label="显示防剧透内容" aria-expanded="false" aria-controls="heimu-content-4"></button><span class="heimu-content" id="heimu-content-4" aria-hidden="true" inert>窗口置顶写的啥玩意</span></span><!--heimu:end-->。随后文件夹下会多出一个主机名的文件夹，内部就是生成好的lic文件，可以用于激活。</p>
+<p>接着还需要对Synopsys的Checksum进行Patch。将<code>SynopsysMonoSlayer</code>拷贝到之前的安装目录<code>/home/eda-tools/synopsys/</code>下，再运行<code>./SynopsysMonoSlayer -a</code>，进行Patch，然后就是漫长的第四次等待。等出现Patch Done就完成了。</p>
+<p>Patch之后，将lic文件拷贝到<code>/home/eda-tools/synopsys/scl/2022.12/linux64/bin/</code>下，先尝试一下运行许可服务器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./lmgrd -c synopsys.lic</span><br></pre></td></tr></table></figure>
+<p>如果一切正常，应当会启动监听端口，这说明Patch生效了。</p>
+<p>之后写个systemd服务进行持久化：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /etc/systemd/system/scl.service</span></span><br><span class="line"></span><br><span class="line"><span class="section">[Unit]</span></span><br><span class="line"><span class="attr">Description</span>=Synopsys Common Licensing (SCL <span class="number">2022.12</span>)</span><br><span class="line"><span class="attr">Wants</span>=network-<span class="literal">on</span>line.target</span><br><span class="line"><span class="attr">After</span>=network-<span class="literal">on</span>line.target</span><br><span class="line"><span class="attr">StartLimitIntervalSec</span>=<span class="number">60</span>s</span><br><span class="line"><span class="attr">StartLimitBurst</span>=<span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="section">[Service]</span></span><br><span class="line"><span class="attr">Type</span>=simple</span><br><span class="line"><span class="attr">User</span>=snpslic</span><br><span class="line"><span class="attr">Group</span>=snpslic</span><br><span class="line"><span class="attr">WorkingDirectory</span>=/home/eda-tools/synopsys/scl/<span class="number">2022.12</span>/linux64/bin</span><br><span class="line"><span class="attr">ExecStartPre</span>=/usr/bin/test -r synopsys.lic</span><br><span class="line"><span class="attr">ExecStart</span>=/home/eda-tools/synopsys/scl/<span class="number">2022.12</span>/linux64/bin/lmgrd -c synopsys.lic -z</span><br><span class="line"><span class="attr">ExecStop</span>=/home/eda-tools/synopsys/scl/<span class="number">2022.12</span>/linux64/bin/lmutil lmdown -c synopsys.lic -q</span><br><span class="line"><span class="attr">Restart</span>=<span class="literal">on</span>-failure</span><br><span class="line"><span class="attr">RestartSec</span>=<span class="number">5</span>s</span><br><span class="line"><span class="attr">TimeoutStopSec</span>=<span class="number">30</span>s</span><br><span class="line"><span class="attr">KillMode</span>=control-group</span><br><span class="line"><span class="attr">LimitNOFILE</span>=<span class="number">65535</span></span><br><span class="line"><span class="attr">UMask</span>=<span class="number">0027</span></span><br><span class="line"><span class="attr">StandardOutput</span>=journal</span><br><span class="line"><span class="attr">StandardError</span>=journal</span><br><span class="line"></span><br><span class="line"><span class="section">[Install]</span></span><br><span class="line"><span class="attr">WantedBy</span>=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>之后设置服务自启和手动启动即可。</p>
+<h3 id="DVE-和-PrimeTime-启动崩溃修复">DVE 和 PrimeTime 启动崩溃修复</h3>
+<div class="note green icon-padding flat"><i class="note-icon fab fa-openai"></i><p>感谢GPT-6.1-Sol的自动分析，得以修复问题。</p>
+</div>
+<p>安装完毕后，使用<code>verid &amp;</code>等命令都是可以正常启动应用的，但是<code>dve -full64 &amp;</code>和<code>pt_shell -gui &amp;</code>都会崩溃。</p>
+<p>6.1Sol分析为：</p>
+<blockquote>
+<p>旧版 EDA 工具自带的 SQLite，与系统 NSS 安全库在同一进程中发生了动态库冲突。</p>
+</blockquote>
+<p>运行下面的命令检查：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> -a dve pt_shell</span><br><span class="line"><span class="built_in">printf</span> <span class="string">&#x27;DISPLAY=%s\n&#x27;</span> <span class="string">&quot;<span class="variable">$DISPLAY</span>&quot;</span></span><br><span class="line">rpm -q sqlite-libs nss nss-softokn</span><br><span class="line">ldconfig -p | grep libsqlite3</span><br></pre></td></tr></table></figure>
+<p>输出为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">dve is /usr/local/libexec/synopsys/dve</span><br><span class="line">dve is /home/eda-tools/synopsys/vcs/T-2022.06-SP2-10/bin/dve</span><br><span class="line">pt_shell is /usr/local/libexec/synopsys/pt_shell</span><br><span class="line">pt_shell is /home/eda-tools/synopsys/prime/U-2022.12-SP5-2/bin/pt_shell</span><br><span class="line">DISPLAY=</span><br><span class="line">sqlite-libs-3.26.0-21.el8_10.x86_64</span><br><span class="line">nss-3.124.0-5.el8_10.x86_64</span><br><span class="line">nss-softokn-3.124.0-5.el8_10.x86_64</span><br><span class="line">        libsqlite3.so.0 (libc6,x86-64) =&gt; /lib64/libsqlite3.so.0</span><br></pre></td></tr></table></figure>
+<p>再查看日志发现，系统 <code>libsoftokn3.so</code> 调用了 SQLite，却进入了 <strong>VCS 目录下的 <code>libsqlite3.so.0</code></strong>。修复方法为，DVE强制指定动态链接库，PrimeTime则直接不使用sqlite而是dbm：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LD_PRELOAD=/usr/lib64/libsqlite3.so.0 <span class="string">&quot;<span class="variable">$VCS_HOME</span>/bin/dve&quot;</span> -full64</span><br><span class="line">NSS_DEFAULT_DB_TYPE=dbm <span class="string">&quot;<span class="variable">$PT_HOME</span>/bin/pt_shell&quot;</span> -gui</span><br></pre></td></tr></table></figure>
+<p>正常启动。然后封装一下，再用Root用户执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &gt; /usr/local/libexec/synopsys/dve &lt;&lt;<span class="string">&#x27;EOF&#x27;</span></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line"><span class="built_in">source</span> /etc/profile.d/synopsys.sh</span><br><span class="line">_system_sqlite=/usr/lib64/libsqlite3.so.0</span><br><span class="line"><span class="keyword">if</span> [ ! -r <span class="string">&quot;<span class="variable">$_system_sqlite</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;DVE compatibility launcher: system SQLite library is missing.&quot;</span> &gt;&amp;2</span><br><span class="line">  <span class="built_in">exit</span> 69</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">export</span> LD_PRELOAD=<span class="string">&quot;$_system_sqlite<span class="variable">$&#123;LD_PRELOAD:+:$LD_PRELOAD&#125;</span>&quot;</span></span><br><span class="line"><span class="built_in">exec</span> <span class="string">&quot;<span class="variable">$VCS_HOME</span>/bin/dve&quot;</span> <span class="string">&quot;<span class="variable">$@</span>&quot;</span></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> &gt; /usr/local/libexec/synopsys/pt_shell &lt;&lt;<span class="string">&#x27;EOF&#x27;</span></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line"><span class="built_in">source</span> /etc/profile.d/synopsys.sh</span><br><span class="line"><span class="built_in">export</span> NSS_DEFAULT_DB_TYPE=dbm</span><br><span class="line"><span class="built_in">exec</span> <span class="string">&quot;<span class="variable">$PT_HOME</span>/bin/pt_shell&quot;</span> <span class="string">&quot;<span class="variable">$@</span>&quot;</span></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="built_in">chown</span> root:root /usr/local/libexec/synopsys/dve /usr/local/libexec/synopsys/pt_shell</span><br><span class="line"><span class="built_in">chmod</span> 0755 /usr/local/libexec/synopsys/dve /usr/local/libexec/synopsys/pt_shell</span><br><span class="line">bash -n /usr/local/libexec/synopsys/dve</span><br><span class="line">bash -n /usr/local/libexec/synopsys/pt_shell</span><br></pre></td></tr></table></figure>
+<p>普通用户重新加载环境并清除 Bash 命令位置缓存：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile.d/synopsys.sh</span><br><span class="line"><span class="built_in">hash</span> -r</span><br><span class="line"><span class="built_in">command</span> -v dve pt_shell</span><br><span class="line">dve -full64 &amp;</span><br><span class="line">pt_shell -gui &amp;</span><br></pre></td></tr></table></figure>
+<h2 id="多用户环境配置">多用户环境配置</h2>
+<p>独乐乐不如众乐乐。配下新用户的环境。</p>
+<h3 id="默认加载环境变量">默认加载环境变量</h3>
+<p>建立 <code>/etc/profile.d/synopsys.sh</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">install -d -o root -g root -m 0755 /usr/local/libexec/synopsys</span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> &gt; /etc/profile.d/synopsys.sh &lt;&lt;<span class="string">&#x27;EOF&#x27;</span></span><br><span class="line"><span class="comment"># Shared Synopsys environment for members of the eda group.</span></span><br><span class="line"><span class="keyword">case</span> <span class="string">&quot; <span class="subst">$(id -nG 2&gt;/dev/null)</span> &quot;</span> <span class="keyword">in</span></span><br><span class="line">  *<span class="string">&quot; eda &quot;</span>*) ;;</span><br><span class="line">  *) <span class="built_in">return</span> 0 ;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> SYNOPSYS_ROOT=/home/eda-tools/synopsys</span><br><span class="line"><span class="built_in">export</span> VCS_HOME=<span class="string">&quot;<span class="variable">$SYNOPSYS_ROOT</span>/vcs/T-2022.06-SP2-10&quot;</span></span><br><span class="line"><span class="built_in">export</span> VERDI_HOME=<span class="string">&quot;<span class="variable">$SYNOPSYS_ROOT</span>/verdi/T-2022.06-SP2-10&quot;</span></span><br><span class="line"><span class="built_in">export</span> DC_HOME=<span class="string">&quot;<span class="variable">$SYNOPSYS_ROOT</span>/syn/U-2022.12-SP7-3&quot;</span></span><br><span class="line"><span class="built_in">export</span> SYNOPSYS=<span class="string">&quot;<span class="variable">$DC_HOME</span>&quot;</span></span><br><span class="line"><span class="built_in">export</span> PT_HOME=<span class="string">&quot;<span class="variable">$SYNOPSYS_ROOT</span>/prime/U-2022.12-SP5-2&quot;</span></span><br><span class="line"><span class="built_in">export</span> FM_HOME=<span class="string">&quot;<span class="variable">$SYNOPSYS_ROOT</span>/fm/U-2022.12-SP6&quot;</span></span><br><span class="line"><span class="built_in">export</span> VC_STATIC_HOME=<span class="string">&quot;<span class="variable">$SYNOPSYS_ROOT</span>/vc_static/T-2022.06-SP2&quot;</span></span><br><span class="line"><span class="built_in">export</span> SCL_HOME=<span class="string">&quot;<span class="variable">$SYNOPSYS_ROOT</span>/scl/2022.12&quot;</span></span><br><span class="line"><span class="built_in">export</span> LC_HOME=<span class="string">&quot;<span class="variable">$SYNOPSYS_ROOT</span>/lc/U-2022.12-SP6&quot;</span></span><br><span class="line"><span class="built_in">export</span> ICC2_HOME=<span class="string">&quot;<span class="variable">$SYNOPSYS_ROOT</span>/icc2/U-2022.12-SP6&quot;</span></span><br><span class="line"><span class="built_in">export</span> SYNOPSYS_LC_ROOT=<span class="string">&quot;<span class="variable">$LC_HOME</span>&quot;</span></span><br><span class="line"><span class="built_in">export</span> SNPSLMD_LICENSE_FILE=<span class="string">&quot;<span class="variable">$&#123;SNPSLMD_LICENSE_FILE:-27080@localhost&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _synopsys_dir <span class="keyword">in</span> \</span><br><span class="line">  <span class="string">&quot;<span class="variable">$SCL_HOME</span>/linux64/bin&quot;</span> <span class="string">&quot;<span class="variable">$VC_STATIC_HOME</span>/bin&quot;</span> <span class="string">&quot;<span class="variable">$FM_HOME</span>/bin&quot;</span> \</span><br><span class="line">  <span class="string">&quot;<span class="variable">$PT_HOME</span>/bin&quot;</span> <span class="string">&quot;<span class="variable">$DC_HOME</span>/bin&quot;</span> <span class="string">&quot;<span class="variable">$VERDI_HOME</span>/bin&quot;</span> <span class="string">&quot;<span class="variable">$VCS_HOME</span>/bin&quot;</span> \</span><br><span class="line">  /usr/local/libexec/synopsys; <span class="keyword">do</span></span><br><span class="line">  <span class="keyword">if</span> [ -d <span class="string">&quot;<span class="variable">$_synopsys_dir</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;:<span class="variable">$PATH</span>:&quot;</span> <span class="keyword">in</span></span><br><span class="line">      *<span class="string">&quot;:<span class="variable">$_synopsys_dir</span>:&quot;</span>*) ;;</span><br><span class="line">      *) PATH=<span class="string">&quot;<span class="variable">$_synopsys_dir</span>:<span class="variable">$PATH</span>&quot;</span> ;;</span><br><span class="line">    <span class="keyword">esac</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Append LC so its shared launcher names do not override other products.</span></span><br><span class="line"><span class="keyword">if</span> [ -d <span class="string">&quot;<span class="variable">$LC_HOME</span>/bin&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">  <span class="keyword">case</span> <span class="string">&quot;:<span class="variable">$PATH</span>:&quot;</span> <span class="keyword">in</span></span><br><span class="line">    *<span class="string">&quot;:<span class="variable">$LC_HOME</span>/bin:&quot;</span>*) ;;</span><br><span class="line">    *) PATH=<span class="string">&quot;<span class="variable">$PATH</span>:<span class="variable">$LC_HOME</span>/bin&quot;</span> ;;</span><br><span class="line">  <span class="keyword">esac</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">export</span> PATH</span><br><span class="line"><span class="built_in">unset</span> _synopsys_dir</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="built_in">chown</span> root:root /etc/profile.d/synopsys.sh</span><br><span class="line"><span class="built_in">chmod</span> 0644 /etc/profile.d/synopsys.sh</span><br><span class="line">bash -n /etc/profile.d/synopsys.sh</span><br></pre></td></tr></table></figure>
+<p>该脚本仅为当前进程具有 <code>eda</code> 组的用户加载环境，避免对其他系统账号加入无关 PATH。LC 放在 PATH 后部，避免它的同名启动器抢在其他产品之前。</p>
+<hr>
+<p>普通用户重新登录后，在自己的终端执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile.d/synopsys.sh</span><br><span class="line"><span class="built_in">hash</span> -r</span><br><span class="line"><span class="built_in">id</span> -nG</span><br><span class="line"><span class="built_in">command</span> -v vcs verdi dc_shell design_vision pt_shell fm_shell vc_static_shell lc_shell</span><br><span class="line"><span class="built_in">printf</span> <span class="string">&#x27;license=%s\n&#x27;</span> <span class="string">&quot;<span class="variable">$SNPSLMD_LICENSE_FILE</span>&quot;</span></span><br><span class="line"><span class="built_in">printf</span> <span class="string">&#x27;LC=%s\n&#x27;</span> <span class="string">&quot;<span class="variable">$SYNOPSYS_LC_ROOT</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<p>即可成功运行。</p>
+<h3 id="VNC配置">VNC配置</h3>
+<p>安装TigerVNC并确认会话文件存在：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dnf install -y tigervnc-server</span><br><span class="line">rpm -q tigervnc-server</span><br><span class="line"><span class="built_in">test</span> -f /usr/share/xsessions/gnome.desktop</span><br><span class="line">systemctl <span class="built_in">cat</span> vncserver@.service</span><br></pre></td></tr></table></figure>
+<p>在 <code>/etc/tigervnc/vncserver-config-defaults</code> 中设置：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">session</span>=gnome</span><br><span class="line"><span class="attr">geometry</span>=<span class="number">1920</span>x1080</span><br></pre></td></tr></table></figure>
+<p><code>session=gnome</code> 对应 <code>/usr/share/xsessions/gnome.desktop</code> 的文件名。</p>
+<p>在 <code>/etc/tigervnc/vncserver-config-mandatory</code> 中设置：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">interface</span>=<span class="number">192.168</span>.<span class="number">10.10</span></span><br><span class="line"><span class="attr">securitytypes</span>=tlsvnc,vncauth</span><br><span class="line"><span class="attr">nolisten</span>=tcp</span><br></pre></td></tr></table></figure>
+<p>这里要将 <code>interface</code> 改成服务器实际内网 IP，并确保地址稳定。</p>
+<p>之后先给管理员分配号，编辑 <code>/etc/tigervnc/vncserver.users</code>，加入：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:<span class="attr">2</span>=esing</span><br></pre></td></tr></table></figure>
+<p>再开放指定端口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --permanent --add-port=5902/tcp</span><br><span class="line">firewall-cmd --reload</span><br><span class="line">firewall-cmd --zone=public --list-ports</span><br></pre></td></tr></table></figure>
+<p>即可。</p>
+<p>对当前 TigerVNC 1.15，可选地为每人设置默认分辨率：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> eda_user <span class="keyword">in</span> student01 student02; <span class="keyword">do</span></span><br><span class="line">  eda_group=$(<span class="built_in">id</span> -gn <span class="string">&quot;<span class="variable">$eda_user</span>&quot;</span>)</span><br><span class="line">  install -d -o <span class="string">&quot;<span class="variable">$eda_user</span>&quot;</span> -g <span class="string">&quot;<span class="variable">$eda_group</span>&quot;</span> -m 0700 \</span><br><span class="line">    <span class="string">&quot;/home/<span class="variable">$eda_user</span>/.config/tigervnc&quot;</span></span><br><span class="line">  <span class="built_in">printf</span> <span class="string">&#x27;session=gnome\ngeometry=1920x1080\n&#x27;</span> \</span><br><span class="line">    &gt; <span class="string">&quot;/home/<span class="variable">$eda_user</span>/.config/tigervnc/config&quot;</span></span><br><span class="line">  <span class="built_in">chown</span> <span class="string">&quot;<span class="variable">$eda_user</span>:<span class="variable">$eda_group</span>&quot;</span> <span class="string">&quot;/home/<span class="variable">$eda_user</span>/.config/tigervnc/config&quot;</span></span><br><span class="line">  <span class="built_in">chmod</span> 0600 <span class="string">&quot;/home/<span class="variable">$eda_user</span>/.config/tigervnc/config&quot;</span></span><br><span class="line">  restorecon -RF <span class="string">&quot;/home/<span class="variable">$eda_user</span>/.config/tigervnc&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<h3 id="开号">开号</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">useradd --create-home --shell /bin/bash --<span class="built_in">groups</span> eda student01</span><br><span class="line">useradd --create-home --shell /bin/bash --<span class="built_in">groups</span> eda student02</span><br><span class="line">passwd student01</span><br><span class="line">passwd student02</span><br><span class="line"><span class="built_in">chmod</span> 0700 /home/student01 /home/student02</span><br><span class="line"><span class="built_in">id</span> student01</span><br><span class="line"><span class="built_in">id</span> student02</span><br></pre></td></tr></table></figure>
+<p>每个人有个人主组，同时属于 <code>eda</code>，就可以访问Synopsys的软件了。之后每个人登录后自己设置下密码。</p>
+<p>同时要修改vnc配置，增加显示号、端口和开机启动。编辑 <code>/etc/tigervnc/vncserver.users</code>，最终映射如下；已有行不重复添加：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:<span class="attr">2</span>=esing</span><br><span class="line">:<span class="attr">3</span>=student01</span><br><span class="line">:<span class="attr">4</span>=student02</span><br></pre></td></tr></table></figure>
+<p>内网直连方案中再开放两个新增端口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(</span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line">firewall-cmd --zone=public --permanent --add-port=5903/tcp</span><br><span class="line">firewall-cmd --zone=public --permanent --add-port=5904/tcp</span><br><span class="line">firewall-cmd --reload</span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">enable</span> --now vncserver@:3.service vncserver@:4.service</span><br><span class="line">systemctl status vncserver@:3.service vncserver@:4.service --no-pager</span><br><span class="line">ss -ltnp <span class="string">&#x27;sport = :5902 or sport = :5903 or sport = :5904&#x27;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>账号</th>
+<th>显示号</th>
+<th>TigerVNC Viewer 地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>esing</td>
+<td><code>:2</code></td>
+<td><code>192.168.10.10::5902</code></td>
+</tr>
+<tr>
+<td>student01</td>
+<td><code>:3</code></td>
+<td><code>192.168.10.10::5903</code></td>
+</tr>
+<tr>
+<td>student02</td>
+<td><code>:4</code></td>
+<td><code>192.168.10.10::5904</code></td>
+</tr>
+</tbody>
+</table>
+<p>开完后测试一下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">runuser -u student01 -- bash -lc \</span><br><span class="line">  <span class="string">&#x27;source /etc/profile.d/synopsys.sh; id -nG; command -v vcs verdi dc_shell pt_shell lc_shell&#x27;</span></span><br><span class="line"></span><br><span class="line">runuser -u student02 -- bash -lc \</span><br><span class="line">  <span class="string">&#x27;source /etc/profile.d/synopsys.sh; id -nG; command -v vcs verdi dc_shell pt_shell lc_shell&#x27;</span></span><br><span class="line"></span><br><span class="line">runuser -u student01 -- <span class="built_in">test</span> -x /home/eda-tools/synopsys/vcs/T-2022.06-SP2-10/bin/vcs</span><br></pre></td></tr></table></figure>
+<h3 id="添加GUI入口">添加GUI入口</h3>
+<p>统一通过加载公共配置的启动脚本进入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &gt; /usr/local/bin/synopsys-gui &lt;&lt;<span class="string">&#x27;EOF&#x27;</span></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line"><span class="built_in">source</span> /etc/profile.d/synopsys.sh</span><br><span class="line">tool=<span class="string">&quot;<span class="variable">$&#123;1:-&#125;</span>&quot;</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$#</span>&quot;</span> -gt 0 ]; <span class="keyword">then</span> <span class="built_in">shift</span>; <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">case</span> <span class="string">&quot;<span class="variable">$tool</span>&quot;</span> <span class="keyword">in</span></span><br><span class="line">  verdi) <span class="built_in">exec</span> <span class="string">&quot;<span class="variable">$VERDI_HOME</span>/bin/verdi&quot;</span> <span class="string">&quot;<span class="variable">$@</span>&quot;</span> ;;</span><br><span class="line">  design_vision) <span class="built_in">exec</span> <span class="string">&quot;<span class="variable">$DC_HOME</span>/bin/design_vision&quot;</span> <span class="string">&quot;<span class="variable">$@</span>&quot;</span> ;;</span><br><span class="line">  formality) <span class="built_in">exec</span> <span class="string">&quot;<span class="variable">$FM_HOME</span>/bin/fm_shell&quot;</span> -gui <span class="string">&quot;<span class="variable">$@</span>&quot;</span> ;;</span><br><span class="line">  dve) <span class="built_in">exec</span> /usr/local/libexec/synopsys/dve -full64 <span class="string">&quot;<span class="variable">$@</span>&quot;</span> ;;</span><br><span class="line">  pt_shell) <span class="built_in">exec</span> /usr/local/libexec/synopsys/pt_shell -gui <span class="string">&quot;<span class="variable">$@</span>&quot;</span> ;;</span><br><span class="line">  *) <span class="built_in">echo</span> <span class="string">&quot;Usage: synopsys-gui &#123;verdi|design_vision|formality|dve|pt_shell&#125;&quot;</span> &gt;&amp;2; <span class="built_in">exit</span> 2 ;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="built_in">chown</span> root:root /usr/local/bin/synopsys-gui</span><br><span class="line"><span class="built_in">chmod</span> 0755 /usr/local/bin/synopsys-gui</span><br><span class="line">bash -n /usr/local/bin/synopsys-gui</span><br></pre></td></tr></table></figure>
+<p>创建快捷方式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> IFS=<span class="string">&#x27;|&#x27;</span> <span class="built_in">read</span> -r app_key app_name; <span class="keyword">do</span></span><br><span class="line">  <span class="built_in">cat</span> &gt; <span class="string">&quot;/usr/share/applications/synopsys-<span class="variable">$&#123;app_key&#125;</span>.desktop&quot;</span> &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">[Desktop Entry]</span></span><br><span class="line"><span class="string">Type=Application</span></span><br><span class="line"><span class="string">Name=$app_name</span></span><br><span class="line"><span class="string">Exec=/usr/local/bin/synopsys-gui $app_key</span></span><br><span class="line"><span class="string">TryExec=/usr/local/bin/synopsys-gui</span></span><br><span class="line"><span class="string">Icon=applications-engineering</span></span><br><span class="line"><span class="string">Terminal=false</span></span><br><span class="line"><span class="string">Categories=Development;Engineering;</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line">  <span class="built_in">chmod</span> 0644 <span class="string">&quot;/usr/share/applications/synopsys-<span class="variable">$&#123;app_key&#125;</span>.desktop&quot;</span></span><br><span class="line"><span class="keyword">done</span> &lt;&lt;<span class="string">&#x27;APPS&#x27;</span></span><br><span class="line">verdi|Verdi</span><br><span class="line">design_vision|Design Vision</span><br><span class="line">formality|Formality</span><br><span class="line">dve|DVE</span><br><span class="line">pt_shell|PrimeTime</span><br><span class="line">APPS</span><br></pre></td></tr></table></figure>
+<p>VC Static 也有 GUI，可以在已加载环境的 VNC 终端使用 <code>vc_static_shell -gui &amp;</code>。</p>
+<h2 id="可选：工艺库安装">可选：工艺库安装</h2>
+<p>工艺库自己上网找或者咸鱼买，都行。这里以TSMC 28nm为例。</p>
+<p>数字前端通常先需要：</p>
+<table>
+<thead>
+<tr>
+<th>文件/视图</th>
+<th>使用者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.db</code></td>
+<td>DC 综合、PrimeTime 时序分析</td>
+</tr>
+<tr>
+<td><code>.lib</code></td>
+<td>Liberty 文本库，按需由 LC 处理</td>
+</tr>
+<tr>
+<td>标准单元 <code>.v</code></td>
+<td>门级仿真</td>
+</tr>
+<tr>
+<td>README、发布说明、数据手册</td>
+<td>核对版本、工艺角、单位和限制</td>
+</tr>
+</tbody>
+</table>
+<p>选择TSMC 28HPC+SVT部署，包含96 份 <code>.db</code>、96 份 <code>.lib</code>、两份 Verilog、说明与手册，294 个文件约 2.84 GB。</p>
+<p>28 nm 实际使用以下四个包，源包约 1.10 GB：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tcbn28hpcplusbwp7t40p140_180a_nldm.tar.gz</span><br><span class="line">tcbn28hpcplusbwp7t40p140_110a_vlg.tar.gz</span><br><span class="line">tcbn28hpcplusbwp7t40p140_130c_doc.tar.gz</span><br><span class="line">tcbn28hpcplusbwp7t40p140_180b_rln.tar.gz</span><br></pre></td></tr></table></figure>
+<p>将它们共同展开到厂商的 <code>TSMCHOME</code> 目录结构。其实让AI来装就可以了。</p>
+<hr>
+<p>使用时，需要手动指定。以 28 nm 的 TT、0.9 V、25°C 为例，下面在普通用户的个人项目终端中执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile.d/synopsys.sh</span><br><span class="line"><span class="built_in">export</span> TSMC28_ROOT=/home/eda-tools/pdk/tsmc28hpcplus/tcbn28hpcplusbwp7t40p140/180b</span><br><span class="line"><span class="built_in">export</span> TSMC28_NLDM_DIR=<span class="string">&quot;<span class="variable">$TSMC28_ROOT</span>/digital/Front_End/timing_power_noise/NLDM/tcbn28hpcplusbwp7t40p140_180a&quot;</span></span><br><span class="line"><span class="built_in">export</span> DC_TARGET_DB=<span class="string">&quot;<span class="variable">$TSMC28_NLDM_DIR</span>/tcbn28hpcplusbwp7t40p140tt0p9v25c.db&quot;</span></span><br><span class="line"><span class="built_in">test</span> -r <span class="string">&quot;<span class="variable">$DC_TARGET_DB</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<p>在项目自己的 DC 脚本中使用：</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set_app_var target_library [<span class="keyword">list</span> <span class="variable">$::env</span>(DC_TARGET_DB)]</span><br><span class="line">set_app_var synthetic_library [<span class="keyword">list</span> dw_foundation.sldb]</span><br><span class="line">set_app_var link_library [<span class="keyword">concat</span> [<span class="keyword">list</span> *] <span class="variable">$target_library</span> <span class="variable">$synthetic_library</span>]</span><br></pre></td></tr></table></figure>
+<p>真实库中的时间、电容单位必须从 Liberty 核对。这里两套库的时间为 ns、电容为 pF；74138 入门测试采用过以下约束：</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set_input_transition <span class="number">0.05</span> [all_inputs]</span><br><span class="line">set_load <span class="number">0.005</span> [all_outputs]</span><br><span class="line">set_max_delay <span class="number">1.0</span> -from [all_inputs] -to [all_outputs]</span><br></pre></td></tr></table></figure>
+<p>它们表示 50 ps 输入转换、5 fF 输出负载及 1 ns 组合路径预算。</p>
+<p>针对PrimeTime，在普通用户已设置本项目 <code>DC_TARGET_DB</code> 的环境中启动 PT，然后在 PT 内执行：</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> link_path [<span class="keyword">list</span> * <span class="variable">$::env</span>(DC_TARGET_DB)]</span><br><span class="line">read_verilog build/outputs/decoder74138_mapped.v</span><br><span class="line">link_design decoder74138</span><br><span class="line">read_sdc build/outputs/decoder74138.sdc</span><br><span class="line">update_timing</span><br><span class="line">report_timing -from [all_inputs] -to [all_outputs] -max_paths <span class="number">10</span> -slack_lesser_than <span class="number">1.0e6</span></span><br></pre></td></tr></table></figure>
+<h2 id="测试">测试</h2>
+<h3 id="74138测试DC">74138测试DC</h3>
+<p>测试一下DC的<code>compile_ultra</code>是否正常：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p ~/eda-work/dc74138/&#123;rtl,scripts&#125;</span><br><span class="line"><span class="built_in">cd</span> ~/eda-work/dc74138</span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> &gt; rtl/decoder74138.v &lt;&lt;<span class="string">&#x27;EOF&#x27;</span></span><br><span class="line">module decoder74138 (</span><br><span class="line">    input wire a, b, c,</span><br><span class="line">    input wire g1, g2a_n, g2b_n,</span><br><span class="line">    output reg [7:0] y_n</span><br><span class="line">);</span><br><span class="line">    always @* begin</span><br><span class="line">        y_n = 8<span class="string">&#x27;hff;</span></span><br><span class="line"><span class="string">        if (g1 &amp;&amp; !g2a_n &amp;&amp; !g2b_n) begin</span></span><br><span class="line"><span class="string">            case (&#123;c,b,a&#125;)</span></span><br><span class="line"><span class="string">                3&#x27;</span>d0: y_n = 8<span class="string">&#x27;b11111110;</span></span><br><span class="line"><span class="string">                3&#x27;</span>d1: y_n = 8<span class="string">&#x27;b11111101;</span></span><br><span class="line"><span class="string">                3&#x27;</span>d2: y_n = 8<span class="string">&#x27;b11111011;</span></span><br><span class="line"><span class="string">                3&#x27;</span>d3: y_n = 8<span class="string">&#x27;b11110111;</span></span><br><span class="line"><span class="string">                3&#x27;</span>d4: y_n = 8<span class="string">&#x27;b11101111;</span></span><br><span class="line"><span class="string">                3&#x27;</span>d5: y_n = 8<span class="string">&#x27;b11011111;</span></span><br><span class="line"><span class="string">                3&#x27;</span>d6: y_n = 8<span class="string">&#x27;b10111111;</span></span><br><span class="line"><span class="string">                3&#x27;</span>d7: y_n = 8<span class="string">&#x27;b01111111;</span></span><br><span class="line"><span class="string">                default: y_n = 8&#x27;</span>hff;</span><br><span class="line">            endcase</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">endmodule</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> &gt; scripts/run_dc.tcl &lt;&lt;<span class="string">&#x27;EOF&#x27;</span></span><br><span class="line"><span class="built_in">set</span> project_dir [file <span class="built_in">dirname</span> [file <span class="built_in">dirname</span> [file normalize [info script]]]]</span><br><span class="line"><span class="built_in">set</span> build_dir [file <span class="built_in">join</span> <span class="variable">$project_dir</span> build]</span><br><span class="line">file <span class="built_in">mkdir</span> [file <span class="built_in">join</span> <span class="variable">$build_dir</span> work] [file <span class="built_in">join</span> <span class="variable">$build_dir</span> reports] [file <span class="built_in">join</span> <span class="variable">$build_dir</span> outputs]</span><br><span class="line">define_design_lib WORK -path [file <span class="built_in">join</span> <span class="variable">$build_dir</span> work]</span><br><span class="line"><span class="built_in">set</span> target_db [file <span class="built_in">join</span> $::<span class="built_in">env</span>(DC_HOME) libraries syn lsi_10k.db]</span><br><span class="line">set_app_var target_library [list <span class="variable">$target_db</span>]</span><br><span class="line">set_app_var synthetic_library [list dw_foundation.sldb]</span><br><span class="line">set_app_var link_library [concat [list *] <span class="variable">$target_library</span> <span class="variable">$synthetic_library</span>]</span><br><span class="line"><span class="keyword">if</span> &#123;![analyze -format verilog [file <span class="built_in">join</span> <span class="variable">$project_dir</span> rtl decoder74138.v]]&#125; &#123;error <span class="string">&quot;analyze failed&quot;</span>&#125;</span><br><span class="line"><span class="keyword">if</span> &#123;![elaborate decoder74138]&#125; &#123;error <span class="string">&quot;elaborate failed&quot;</span>&#125;</span><br><span class="line">current_design decoder74138</span><br><span class="line"><span class="keyword">if</span> &#123;![<span class="built_in">link</span>]&#125; &#123;error <span class="string">&quot;link failed&quot;</span>&#125;</span><br><span class="line"><span class="keyword">if</span> &#123;![check_design]&#125; &#123;error <span class="string">&quot;check_design failed&quot;</span>&#125;</span><br><span class="line">set_input_transition 0.1 [all_inputs]</span><br><span class="line">set_load 1.0 [all_outputs]</span><br><span class="line">set_max_delay 10.0 -from [all_inputs] -to [all_outputs]</span><br><span class="line"><span class="keyword">if</span> &#123;![compile_ultra]&#125; &#123;error <span class="string">&quot;compile_ultra failed&quot;</span>&#125;</span><br><span class="line">change_names -rules verilog -hierarchy</span><br><span class="line">redirect -file [file <span class="built_in">join</span> <span class="variable">$build_dir</span> reports area.rpt] &#123;report_area&#125;</span><br><span class="line">redirect -file [file <span class="built_in">join</span> <span class="variable">$build_dir</span> reports timing.rpt] &#123;report_timing -from [all_inputs] -to [all_outputs]&#125;</span><br><span class="line">redirect -file [file <span class="built_in">join</span> <span class="variable">$build_dir</span> reports references.rpt] &#123;report_reference&#125;</span><br><span class="line">redirect -file [file <span class="built_in">join</span> <span class="variable">$build_dir</span> reports qor.rpt] &#123;report_qor&#125;</span><br><span class="line">write -format verilog -hierarchy -output [file <span class="built_in">join</span> <span class="variable">$build_dir</span> outputs decoder74138_mapped.v]</span><br><span class="line">write -format ddc -hierarchy -output [file <span class="built_in">join</span> <span class="variable">$build_dir</span> outputs decoder74138.ddc]</span><br><span class="line">write_sdc [file <span class="built_in">join</span> <span class="variable">$build_dir</span> outputs decoder74138.sdc]</span><br><span class="line">puts <span class="string">&quot;COMPILE_ULTRA_PASS&quot;</span></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">dc_shell</span><br></pre></td></tr></table></figure>
+<p>在 DC 内执行：</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">source</span> scripts/run_dc.tcl</span><br></pre></td></tr></table></figure>
+<p>脚本只使用 DC 自带 <code>lsi_10k.db</code>，用于先把工具运行与实际工艺库问题分开。实际部署的对应示例得到 19 个组合单元、0 个黑盒、路径约 2.91 ns，10 ns 预算下余量约 7.09 ns。完美可用！</p>
+<table>
+<thead>
+<tr>
+<th>库与场景</th>
+<th>DC <code>compile_ultra</code></th>
+<th>VCS 门级功能</th>
+<th>PrimeTime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SMIC TT，1.10 V，25°C</td>
+<td>14 个组合单元，面积报告值 11.491200</td>
+<td rowspan="2">74138 全部 64 种输入组合通过</td>
+<td>路径约 0.37 ns，1 ns 预算下余量约 0.63 ns</td>
+</tr>
+<tr>
+<td>TSMC TT，0.9 V，25°C</td>
+<td>14 个组合单元，面积报告值 4.998000</td>
+<td>路径约 0.16 ns，1 ns 预算下余量约 0.84 ns</td>
+</tr>
+</tbody>
+</table>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.esing.dev">Esing</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.esing.dev/2026/10/15/vcsserver/">https://blog.esing.dev/2026/10/15/vcsserver/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://blog.esing.dev" target="_blank">Esing的小站</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Verilog/">Verilog</a><a class="post-meta__tags" href="/tags/SystemVerilog/">SystemVerilog</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/">数字逻辑电路</a><a class="post-meta__tags" href="/tags/%E5%BE%AE%E7%94%B5%E5%AD%90/">微电子</a><a class="post-meta__tags" href="/tags/%E8%B8%A9%E5%9D%91/">踩坑</a><a class="post-meta__tags" href="/tags/Synopsys/">Synopsys</a><a class="post-meta__tags" href="/tags/EDA/">EDA</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/10/10/bili-mastercard/" title="拿下全港首张哔哩哔哩2233联名万事达！"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/IMG_20261010_135905_261011_0001_2RaZ.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">拿下全港首张哔哩哔哩2233联名万事达！</div></div><div class="info-2"><div class="info-item-1">又好看又好用，B站近几年干的最好的事</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/12/28/corecat-drawer/" title="CoreCat：画模块电路的好帮手"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/CoreCat_251228_1645_WqLy.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-28</div><div class="info-item-2">CoreCat：画模块电路的好帮手</div></div><div class="info-2"><div class="info-item-1">Drag modules, edit ports, connect wires, and fxxk Visio.</div></div></div></a><a class="pagination-related" href="/2025/12/08/riscvcod-p5/" title="从零开始学RISC：第五篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/128470225_p0_250408_0130_fLZB.avif" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-08</div><div class="info-item-2">从零开始学RISC：第五篇</div></div><div class="info-2"><div class="info-item-1">译码 ID级 设计 提到译码级，那就得是译码器啊。纯组合逻辑，包你写到爽。 译码级还有什么？立即数移位也需要放在ID级，以减轻EX级的压力。 指令译码器 Decoder.sv 指令译码器为组合逻辑模块。我们需要哪些信号？ 首先要把31位的指令分类：是RIBJSU的哪一种？之后，要根据分类，将寄存器地址拆分出来，准备送进同一级的寄存器堆来读取数据；要提取指令的funct3和funct7，以便在EX级告诉ALU“长的像的指令如何区分”；要根据指令类型，区分跳转类型和读取/写入类型，给后面的流水级进行处理；还要生成对应位的寄存器读信号，和分支指令判断信号，为后面处理数据冒险准备……要干的事情真不少。 一步一步全写上即可。推荐使用宏定义，大幅度提升可读性。 在模块内使用``ifdef DEBUG`配合上ASCII字符进行Debug是另一个小技巧。在综合时取消宏定义即可。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596...</div></div></div></a><a class="pagination-related" href="/2026/01/11/riscvcod-p13/" title="从零开始学RISC：第十三篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/128470225_p0_250408_0130_fLZB.avif" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-11</div><div class="info-item-2">从零开始学RISC：第十三篇</div></div><div class="info-2"><div class="info-item-1">异常：CSR寄存器 为了能运行更多的C程序，并且在出现问题时记录下来，CSR寄存器是必不可缺少的。他也是切换特权模式的重要组件。虽然RISCV规范中已经将CSR从I指令集中移除，但是支持一下还是很重要的。 不多，支持最基础的机器模式相关寄存器即可。 CSR寄存器和通用寄存器堆类似，也是同步写异步读。但它不放在ID级，而是在EX级，因为我们的异常检测主要放在EX级进行。此外，CSR需要立即响应异常。另一方面，将CSR读写放在关键路径较长的EX级，也可以防止拉长其他级的关键路径。 CSR寄存器模块 CSR.sv 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116...</div></div></div></a><a class="pagination-related" href="/2026/03/19/riscvcod-p16/" title="从零开始学RISC：第十六篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/128470225_p0_250408_0130_fLZB.avif" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-19</div><div class="info-item-2">从零开始学RISC：第十六篇</div></div><div class="info-2"><div class="info-item-1">神秘 j8 反汇编的程序中，总能看到一堆神秘j 8，这是什么？  j 8实际上是个伪指令，会被翻译成jal x0,8，即不保存返回地址直接跳走。在判断比较后跳转中常会看见。 此外，这个j 8后面还跟了已知符号__BSS_END__来做相对标注，标识出0x8 = __BSS_END__ - 0x11bc。 历史遗留问题：CoreMark与ee_printf 我们想一下 之前 移植CoreMark后遇到的问题：在每次的crc更新后，必须插入一句ee_printf。这个问题我们还没有解决。 反汇编分析 这个问题可能出现在哪？我们回过头看一下原先出问题的C代码： 1234seedcrc = crc16(results[0].seed1, seedcrc);seedcrc = crc16(results[0].seed2, seedcrc);seedcrc = crc16(results[0].seed3, seedcrc);seedcrc = crc16(results[0].size,  seedcrc); 注意到，这是函数的连续调用。连续调用很可能在寄存器返回值、紧邻的下一次调用参数...</div></div></div></a><a class="pagination-related" href="/2026/03/09/riscvcod-p14/" title="从零开始学RISC：第十四篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/128470225_p0_250408_0130_fLZB.avif" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-09</div><div class="info-item-2">从零开始学RISC：第十四篇</div></div><div class="info-2"><div class="info-item-1">CoreMark移植 功能验证和CSR都做完了，该跑个分了。 CoreMark 是由 EEMBC 推出的一个处理器基准测试（benchmark），主要用来衡量 嵌入式处理器、MCU 和 CPU 内核的整数运算性能。它的设计目标是尽量只测试“处理器核心本身”的能力，而不过多受操作系统、外设或平台差异影响，因此很常被用来做不同芯片之间的横向比较。 源代码获取 源代码可以在eembc/coremark获取。 目录结构 CoreMark的库底下有很多文件。我们只需要关心barebones文件夹下的内容即可，这是适用于裸机的移植方案。 1234567891011121314151617181920├── barebones/            # barebones 移植│  │                      # 这两个文件需要修改│  ├── core_portme.c      # coremark 的平台移植层实现模板│  ├── core_portme.h      # 核心可移植层头文件│  ││  ├── core_portme.mak    # Makefil...</div></div></div></a><a class="pagination-related" href="/2025/12/09/riscvcod-p6/" title="从零开始学RISC：第六篇"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.esing.dev/img/128470225_p0_250408_0130_fLZB.avif" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-09</div><div class="info-item-2">从零开始学RISC：第六篇</div></div><div class="info-2"><div class="info-item-1">执行 EX级 设计 EX级以负责核心运算功能的ALU著称。可以说，它是CPU的灵魂。来一人一句ALU牛逼来。 算数逻辑单元 ALU.sv ALU需要完成一系列R-Type、I-Type指令的运算。对于L-Type和S-Type，它们的处理逻辑其实差不多，都是相加——这样才能让ALU输出基地址和偏移量之和，算出目标地址。 同样地，使用字符串打印的方式来增强可读性，优化Debug体验，并更好的看到指令在流水线中的流动。同样使用DEBUG宏进行包装，在给综合器生成最终电路前取消宏定义即可。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283`include &quot;include/defines.svh&quot;module ALU (    // 操作码    input  logic [ 4:0] alu_op,  ...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.avif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Esing</div><div class="author-info-description">咱也不知道写点啥 (＠_＠;)</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">253</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">225</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Zxis233"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Zxis233" target="_blank" title="Github"><i class="fab fa-github" style="color: #ff80ac;"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss" style="color: #ff80ac;"></i></a><a class="social-icon" href="mailto:esing@mail.esing.dev" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #ff80ac;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p><b>将音乐解析 API 修改为自建版！</b><br><b>迁移到最新的Hexo 与 Butterfly！</b><br><b>添加了黑幕样式以优化文章内容！</b></p></div></div><div class="card-widget colo-info" id="colo-info"><div class="item-headline"><i class="fas fa-satellite-dish fa-flip-360"></i><span>Cloudflare 节点信息</span></div><div class="item-content"><div class="webinfo" data-cf-fields data-pangu-ignore>
+  <div class="webinfo-item"><div class="item-name">访问 IP :</div><div class="item-count" id="cf-ip">—</div></div>
+  <div class="webinfo-item"><div class="item-name">访问地区 :</div><div class="item-count" id="cf-loc">—</div></div>
+  <div class="webinfo-item"><div class="item-name">CDN 节点 :</div><div class="item-count" id="cf-colo">—</div></div>
+  <div class="webinfo-item"><div class="item-name">TLS 协议 :</div><div class="item-count" id="cf-tls">—</div></div>
+  <div class="webinfo-item"><div class="item-name">WARP :</div><div class="item-count" id="cf-warp">—</div></div>
+</div>
+<p data-cf-status role="status" aria-live="polite">节点信息需要 JavaScript 才能加载</p>
+<button type="button" data-cf-retry hidden>重试</button>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%85%E6%9C%BA%EF%BC%88%E7%89%A9%E7%90%86%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">装机（物理）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%85%E6%9C%BA%EF%BC%88%E8%BD%AF%E4%BB%B6%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">装机（软件）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Synopsys-EDA%E5%AE%89%E8%A3%85"><span class="toc-number">4.</span> <span class="toc-text">Synopsys EDA安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-number">4.1.</span> <span class="toc-text">系统环境准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5Synopsys%E5%AE%89%E8%A3%85%E5%8C%85"><span class="toc-number">4.2.</span> <span class="toc-text">检查Synopsys安装包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%AF%E7%BB%88%E7%AB%AF%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85Synopsys"><span class="toc-number">4.3.</span> <span class="toc-text">纯终端环境安装Synopsys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%9F%BA%E7%A1%80%E4%BA%A7%E5%93%81%E5%B9%B6%E4%BF%9D%E5%AD%98%E6%97%A5%E5%BF%97"><span class="toc-number">4.4.</span> <span class="toc-text">安装基础产品并保存日志</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Verdi-Supplementary-Package-%E5%8D%95%E7%8B%AC%E5%A4%84%E7%90%86"><span class="toc-number">4.5.</span> <span class="toc-text">Verdi Supplementary Package 单独处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E7%9B%AE%E5%BD%95%E6%9D%83%E9%99%90%E4%BF%AE%E6%94%B9"><span class="toc-number">4.6.</span> <span class="toc-text">安装目录权限修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Patch%E6%BF%80%E6%B4%BB"><span class="toc-number">4.7.</span> <span class="toc-text">Patch激活</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DVE-%E5%92%8C-PrimeTime-%E5%90%AF%E5%8A%A8%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D"><span class="toc-number">4.8.</span> <span class="toc-text">DVE 和 PrimeTime 启动崩溃修复</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%94%A8%E6%88%B7%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">5.</span> <span class="toc-text">多用户环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E5%8A%A0%E8%BD%BD%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">5.1.</span> <span class="toc-text">默认加载环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VNC%E9%85%8D%E7%BD%AE"><span class="toc-number">5.2.</span> <span class="toc-text">VNC配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%8F%B7"><span class="toc-number">5.3.</span> <span class="toc-text">开号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0GUI%E5%85%A5%E5%8F%A3"><span class="toc-number">5.4.</span> <span class="toc-text">添加GUI入口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E9%80%89%EF%BC%9A%E5%B7%A5%E8%89%BA%E5%BA%93%E5%AE%89%E8%A3%85"><span class="toc-number">6.</span> <span class="toc-text">可选：工艺库安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">7.</span> <span class="toc-text">测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#74138%E6%B5%8B%E8%AF%95DC"><span class="toc-number">7.1.</span> <span class="toc-text">74138测试DC</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline" style="font-weight: bold;"><i class="fas fa-history fa-spin fa-spin-reverse"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/10/15/vcsserver/" title="从零开始搭建Synopsys数字EDA开发环境"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://opic.esing.dev/img/chip1_261016_1720_ft5S.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="从零开始搭建Synopsys数字EDA开发环境"/></a><div class="content"><a class="title" href="/2026/10/15/vcsserver/" title="从零开始搭建Synopsys数字EDA开发环境">从零开始搭建Synopsys数字EDA开发环境</a><time datetime="2026-10-16T12:37:50.754Z" title="更新于 2026-10-16 20:37:50">2026-10-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/15/wsnl/" title="文言文赏析《卧石乃龙》"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/120872181_p0_1280x2_2024-7-25_2038_v77pziokmt.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="文言文赏析《卧石乃龙》"/></a><div class="content"><a class="title" href="/2025/01/15/wsnl/" title="文言文赏析《卧石乃龙》">文言文赏析《卧石乃龙》</a><time datetime="2026-10-14T16:27:41.578Z" title="更新于 2026-10-15 00:27:41">2026-10-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/10/10/bili-mastercard/" title="拿下全港首张哔哩哔哩2233联名万事达！"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/IMG_20261010_135905_261011_0001_2RaZ.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="拿下全港首张哔哩哔哩2233联名万事达！"/></a><div class="content"><a class="title" href="/2026/10/10/bili-mastercard/" title="拿下全港首张哔哩哔哩2233联名万事达！">拿下全港首张哔哩哔哩2233联名万事达！</a><time datetime="2026-10-10T18:06:47.904Z" title="更新于 2026-10-11 02:06:47">2026-10-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/10/07/starport-p14/" title="[星港游记] 残月、火星与木星"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/starport.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[星港游记] 残月、火星与木星"/></a><div class="content"><a class="title" href="/2026/10/07/starport-p14/" title="[星港游记] 残月、火星与木星">[星港游记] 残月、火星与木星</a><time datetime="2026-10-07T16:47:14.572Z" title="更新于 2026-10-08 00:47:14">2026-10-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/10/02/vscode-codex-dropmessage/" title="VSCode Codex 插件吞掉消息的临时解决方案"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://webpn.esing.dev/img/88338018_p0_20240901_1714.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="VSCode Codex 插件吞掉消息的临时解决方案"/></a><div class="content"><a class="title" href="/2026/10/02/vscode-codex-dropmessage/" title="VSCode Codex 插件吞掉消息的临时解决方案">VSCode Codex 插件吞掉消息的临时解决方案</a><time datetime="2026-10-03T03:57:30.139Z" title="更新于 2026-10-03 11:57:30">2026-10-03</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(https://pic.esing.dev/img/87257672_p0_2023-4-16_1808_qmfhwf6v6g.avif);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2023 - 2026 By Esing</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></span></div><div class="footer_custom_text">Deployed On <a href="https://pages.cloudflare.com/" target="_blank">Cloudflare Pages</a><a href="https://icp.gov.moe/?keyword=20237860" target="_blank"><br /><br /> 萌 ICP 备 20237860 号 </a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="rightMenu" role="menu" aria-label="页面操作" hidden data-min-width="0" data-random-url="/js/random-posts.json"><div class="rightMenu-group rightMenu-small" role="group" aria-label="页面导航"><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="back" aria-label="返回" title="返回"><i class="fas fa-arrow-left" aria-hidden="true"></i><span>返回</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="forward" aria-label="前进" title="前进"><i class="fas fa-arrow-right" aria-hidden="true"></i><span>前进</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="reload" aria-label="刷新" title="刷新"><i class="fas fa-rotate-right" aria-hidden="true"></i><span>刷新</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="top" aria-label="回到顶部" title="回到顶部"><i class="fas fa-arrow-up" aria-hidden="true"></i><span>回到顶部</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="选中文字" data-group="selection" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-selection" aria-label="复制选中文字" title="复制选中文字"><i class="fas fa-copy" aria-hidden="true"></i><span>复制选中文字</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="search" aria-label="百度搜索" title="百度搜索"><i class="rightmenu-baidu" aria-hidden="true"></i><span>百度搜索</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="选中的网址" data-group="selected-url" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="open-selection" aria-label="转到选中网址" title="转到选中网址"><i class="fas fa-link" aria-hidden="true"></i><span>转到选中网址</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="链接操作" data-group="link" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="open-link" aria-label="新标签打开链接" title="新标签打开链接"><i class="fas fa-up-right-from-square" aria-hidden="true"></i><span>新标签打开链接</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-link" aria-label="复制链接" title="复制链接"><i class="fas fa-copy" aria-hidden="true"></i><span>复制链接</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="图片操作" data-group="image" hidden><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="open-image" aria-label="新标签打开图片" title="新标签打开图片"><i class="fas fa-image" aria-hidden="true"></i><span>新标签打开图片</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-image" aria-label="复制图片链接" title="复制图片链接"><i class="fas fa-copy" aria-hidden="true"></i><span>复制图片链接</span></button></div><div class="rightMenu-group rightMenu-line" role="group" aria-label="页面功能"><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="copy-page" aria-label="复制本文地址" title="复制本文地址"><i class="fas fa-link" aria-hidden="true"></i><span>复制本文地址</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="random" aria-label="随便逛逛" title="随便逛逛"><i class="fas fa-paper-plane" aria-hidden="true"></i><span>随便逛逛</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="dark" aria-label="昼夜切换" title="昼夜切换"><i class="fas fa-moon" aria-hidden="true"></i><span>昼夜切换</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="read" aria-label="阅读模式" title="阅读模式"><i class="fas fa-book" aria-hidden="true"></i><span>阅读模式</span></button><button class="rightMenu-item" type="button" role="menuitem" tabindex="-1" data-action="fullscreen" aria-label="进入全屏" title="进入全屏"><i class="fas fa-expand" aria-hidden="true"></i><span>进入全屏</span></button></div></div><div id="rightmenu-status" role="status" aria-live="polite" aria-atomic="true"></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><script src="/vendor/pangu/pangu.umd.js?v=10.4.1" defer></script><script src="/js/pangu-spacing.js?v=10.4.1" defer data-field="post"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.18.1/dist/katex.min.css')
+    if (false) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.18.1/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script><script>(() => {
+  const parseViewBox = viewBox => {
+    if (!viewBox) return null
+    const parts = viewBox.trim().split(/[\s,]+/).map(n => Number(n))
+    if (parts.length !== 4 || parts.some(n => Number.isNaN(n))) return null
+    return parts
+  }
+
+  const getSvgViewBox = svg => {
+    const attr = parseViewBox(svg.getAttribute('viewBox'))
+    if (attr) return attr
+
+    // Fallback: use bbox to build a viewBox
+    try {
+      const bbox = svg.getBBox()
+      if (bbox && bbox.width && bbox.height) return [bbox.x, bbox.y, bbox.width, bbox.height]
+    } catch (e) {
+      // getBBox may fail on some edge cases; ignore
+    }
+
+    const w = Number(svg.getAttribute('width')) || 0
+    const h = Number(svg.getAttribute('height')) || 0
+    if (w > 0 && h > 0) return [0, 0, w, h]
+    return [0, 0, 100, 100]
+  }
+
+  const setSvgViewBox = (svg, vb) => {
+    svg.setAttribute('viewBox', `${vb[0]} ${vb[1]} ${vb[2]} ${vb[3]}`)
+  }
+
+  const clamp = (v, min, max) => Math.max(min, Math.min(max, v))
+
+  const openSvgInNewTab = ({ source, initViewBox }) => {
+    const getClonedSvg = () => {
+      if (typeof source === 'string') {
+        const template = document.createElement('template')
+        template.innerHTML = source.trim()
+        const svg = template.content.querySelector('svg')
+        return svg ? svg.cloneNode(true) : null
+      }
+      if (source && typeof source.cloneNode === 'function') {
+        return source.cloneNode(true)
+      }
+      return null
+    }
+
+    const clone = getClonedSvg()
+    if (!clone) return
+    if (initViewBox && initViewBox.length === 4) {
+      clone.setAttribute('viewBox', initViewBox.join(' '))
+    }
+    if (!clone.getAttribute('xmlns')) clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+    if (!clone.getAttribute('xmlns:xlink') && clone.innerHTML.includes('xlink:')) {
+      clone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink')
+    }
+    // inject background to match current theme
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
+    const bg = getComputedStyle(document.body).backgroundColor || (isDark ? '#1e1e1e' : '#ffffff')
+    if (!clone.style.background) clone.style.background = bg
+
+    const serializer = new XMLSerializer()
+    const svgSource = serializer.serializeToString(clone)
+    const htmlSource = `<!doctype html><html><head><meta charset="utf-8" />
+      <style>
+        html, body { width: 100%; height: 100%; margin: 0; display: flex; align-items: center; justify-content: center; background: ${bg}; }
+        svg { max-width: 100%; max-height: 100%; height: auto; width: auto; }
+      </style>
+      </head><body>${svgSource}</body></html>`
+    const blob = new Blob([htmlSource], { type: 'text/html;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    window.open(url, '_blank', 'noopener')
+
+    setTimeout(() => URL.revokeObjectURL(url), 5000)
+  }
+
+  const attachMermaidViewerButton = wrap => {
+    let btn = wrap.querySelector('.mermaid-open-btn')
+    if (!btn) {
+      btn = document.createElement('button')
+      btn.type = 'button'
+      btn.className = 'mermaid-open-btn'
+      wrap.appendChild(btn)
+    }
+
+    btn.innerHTML = '<i class="fa fa-search fa-fw" aria-hidden="true"></i>'
+
+    if (!btn.__mermaidViewerBound) {
+      btn.addEventListener('click', e => {
+        e.preventDefault()
+        e.stopPropagation()
+        const svg = wrap.__mermaidOriginalSvg || wrap.querySelector('svg')
+        if (!svg) return
+        const initViewBox = wrap.__mermaidInitViewBox
+        openSvgInNewTab({ source: svg, initViewBox })
+      })
+      btn.__mermaidViewerBound = true
+    }
+  }
+
+  // Zoom around a point (px, py) in the SVG viewport (in viewBox coordinates)
+  const zoomAtPoint = (vb, factor, px, py) => {
+    const w = vb[2] * factor
+    const h = vb[3] * factor
+    const nx = px - (px - vb[0]) * factor
+    const ny = py - (py - vb[1]) * factor
+    return [nx, ny, w, h]
+  }
+
+  const initMermaidGestures = wrap => {
+    // Clean up previous event listeners and pending frames
+    if (wrap.__mermaidAbortController) {
+      wrap.__mermaidAbortController.abort()
+      if (wrap.__mermaidRafId) cancelAnimationFrame(wrap.__mermaidRafId)
+    }
+    const ac = new AbortController()
+    wrap.__mermaidAbortController = ac
+    const svg = wrap.querySelector('svg')
+    if (!svg) return
+
+    // Ensure viewBox exists so gestures always work
+    const initVb = getSvgViewBox(svg)
+    wrap.__mermaidInitViewBox = initVb
+    wrap.__mermaidCurViewBox = initVb.slice()
+    setSvgViewBox(svg, initVb)
+    // Disable default gestures to prevent scroll chaining and pinch-zoom penetration in Chrome
+    svg.style.touchAction = 'none'
+
+    // Cache BoundingClientRect, throttled on scroll to reduce reflow
+    let cachedRect = svg.getBoundingClientRect()
+    let rectDirty = false
+    const markRectDirty = () => { rectDirty = true }
+    window.addEventListener('resize', markRectDirty, { signal: ac.signal })
+    window.addEventListener('scroll', markRectDirty, { signal: ac.signal, capture: true })
+    const getRect = () => {
+      if (rectDirty) {
+        cachedRect = svg.getBoundingClientRect()
+        rectDirty = false
+      }
+      return cachedRect
+    }
+
+    // Precompute clamp bounds from initial viewBox
+    const minW = initVb[2] * 0.1
+    const maxW = initVb[2] * 10
+    const minH = initVb[3] * 0.1
+    const maxH = initVb[3] * 10
+    const clampVb = vb => {
+      const out = vb.slice()
+      out[2] = clamp(out[2], minW, maxW)
+      out[3] = clamp(out[3], minH, maxH)
+      return out
+    }
+
+    // Throttle DOM updates using requestAnimationFrame
+    let pendingVb = null
+    let rafId = null
+    const applyVb = () => {
+      if (pendingVb) {
+        wrap.__mermaidCurViewBox = pendingVb
+        setSvgViewBox(svg, pendingVb)
+        pendingVb = null
+      }
+      rafId = null
+      wrap.__mermaidRafId = null
+    }
+    const setCurVb = vb => {
+      pendingVb = clampVb(vb)
+      if (!rafId) {
+        rafId = requestAnimationFrame(applyVb)
+        wrap.__mermaidRafId = rafId
+      }
+    }
+
+    const state = {
+      pointers: new Map(),
+      startVb: null,
+      startDist: 0,
+      lastPointerX: 0,
+      lastPointerY: 0
+    }
+
+    const onPointerDown = e => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return
+      svg.setPointerCapture(e.pointerId)
+      const curVb = wrap.__mermaidCurViewBox
+      state.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+      if (state.pointers.size === 1) {
+        state.startVb = curVb.slice()
+        state.lastPointerX = e.clientX
+        state.lastPointerY = e.clientY
+      } else if (state.pointers.size === 2) {
+        const pts = [...state.pointers.values()]
+        const dx = pts[0].x - pts[1].x
+        const dy = pts[0].y - pts[1].y
+        state.startDist = Math.hypot(dx, dy)
+        state.startVb = curVb.slice()
+      }
+    }
+
+    const onPointerMove = e => {
+      if (!state.pointers.has(e.pointerId)) return
+      state.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+      const curVb = wrap.__mermaidCurViewBox
+      const rect = getRect()
+      if (state.pointers.size === 1 && state.startVb) {
+        const p = state.pointers.values().next().value
+        const dxClient = p.x - state.lastPointerX
+        const dyClient = p.y - state.lastPointerY
+        state.lastPointerX = p.x
+        state.lastPointerY = p.y
+        const dx = dxClient * (curVb[2] / rect.width)
+        const dy = dyClient * (curVb[3] / rect.height)
+        setCurVb([curVb[0] - dx, curVb[1] - dy, curVb[2], curVb[3]])
+        return
+      }
+      if (state.pointers.size === 2 && state.startVb && state.startDist > 0) {
+        const pts = [...state.pointers.values()]
+        const dx = pts[0].x - pts[1].x
+        const dy = pts[0].y - pts[1].y
+        const dist = Math.hypot(dx, dy)
+        if (!dist) return
+        const factor = state.startDist / dist
+        const cx = (pts[0].x + pts[1].x) / 2
+        const cy = (pts[0].y + pts[1].y) / 2
+        const px = curVb[0] + (cx - rect.left) * (curVb[2] / rect.width)
+        const py = curVb[1] + (cy - rect.top) * (curVb[3] / rect.height)
+        setCurVb(zoomAtPoint(state.startVb, factor, px, py))
+      }
+    }
+
+    const onPointerUpOrCancel = e => {
+      // Release PointerCapture to avoid event capture anomalies
+      if (svg.hasPointerCapture && svg.hasPointerCapture(e.pointerId)) {
+        svg.releasePointerCapture(e.pointerId)
+      }
+      state.pointers.delete(e.pointerId)
+      if (state.pointers.size === 0) {
+        state.startVb = null
+        state.startDist = 0
+      } else if (state.pointers.size === 1) {
+        const p = state.pointers.values().next().value
+        state.lastPointerX = p.x
+        state.lastPointerY = p.y
+      }
+    }
+
+    const onWheel = e => {
+      // Prevent event bubbling from triggering external scroll
+      e.preventDefault()
+      e.stopPropagation()
+      // Normalize deltaY across deltaMode (Chrome uses pixels, Safari uses lines)
+      let delta = e.deltaY
+      if (e.deltaMode === 1) delta *= 16
+      else if (e.deltaMode === 2) delta *= 400
+
+      // Continuous zoom factor: smoother than fixed 1.1/0.9 steps
+      const zoomFactor = Math.pow(1.001, delta)
+
+      const curVb = wrap.__mermaidCurViewBox
+      const rect = getRect()
+      const px = curVb[0] + (e.clientX - rect.left) * (curVb[2] / rect.width)
+      const py = curVb[1] + (e.clientY - rect.top) * (curVb[3] / rect.height)
+      setCurVb(zoomAtPoint(curVb, zoomFactor, px, py))
+    }
+
+    const onDblClick = () => {
+      const init = wrap.__mermaidInitViewBox
+      if (init) setCurVb(init)
+    }
+
+    svg.addEventListener('pointerdown', onPointerDown, { signal: ac.signal })
+    svg.addEventListener('pointermove', onPointerMove, { signal: ac.signal })
+    svg.addEventListener('pointerup', onPointerUpOrCancel, { signal: ac.signal })
+    svg.addEventListener('pointercancel', onPointerUpOrCancel, { signal: ac.signal })
+    svg.addEventListener('wheel', onWheel, { passive: false, signal: ac.signal })
+    svg.addEventListener('dblclick', onDblClick, { signal: ac.signal })
+  }
+
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const mode = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'
+    const themes = {"light":"base","dark":"base"}
+    const palettes = {"light":{"darkMode":false,"background":"#ffffff","textColor":"#2b3037","primaryColor":"#fff5f8","primaryTextColor":"#29313a","primaryBorderColor":"#d96a91","secondaryColor":"#ecfbf5","secondaryTextColor":"#213c34","secondaryBorderColor":"#269c78","tertiaryColor":"#f7f9fb","tertiaryTextColor":"#2b3037","tertiaryBorderColor":"#cfd8e3","lineColor":"#64717d","defaultLinkColor":"#64717d","titleColor":"#26323a","edgeLabelBackground":"#ffffff","clusterBkg":"#fbfcfd","clusterBorder":"#dbe3ea","noteBkgColor":"#fff8df","noteTextColor":"#3a3428","noteBorderColor":"#d6b25a","actorBkg":"#fff5f8","actorBorder":"#d96a91","actorTextColor":"#29313a","actorLineColor":"#8b96a3","signalColor":"#64717d","signalTextColor":"#2b3037","labelBoxBkgColor":"#f7f9fb","labelBoxBorderColor":"#dbe3ea","labelTextColor":"#2b3037","loopTextColor":"#2b3037","activationBkgColor":"#ecfbf5","activationBorderColor":"#269c78"},"dark":{"darkMode":true,"background":"#171a1f","textColor":"#e6edf3","primaryColor":"#33242c","primaryTextColor":"#f7eaf0","primaryBorderColor":"#f08cab","secondaryColor":"#1c332d","secondaryTextColor":"#e5f8f1","secondaryBorderColor":"#5bcaa0","tertiaryColor":"#20262e","tertiaryTextColor":"#e6edf3","tertiaryBorderColor":"#3b4652","lineColor":"#a7b1bc","defaultLinkColor":"#a7b1bc","titleColor":"#f0f4f8","edgeLabelBackground":"#171a1f","clusterBkg":"#1b2027","clusterBorder":"#323d48","noteBkgColor":"#352d1e","noteTextColor":"#f4e9c8","noteBorderColor":"#c8a856","actorBkg":"#33242c","actorBorder":"#f08cab","actorTextColor":"#f7eaf0","actorLineColor":"#687482","signalColor":"#c7d0d9","signalTextColor":"#e6edf3","labelBoxBkgColor":"#20262e","labelBoxBorderColor":"#3b4652","labelTextColor":"#e6edf3","loopTextColor":"#e6edf3","activationBkgColor":"#1c332d","activationBorderColor":"#5bcaa0"}}
+    const theme = themes[mode]
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      // Clean up event listeners before removing old SVG
+      if (item.__mermaidAbortController) {
+        item.__mermaidAbortController.abort()
+      }
+      const oldSvg = item.querySelector('svg')
+      if (oldSvg) oldSvg.remove()
+      let config = {}
+      try {
+        config = mermaidSrc.dataset.config ? JSON.parse(mermaidSrc.dataset.config) : {}
+      } catch (e) {
+        console.warn('[mermaid] failed to parse dataset.config:', e)
+      }
+      if (!config.theme) {
+        config.theme = theme
+      }
+      // Keep per-diagram overrides; do not tint an explicitly different theme.
+      if (config.theme === theme && palettes[mode]) {
+        config.themeVariables = { ...palettes[mode], ...config.themeVariables }
+      }
+      const mermaidThemeConfig = `%%{init: ${JSON.stringify(config)}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+        if (true) initMermaidGestures(item)
+        item.__mermaidOriginalSvg = svg
+        if (true) attachMermaidViewerButton(item)
+      }
+
+      const handleError = err => {
+        console.error(`[mermaid] render failed for block #${index}:`, err)
+        const errorEl = document.createElement('div')
+        errorEl.className = 'mermaid-error'
+        errorEl.textContent = `Mermaid render error: ${err.message || err}`
+        mermaidSrc.insertAdjacentElement('afterend', errorEl)
+      }
+
+      try {
+        const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+        // mermaid v9 and v10 compatibility
+        if (typeof renderFn === 'string') {
+          renderMermaid(renderFn)
+        } else {
+          renderFn.then(({ svg }) => renderMermaid(svg)).catch(handleError)
+        }
+      } catch (err) {
+        handleError(err)
+      }
+    })
+  }
+
+  const codeToMermaid = $article => {
+    const codeMermaidEle = $article.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    const $article = document.getElementById('article-container')
+    if (!$article) return
+
+    if (true) codeToMermaid($article)
+    const $mermaid = $article.querySelectorAll('.mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = {"search":false}
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://comment.esing.dev/',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.15.2/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client@3.15.2/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !true) {
+    if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script src="/js/heimu.js" defer></script><script src="/js/meting.js" defer></script><script src="/js/music-pjax.js" defer></script><script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script><script src="/js/target-cursor.js" defer></script><script src="/js/cursor-toggle.js" defer></script><script src="/js/title.js" defer></script><script src="/js/titlelight.js" defer></script><script src="/js/autoload.js" defer></script><script src="/js/rightmenu.js" defer></script><link rel="stylesheet" href="/css/waline-custom.css"><script src="/js/cloudflare-info.js" defer></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"]):not([data-fancybox])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      if (!item.parentNode) return
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || ''
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    const responseURL = e.request && e.request.responseURL
+    if (e.request && e.request.status === 404) {
+      true
+        ? pjax.loadUrl('/404')
+        : responseURL && (window.location.href = responseURL)
+    } else if (responseURL) {
+      window.location.href = responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.7.0"></script></div></div></body></html>

@@ -194,6 +194,16 @@
 
     isHidden: ele => ele.offsetHeight === 0 && ele.offsetWidth === 0,
 
+    isCodeBlockSelection: selection => {
+      if (!selection || selection.rangeCount === 0) return false
+
+      return Array.from({ length: selection.rangeCount }, (_, i) => selection.getRangeAt(i)).every(range => {
+        const container = range.commonAncestorContainer
+        const element = container.nodeType === Node.ELEMENT_NODE ? container : container.parentElement
+        return !!element?.closest('pre, figure.highlight')
+      })
+    },
+
     getEleTop: ele => ele.getBoundingClientRect().top + window.scrollY,
 
     loadLightbox: ele => {
